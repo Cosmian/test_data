@@ -5,3 +5,4 @@ The file test_data/certificates/client_server/ca/stack_of_ca.pem is the result o
 - test_data/mozilla_IncludedRootsPEM.txt
 - test_data/certificates/client_server/ca/ca.crt
 - test_data/certificates/p12/root.pem
+- test_data/certificates/another_p12/root.crt

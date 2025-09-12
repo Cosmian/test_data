@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# on MacOS, you should pass a link to an actually installed openssl binary, and nopt use the default `libressl`
-# which generates PKCS12 files qith the deprecated RC2 algorithm
+# on MacOS, you should pass a link to an actually installed openssl binary, and not use the default `libressl`
+# which generates PKCS12 files with the deprecated RC2 algorithm
 OPENSSL_BIN=${1:-openssl}
 
 # Generate CA private key
@@ -54,4 +54,3 @@ $OPENSSL_BIN x509 -req -days 3650 -in user.client.acme.com.csr -CA ca.crt -CAkey
 
 # Generate a PKCS12 file
 $OPENSSL_BIN pkcs12 -export -out user.client.acme.com.p12 -inkey user.client.acme.com.key -in user.client.acme.com.crt -certfile ca.crt -password pass:password
-
