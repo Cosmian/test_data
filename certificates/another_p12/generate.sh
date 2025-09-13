@@ -26,3 +26,10 @@ openssl req -new -key expired.key -out expired.csr -subj "/C=FR/ST=IdG/L=Paris/O
 # Create certificate with 1 day validity - since the existing one is already expired, we'll keep it short
 openssl x509 -req -in expired.csr -CA intermediate.crt -CAkey intermediate.key -CAcreateserial -out expired.crt -not_after 20240101000000Z -not_before 20230101000000Z
 openssl pkcs12 -export -out expired.p12 -inkey expired.key -in expired.crt -certfile intermediate.crt -password pass:secret
+
+# Generate an expired certificate for testing
+openssl genpkey -algorithm ED25519 -out ed25519.key
+openssl req -new -key ed25519.key -out ed25519.csr -subj "/C=FR/ST=IdG/L=Paris/O=GitHub/OU=Cosmian/CN=ed25519.foo.com"
+# Create certificate with 1 day validity - since the existing one is already expired, we'll keep it short
+openssl x509 -req -in ed25519.csr -CA intermediate.crt -CAkey intermediate.key -CAcreateserial -out ed25519.crt -not_after 20240101000000Z -not_before 20230101000000Z
+openssl pkcs12 -export -out ed25519.p12 -inkey ed25519.key -in ed25519.crt -certfile intermediate.crt -password pass:secret

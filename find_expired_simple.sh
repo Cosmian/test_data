@@ -14,8 +14,6 @@ echo
 
 cd "$(dirname "$0")" 2>/dev/null || cd test_data 2>/dev/null || { echo "Error: Cannot find test_data directory"; exit 1; }
 
-expired_found=false
-
 # Common passwords to try
 passwords=("" "password" "test" "cosmian" "kms" "123456" "secret")
 
@@ -44,17 +42,12 @@ find . -name "*.p12" -type f | while read -r p12file; do
         echo -e "  ${RED}🚨 EXPIRED CERTIFICATE FOUND!${NC}"
         echo -e "  Subject: $subject"
         echo -e "  Expired on: $not_after"
-        expired_found=true
     else
         echo -e "  ${GREEN}✅ Valid certificate${NC}"
     fi
     echo
-done
 
-if [ "$expired_found" = true ]; then
-    echo -e "${RED}⚠️  Expired certificates detected in test_data folder!${NC}"
-    exit 1
-else
-    echo -e "${GREEN}✅ No expired certificates found${NC}"
-    exit 0
-fi
+    # Check cryptographic algorithm
+    algo=$(echo "$cert_content" | openssl x509 -noout -text | grep "Public Key Algorithm" | head -n1 | awk -F: '{print $2}' | xargs)
+    echo -e "  Public Key Algorithm: $algo"
+done
