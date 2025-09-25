@@ -1,0 +1,3 @@
+# JWT authentication configuration using new idp_auth format
+[idp_auth]
+jwt_auth_provider = ["https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,cosmian_kms"]

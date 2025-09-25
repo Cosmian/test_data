@@ -1,0 +1,5 @@
+# JWT authentication configuration from authentication.md (updated to consolidated idp_auth format)
+[idp_auth]
+# Each entry has the form: "JWT_ISSUER_URI,JWKS_URI,JWT_AUDIENCE"
+# JWKS_URI optional (defaults to <issuer>/.well-known/jwks.json). JWT_AUDIENCE optional.
+jwt_auth_provider = ["https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,cosmian_kms"]

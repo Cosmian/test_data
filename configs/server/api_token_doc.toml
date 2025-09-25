@@ -1,0 +1,3 @@
+# API token authentication configuration from authentication.md
+[http]
+api_token_id = "test-symmetric-key-id"

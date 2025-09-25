@@ -1,0 +1,8 @@
+# Multi-factor: TLS + JWT from authentication.md
+[tls]
+tls_p12_file = "kms.server.p12"
+tls_p12_password = "password"
+clients_ca_cert_file = "client_ca.cert.pem"
+
+[idp_auth]
+jwt_auth_provider = ["https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,"]

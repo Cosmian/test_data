@@ -1,0 +1,4 @@
+# MySQL database configuration from database.md
+[db]
+database_type = "mysql"
+database_url = "mysql://kms_user:kms_password@mysql-server:3306/kms"

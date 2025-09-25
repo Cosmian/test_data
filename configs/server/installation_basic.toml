@@ -1,0 +1,4 @@
+# Installation getting started configuration from installation/installation_getting_started.md
+[http]
+port = 9998
+hostname = "0.0.0.0"

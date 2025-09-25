@@ -1,0 +1,7 @@
+# MySQL database configuration from database.md
+[db]
+database_type = "mysql"
+database_url = "mysql://mysql_server:3306/kms"
+# Note: if client certificate authentication is required for MySQL,
+# configure it via command-line option `--mysql-user-cert-file` for now.
+# A dedicated TOML key may not be available in this version.

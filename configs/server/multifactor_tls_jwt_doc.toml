@@ -1,0 +1,9 @@
+# Multi-factor TLS + JWT authentication from authentication.md
+[tls]
+tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
+tls_p12_password = "password"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[idp_auth]
+# Empty audience preserved as empty last segment
+jwt_auth_provider = ["https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,"]

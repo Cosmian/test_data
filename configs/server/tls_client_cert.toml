@@ -1,0 +1,5 @@
+# TLS Client Certificate Authentication from authentication.md
+[tls]
+tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
+tls_p12_password = "password"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"

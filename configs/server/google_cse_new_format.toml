@@ -1,0 +1,9 @@
+# Google CSE configuration from google_cse/index.md - using new idp_auth format
+kms_public_url = "https://cse.example.com"
+
+[idp_auth]
+# Use Google Identity for JWT validation  
+jwt_auth_provider = ["https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,"]
+
+[google_cse_config]
+google_cse_enable = true

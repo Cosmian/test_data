@@ -1,0 +1,4 @@
+# OTLP logging configuration from logging.md
+[logging]
+otlp = "http://localhost:4317"
+quiet = true
