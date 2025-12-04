@@ -1,7 +1,12 @@
 # Multi-factor: TLS + JWT from authentication.md
 [tls]
-tls_p12_file = "kms.server.p12"
-tls_p12_password = "password"
+# For FIPS mode (default), use:
+tls_cert_file = "path/to/server.crt"
+tls_key_file = "path/to/server.key"
+
+# For non-FIPS mode, use:
+# tls_p12_file = "kms.server.p12"
+# tls_p12_password = "password"
 clients_ca_cert_file = "client_ca.cert.pem"
 
 [idp_auth]
