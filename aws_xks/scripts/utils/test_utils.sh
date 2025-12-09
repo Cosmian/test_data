@@ -64,7 +64,7 @@ EOM
     build_command() {
         local -r uri_target="$1" json_body="$2"
         cat <<-EOM
-curl $SCHEME$XKS_PROXY_HOST/$URI_PREFIX/kms/xks/v1/$uri_target \\
+curl -v -k $SCHEME$XKS_PROXY_HOST/$URI_PREFIX/kms/xks/v1/$uri_target \\
     --silent $VERBOSE $SECURE $MTLS \\
     -H "Content-Type:application/json" \\
     --aws-sigv4 "aws:amz:$REGION:kms-xks-proxy" \\
@@ -107,6 +107,10 @@ EOM
 
     # shellcheck disable=SC2207
     local -r response="$(post "$uri_target" "$json_body" 2>&1)"
+
+    echo -e "\nFull response ..."
+    echo "$response"
+
     local -a arr
     readarray -t arr <<<"$response"
     local -ir n=${#arr[@]}
