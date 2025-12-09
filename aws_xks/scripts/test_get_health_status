@@ -29,30 +29,33 @@ EOM
         "$(json_body)" \
         "GetHealthStatus" \
         "\"healthStatus\":" && ((++success)) || ((++failure))
-    # run_test "health" \
-    #     "{}" \
-    #     "GetHealthStatus without requestMetadata" \
-    #     "ValidationException" && ((++success)) || ((++failure))
-    # # shellcheck disable=SC2154
-    # run_test "health" \
-    #     "$json_body_with_empty_request_metadata" \
-    #     "GetHealthStatus with empty requestMetadata" \
-    #     "ValidationException" && ((++success)) || ((++failure))
-    # SIGV4_ACCESS_KEY_ID=Invalid$SIGV4_ACCESS_KEY_ID \
-    #     run_test "health" \
-    #         "$(json_body)" \
-    #         "GetHealthStatus with an invalid Sigv4 access id" \
-    #         "AuthenticationFailedException" && ((++success)) || ((++failure))
-    # SIGV4_SECRET_ACCESS_KEY=Invalid$SIGV4_SECRET_ACCESS_KEY \
-    #     run_test "health" \
-    #         "$(json_body)" \
-    #         "GetHealthStatus with an invalid Sigv4 access key" \
-    #         "AuthenticationFailedException" && ((++success)) || ((++failure))
-    # URI_PREFIX=$URI_PREFIX/invalid \
-    #     run_test "health" \
-    #         "$(json_body)" \
-    #         "GetHealthStatus with an invalid URI prefix" \
-    #         "InvalidUriPathException" && ((++success)) || ((++failure))
+    run_test "health" \
+        "{}" \
+        "GetHealthStatus without requestMetadata" \
+        "ValidationException" && ((++success)) || ((++failure))
+    # shellcheck disable=SC2154
+    run_test "health" \
+        "$json_body_with_empty_request_metadata" \
+        "GetHealthStatus with empty requestMetadata" \
+        "ValidationException" && ((++success)) || ((++failure))
+    
+    SIGV4_ACCESS_KEY_ID=Invalid$SIGV4_ACCESS_KEY_ID \
+    run_test "health" \
+        "$(json_body)" \
+        "GetHealthStatus with an invalid Sigv4 access id" \
+        "AuthenticationFailedException" && ((++success)) || ((++failure))
+    
+    SIGV4_SECRET_ACCESS_KEY=Invalid$SIGV4_SECRET_ACCESS_KEY \
+    run_test "health" \
+        "$(json_body)" \
+        "GetHealthStatus with an invalid Sigv4 access key" \
+        "AuthenticationFailedException" && ((++success)) || ((++failure))
+    
+    URI_PREFIX=$URI_PREFIX/invalid \
+    run_test "health" \
+        "$(json_body)" \
+        "GetHealthStatus with an invalid URI prefix" \
+        "InvalidUriPathException" && ((++success)) || ((++failure))
 }
 
 if ((${#@})); then
