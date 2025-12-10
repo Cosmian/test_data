@@ -1,0 +1,6 @@
+[kms_config]
+print_json = false
+
+[kms_config.http_config]
+accept_invalid_certs = true
+server_url = "https://0.0.0.0:9998"

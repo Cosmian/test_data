@@ -21,6 +21,14 @@ cargo run --features non-fips --bin cosmian_kms -- \
 -c test_data/aws_xks/aws_xks.toml
 ```
 
+## Create the AWS key encryption key
+
+From the root directory, run: 
+
+```sh
+cosmian -c test_data/aws_xks/cosmian_cli.toml kms sym keys create aws_xks_kek
+```
+
 ## Run the tests
 
 From the `test_data/aws_xks/scripts` directory, run:

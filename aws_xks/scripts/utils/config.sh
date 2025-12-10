@@ -9,4 +9,4 @@ export SIGV4_ACCESS_KEY_ID="AKIAIOSFODNN7EXAMPLE"
 # Secret access key must have between 43 and 64 characters. Valid characters are a-z, A-Z, 0-9, /, +, and =
 export SIGV4_SECRET_ACCESS_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 # Change this to a test key id supported by your logical keystore.
-export KEY_ID="foo"
+export KEY_ID="aws_xks_kek"

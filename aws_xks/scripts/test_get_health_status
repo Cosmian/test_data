@@ -8,6 +8,7 @@
 
 # shellcheck disable=SC1091
 source ./utils/config.sh
+# shellcheck disable=SC1091
 source ./utils/test_utils.sh
 
 declare -i success=0 failure=0
