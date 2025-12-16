@@ -23,10 +23,19 @@ cargo run --features non-fips --bin cosmian_kms -- \
 
 ## Create the AWS key encryption key
 
+First create an AES 256-bit symmetric key.
 From the root directory, run: 
 
 ```sh
-cosmian -c test_data/aws_xks/cosmian_cli.toml kms sym keys create aws_xks_kek
+cosmian -c test_data/aws_xks/cosmian_cli.toml kms \
+sym keys create aws_xks_kek
+```
+
+Grant the `GetAttributes`, `Encrypt` and `Decrypt` operations to the AWS user `arn:aws:iam::123456789012:user/Alice`:
+
+```sh
+cosmian -c test_data/aws_xks/cosmian_cli.toml kms \
+access-rights grant -i aws_xks_kek arn:aws:iam::123456789012:user/Alice get_attributes encrypt decrypt
 ```
 
 ## Run the tests
