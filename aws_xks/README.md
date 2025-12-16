@@ -73,11 +73,11 @@ From the `test_data/aws_xks/scripts` directory, run:
 on macOS:
 
 ```sh
-<HOMEBREW_HOME>/bin/bash ./test_get_health_status
+<HOMEBREW_HOME>/bin/bash ./test_all
 ```
 
 on Linux:
 
 ```sh
-./test_get_health_status
+./test_all
 ```
