@@ -64,7 +64,7 @@ EOM
     build_command() {
         local -r uri_target="$1" json_body="$2"
         cat <<-EOM
-curl -k -v $SCHEME$XKS_PROXY_HOST/$URI_PREFIX/kms/xks/v1/$uri_target \\
+curl -k $SCHEME$XKS_PROXY_HOST/$URI_PREFIX/kms/xks/v1/$uri_target \\
     --silent $VERBOSE $SECURE $MTLS \\
     -H "Content-Type:application/json" \\
     --aws-sigv4 "aws:amz:$REGION:kms-xks-proxy" \\

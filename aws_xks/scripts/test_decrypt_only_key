@@ -7,6 +7,8 @@
 # shellcheck disable=SC2154
 
 # shellcheck disable=SC1091
+source ./utils/config.sh
+# shellcheck disable=SC1091
 source ./utils/test_utils.sh
 source ./utils/test_encrypt_decrypt_utils.sh
 source ./utils/tests_for_decrypt_only_key.sh

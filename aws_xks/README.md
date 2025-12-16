@@ -38,6 +38,34 @@ cosmian -c test_data/aws_xks/cosmian_cli.toml kms \
 access-rights grant -i aws_xks_kek arn:aws:iam::123456789012:user/Alice get_attributes encrypt decrypt
 ```
 
+## Create an "encrypt only" key
+
+```sh
+cosmian -c test_data/aws_xks/cosmian_cli.toml kms \
+sym keys create encrypt_only_key
+```
+
+Grant the `GetAttributes` and `Encrypt` operations to the AWS user `arn:aws:iam::123456789012:user/Alice`:
+
+```sh
+cosmian -c test_data/aws_xks/cosmian_cli.toml kms \
+access-rights grant -i encrypt_only_key arn:aws:iam::123456789012:user/Alice get_attributes encrypt
+```
+
+## Create a "decrypt only" key
+
+```sh
+cosmian -c test_data/aws_xks/cosmian_cli.toml kms \
+sym keys create decrypt_only_key
+```
+Grant the `GetAttributes` and `Decrypt` operations to the AWS user `arn:aws:iam::123456789012:user/Alice`:
+
+```sh
+cosmian -c test_data/aws_xks/cosmian_cli.toml kms \
+access-rights grant -i decrypt_only_key arn:aws:iam::123456789012:user/Alice get_attributes decrypt
+```
+
+
 ## Run the tests
 
 From the `test_data/aws_xks/scripts` directory, run:
