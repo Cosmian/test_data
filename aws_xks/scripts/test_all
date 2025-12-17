@@ -88,15 +88,12 @@ declare -a scripts=(
     "test_get_health_status"
     "test_get_key_metadata"
     "test_encrypt_decrypt"
-)
-
-((all_test)) && scripts+=(
     "test_encrypt_only_key"
     "test_decrypt_only_key"
 )
 
 for script in "${scripts[@]}"; do
-    ./"$script" "$tmpdir"
+    ${BASH} ./"$script" "$tmpdir"
     read -d '' -r -a counts <<< "$(cat "$tmpdir/$script.counts")"
     ((total_success += counts[0]))
     ((total_failure += counts[1]))
@@ -110,3 +107,5 @@ if [[ -n "$MTLS" ]]; then
 fi
 
 summarize "$total_success" "$total_failure"
+
+

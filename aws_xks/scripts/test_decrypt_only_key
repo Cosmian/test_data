@@ -19,7 +19,7 @@ if ((${#@})); then
     main "$DECRYPT_ONLY_KEY_ID"
     echo "$success $failure" > "$counts_file"
 else
-    check_environment
+    # check_environment
     main "$DECRYPT_ONLY_KEY_ID"
     summarize "$success" "$failure"
 fi

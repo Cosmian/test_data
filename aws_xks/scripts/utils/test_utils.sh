@@ -143,11 +143,14 @@ summarize() {
     if ((failure)); then
         if ((success)); then
             echo -e "\n$question A total of $(green "$success tests PASSED") and $(red "$failure tests FAILED")."
+            exit 1
         else
             echo -e "\n$cross $(red "All ${failure} tests FAILED.")"
+            exit 1
         fi
     else
         echo -e "\n$tick $(green "All ${success} tests PASSED.")"
+        exit 0
     fi
 }
 
