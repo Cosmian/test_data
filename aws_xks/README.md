@@ -2,7 +2,7 @@
 
 These are the AWS XKS tests, slightly adapted so that they can call a local KMS and run on macOS.
 
-## Setup
+## Setup[text](https://meet.google.com/hrq-rbxy-wcf?authuser%3D1)
 
 You need `bash`version 4.2 or later.
 If on macOS, install a recent version of bash using:
