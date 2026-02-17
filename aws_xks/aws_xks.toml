@@ -1,0 +1,17 @@
+# Test of the AWS XKS parameters: 
+# cargo run --bin cosmian_kms --features non-fips -- -c test_data/aws_xks/aws_xks.toml
+[http]
+port = 9998
+hostname = "0.0.0.0"
+
+[tls]
+tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
+tls_p12_password = "password"
+
+[aws_xks_config]
+aws_xks_enable = true
+aws_xks_region = "us-east-1"
+aws_xks_service = "kms-xks-proxy"
+aws_xks_uri_path_prefix = "/aws/"
+aws_xks_sigv4_access_key_id = "AKIAIOSFODNN7EXAMPLE"
+aws_xks_sigv4_secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
