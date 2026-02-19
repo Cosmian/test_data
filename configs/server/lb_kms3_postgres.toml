@@ -1,0 +1,18 @@
+default_username = "admin"
+
+[http]
+port = 9998
+hostname = "0.0.0.0"
+
+[db]
+database_type = "postgresql"
+database_url = "postgresql://kms:kms@postgres:5432/kms"
+clear_database = false
+unwrapped_cache_max_age = 15
+
+[logging]
+rust_log = "info,cosmian_kms=info"
+ansi_colors = false
+
+[ui_config]
+ui_index_html_folder = "/usr/local/cosmian/ui/dist"

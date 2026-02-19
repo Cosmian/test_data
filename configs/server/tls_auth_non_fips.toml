@@ -1,0 +1,29 @@
+default_username = "admin"
+
+[http]
+port = 9999
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-data"
+clear_database = false
+unwrapped_cache_max_age = 15
+
+[tls]
+# non-FIPS images typically use PKCS#12
+tls_p12_file = "/data/certificates/client_server/server/kmserver.acme.com.p12"
+tls_p12_password = "password"
+clients_ca_cert_file = "/data/certificates/client_server/ca/ca.crt"
+
+[socket_server]
+socket_server_start = true
+socket_server_port = 5696
+socket_server_hostname = "0.0.0.0"
+
+[logging]
+rust_log = "info,cosmian_kms=info"
+ansi_colors = false
+
+[ui_config]
+ui_index_html_folder = "/usr/local/cosmian/ui/dist"
