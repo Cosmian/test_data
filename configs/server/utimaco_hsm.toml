@@ -1,0 +1,26 @@
+default_username = "admin"
+
+hsm_model = "utimaco"
+hsm_admin = "admin"
+hsm_slot = [0]
+hsm_password = ["12345678"]
+
+[http]
+port = 9999
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-utimaco-data"
+clear_database = false
+
+[tls]
+tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
+tls_p12_password = "password"
+
+[logging]
+rust_log = "cosmian_kms_server=debug"
+ansi_colors = true
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
