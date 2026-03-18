@@ -1,7 +1,7 @@
 default_username = "admin"
 
 hsm_model = "utimaco"
-hsm_admin = "admin"
+hsm_admin = ["admin"]
 hsm_slot = [0]
 hsm_password = ["12345678"]
 
