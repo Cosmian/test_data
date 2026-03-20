@@ -6,7 +6,7 @@
 default_username = "tech@cosmian.com"
 kms_public_url = "https://localhost:10002/google_cse"
 hsm_model = "utimaco"
-hsm_admin = "owner.client@acme.com"
+hsm_admin = ["owner.client@acme.com"]
 hsm_slot = [0]
 hsm_password = ["12345678"]
 
