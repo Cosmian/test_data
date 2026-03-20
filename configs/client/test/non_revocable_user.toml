@@ -1,0 +1,6 @@
+# Test KMS client — plain HTTP, no authentication. User identity.
+# Corresponds to server config test/non_revocable.toml (port 10000).
+
+[http_config]
+server_url = "http://localhost:10000"
+accept_invalid_certs = true

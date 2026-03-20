@@ -1,5 +1,5 @@
 # Test KMS client — HTTPS with JWT token, no client certificate. User identity.
-# Corresponds to server config test_auth_https_jwt.toml (port 12003); authenticates with JWT only (no client cert).
+# Corresponds to server config test/auth_https_jwt.toml (port 12003); authenticates with JWT only (no client cert).
 
 [http_config]
 server_url = "https://localhost:12003"

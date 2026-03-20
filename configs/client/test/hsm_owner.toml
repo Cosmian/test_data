@@ -1,0 +1,6 @@
+# Test KMS client — plain HTTP, no authentication. Owner identity.
+# Corresponds to server config test/hsm.toml (port 10001).
+
+[http_config]
+server_url = "http://localhost:10001"
+accept_invalid_certs = true

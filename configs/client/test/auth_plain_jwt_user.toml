@@ -1,5 +1,5 @@
 # Test KMS client — plain HTTP with JWT token. User identity (user.client@acme.com).
-# Corresponds to server config test_auth_plain_jwt.toml (port 12002).
+# Corresponds to server config test/auth_plain_jwt.toml (port 12002).
 
 [http_config]
 server_url = "http://localhost:12002"

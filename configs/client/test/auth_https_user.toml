@@ -1,5 +1,5 @@
 # Test KMS client — HTTPS, no client certificate, no authentication. User identity.
-# Corresponds to server config test_auth_https.toml (port 12005).
+# Corresponds to server config test/auth_https.toml (port 12005).
 
 [http_config]
 server_url = "https://localhost:12005"

@@ -1,6 +1,6 @@
 # Test KMS client — HTTPS with user PEM client certificate, no JWT. User identity.
 # Cert paths are relative to workspace root, resolved by load_client_config().
-# Corresponds to server config test_auth_https_client_ca.toml (port 12004).
+# Corresponds to server config test/auth_https_client_ca.toml (port 12004).
 
 [http_config]
 server_url = "https://localhost:12004"
