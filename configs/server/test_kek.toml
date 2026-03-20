@@ -1,0 +1,47 @@
+# Test KMS server — TLS + JWT + Utimaco HSM + KEK.
+# Uses PEM cert + key (works in both FIPS and non-FIPS mode).
+# Bound to port 10002. key_encryption_key is injected at runtime after the KEK
+# has been materialised in the database by create_kek_in_db().
+
+default_username = "tech@cosmian.com"
+kms_public_url = "https://localhost:10002/google_cse"
+hsm_model = "utimaco"
+hsm_admin = "owner.client@acme.com"
+hsm_slot = [0]
+hsm_password = ["12345678"]
+
+[http]
+port = 10002
+hostname = "0.0.0.0"
+
+[db]
+# clear_database = false so the database that already holds the KEK is reused.
+database_type = "sqlite"
+sqlite_path = "/tmp/kms_test_kek"
+clear_database = false
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_kek"
+tmp_path = "/tmp"
+
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[socket_server]
+socket_server_start = true
+socket_server_port = 10102
+
+[idp_auth]
+jwt_auth_provider = [
+  "https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,kacls-migration,996739510374-2tauakcggau7kvk37784k0s2lmveb9c9.apps.googleusercontent.com",
+  "https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/v2.0,https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/discovery/v2.0/keys",
+  "https://demo-kms.eu.auth0.com/,https://demo-kms.eu.auth0.com/.well-known/jwks.json",
+]
+
+[google_cse_config]
+google_cse_enable = true
+# Token validation is active because JWT auth is enabled.
+google_cse_disable_tokens_validation = false
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

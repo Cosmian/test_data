@@ -1,0 +1,29 @@
+# Auth test server — HTTPS with client-certificate CA, no JWT.
+# Uses PEM cert + key (works in both FIPS and non-FIPS mode).
+# Bound to port 12004.
+
+default_username = "tech@cosmian.com"
+kms_public_url = "https://localhost:12004/google_cse"
+
+[http]
+port = 12004
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "./sqlite-data-auth-tests"
+clear_database = false
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_12004"
+tmp_path = "/tmp"
+
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = true
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

@@ -1,0 +1,24 @@
+# Default test KMS server — plain HTTP, no authentication, PostgreSQL backend.
+# Bound to port 9998. Loaded when KMS_TEST_DB=postgresql.
+# Set KMS_POSTGRES_URL to override the default connection string.
+
+default_username = "tech@cosmian.com"
+kms_public_url = "http://localhost:9998/google_cse"
+
+[http]
+port = 9998
+hostname = "0.0.0.0"
+
+[db]
+database_type = "postgresql"
+database_url = "postgresql://kms:kms@127.0.0.1:5432/kms"
+clear_database = false
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_postgres"
+tmp_path = "/tmp"
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = true
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

@@ -1,0 +1,6 @@
+# Test KMS client — plain HTTP, no authentication. Owner identity.
+# Corresponds to server config test_auth_plain.toml (port 12001).
+
+[http_config]
+server_url = "http://localhost:12001"
+accept_invalid_certs = true

@@ -1,0 +1,26 @@
+# Default test KMS server — plain HTTP, no authentication, Redis-Findex backend.
+# Only valid in non-FIPS mode (redis-findex is gated behind the non-fips feature).
+# Bound to port 9998. Loaded when KMS_TEST_DB=redis-findex.
+# Set REDIS_HOST to override the default Redis host (default: localhost).
+
+default_username = "tech@cosmian.com"
+kms_public_url = "http://localhost:9998/google_cse"
+
+[http]
+port = 9998
+hostname = "0.0.0.0"
+
+[db]
+database_type = "redis-findex"
+database_url = "redis://localhost:6379"
+clear_database = true
+redis_master_password = "password"
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_redis"
+tmp_path = "/tmp"
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = true
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

@@ -1,0 +1,31 @@
+# Auth test server — plain HTTP with JWT authentication.
+# Bound to port 12002.
+
+default_username = "tech@cosmian.com"
+kms_public_url = "http://localhost:12002/google_cse"
+
+[http]
+port = 12002
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "./sqlite-data-auth-tests"
+clear_database = false
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_12002"
+tmp_path = "/tmp"
+
+[idp_auth]
+jwt_auth_provider = [
+  "https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,kacls-migration,996739510374-2tauakcggau7kvk37784k0s2lmveb9c9.apps.googleusercontent.com",
+  "https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/v2.0,https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/discovery/v2.0/keys",
+  "https://demo-kms.eu.auth0.com/,https://demo-kms.eu.auth0.com/.well-known/jwks.json",
+]
+
+[google_cse_config]
+google_cse_enable = true
+# Token validation is active because JWT auth is enabled.
+google_cse_disable_tokens_validation = false
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]
