@@ -1,0 +1,28 @@
+# Test KMS server — plain HTTP with Utimaco HSM, PostgreSQL backend.
+# Bound to port 10001. Loaded by start_default_test_kms_server_with_utimaco_hsm().
+# HSM fields are at the top level because HsmConfig is flattened into ClapConfig.
+
+default_username = "tech@cosmian.com"
+kms_public_url = "http://localhost:10001/google_cse"
+hsm_model = "utimaco"
+hsm_admin = ["tech@cosmian.com"]
+hsm_slot = [0]
+hsm_password = ["12345678"]
+
+[http]
+port = 10001
+hostname = "0.0.0.0"
+
+[db]
+database_type = "postgresql"
+database_url = "postgresql://kms:kms@127.0.0.1:5432/kms"
+clear_database = false
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_hsm_postgres"
+tmp_path = "/tmp"
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = true
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

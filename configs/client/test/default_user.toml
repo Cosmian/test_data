@@ -1,6 +1,0 @@
-# Test KMS client — plain HTTP, no authentication. User identity.
-# Corresponds to server config test/default.toml (port 9998).
-
-[http_config]
-server_url = "http://localhost:9998"
-accept_invalid_certs = true
