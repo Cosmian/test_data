@@ -1,18 +1,16 @@
 default_username = "admin"
-
-hsm_model = "proteccio"
+hsm_model = "softhsm2"
 hsm_admin = ["admin"]
-hsm_slot = [5]
-hsm_password = ["xxx"]
-key_encryption_key = "hsm::5::aes"
+hsm_slot = [0]
+hsm_password = ["12345678"]
 
 [http]
-port = 9999
+port = 9998
 hostname = "0.0.0.0"
 
 [db]
 database_type = "sqlite"
-sqlite_path = "/tmp/kms-proteccio-data"
+sqlite_path = "/tmp/kms-softhsm2-data"
 clear_database = false
 
 [tls]
