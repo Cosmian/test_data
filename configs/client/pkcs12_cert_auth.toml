@@ -1,0 +1,18 @@
+# KMS client — mTLS with PKCS#12 client certificate bundle (non-FIPS only).
+#
+# Use this template when the KMS server requires mutual TLS and you have the
+# client certificate and private key bundled in a PKCS#12 file (.p12).
+# Note: PKCS#12 is not supported in FIPS mode; use pem_cert_auth.toml instead.
+#
+# Configure interactively: ckms configure → "Client certificate (PKCS#12)"
+
+[http_config]
+server_url = "https://kms.example.com:9998"
+accept_invalid_certs = false
+
+# Path to the PKCS#12 bundle containing the client certificate and private key.
+ssl_client_pkcs12_path = "/path/to/client.p12"
+
+# Password to decrypt the PKCS#12 bundle.
+# Leave this key absent (or set to "") if the bundle has no password.
+ssl_client_pkcs12_password = "changeit"

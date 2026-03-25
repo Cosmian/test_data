@@ -1,0 +1,21 @@
+# KMS client — mTLS with PEM client certificate + JWT bearer token (FIPS-compatible).
+#
+# Use this template when the KMS server requires both a client certificate
+# (TLS-layer) and a JWT/bearer token (HTTP-layer) for multi-factor auth.
+#
+# Requires: cosmian_kms_client >= 5.18.0
+# Configure interactively: ckms configure → "Both (PEM cert + token)"
+
+[http_config]
+server_url = "https://kms.example.com:9998"
+accept_invalid_certs = false
+
+# Path to the client certificate in PEM format (.crt or .pem).
+ssl_client_pem_cert_path = "/path/to/client.crt"
+
+# Path to the client private key in PEM format (.key or .pem).
+ssl_client_pem_key_path = "/path/to/client.key"
+
+# JWT bearer token sent in the Authorization: Bearer <token> header.
+# Obtain from your identity provider (Google, Azure AD, Keycloak, …).
+access_token = "<JWT_BEARER_TOKEN>"
