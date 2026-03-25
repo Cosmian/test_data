@@ -27,3 +27,6 @@ tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.ke
 google_cse_enable = true
 google_cse_disable_tokens_validation = true
 google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]
+
+[logging]
+rust_log = "off"
