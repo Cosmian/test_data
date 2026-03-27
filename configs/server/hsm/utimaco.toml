@@ -24,3 +24,4 @@ ansi_colors = true
 
 [ui_config]
 ui_index_html_folder = "ui/dist"
+enable = true

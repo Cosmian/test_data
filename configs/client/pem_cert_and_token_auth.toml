@@ -11,10 +11,10 @@ server_url = "https://kms.example.com:9998"
 accept_invalid_certs = false
 
 # Path to the client certificate in PEM format (.crt or .pem).
-ssl_client_pem_cert_path = "/path/to/client.crt"
+tls_client_pem_cert_path = "/path/to/client.crt"
 
 # Path to the client private key in PEM format (.key or .pem).
-ssl_client_pem_key_path = "/path/to/client.key"
+tls_client_pem_key_path = "/path/to/client.key"
 
 # JWT bearer token sent in the Authorization: Bearer <token> header.
 # Obtain from your identity provider (Google, Azure AD, Keycloak, …).

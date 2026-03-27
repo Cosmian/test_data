@@ -11,8 +11,8 @@ server_url = "https://kms.example.com:9998"
 accept_invalid_certs = false
 
 # Path to the PKCS#12 bundle containing the client certificate and private key.
-ssl_client_pkcs12_path = "/path/to/client.p12"
+tls_client_pkcs12_path = "/path/to/client.p12"
 
 # Password to decrypt the PKCS#12 bundle.
 # Leave this key absent (or set to "") if the bundle has no password.
-ssl_client_pkcs12_password = "changeit"
+tls_client_pkcs12_password = "changeit"

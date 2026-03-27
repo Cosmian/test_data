@@ -13,9 +13,9 @@ accept_invalid_certs = false
 # Path to the client certificate in PEM format (.crt or .pem).
 # The file may contain a single leaf certificate or a full chain
 # (leaf + intermediates).
-ssl_client_pem_cert_path = "/path/to/client.crt"
+tls_client_pem_cert_path = "/path/to/client.crt"
 
 # Path to the client private key in PEM format (.key or .pem).
 # Supported formats: PKCS#8 (-----BEGIN PRIVATE KEY-----) and
 # traditional RSA/EC (-----BEGIN RSA PRIVATE KEY-----).
-ssl_client_pem_key_path = "/path/to/client.key"
+tls_client_pem_key_path = "/path/to/client.key"

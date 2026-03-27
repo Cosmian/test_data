@@ -5,5 +5,5 @@
 [http_config]
 server_url = "https://localhost:9999"
 accept_invalid_certs = true
-ssl_client_pem_cert_path = "test_data/certificates/client_server/user/user.client.acme.com.crt"
-ssl_client_pem_key_path = "test_data/certificates/client_server/user/user.client.acme.com.key"
+tls_client_pem_cert_path = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+tls_client_pem_key_path = "test_data/certificates/client_server/user/user.client.acme.com.key"
