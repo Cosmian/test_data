@@ -1,7 +1,7 @@
 default_username = "admin"
 hsm_model = "softhsm2"
 hsm_admin = ["admin"]
-hsm_slot = [0]
+hsm_slot = [473094471]
 hsm_password = ["12345678"]
 
 [http]
