@@ -1,0 +1,10 @@
+# Microsoft Entra ID (Azure AD) JWT authentication — from authentication.md
+[idp_auth]
+jwt_auth_provider = [
+  "https://login.microsoftonline.com/{TENANT_ID}/v2.0,https://login.microsoftonline.com/{TENANT_ID}/discovery/v2.0/keys",
+]
+
+[ui_config.ui_oidc_auth]
+ui_oidc_client_id = "{CLIENT_ID}"
+ui_oidc_issuer_url = "https://login.microsoftonline.com/{TENANT_ID}/v2.0"
+ui_oidc_logout_url = "https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/logout"

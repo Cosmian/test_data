@@ -1,0 +1,19 @@
+print_json = false
+
+[http_config]
+server_url = "http://0.0.0.0:9998"
+# Paste a valid access token obtained from Entra ID (e.g. via `az account get-access-token`
+# or the MSAL library).  Replace the placeholder with a real token before use.
+access_token = "{ENTRA_ID_ACCESS_TOKEN}"
+
+[http_config.oauth2_conf]
+# Application (client) ID registered in Entra ID.
+client_id = "{CLIENT_ID}"
+# Client secret for the app registration (for confidential clients).
+client_secret = "{CLIENT_SECRET}"
+# OAuth2 Authorization endpoint.
+authorize_url = "https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/authorize"
+# OAuth2 Token endpoint.
+token_url = "https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"
+# Scopes requested during authorization.
+scopes = ["openid", "email", "offline_access"]

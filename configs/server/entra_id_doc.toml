@@ -1,0 +1,22 @@
+# Microsoft Entra ID (Azure AD) JWT authentication configuration
+# Replace {TENANT_ID} with your Azure tenant ID (a UUID).
+# Replace {CLIENT_ID} with the Application (client) ID registered in Entra ID.
+[idp_auth]
+# Each entry: "JWT_ISSUER_URI,JWKS_URI"
+# The JWKS_URI is optional; it defaults to <issuer>/.well-known/openid-configuration
+# then fetches the jwks_uri from there.  For Entra ID the keys endpoint is:
+#   https://login.microsoftonline.com/{TENANT_ID}/discovery/v2.0/keys
+jwt_auth_provider = [
+  "https://login.microsoftonline.com/{TENANT_ID}/v2.0,https://login.microsoftonline.com/{TENANT_ID}/discovery/v2.0/keys",
+]
+
+# Optional: Web UI OIDC configuration.
+# Fill in client_id and tenant-specific URLs so the built-in UI can log in
+# via the Authorization Code flow.
+[ui_config.ui_oidc_auth]
+# The Application (client) ID of the Entra ID app registration.
+ui_oidc_client_id = "{CLIENT_ID}"
+# Token issuer URL — must match the iss claim in the JWT.
+ui_oidc_issuer_url = "https://login.microsoftonline.com/{TENANT_ID}/v2.0"
+# Logout redirect URL (optional, but recommended for clean session termination).
+ui_oidc_logout_url = "https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/logout"
