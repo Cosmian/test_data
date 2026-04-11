@@ -1,0 +1,7 @@
+pkcs11_use_pin_as_access_token = true
+
+# PKCS#11 provider config — Mode 2: OIDC/JWT token passed via C_Login (pPin).
+# No credentials stored here; the bearer token is supplied at keystore open time
+# (e.g. Oracle: ADMINISTER KEY MANAGEMENT SET KEYSTORE OPEN IDENTIFIED BY '<JWT>').
+[http_config]
+server_url = "http://localhost:9998"
