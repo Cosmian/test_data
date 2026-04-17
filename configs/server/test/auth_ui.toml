@@ -15,3 +15,10 @@ ui_oidc_logout_url = "https://demo-kms.eu.auth0.com/logout"
 
 [ui_config]
 ui_index_html_folder = "ui/dist"
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true

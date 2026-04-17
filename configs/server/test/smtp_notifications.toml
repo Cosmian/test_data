@@ -1,0 +1,46 @@
+# Test KMS server with SMTP email notifications wired to a local mock SMTP relay.
+#
+# Used by integration tests that exercise the notification system. The test must
+# start a Mailpit or MailHog container (or a tokio-based stub) on port 1025 before
+# loading this config.
+#
+# Usage in tests (requires email-notifications feature):
+#
+#   #[cfg(feature = "email-notifications")]
+#   #[tokio::test]
+#   async fn test_rotation_email() {
+#       let server = start_test_kms_server_from_config(
+#           "test_data/configs/server/test/smtp_notifications.toml"
+#       ).await;
+#       // ...trigger rotation...
+#       // poll Mailpit HTTP API at http://127.0.0.1:8025/api/v1/messages
+#   }
+
+default_username = "tech@cosmian.com"
+
+# Fire rotation checks every 2 seconds during tests
+auto_rotation_check_interval_secs = 10
+
+[http]
+port = 12099
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms_test_smtp"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_smtp"
+tmp_path = "/tmp"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
+
+# ── Mock SMTP relay ────────────────────────────────────────────────────────────
+# Mailpit / MailHog default: SMTP on 1025, web UI on 8025.
+[notifications.smtp]
+host = "127.0.0.1"
+port = 1025
+from = "kms@test.local"
+to = "test@test.local"

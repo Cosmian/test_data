@@ -4,6 +4,9 @@ hsm_admin = ["admin"]
 hsm_slot = [473094471]
 hsm_password = ["12345678"]
 
+auto_rotation_check_interval_secs = 10
+# key_encryption_key = "hsm::473094471::aes"
+
 [http]
 port = 9998
 hostname = "0.0.0.0"
@@ -17,9 +20,12 @@ clear_database = false
 tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
 tls_p12_password = "password"
 
-[logging]
-rust_log = "cosmian_kms_server=debug"
-ansi_colors = true
-
 [ui_config]
 ui_index_html_folder = "ui/dist"
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true
