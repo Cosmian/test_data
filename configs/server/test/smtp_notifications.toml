@@ -4,9 +4,8 @@
 # start a Mailpit or MailHog container (or a tokio-based stub) on port 1025 before
 # loading this config.
 #
-# Usage in tests (requires email-notifications feature):
+# Usage in tests:
 #
-#   #[cfg(feature = "email-notifications")]
 #   #[tokio::test]
 #   async fn test_rotation_email() {
 #       let server = start_test_kms_server_from_config(
