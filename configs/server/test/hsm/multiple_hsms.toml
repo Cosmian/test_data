@@ -1,0 +1,48 @@
+# Test KMS server — plain HTTP with two SoftHSM2 instances.
+# Demonstrates the multi-HSM [[hsm_instances]] TOML array.
+#
+# Slot IDs are the PKCS#11 slot IDs reported by:
+#   softhsm2-util --show-slots
+#
+# First instance gets routing prefix "hsm"  → UIDs of the form  hsm::<slot>::<key-id>
+# Second instance gets routing prefix "hsm1" → UIDs of the form hsm1::<slot>::<key-id>
+
+default_username = "admin"
+
+# Fire rotation checks every 2 seconds during tests
+auto_rotation_check_interval_secs = 10
+
+[[hsm_instances]]
+hsm_model = "softhsm2"
+hsm_admin = ["admin"]
+hsm_slot = [473094471]
+hsm_password = ["12345678"]
+
+[[hsm_instances]]
+hsm_model = "softhsm2"
+hsm_admin = ["admin"]
+hsm_slot = [1355662635]
+hsm_password = ["12345678"]
+
+# ── Mock SMTP relay ────────────────────────────────────────────────────────────
+# Mailpit / MailHog default: SMTP on 1025, web UI on 8025.
+[notifications.smtp]
+host = "127.0.0.1"
+port = 1025
+from = "kms@test.local"
+to = "test@test.local"
+
+[http]
+hostname = "127.0.0.1"
+port = 9998
+cors_allowed_origins = ["http://localhost:9998"]
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true
