@@ -1,0 +1,45 @@
+default_username = "admin"
+hsm_model = "softhsm2"
+hsm_admin = ["admin"]
+hsm_slot = [473094471]
+hsm_password = ["12345678"]
+
+auto_rotation_check_interval_secs = 10
+# key_encryption_key = "hsm::473094471::aes"
+
+[[hsm_instances]]
+hsm_model = "softhsm2"
+hsm_admin = ["admin"]
+hsm_slot = [1355662635]
+hsm_password = ["12345678"]
+
+[[hsm_instances]]
+hsm_model = "softhsm2"
+hsm_admin = ["admin"]
+hsm_slot = [1667223158]
+hsm_password = ["12345678"]
+
+[http]
+port = 29998
+hostname = "0.0.0.0"
+cors_allowed_origins = ["https://localhost:29998"]
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-softhsm2-data"
+clear_database = false
+
+[tls]
+tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
+tls_p12_password = "password"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true
