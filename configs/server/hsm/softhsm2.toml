@@ -10,6 +10,7 @@ auto_rotation_check_interval_secs = 10
 [http]
 port = 9998
 hostname = "0.0.0.0"
+cors_allowed_origins = ["https://localhost:9998"]
 
 [db]
 database_type = "sqlite"
@@ -19,6 +20,7 @@ clear_database = false
 [tls]
 tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
 tls_p12_password = "password"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
 
 [ui_config]
 ui_index_html_folder = "ui/dist"
