@@ -1,11 +1,11 @@
 default_username = "admin"
 hsm_model = "softhsm2"
-hsm_admin = ["admin"]
-hsm_slot = [473094471]
+hsm_admin = ["admin", "owner.client@acme.com"]
+hsm_slot = [2045571331]
 hsm_password = ["12345678"]
 
 auto_rotation_check_interval_secs = 10
-# key_encryption_key = "hsm::473094471::aes"
+key_encryption_key = "hsm::2045571331::owner"
 
 [http]
 port = 9998
@@ -14,7 +14,6 @@ cors_allowed_origins = ["https://localhost:9998"]
 
 [db]
 database_type = "sqlite"
-sqlite_path = "/tmp/kms-softhsm2-data"
 clear_database = false
 
 [tls]
