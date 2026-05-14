@@ -1,0 +1,16 @@
+name = "KAT: RSA-2048 OAEP-SHA256 decrypt (known key+ciphertext)"
+description = "Known-Answer Test: RSA-2048 PKCS#1v2 OAEP-SHA256 decryption with embedded key and ciphertext"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Decrypt"
+request = "step2_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F2C205253412D32303438204F4145502D53484132353621"

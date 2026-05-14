@@ -1,0 +1,10 @@
+{
+  "tag": "DestroyResponse",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "bc2dfcac-a516-4842-89b4-362f75fbcaae"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+name = "ChaCha20 Encrypt and Decrypt with Explicit CryptographicParameters"
+description = "Creates a ChaCha20 key, encrypts with an explicit CryptographicParameters block specifying the ChaCha20 algorithm and a client-provided 8-byte nonce, then decrypts and verifies the plaintext"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "48656C6C6F2C2043686143686132302121"

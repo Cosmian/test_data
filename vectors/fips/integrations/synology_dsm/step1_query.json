@@ -1,0 +1,35 @@
+{
+  "tag": "Query",
+  "value": [
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryOperations"
+    },
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryObjects"
+    },
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryServerInformation"
+    },
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryApplicationNamespaces"
+    },
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryExtensionList"
+    },
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryExtensionMap"
+    }
+  ]
+}

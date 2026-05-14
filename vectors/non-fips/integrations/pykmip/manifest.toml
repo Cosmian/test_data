@@ -1,0 +1,68 @@
+name = "PyKMIP Integration Test Sequence"
+description = """
+Simulates the PyKMIP client KMIP 1.2 protocol sequence: \
+DiscoverVersions → Create (AES-256) → CreateKeyPair (RSA-2048) → GetAttributes → \
+Locate → Activate → Revoke → Destroy (symmetric + RSA pair).
+"""
+wire_format = "binary"
+kmip_version = [1, 2]
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step1_discover_versions.json"
+assert_success = true
+
+[[steps]]
+operation = "Create"
+request = "step2_create_symmetric.json"
+assert_success = true
+[steps.capture]
+sym_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step3_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attributes.json"
+assert_success = true
+
+[[steps]]
+operation = "Locate"
+request = "step5_locate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step6_activate_sym.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_sym.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_sym.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step10_revoke_priv.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_priv.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_pub.json"
+assert_success = true

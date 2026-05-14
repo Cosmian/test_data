@@ -1,0 +1,30 @@
+{
+  "tag": "MACVerify",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "HashingAlgorithm",
+          "type": "Enumeration",
+          "value": "SHA256"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "DEADBEEF"
+    },
+    {
+      "tag": "MACData",
+      "type": "ByteString",
+      "value": "{{mac_data}}"
+    }
+  ]
+}

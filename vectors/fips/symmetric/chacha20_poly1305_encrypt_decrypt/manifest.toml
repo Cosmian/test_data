@@ -1,0 +1,25 @@
+name = "ChaCha20-Poly1305 Encrypt and Decrypt"
+description = "Creates a ChaCha20-Poly1305 key, encrypts data with AEAD mode, then decrypts and verifies"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true

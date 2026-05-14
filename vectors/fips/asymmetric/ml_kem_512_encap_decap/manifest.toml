@@ -1,0 +1,28 @@
+name = "ML-KEM-512 Encapsulate / Decapsulate"
+description = "Creates a ML-KEM-512 key pair, encapsulates to get ciphertext + shared secret, decapsulates and verifies shared secrets match"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encapsulate.json"
+assert_success = true
+
+[steps.capture]
+shared_secret = "Data"
+ciphertext = "IVCounterNonce"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decapsulate.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "{{shared_secret}}"

@@ -1,0 +1,23 @@
+name = "ChaCha20 Pure Stream Encrypt and Decrypt"
+description = "Creates a ChaCha20 key (non-FIPS), encrypts data with an 8-byte nonce, then decrypts and verifies"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true

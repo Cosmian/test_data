@@ -1,0 +1,16 @@
+name = "KAT: Ed448 EdDSA sign (RFC 8032 §7.4 Test Vector 1)"
+description = "Known-Answer Test: Ed448 EdDSA signature of an empty message using RFC 8032 §7.4 test vector 1 (blank message)"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_privkey.json"
+assert_success = true
+[steps.capture]
+private_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true
+[steps.assert_fields]
+SignatureData = "533A37F6BBE457251F023C0D88F976AE2DFB504A843E34D2074FD823D41A591F2B233F034F628281F2FD7A22DDD47D7828C59BD0A21BFD3980FF0D2028D4B18A9DF63E006C5D1C2D345B925D8DC00B4104852DB99AC5C7CDDA8530A113A0F4DBB61149F05A7363268C71D95808FF2E652600"

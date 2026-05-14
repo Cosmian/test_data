@@ -1,0 +1,35 @@
+{
+  "tag": "Encrypt",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "BlockCipherMode",
+          "type": "Enumeration",
+          "value": "AEAD"
+        },
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "ChaCha20Poly1305"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "48656C6C6F2C20576F726C642120546869732069732061207465737420666F72204368614368613230"
+    },
+    {
+      "tag": "AuthenticatedEncryptionAdditionalData",
+      "type": "ByteString",
+      "value": "feedfacedeadbeeffeedfacedeadbeefabaddad2"
+    }
+  ]
+}

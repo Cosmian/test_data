@@ -1,0 +1,13 @@
+{
+  "tag": "Decrypt",
+  "value": [
+    { "tag": "UniqueIdentifier", "type": "TextString", "value": "{{private_key_id}}" },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        { "tag": "PaddingMethod", "type": "Enumeration", "value": "None" }
+      ]
+    },
+    { "tag": "Data", "type": "ByteString", "value": "{{ciphertext}}" }
+  ]
+}

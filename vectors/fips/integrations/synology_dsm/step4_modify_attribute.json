@@ -1,0 +1,35 @@
+{
+    "tag": "ModifyAttribute",
+    "value": [
+        {
+            "tag": "UniqueIdentifier",
+            "type": "TextString",
+            "value": "{{key_id}}"
+        },
+        {
+            "tag": "Attribute",
+            "value": [
+                {
+                    "tag": "AttributeName",
+                    "type": "TextString",
+                    "value": "Name"
+                },
+                {
+                    "tag": "AttributeValue",
+                    "value": [
+                        {
+                            "tag": "NameValue",
+                            "type": "TextString",
+                            "value": "dsm-json-test-volume-uuid"
+                        },
+                        {
+                            "tag": "NameType",
+                            "type": "Enumeration",
+                            "value": "UninterpretedTextString"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

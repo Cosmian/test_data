@@ -1,0 +1,8 @@
+name = "Negative: Create key with invalid algorithm"
+description = "Tests that key creation fails when specifying an unsupported cryptographic algorithm"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = false
+assert_error_contains = "Blowfish"

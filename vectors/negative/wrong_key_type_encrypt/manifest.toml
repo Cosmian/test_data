@@ -1,0 +1,17 @@
+name = "Negative: Encrypt With Private Key"
+description = "Tests that encrypt fails when using a private key (wrong key type for encryption)"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_with_private.json"
+assert_success = false
+assert_error_contains = "not found"

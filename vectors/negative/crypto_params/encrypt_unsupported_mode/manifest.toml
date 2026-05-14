@@ -1,0 +1,16 @@
+name = "Negative: Encrypt With Unsupported Block Cipher Mode (CTR)"
+description = "Tests that AES encryption fails with an unsupported BlockCipherMode"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_ctr.json"
+assert_success = false
+assert_error_contains = "not supported"

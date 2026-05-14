@@ -1,0 +1,7 @@
+name = "Negative: Encrypt Without UniqueIdentifier"
+description = "Tests that encrypt fails when no UniqueIdentifier is provided"
+
+[[steps]]
+operation = "Encrypt"
+request = "step1_encrypt_no_uid.json"
+assert_success = false

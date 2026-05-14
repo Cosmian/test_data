@@ -1,0 +1,25 @@
+name = "KAT: RFC 3394 AES-192 KEK (§4.2)"
+description = "Known-Answer Test: RFC 3394 key wrap with 192-bit KEK, 128-bit plaintext (RFC 3394 §4.2)"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_wrap.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "96778B25AE6CA435F92B5B97C050AED2468AB8A17AD84E5D"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "00112233445566778899AABBCCDDEEFF"

@@ -1,0 +1,30 @@
+{
+    "tag": "Locate",
+    "value": [
+        {
+            "tag": "Attribute",
+            "value": [
+                {
+                    "tag": "AttributeName",
+                    "type": "TextString",
+                    "value": "Name"
+                },
+                {
+                    "tag": "AttributeValue",
+                    "value": [
+                        {
+                            "tag": "NameValue",
+                            "type": "TextString",
+                            "value": "dsm-json-test-volume-uuid"
+                        },
+                        {
+                            "tag": "NameType",
+                            "type": "Enumeration",
+                            "value": "UninterpretedTextString"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

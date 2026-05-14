@@ -1,0 +1,25 @@
+{
+  "tag": "Mac",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "HashingAlgorithm",
+          "type": "Enumeration",
+          "value": "SHA256"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "48656C6C6F"
+    }
+  ]
+}

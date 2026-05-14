@@ -1,0 +1,25 @@
+{
+  "tag": "AddAttribute",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "Attribute",
+      "value": [
+        {
+          "tag": "AttributeName",
+          "type": "TextString",
+          "value": "x-Vendor"
+        },
+        {
+          "tag": "AttributeValue",
+          "type": "TextString",
+          "value": "VMware, Inc."
+        }
+      ]
+    }
+  ]
+}

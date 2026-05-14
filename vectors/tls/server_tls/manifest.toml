@@ -1,0 +1,20 @@
+name = "Transport: HTTPS (server-TLS, no client cert)"
+description = "Verifies the KMS can be reached over HTTPS with server-TLS only (self-signed cert, no mTLS)"
+server_config = "test_data/configs/server/test/auth_https.toml"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true

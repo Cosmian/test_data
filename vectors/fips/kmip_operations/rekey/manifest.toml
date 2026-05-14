@@ -1,0 +1,33 @@
+name = "ReKey Symmetric Key"
+description = "Creates an AES key, re-keys it, and verifies the new key works for encryption"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+assert_success = true

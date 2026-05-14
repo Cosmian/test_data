@@ -1,0 +1,23 @@
+name = "KAT: HKDF-SHA384 (IKM=0x0b*32, 32-byte output)"
+description = "Known-Answer Test: HKDF-SHA384 with RFC 5869-style salt and info, 32-byte derived key"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_base_key.json"
+assert_success = true
+[steps.capture]
+base_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "DeriveKey"
+request = "step2_derive.json"
+assert_success = true
+[steps.capture]
+derived_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step3_get.json"
+assert_success = true
+[steps.assert_fields]
+KeyMaterial = "AE258F21D039CD0AE30A1B75372A91C7C7601C4431967B5A25959AAC2823ED86"

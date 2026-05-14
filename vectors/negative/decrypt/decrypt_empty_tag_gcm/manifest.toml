@@ -1,0 +1,22 @@
+name = "Negative: GCM decrypt without authentication tag"
+description = "Tests that AES-GCM decryption fails when AuthenticatedEncryptionTag is missing"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt_no_tag.json"
+assert_success = false
+assert_error_contains = "invalid tag"

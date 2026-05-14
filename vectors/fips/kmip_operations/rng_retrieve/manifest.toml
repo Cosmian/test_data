@@ -1,0 +1,9 @@
+name = "RNG Retrieve Random Bytes"
+description = "Retrieves 32 random bytes from the server RNG"
+
+[[steps]]
+operation = "RNGRetrieve"
+request = "step1_rng_retrieve.json"
+assert_success = true
+[steps.capture]
+random_data = "Data"

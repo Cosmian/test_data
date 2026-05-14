@@ -1,0 +1,55 @@
+{
+  "tag": "DeriveKey",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "ObjectUniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "DerivationMethod",
+      "type": "Enumeration",
+      "value": "PBKDF2"
+    },
+    {
+      "tag": "DerivationParameters",
+      "value": [
+        {
+          "tag": "HashingAlgorithm",
+          "type": "Enumeration",
+          "value": "SHA256"
+        },
+        {
+          "tag": "IterationCount",
+          "type": "Integer",
+          "value": 10000
+        }
+      ]
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 256
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 12
+        }
+      ]
+    }
+  ]
+}

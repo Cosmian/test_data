@@ -1,0 +1,30 @@
+name = "Negative: Decrypt with wrong key"
+description = "Tests that AES-GCM decryption fails when using a different key than the one used for encryption"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key_a.json"
+assert_success = true
+[steps.capture]
+key_a = "UniqueIdentifier"
+
+[[steps]]
+operation = "Create"
+request = "step2_create_key_b.json"
+assert_success = true
+[steps.capture]
+key_b = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt_wrong_key.json"
+assert_success = false
+assert_error_contains = "CRYPTO"

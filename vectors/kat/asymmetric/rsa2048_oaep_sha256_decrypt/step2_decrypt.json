@@ -1,0 +1,35 @@
+{
+  "tag": "Decrypt",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "RSA"
+        },
+        {
+          "tag": "PaddingMethod",
+          "type": "Enumeration",
+          "value": "OAEP"
+        },
+        {
+          "tag": "HashingAlgorithm",
+          "type": "Enumeration",
+          "value": "SHA256"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "7A885F95170614EA54DD5015866580D153C94D68529575C64A6827B7D165E38E6D560D1FAA30EC2CCAE7C4D666869956FFB7DE77036CC5E940C550637C00997DC2EE7DFB2E9B3C63487A7AC357829DDBE34417D4D6944EB4923390EC4C55754F6CCBA45AD8D1DA3AF04D28B75E1B811DB54FD51C898A32DF12E672E11F87EBAEC605671972C9C148A0DF20111FF6FB511CE0B506D9E5CDD27624A138D705726ADF10C9D7E41A9DE4070BBAAFE561356F04E3A56349DCF55E52F4998636C21A9F94F1DE9B629A90C61BBAF55B4482AA0E6798647C411215C8F48289425A67B973CA92231C3A87B5511379B727D3B7E76426FF9717520E93BB989F4D849A191C71"
+    }
+  ]
+}

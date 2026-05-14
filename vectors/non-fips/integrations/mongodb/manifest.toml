@@ -1,0 +1,30 @@
+name = "MongoDB Queryable Encryption KMIP Key Lifecycle"
+description = """
+Simulates MongoDB Queryable Encryption KMIP 1.0 key management: \
+Create AES-256 → Locate → Get → Destroy. \
+Mirrors crate/server/src/tests/ttlv_tests/get_1_0.rs (Percona Server for MongoDB KMIP 1.0).
+"""
+wire_format = "binary"
+kmip_version = [1, 0]
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step2_locate.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step3_get.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

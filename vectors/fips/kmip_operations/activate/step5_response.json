@@ -1,0 +1,10 @@
+{
+  "tag": "RevokeResponse",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "705975b1-7295-40f1-8870-d13ad7f7d0fd"
+    }
+  ]
+}

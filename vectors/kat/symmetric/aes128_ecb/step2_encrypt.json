@@ -1,0 +1,15 @@
+{
+  "tag": "Encrypt",
+  "value": [
+    { "tag": "UniqueIdentifier", "type": "TextString", "value": "{{key_id}}" },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        { "tag": "BlockCipherMode", "type": "Enumeration", "value": "ECB" },
+        { "tag": "PaddingMethod", "type": "Enumeration", "value": "None" },
+        { "tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES" }
+      ]
+    },
+    { "tag": "Data", "type": "ByteString", "value": "6BC1BEE22E409F96E93D7E117393172A" }
+  ]
+}

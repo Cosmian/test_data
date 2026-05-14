@@ -1,0 +1,16 @@
+name = "KAT: secp256k1 ECDSA sign (RFC 6979 §A.2.5 self-computed)"
+description = "Known-Answer Test: secp256k1 ECDSA deterministic signature (RFC 6979) of message 'sample' with SHA-256"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_privkey.json"
+assert_success = true
+[steps.capture]
+private_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true
+[steps.assert_fields]
+SignatureData = "30440220432310E32CB80EB6503A26CE83CC165C783B870845FB8AAD6D970889FCD7A6C80220530128B6B81C548874A6305D93ED071CA6E05074D85863D4056CE89B02BFAB69"

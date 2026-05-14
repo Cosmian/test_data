@@ -1,0 +1,85 @@
+{
+  "tag": "DeriveKey",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "ObjectUniqueIdentifier",
+      "type": "TextString",
+      "value": "{{base_key_id}}"
+    },
+    {
+      "tag": "DerivationMethod",
+      "type": "Enumeration",
+      "value": "PBKDF2"
+    },
+    {
+      "tag": "DerivationParameters",
+      "value": [
+        {
+          "tag": "CryptographicParameters",
+          "value": [
+            {
+              "tag": "HashingAlgorithm",
+              "type": "Enumeration",
+              "value": "SHA512"
+            }
+          ]
+        },
+        {
+          "tag": "DerivationData",
+          "type": "ByteString",
+          "value": "746573742064657269766174696F6E2064617461"
+        },
+        {
+          "tag": "Salt",
+          "type": "ByteString",
+          "value": "746573742073616C74"
+        },
+        {
+          "tag": "IterationCount",
+          "type": "Integer",
+          "value": 100000
+        }
+      ]
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 128
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 12
+        },
+        {
+          "tag": "KeyFormatType",
+          "type": "Enumeration",
+          "value": "TransparentSymmetricKey"
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SymmetricKey"
+        },
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    }
+  ]
+}

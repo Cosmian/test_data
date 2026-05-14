@@ -1,0 +1,40 @@
+{
+  "tag": "Decrypt",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "BlockCipherMode",
+          "type": "Enumeration",
+          "value": "GCMSIV"
+        },
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "4CD07B7830DE7AA68C937FC688F36924D88B7F98E0902F"
+    },
+    {
+      "tag": "IVCounterNonce",
+      "type": "ByteString",
+      "value": "000000000000000000000000"
+    },
+    {
+      "tag": "AuthenticatedEncryptionTag",
+      "type": "ByteString",
+      "value": "38840F9FE293E37157D3D1472DB46596"
+    }
+  ]
+}

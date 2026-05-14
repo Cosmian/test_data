@@ -1,0 +1,44 @@
+name = "HMAC-SHA256 Compute and Verify"
+description = "Creates an HMAC key, computes a MAC, verifies it, then verifies an invalid MAC fails"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hmac_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "MAC"
+request = "step2_compute_mac.json"
+assert_success = true
+
+[steps.capture]
+mac_data = "MACData"
+
+[[steps]]
+operation = "MACVerify"
+request = "step3_verify_mac.json"
+assert_success = true
+
+[steps.assert_fields]
+ValidityIndicator = "Valid"
+
+[[steps]]
+operation = "MACVerify"
+request = "step4_verify_bad_mac.json"
+assert_success = true
+
+[steps.assert_fields]
+ValidityIndicator = "Invalid"
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

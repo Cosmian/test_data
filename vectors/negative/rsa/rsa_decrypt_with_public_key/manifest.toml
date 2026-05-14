@@ -1,0 +1,16 @@
+name = "Negative: RSA decrypt using public key"
+description = "Tests that RSA decryption fails when attempting to use a public key for decryption"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+priv_key_id = "PrivateKeyUniqueIdentifier"
+pub_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Decrypt"
+request = "step2_decrypt_with_pubkey.json"
+assert_success = false
+assert_error_contains = "not found"

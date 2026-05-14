@@ -1,0 +1,20 @@
+name = "Transport: HTTPS mTLS (mutual TLS with client certificate)"
+description = "Verifies the KMS can be reached over HTTPS with mutual TLS (client certificate required)"
+server_config = "test_data/configs/server/test/cert_auth.toml"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true

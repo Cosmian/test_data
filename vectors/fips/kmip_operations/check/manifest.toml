@@ -1,0 +1,25 @@
+name = "Check Key State"
+description = "Creates a key, checks its usage mask, activates it, checks again"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Check"
+request = "step2_check.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

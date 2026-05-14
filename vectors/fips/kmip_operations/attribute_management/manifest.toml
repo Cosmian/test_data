@@ -1,0 +1,53 @@
+name = "Attribute Management Lifecycle"
+description = "Tests GetAttributes, SetAttribute, AddAttribute, DeleteAttribute, ModifyAttribute, GetAttributeList"
+
+[[steps]]
+operation = "Create"
+request = "step01_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step02_get_attributes.json"
+assert_success = true
+
+[steps.assert_fields]
+CryptographicAlgorithm = "AES"
+
+[[steps]]
+operation = "GetAttributeList"
+request = "step03_get_attribute_list.json"
+assert_success = true
+
+[[steps]]
+operation = "SetAttribute"
+request = "step04_set_attribute.json"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributes"
+request = "step05_get_attributes_after_set.json"
+assert_success = true
+
+[[steps]]
+operation = "AddAttribute"
+request = "step06_add_attribute.json"
+assert_success = true
+
+[[steps]]
+operation = "DeleteAttribute"
+request = "step07_delete_attribute.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step08_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step09_destroy.json"
+assert_success = true

@@ -1,0 +1,30 @@
+{
+  "tag": "Hash",
+  "value": [
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "HashingAlgorithm",
+          "type": "Enumeration",
+          "value": "SHA256"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "48656C6C6F"
+    },
+    {
+      "tag": "InitIndicator",
+      "type": "Boolean",
+      "value": true
+    },
+    {
+      "tag": "FinalIndicator",
+      "type": "Boolean",
+      "value": true
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+name = "AES-128-GCM Encrypt and Decrypt"
+description = "Creates an AES-128 key, encrypts data with AES-GCM, then decrypts"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+assert_success = true

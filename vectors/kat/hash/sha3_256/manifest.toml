@@ -1,0 +1,10 @@
+name = "KAT: Hash SHA3-256 (input=abc, NIST reference)"
+description = "Known-Answer Test: computes SHA3-256 hash of 'abc' and asserts the NIST FIPS reference value"
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "3A985DA74FE225B2045C172D6BD390BD855F086E3E9D525B46BFE24511431532"

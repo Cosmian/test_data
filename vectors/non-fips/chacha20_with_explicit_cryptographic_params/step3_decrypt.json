@@ -1,0 +1,30 @@
+{
+  "tag": "Decrypt",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "ChaCha20"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "{{ciphertext}}"
+    },
+    {
+      "tag": "IVCounterNonce",
+      "type": "ByteString",
+      "value": "0001020304050607"
+    }
+  ]
+}

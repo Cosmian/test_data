@@ -1,0 +1,18 @@
+name = "KAT: HMAC-SHA3-512 (key=0x0b*32, msg='Hi There')"
+description = "Known-Answer Test: computes HMAC-SHA3-512 of 'Hi There' with a known 32-byte key"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_compute_mac.json"
+assert_success = true
+
+[steps.assert_fields]
+MACData = "6A70474A0C8123FF4680AA34072F016221911F718F9553FA6739BDFEC23FA45B705DFF15F889CC5B3D4C328ADDA7CC358CE9E0A23E8C32D715DBD30FB8853FB8"

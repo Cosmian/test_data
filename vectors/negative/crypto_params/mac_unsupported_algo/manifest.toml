@@ -1,0 +1,16 @@
+name = "Negative: MAC With Unsupported Hash Algorithm (MD5)"
+description = "Tests that MAC computation fails when using an unsupported hashing algorithm (MD5)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hmac_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "MAC"
+request = "step2_mac_md5.json"
+assert_success = false
+assert_error_contains = "support"

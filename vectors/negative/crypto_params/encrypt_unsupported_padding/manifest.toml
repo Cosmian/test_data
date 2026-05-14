@@ -1,0 +1,15 @@
+name = "Negative: Encrypt AES-GCM With Unsupported Padding Method"
+description = "Documents that AES-GCM encryption ignores unsupported PaddingMethod (GCM handles padding internally)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_bad_padding.json"
+assert_success = true

@@ -1,0 +1,40 @@
+{
+  "tag": "Decrypt",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "BlockCipherMode",
+          "type": "Enumeration",
+          "value": "AEAD"
+        },
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "ChaCha20Poly1305"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "D7628BD23A7D1839F0DBD414121F382C"
+    },
+    {
+      "tag": "IVCounterNonce",
+      "type": "ByteString",
+      "value": "000000000000000000000000"
+    },
+    {
+      "tag": "AuthenticatedEncryptionTag",
+      "type": "ByteString",
+      "value": "7F8D418116F63FFC0DB22ABE50F57EE1"
+    }
+  ]
+}

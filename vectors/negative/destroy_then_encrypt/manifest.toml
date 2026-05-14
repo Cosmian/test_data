@@ -1,0 +1,31 @@
+name = "Negative: Encrypt With Destroyed Key"
+description = "Tests that encrypt fails when the key has been destroyed"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step5_encrypt_destroyed.json"
+assert_success = false
+assert_error_reason = "Item_Not_Found"

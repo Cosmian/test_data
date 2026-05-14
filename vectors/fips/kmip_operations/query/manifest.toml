@@ -1,0 +1,9 @@
+name = "Query Server Capabilities"
+description = "Queries server information, supported operations, and supported object types"
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+assert_success = true
+[steps.assert_fields]
+VendorIdentification = "cosmian"

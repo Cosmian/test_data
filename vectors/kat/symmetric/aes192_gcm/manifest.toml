@@ -1,0 +1,26 @@
+name = "KAT: AES-192-GCM (NIST SP 800-38D TC7)"
+description = "Known-Answer Test: AES-192 GCM with the authentic NIST SP 800-38D Test Case 7 key"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "3980CA0B3C00E841EB06FAC4872A2757859E1CEAA6EFD984628593B40CA1E19C7D773D00C144C525AC619D18C84A3F4718E2448B2FE324D9CCDA2710ACADE256"
+AuthenticatedEncryptionTag = "12C9FF85FBE15C9C5757BEE6FAC3C674"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "D9313225F88406E5A55909C5AFF5269A86A7A9531534F7DA2E4C303D8A318A721C3C0C95956809532FCF0E2449A6B525B16AEDF5AA0DE657BA637B391AAFD255"

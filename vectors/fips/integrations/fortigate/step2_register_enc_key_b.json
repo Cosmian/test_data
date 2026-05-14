@@ -1,0 +1,120 @@
+{
+    "tag": "Register",
+    "value": [
+        {
+            "tag": "ObjectType",
+            "type": "Enumeration",
+            "value": "SymmetricKey"
+        },
+        {
+            "tag": "TemplateAttribute",
+            "value": [
+                {
+                    "tag": "Attribute",
+                    "value": [
+                        {
+                            "tag": "AttributeName",
+                            "type": "TextString",
+                            "value": "Cryptographic Algorithm"
+                        },
+                        {
+                            "tag": "AttributeValue",
+                            "type": "Enumeration",
+                            "value": "AES"
+                        }
+                    ]
+                },
+                {
+                    "tag": "Attribute",
+                    "value": [
+                        {
+                            "tag": "AttributeName",
+                            "type": "TextString",
+                            "value": "Cryptographic Length"
+                        },
+                        {
+                            "tag": "AttributeValue",
+                            "type": "Integer",
+                            "value": 128
+                        }
+                    ]
+                },
+                {
+                    "tag": "Attribute",
+                    "value": [
+                        {
+                            "tag": "AttributeName",
+                            "type": "TextString",
+                            "value": "Cryptographic Usage Mask"
+                        },
+                        {
+                            "tag": "AttributeValue",
+                            "type": "Integer",
+                            "value": 12
+                        }
+                    ]
+                },
+                {
+                    "tag": "Attribute",
+                    "value": [
+                        {
+                            "tag": "AttributeName",
+                            "type": "TextString",
+                            "value": "Name"
+                        },
+                        {
+                            "tag": "AttributeValue",
+                            "value": [
+                                {
+                                    "tag": "NameValue",
+                                    "type": "TextString",
+                                    "value": "test-kmip-ENC-AES-16-b"
+                                },
+                                {
+                                    "tag": "NameType",
+                                    "type": "Enumeration",
+                                    "value": "UninterpretedTextString"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "SymmetricKey",
+            "value": [
+                {
+                    "tag": "KeyBlock",
+                    "value": [
+                        {
+                            "tag": "KeyFormatType",
+                            "type": "Enumeration",
+                            "value": "Raw"
+                        },
+                        {
+                            "tag": "KeyValue",
+                            "value": [
+                                {
+                                    "tag": "KeyMaterial",
+                                    "type": "ByteString",
+                                    "value": "101112131415161718191A1B1C1D1E1F"
+                                }
+                            ]
+                        },
+                        {
+                            "tag": "CryptographicAlgorithm",
+                            "type": "Enumeration",
+                            "value": "AES"
+                        },
+                        {
+                            "tag": "CryptographicLength",
+                            "type": "Integer",
+                            "value": 128
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

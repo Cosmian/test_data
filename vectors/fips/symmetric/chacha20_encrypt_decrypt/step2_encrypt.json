@@ -1,0 +1,8 @@
+{
+  "tag": "Encrypt",
+  "value": [
+    { "tag": "UniqueIdentifier", "type": "TextString", "value": "{{key_id}}" },
+    { "tag": "Data", "type": "ByteString", "value": "48656C6C6F2C2043686143686132302121" },
+    { "tag": "IVCounterNonce", "type": "ByteString", "value": "0001020304050607" }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "tag": "CreateKeyPairResponse",
+  "value": [
+    {
+      "tag": "PrivateKeyUniqueIdentifier",
+      "type": "TextString",
+      "value": "1cfde8f6-cbcc-4f95-8158-f39ce919afab"
+    },
+    {
+      "tag": "PublicKeyUniqueIdentifier",
+      "type": "TextString",
+      "value": "1cfde8f6-cbcc-4f95-8158-f39ce919afab_pk"
+    }
+  ]
+}

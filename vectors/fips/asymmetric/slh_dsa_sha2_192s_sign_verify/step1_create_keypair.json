@@ -1,0 +1,34 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {
+      "tag": "CommonAttributes",
+      "value": [
+        { "tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "SLHDSA_SHA2_192s" },
+        { "tag": "CryptographicUsageMask", "type": "Integer", "value": 2097152 },
+        { "tag": "ObjectType", "type": "Enumeration", "value": "PrivateKey" },
+        { "tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z" }
+      ]
+    },
+    {
+      "tag": "PrivateKeyAttributes",
+      "value": [
+        { "tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "SLHDSA_SHA2_192s" },
+        { "tag": "CryptographicUsageMask", "type": "Integer", "value": 2097152 },
+        { "tag": "KeyFormatType", "type": "Enumeration", "value": "PKCS8" },
+        { "tag": "ObjectType", "type": "Enumeration", "value": "PrivateKey" },
+        { "tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z" }
+      ]
+    },
+    {
+      "tag": "PublicKeyAttributes",
+      "value": [
+        { "tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "SLHDSA_SHA2_192s" },
+        { "tag": "CryptographicUsageMask", "type": "Integer", "value": 2097152 },
+        { "tag": "KeyFormatType", "type": "Enumeration", "value": "PKCS8" },
+        { "tag": "ObjectType", "type": "Enumeration", "value": "PublicKey" },
+        { "tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z" }
+      ]
+    }
+  ]
+}

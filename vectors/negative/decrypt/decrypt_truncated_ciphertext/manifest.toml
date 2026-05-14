@@ -1,0 +1,15 @@
+name = "Negative: Decrypt GCM with truncated ciphertext"
+description = "Tests that AES-GCM decryption fails when ciphertext is too short (1 byte)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Decrypt"
+request = "step2_decrypt_short.json"
+assert_success = false
+assert_error_contains = "invalid tag"

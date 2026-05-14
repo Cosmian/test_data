@@ -1,0 +1,50 @@
+{
+  "tag": "Import",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "test-opaque-data-001"
+    },
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "OpaqueObject"
+    },
+    {
+      "tag": "ReplaceExisting",
+      "type": "Boolean",
+      "value": false
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "OpaqueObject"
+        },
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "tag": "OpaqueObject",
+      "value": [
+        {
+          "tag": "OpaqueDataType",
+          "type": "Enumeration",
+          "value": "Unknown"
+        },
+        {
+          "tag": "OpaqueDataValue",
+          "type": "ByteString",
+          "value": "48656C6C6F204F706171756520446174612054657374"
+        }
+      ]
+    }
+  ]
+}

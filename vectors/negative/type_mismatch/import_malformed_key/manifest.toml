@@ -1,0 +1,8 @@
+name = "Negative: Import malformed key material"
+description = "Tests that importing a key with mismatched key material size and declared CryptographicLength fails"
+
+[[steps]]
+operation = "Import"
+request = "step1_import.json"
+assert_success = false
+assert_error_contains = "KeyMaterial"

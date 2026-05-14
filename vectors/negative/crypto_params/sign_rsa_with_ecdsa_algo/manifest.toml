@@ -1,0 +1,16 @@
+name = "Negative: Sign RSA Key With ECDSA Algorithm"
+description = "Tests that signing an RSA key with ECDSA digital signature algorithm fails"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign_ecdsa.json"
+assert_success = false

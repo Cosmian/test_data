@@ -1,0 +1,8 @@
+name = "Negative: Empty Request"
+description = "Tests that the server handles an empty JSON body gracefully"
+
+[[steps]]
+operation = "Unknown"
+request = "step1_empty.json"
+assert_success = false
+assert_error_contains = "OperationEnumeration"

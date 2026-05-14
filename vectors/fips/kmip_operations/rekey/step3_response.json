@@ -1,0 +1,25 @@
+{
+  "tag": "EncryptResponse",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "855d53be-0a49-49b2-8b11-a10ee2b4b34d"
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "6385F83F00"
+    },
+    {
+      "tag": "IVCounterNonce",
+      "type": "ByteString",
+      "value": "4218B3CB24597F609470F052"
+    },
+    {
+      "tag": "AuthenticatedEncryptionTag",
+      "type": "ByteString",
+      "value": "5233CAEF259D09BE5A3674A85890B203"
+    }
+  ]
+}

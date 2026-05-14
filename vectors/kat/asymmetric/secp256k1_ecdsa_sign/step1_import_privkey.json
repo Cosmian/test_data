@@ -1,0 +1,85 @@
+{
+  "tag": "Import",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "kat-asym-secp256k1-privkey-001"
+    },
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "PrivateKey"
+    },
+    {
+      "tag": "ReplaceExisting",
+      "type": "Boolean",
+      "value": false
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "ECDSA"
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 1
+        },
+        {
+          "tag": "KeyFormatType",
+          "type": "Enumeration",
+          "value": "PKCS8"
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "PrivateKey"
+        },
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKey",
+      "value": [
+        {
+          "tag": "KeyBlock",
+          "value": [
+            {
+              "tag": "KeyFormatType",
+              "type": "Enumeration",
+              "value": "PKCS8"
+            },
+            {
+              "tag": "KeyValue",
+              "value": [
+                {
+                  "tag": "KeyMaterial",
+                  "type": "ByteString",
+                  "value": "303E020100301006072A8648CE3D020106052B8104000A042730250201010420C9AFA9D845BA75166B5C215767B1D6934E50C3DB36E89B127B8A622B120F6721"
+                }
+              ]
+            },
+            {
+              "tag": "CryptographicAlgorithm",
+              "type": "Enumeration",
+              "value": "ECDSA"
+            },
+            {
+              "tag": "CryptographicLength",
+              "type": "Integer",
+              "value": 256
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

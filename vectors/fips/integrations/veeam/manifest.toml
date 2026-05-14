@@ -1,0 +1,38 @@
+name = "Veeam Backup RSA Key Lifecycle"
+description = """
+Replays the KMIP 1.4 operation sequence from Veeam Backup & Replication: \
+CreateKeyPair (RSA-2048, Sign/Verify) → Get (public key) → Get (private key) → \
+Destroy private → Destroy public. \
+Mirrors crate/server/src/tests/ttlv_tests/integrations/veeam.rs exactly.
+"""
+wire_format = "binary"
+kmip_version = [1, 4]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step3_get_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_public.json"
+assert_success = true

@@ -1,0 +1,18 @@
+name = "KAT: HMAC-SHA1 (key=0x0b*20, msg='Hi There')"
+description = "Known-Answer Test: computes HMAC-SHA1 of 'Hi There' with a known 20-byte key (RFC 2202 §3 Test Case 1)"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_compute_mac.json"
+assert_success = true
+
+[steps.assert_fields]
+MACData = "B617318655057264E28BC0B6FB378C8EF146BE00"

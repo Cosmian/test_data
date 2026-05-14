@@ -1,0 +1,15 @@
+name = "Negative: Encrypt with Secret Data object"
+description = "Tests that encryption fails when attempting to use a Secret Data object instead of a cryptographic key"
+
+[[steps]]
+operation = "Register"
+request = "step1_register.json"
+assert_success = true
+[steps.capture]
+obj_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = false
+assert_error_contains = "not found"

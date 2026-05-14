@@ -1,0 +1,17 @@
+name = "Negative: Sign With Encrypt-Only Key"
+description = "Tests that signing fails when the private key only has Decrypt usage mask (no Sign permission)"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = false
+assert_error_contains = "no valid private key"

@@ -1,0 +1,25 @@
+name = "KAT: RFC 5649 AES-256 KEK"
+description = "Known-Answer Test: RFC 5649 key wrap with padding with 256-bit KEK, 128-bit plaintext"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_wrap.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "AFC860015FFE2D75BEDF43C444FE58F4AD9D89C4EC71E23B"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "00112233445566778899AABBCCDDEEFF"

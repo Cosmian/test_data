@@ -1,0 +1,24 @@
+name = "AES-256-CBC Encrypt and Decrypt"
+description = "Creates an AES-256 symmetric key, encrypts data with AES-CBC (PKCS5 padding), then decrypts and verifies"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+iv = "IVCounterNonce"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true

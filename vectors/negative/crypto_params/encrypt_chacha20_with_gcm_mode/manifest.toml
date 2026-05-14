@@ -1,0 +1,15 @@
+name = "Negative: Encrypt ChaCha20 Key With GCM Mode"
+description = "Documents that ChaCha20Poly1305 key with BlockCipherMode GCM succeeds — server routes to AES-256-GCM since GCM mode overrides the key's algorithm"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_chacha_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_gcm.json"
+assert_success = true

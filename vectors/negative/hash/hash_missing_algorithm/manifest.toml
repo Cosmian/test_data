@@ -1,0 +1,8 @@
+name = "Negative: Hash without hashing algorithm"
+description = "Tests that Hash operation fails when CryptographicParameters has no HashingAlgorithm"
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = false
+assert_error_contains = "algorithm"

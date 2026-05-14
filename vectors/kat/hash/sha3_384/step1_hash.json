@@ -1,0 +1,12 @@
+{
+  "tag": "Hash",
+  "value": [
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        { "tag": "HashingAlgorithm", "type": "Enumeration", "value": "SHA3384" }
+      ]
+    },
+    { "tag": "Data", "type": "ByteString", "value": "616263" }
+  ]
+}

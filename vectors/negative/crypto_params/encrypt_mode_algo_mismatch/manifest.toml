@@ -1,0 +1,15 @@
+name = "Negative: Encrypt Mode-Algorithm Mismatch (ChaCha20 Key With AES CBC)"
+description = "Documents that encryption succeeds when CryptographicParameters algorithm differs from key algorithm — server uses the key's actual algorithm, ignoring algorithm field in CryptographicParameters"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_chacha_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_mismatch.json"
+assert_success = true

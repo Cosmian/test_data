@@ -1,0 +1,15 @@
+name = "Negative: Encrypt With Empty Data"
+description = "Tests that GCM encryption with empty data succeeds (GCM allows empty plaintext)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_empty_data.json"
+assert_success = true

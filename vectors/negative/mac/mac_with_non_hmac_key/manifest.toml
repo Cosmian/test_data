@@ -1,0 +1,15 @@
+name = "Negative: MAC with non-HMAC key"
+description = "Tests that MAC operation fails when using an AES key without proper HMAC algorithm parameters"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_mac.json"
+assert_success = false
+assert_error_contains = "algorithm"

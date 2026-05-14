@@ -1,0 +1,16 @@
+name = "Negative: Encrypt AES-CBC With Invalid IV Length"
+description = "Tests that AES-CBC encryption fails when an IV with incorrect length (8 bytes instead of 16) is provided"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_bad_iv.json"
+assert_success = false
+assert_error_contains = "invalid IV/nonce length"

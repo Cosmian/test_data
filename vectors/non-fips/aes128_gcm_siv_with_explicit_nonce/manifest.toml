@@ -1,0 +1,27 @@
+name = "AES-128-GCM-SIV Encrypt and Decrypt with Explicit Nonce"
+description = "Creates an AES-128 key, encrypts with a client-provided 12-byte nonce using AES-GCM-SIV, then decrypts and verifies the plaintext"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "48656C6C6F2C20576F726C642120546869732069732061207465737420666F72204145532D313238"

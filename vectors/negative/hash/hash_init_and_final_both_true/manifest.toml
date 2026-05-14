@@ -1,0 +1,8 @@
+name = "Negative: Hash with init and final indicators both true"
+description = "Tests that Hash operation fails when both InitIndicator and FinalIndicator are set to true"
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = false
+assert_error_contains = "init"

@@ -1,0 +1,15 @@
+{
+  "tag": "MACResponse",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "455a9f54-fa30-43f8-989b-f1c6c1521f6d"
+    },
+    {
+      "tag": "MACData",
+      "type": "ByteString",
+      "value": "31BFA55CDD76930C127D651FC3391A5024C7469B4E6DB7C7ED8F8D29EC5713E1"
+    }
+  ]
+}

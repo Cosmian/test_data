@@ -1,0 +1,16 @@
+name = "KAT: Covercrypt decrypt (self-generated USK)"
+description = "Known-Answer Test: Covercrypt single-decrypt using a pre-generated user secret key (Department::FIN)"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_usk.json"
+assert_success = true
+[steps.capture]
+usk_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Decrypt"
+request = "step2_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F2C20436F7665726372797074204B415421"

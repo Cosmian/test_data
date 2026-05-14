@@ -1,0 +1,30 @@
+{
+  "tag": "Create",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "Blowfish"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 128
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 12
+        }
+      ]
+    }
+  ]
+}

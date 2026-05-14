@@ -1,0 +1,10 @@
+name = "Discover Versions"
+description = "Queries supported KMIP protocol versions from the server"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step1_discover_versions.json"
+assert_success = true
+[steps.assert_fields]
+ProtocolVersionMajor = "2"
+ProtocolVersionMinor = "1"

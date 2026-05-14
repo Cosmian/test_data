@@ -1,0 +1,23 @@
+name = "Negative: MACVerify with wrong data"
+description = "Tests that MAC verification returns Invalid when data does not match the MAC"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_mac.json"
+assert_success = true
+[steps.capture]
+mac_data = "MACData"
+
+[[steps]]
+operation = "MACVerify"
+request = "step3_mac_verify.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Invalid"

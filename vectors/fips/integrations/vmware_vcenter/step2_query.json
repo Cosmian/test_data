@@ -1,0 +1,10 @@
+{
+  "tag": "Query",
+  "value": [
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryObjects"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+name = "AES-256-CBC No-Padding Encrypt and Decrypt"
+description = "Creates an AES-256 key, encrypts block-aligned data with CBC and no padding, then decrypts and verifies"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true

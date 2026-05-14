@@ -1,0 +1,20 @@
+{
+  "tag": "Hash",
+  "value": [
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "HashingAlgorithm",
+          "type": "Enumeration",
+          "value": "MD5"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "48656C6C6F2C20576F726C6421"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+name = "Negative: Decrypt AES-CBC without IV"
+description = "Tests that AES-CBC decryption fails when IVCounterNonce is not provided"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Decrypt"
+request = "step2_decrypt_no_iv.json"
+assert_success = false
+assert_error_contains = "missing"

@@ -1,0 +1,20 @@
+{
+  "tag": "Decrypt",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "{{ciphertext}}"
+    },
+    {
+      "tag": "IVCounterNonce",
+      "type": "ByteString",
+      "value": "{{nonce}}"
+    }
+  ]
+}

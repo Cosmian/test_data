@@ -1,0 +1,15 @@
+{
+  "tag": "MACVerifyResponse",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "455a9f54-fa30-43f8-989b-f1c6c1521f6d"
+    },
+    {
+      "tag": "ValidityIndicator",
+      "type": "Enumeration",
+      "value": "Invalid"
+    }
+  ]
+}

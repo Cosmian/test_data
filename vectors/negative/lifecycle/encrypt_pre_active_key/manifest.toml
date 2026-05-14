@@ -1,0 +1,15 @@
+name = "Negative: Encrypt with pre-active key"
+description = "Tests that encryption fails when using a key that has not been activated (no ActivationDate)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = false
+assert_error_contains = "not found"

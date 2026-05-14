@@ -1,0 +1,36 @@
+name = "Register and Export Key"
+description = "Registers a pre-existing AES key, retrieves it with Get, exports it, then destroys"
+
+[[steps]]
+operation = "Register"
+request = "step1_register.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+
+[[steps]]
+operation = "Export"
+request = "step3_export.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+assert_success = true

@@ -1,0 +1,15 @@
+name = "Negative: PBKDF2 derive key with negative iteration count"
+description = "Tests that PBKDF2 key derivation fails when IterationCount is negative"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "DeriveKey"
+request = "step2_derive.json"
+assert_success = false
+assert_error_contains = "iteration"

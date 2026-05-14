@@ -1,0 +1,15 @@
+{
+  "tag": "Encrypt",
+  "value": [
+    { "tag": "UniqueIdentifier", "type": "TextString", "value": "{{key_id}}" },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        { "tag": "BlockCipherMode", "type": "Enumeration", "value": "XTS" },
+        { "tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES" }
+      ]
+    },
+    { "tag": "Data", "type": "ByteString", "value": "48656C6C6F2C204145532D5854532121" },
+    { "tag": "IVCounterNonce", "type": "ByteString", "value": "00000000000000000000000000000000" }
+  ]
+}

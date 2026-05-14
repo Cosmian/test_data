@@ -1,0 +1,12 @@
+{
+    "tag": "Locate",
+    "value": [
+        {
+            "tag": "Attribute",
+            "value": [
+                { "tag": "AttributeName", "type": "TextString", "value": "Object Type" },
+                { "tag": "AttributeValue", "type": "Enumeration", "value": "SymmetricKey" }
+            ]
+        }
+    ]
+}

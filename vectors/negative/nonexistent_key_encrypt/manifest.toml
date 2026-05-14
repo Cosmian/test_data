@@ -1,0 +1,8 @@
+name = "Negative: Encrypt With Nonexistent Key"
+description = "Tests that encrypt fails when referencing a key ID that does not exist"
+
+[[steps]]
+operation = "Encrypt"
+request = "step1_encrypt_nonexistent.json"
+assert_success = false
+assert_error_reason = "Item_Not_Found"

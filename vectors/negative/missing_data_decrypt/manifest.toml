@@ -1,0 +1,16 @@
+name = "Negative: Decrypt Without Data Field"
+description = "Tests that decrypt fails when no Data field is provided"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Decrypt"
+request = "step2_decrypt_no_data.json"
+assert_success = false
+assert_error_contains = "data"

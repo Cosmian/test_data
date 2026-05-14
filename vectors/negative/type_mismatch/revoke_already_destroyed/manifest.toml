@@ -1,0 +1,24 @@
+name = "Surprising: Revoke an already destroyed key succeeds"
+description = "Documents that the server allows revoking a key that has already been destroyed (surprising but accepted behavior)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_again.json"
+assert_success = true

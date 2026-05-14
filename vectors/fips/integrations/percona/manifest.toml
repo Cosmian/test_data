@@ -1,0 +1,39 @@
+name = "Percona PostgreSQL TDE KMIP Key Lifecycle"
+description = """
+Simulates the Percona PostgreSQL TDE KMIP 1.4 protocol: \
+Register (AES-128 symmetric key) → Locate (by ObjectType + Name) → Get. \
+Mirrors crate/server/src/tests/ttlv_tests/integrations/postgres.rs exactly.
+"""
+wire_format = "binary"
+kmip_version = [1, 4]
+
+# Register a symmetric key (AES-128) with name "cle_cosmian_01"
+[[steps]]
+operation = "Register"
+request = "step1_register.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Locate the key by ObjectType=SymmetricKey + Name
+[[steps]]
+operation = "Locate"
+request = "step2_locate.json"
+assert_success = true
+
+# Get the symmetric key
+[[steps]]
+operation = "Get"
+request = "step3_get.json"
+assert_success = true
+
+# Cleanup (not in original postgres.rs test but needed for test isolation)
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

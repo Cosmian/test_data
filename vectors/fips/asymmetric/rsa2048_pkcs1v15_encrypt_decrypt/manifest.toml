@@ -1,0 +1,24 @@
+name = "RSA-2048 PKCS#1v15 Encrypt and Decrypt"
+description = "Creates an RSA-2048 key pair, encrypts data with PKCS#1 v1.5 padding (non-FIPS), decrypts with the private key and verifies"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true

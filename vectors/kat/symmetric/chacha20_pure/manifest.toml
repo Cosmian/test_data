@@ -1,0 +1,23 @@
+name = "KAT: ChaCha20-pure (self-computed, key=0*32, nonce=0*8)"
+description = "Known-Answer Test: ChaCha20 stream cipher with all-zero key and 8-byte nonce"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "3EDD8CC1CFDD1DD3283C298D32B48D09"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F2C20436861436861323021"

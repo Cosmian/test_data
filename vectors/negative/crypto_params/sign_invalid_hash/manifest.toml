@@ -1,0 +1,16 @@
+name = "Negative: Sign With Unsupported Hash Algorithm (MD5)"
+description = "Documents that RSA-PSS signing with MD5 succeeds in non-FIPS mode (OpenSSL allows MD5 in legacy mode)"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign_md5.json"
+assert_success = true

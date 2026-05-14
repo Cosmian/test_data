@@ -1,0 +1,23 @@
+name = "KAT: PBKDF2-SHA512 (known 32-byte password, salt='salt', 4096 iters)"
+description = "Known-Answer Test: PBKDF2-SHA512 with 32-byte password key, 4096 iterations"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_password.json"
+assert_success = true
+[steps.capture]
+base_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "DeriveKey"
+request = "step2_derive.json"
+assert_success = true
+[steps.capture]
+derived_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step3_get.json"
+assert_success = true
+[steps.assert_fields]
+KeyMaterial = "0315A6A5350F2A5B5207358EA4337DA253B56162685A7C35FD4C654F3E4E4EB2"

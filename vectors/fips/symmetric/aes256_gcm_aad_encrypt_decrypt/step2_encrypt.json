@@ -1,0 +1,35 @@
+{
+  "tag": "Encrypt",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "BlockCipherMode",
+          "type": "Enumeration",
+          "value": "GCM"
+        },
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "48656C6C6F2C20576F726C642120546869732069732061207465737420666F722041455320474346204D20776974682041414421"
+    },
+    {
+      "tag": "AuthenticatedEncryptionAdditionalData",
+      "type": "ByteString",
+      "value": "4164646974696F6E616C44617461"
+    }
+  ]
+}

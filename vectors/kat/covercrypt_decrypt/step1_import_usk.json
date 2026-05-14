@@ -1,0 +1,100 @@
+{
+  "tag": "Import",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "kat-cc-usk-001"
+    },
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "PrivateKey"
+    },
+    {
+      "tag": "ReplaceExisting",
+      "type": "Boolean",
+      "value": false
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "CoverCrypt"
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 2097152
+        },
+        {
+          "tag": "KeyFormatType",
+          "type": "Enumeration",
+          "value": "CoverCryptSecretKey"
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "PrivateKey"
+        },
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "VendorIdentification",
+              "type": "TextString",
+              "value": "cosmian"
+            },
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "cover_crypt_access_policy"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "ByteString",
+              "value": "4465706172746D656E743A3A46494E"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKey",
+      "value": [
+        {
+          "tag": "KeyBlock",
+          "value": [
+            {
+              "tag": "KeyFormatType",
+              "type": "Enumeration",
+              "value": "CoverCryptSecretKey"
+            },
+            {
+              "tag": "KeyValue",
+              "value": [
+                {
+                  "tag": "KeyMaterial",
+                  "type": "ByteString",
+                  "value": "0281EAD3E7D817BC64F4973CE1F30A03163FDD246E6C3EADF83159A9081704D502C5614A8B1F313A5990634A51DC00A6E49C33544822E853C59A1096713D5A0D06021863F78BA99173B2D63132FB708C7AA7AC867732411E863945F746B0EF88210C3AF512626E50B5EC6CF8207297D2A64D8B6D00B80BDB848FDEC6EDF43518AC460201000100C6FA3A7339BA62FE1FBCDEA244941954568D6BE3AA85322CA7CD63062E035E030001003FEDDC4633190A556C3A421B1A8971B4C285493348712AE345D311183FB2590201C39457F5F5657EA4CA72F9FF5E2A09266145BB42775824B5C054D2E8B212B319"
+                }
+              ]
+            },
+            {
+              "tag": "CryptographicAlgorithm",
+              "type": "Enumeration",
+              "value": "CoverCrypt"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+name = "Negative: Verify signature with wrong key"
+description = "Tests that signature verification returns Invalid when verifying with a different key pair"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair_a.json"
+assert_success = true
+[steps.capture]
+priv_key_a = "PrivateKeyUniqueIdentifier"
+pub_key_a = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step2_create_keypair_b.json"
+assert_success = true
+[steps.capture]
+priv_key_b = "PrivateKeyUniqueIdentifier"
+pub_key_b = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step3_sign.json"
+assert_success = true
+[steps.capture]
+signature = "SignatureData"
+
+[[steps]]
+operation = "SignatureVerify"
+request = "step4_verify_wrong_key.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Invalid"

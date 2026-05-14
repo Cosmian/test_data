@@ -1,0 +1,28 @@
+name = "Opaque Data Lifecycle"
+description = "Imports opaque data, retrieves it, then destroys"
+
+[[steps]]
+operation = "Import"
+request = "step1_import.json"
+assert_success = true
+
+[steps.capture]
+obj_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "OpaqueObject"
+
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

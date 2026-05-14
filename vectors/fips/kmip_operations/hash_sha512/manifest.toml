@@ -1,0 +1,10 @@
+name = "SHA512 Hash"
+description = "Computes a SHA512 hash of data"
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = true
+
+[steps.capture]
+hash_data = "Data"

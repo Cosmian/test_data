@@ -1,0 +1,60 @@
+{
+    "tag": "Create",
+    "value": [
+        {
+            "tag": "ObjectType",
+            "type": "Enumeration",
+            "value": "SymmetricKey"
+        },
+        {
+            "tag": "TemplateAttribute",
+            "value": [
+                {
+                    "tag": "Attribute",
+                    "value": [
+                        {
+                            "tag": "AttributeName",
+                            "type": "TextString",
+                            "value": "Cryptographic Algorithm"
+                        },
+                        {
+                            "tag": "AttributeValue",
+                            "type": "Enumeration",
+                            "value": "AES"
+                        }
+                    ]
+                },
+                {
+                    "tag": "Attribute",
+                    "value": [
+                        {
+                            "tag": "AttributeName",
+                            "type": "TextString",
+                            "value": "Cryptographic Usage Mask"
+                        },
+                        {
+                            "tag": "AttributeValue",
+                            "type": "Integer",
+                            "value": 12
+                        }
+                    ]
+                },
+                {
+                    "tag": "Attribute",
+                    "value": [
+                        {
+                            "tag": "AttributeName",
+                            "type": "TextString",
+                            "value": "Cryptographic Length"
+                        },
+                        {
+                            "tag": "AttributeValue",
+                            "type": "Integer",
+                            "value": 256
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

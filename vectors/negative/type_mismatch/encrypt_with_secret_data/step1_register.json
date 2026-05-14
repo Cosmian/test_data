@@ -1,0 +1,55 @@
+{
+  "tag": "Register",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SecretData"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "tag": "SecretData",
+      "value": [
+        {
+          "tag": "SecretDataType",
+          "type": "Enumeration",
+          "value": "Password"
+        },
+        {
+          "tag": "KeyBlock",
+          "value": [
+            {
+              "tag": "KeyFormatType",
+              "type": "Enumeration",
+              "value": "Opaque"
+            },
+            {
+              "tag": "KeyValue",
+              "value": [
+                {
+                  "tag": "KeyMaterial",
+                  "type": "ByteString",
+                  "value": "70617373776F7264313233"
+                }
+              ]
+            },
+            {
+              "tag": "CryptographicLength",
+              "type": "Integer",
+              "value": 80
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

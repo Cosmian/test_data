@@ -1,0 +1,140 @@
+{
+  "tag": "GetAttributesResponse",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "10b47871-3a69-4042-ae3a-765ed9fc93d7"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2026-05-13T09:18:06Z"
+        },
+        {
+          "tag": "AlwaysSensitive",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 256
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 12
+        },
+        {
+          "tag": "Digest",
+          "value": [
+            {
+              "tag": "HashingAlgorithm",
+              "type": "Enumeration",
+              "value": "SHA256"
+            },
+            {
+              "tag": "DigestValue",
+              "type": "ByteString",
+              "value": "2F2A9BADA0D2F55C8FDB4B9A05D1630D049E44A73F2CBF33B05ED9445999291B"
+            },
+            {
+              "tag": "KeyFormatType",
+              "type": "Enumeration",
+              "value": "Raw"
+            }
+          ]
+        },
+        {
+          "tag": "Extractable",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "tag": "InitialDate",
+          "type": "DateTime",
+          "value": "2026-05-13T09:18:06Z"
+        },
+        {
+          "tag": "KeyFormatType",
+          "type": "Enumeration",
+          "value": "Raw"
+        },
+        {
+          "tag": "LastChangeDate",
+          "type": "DateTime",
+          "value": "2026-05-13T09:18:06Z"
+        },
+        {
+          "tag": "LeaseTime",
+          "type": "Integer",
+          "value": 3600
+        },
+        {
+          "tag": "NeverExtractable",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SymmetricKey"
+        },
+        {
+          "tag": "OriginalCreationDate",
+          "type": "DateTime",
+          "value": "2026-05-13T09:18:06Z"
+        },
+        {
+          "tag": "RandomNumberGenerator",
+          "value": [
+            {
+              "tag": "RNGAlgorithm",
+              "type": "Enumeration",
+              "value": "ANSI_X931"
+            },
+            {
+              "tag": "CryptographicAlgorithm",
+              "type": "Enumeration",
+              "value": "AES"
+            },
+            {
+              "tag": "CryptographicLength",
+              "type": "LongInteger",
+              "value": "0x0000000000000100"
+            }
+          ]
+        },
+        {
+          "tag": "Sensitive",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "tag": "ShortUniqueIdentifier",
+          "type": "TextString",
+          "value": ""
+        },
+        {
+          "tag": "State",
+          "type": "Enumeration",
+          "value": "Active"
+        },
+        {
+          "tag": "UniqueIdentifier",
+          "type": "TextString",
+          "value": "10b47871-3a69-4042-ae3a-765ed9fc93d7"
+        }
+      ]
+    }
+  ]
+}

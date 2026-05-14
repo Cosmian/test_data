@@ -1,0 +1,10 @@
+{
+  "tag": "GetAttributes",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{sym_key_id}}"
+    }
+  ]
+}

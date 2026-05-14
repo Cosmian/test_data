@@ -1,0 +1,16 @@
+name = "KAT: Ed25519 EdDSA sign (RFC 8032 §7.1 Test Vector 2)"
+description = "Known-Answer Test: Ed25519 EdDSA signature of single-byte message 0x72 using RFC 8032 §7.1 test vector 2"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_privkey.json"
+assert_success = true
+[steps.capture]
+private_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true
+[steps.assert_fields]
+SignatureData = "92A009A9F0D4CAB8720E820B5F642540A2B27B5416503F8FB3762223EBDB69DA085AC1E43E15996E458F3613D0F11D8C387B2EAEB4302AEEB00D291612BB0C00"

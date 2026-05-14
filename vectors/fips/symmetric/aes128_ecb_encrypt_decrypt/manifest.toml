@@ -1,0 +1,23 @@
+name = "AES-128-ECB Encrypt and Decrypt"
+description = "Creates an AES-128 symmetric key, encrypts block-aligned data with AES-ECB (no padding, no nonce), then decrypts and verifies"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true

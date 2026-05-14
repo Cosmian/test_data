@@ -1,0 +1,46 @@
+name = "VAST Data Storage Appliance Key Lifecycle"
+description = """
+Simulates VAST Data EKM key management: \
+Create AES-256 named key → Activate → Locate by name → Get → \
+GetAttributes (verify Active state) → Revoke → Destroy. \
+Derived from real VAST Data kmip_client.log traces (PyKMIP client, KMIP 1.2).
+"""
+wire_format = "json"
+kmip_version = [1, 2]
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Locate"
+request = "step3_locate_by_name.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step4_get.json"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attributes.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy.json"
+assert_success = true

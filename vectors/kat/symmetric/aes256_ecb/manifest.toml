@@ -1,0 +1,23 @@
+name = "KAT: AES-256-ECB (NIST FIPS 197)"
+description = "Known-Answer Test: AES-256 ECB single block, NIST FIPS 197 reference"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "F3EED1BDB5D2A03C064B5A7E3DB181F8"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "6BC1BEE22E409F96E93D7E117393172A"

@@ -1,0 +1,8 @@
+name = "Negative: Create symmetric key with zero length"
+description = "Tests that key creation fails when CryptographicLength is set to zero"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = false
+assert_error_contains = "length"

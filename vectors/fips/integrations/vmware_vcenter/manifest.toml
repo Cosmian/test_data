@@ -1,0 +1,60 @@
+name = "VMware vCenter AES Key Lifecycle"
+description = """
+Simulates the VMware vCenter KMIP 1.1 protocol for VM encryption key management: \
+DiscoverVersions → Query → Create (AES-256) → GetAttributes → \
+AddAttribute (x-Product_Version, x-Vendor, x-Product) → GetAttributes → Get. \
+Mirrors crate/server/src/tests/ttlv_tests/integrations/vmware.rs exactly.
+"""
+wire_format = "binary"
+kmip_version = [1, 1]
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step1_discover_versions.json"
+assert_success = true
+
+[[steps]]
+operation = "Query"
+request = "step2_query.json"
+assert_success = true
+
+[[steps]]
+operation = "Create"
+request = "step3_create.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attributes.json"
+assert_success = true
+
+[[steps]]
+operation = "AddAttribute"
+request = "step5_add_product_version.json"
+assert_success = true
+
+[[steps]]
+operation = "AddAttribute"
+request = "step6_add_vendor.json"
+assert_success = true
+
+[[steps]]
+operation = "AddAttribute"
+request = "step7_add_product.json"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attributes.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step9_get.json"
+assert_success = true

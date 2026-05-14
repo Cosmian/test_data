@@ -1,0 +1,114 @@
+name = "FortiGate/FortiOS KMIP Batched Locate with Authentication"
+description = """
+Simulates FortiOS KMIP 1.0 batched key lookup: \
+Register named AES-128 and HMAC-SHA1 keys → Activate → \
+Batched Locate×4 with UsernamePassword Authentication → Revoke → Destroy. \
+Matches real FortiOS TRACES_40F_1.txt traces (BatchCount=4, \
+BatchOrderOption=true, MaximumItems=1 per Locate, KMIP 1.0 TemplateAttribute).
+"""
+wire_format = "binary"
+kmip_version = [1, 0]
+
+# --- Setup: Register 4 named keys ---
+
+[[steps]]
+operation = "Register"
+request = "step1_register_enc_key_a.json"
+assert_success = true
+[steps.capture]
+enc_key_a_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step2_register_enc_key_b.json"
+assert_success = true
+[steps.capture]
+enc_key_b_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step3_register_auth_key_a.json"
+assert_success = true
+[steps.capture]
+auth_key_a_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step4_register_auth_key_b.json"
+assert_success = true
+[steps.capture]
+auth_key_b_id = "UniqueIdentifier"
+
+# --- Activate all 4 keys ---
+
+[[steps]]
+operation = "Activate"
+request = "step5_activate_enc_a.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step6_activate_enc_b.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step7_activate_auth_a.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step8_activate_auth_b.json"
+assert_success = true
+
+# --- Batched Locate×4 (raw KMIP 1.0 RequestMessage with Authentication) ---
+
+[[steps]]
+operation = "Batch Locate"
+request = "step9_batch_locate.json"
+raw_request = true
+assert_success = true
+
+# --- Revoke all 4 keys (required before Destroy) ---
+
+[[steps]]
+operation = "Revoke"
+request = "step10_revoke_enc_a.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_enc_b.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step12_revoke_auth_a.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step13_revoke_auth_b.json"
+assert_success = true
+
+# --- Cleanup: Destroy all 4 keys ---
+
+[[steps]]
+operation = "Destroy"
+request = "step14_destroy_enc_a.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step15_destroy_enc_b.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step16_destroy_auth_a.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step17_destroy_auth_b.json"
+assert_success = true

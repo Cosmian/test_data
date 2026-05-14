@@ -1,0 +1,10 @@
+name = "RNG Seed"
+description = "Seeds the server RNG with entropy and verifies the response"
+
+[[steps]]
+operation = "RNGSeed"
+request = "step1_rng_seed.json"
+assert_success = true
+
+[steps.assert_fields]
+AmountOfSeedData = "32"

@@ -1,0 +1,31 @@
+{
+  "tag": "Import",
+  "value": [
+    { "tag": "UniqueIdentifier", "type": "TextString", "value": "kat-sym-rfc5649_aes256_kek-001" },
+    { "tag": "ObjectType", "type": "Enumeration", "value": "SymmetricKey" },
+    { "tag": "ReplaceExisting", "type": "Boolean", "value": false },
+    {
+      "tag": "Attributes",
+      "value": [
+        { "tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES" },
+        { "tag": "CryptographicLength", "type": "Integer", "value": 256 },
+        { "tag": "CryptographicUsageMask", "type": "Integer", "value": 12 },
+        { "tag": "KeyFormatType", "type": "Enumeration", "value": "TransparentSymmetricKey" },
+        { "tag": "ObjectType", "type": "Enumeration", "value": "SymmetricKey" },
+        { "tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z" }
+      ]
+    },
+    {
+      "tag": "SymmetricKey",
+      "value": [{
+        "tag": "KeyBlock",
+        "value": [
+          { "tag": "KeyFormatType", "type": "Enumeration", "value": "TransparentSymmetricKey" },
+          { "tag": "KeyValue", "value": [{ "tag": "KeyMaterial", "value": [{ "tag": "Key", "type": "ByteString", "value": "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F" }] }] },
+          { "tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES" },
+          { "tag": "CryptographicLength", "type": "Integer", "value": 256 }
+        ]
+      }]
+    }
+  ]
+}

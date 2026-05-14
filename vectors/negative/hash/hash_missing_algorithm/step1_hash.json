@@ -1,0 +1,14 @@
+{
+  "tag": "Hash",
+  "value": [
+    {
+      "tag": "CryptographicParameters",
+      "value": []
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "48656C6C6F"
+    }
+  ]
+}

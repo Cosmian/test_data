@@ -1,0 +1,24 @@
+name = "Negative: Verify with corrupted signature"
+description = "Tests that signature verification returns Invalid when the signature is fabricated"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+priv_key_id = "PrivateKeyUniqueIdentifier"
+pub_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true
+[steps.capture]
+signature = "SignatureData"
+
+[[steps]]
+operation = "SignatureVerify"
+request = "step3_verify_bad_sig.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Invalid"

@@ -1,0 +1,16 @@
+name = "Negative: RSA-OAEP encrypt with oversized plaintext"
+description = "Tests that RSA-OAEP encryption fails when plaintext exceeds modulus size limit"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+priv_key_id = "PrivateKeyUniqueIdentifier"
+pub_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_oversized.json"
+assert_success = false
+assert_error_contains = "data too large"

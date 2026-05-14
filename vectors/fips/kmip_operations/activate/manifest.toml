@@ -1,0 +1,35 @@
+name = "Activate Key Lifecycle"
+description = "Creates a pre-active key, verifies encrypt fails, activates it, encrypts successfully"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_preactive.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_before_activate.json"
+assert_success = false
+
+[[steps]]
+operation = "Activate"
+request = "step3_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_after_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

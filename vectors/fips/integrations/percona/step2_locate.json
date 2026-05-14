@@ -1,0 +1,45 @@
+{
+    "tag": "Locate",
+    "value": [
+        {
+            "tag": "Attribute",
+            "value": [
+                {
+                    "tag": "AttributeName",
+                    "type": "TextString",
+                    "value": "Object Type"
+                },
+                {
+                    "tag": "AttributeValue",
+                    "type": "Enumeration",
+                    "value": "SymmetricKey"
+                }
+            ]
+        },
+        {
+            "tag": "Attribute",
+            "value": [
+                {
+                    "tag": "AttributeName",
+                    "type": "TextString",
+                    "value": "Name"
+                },
+                {
+                    "tag": "AttributeValue",
+                    "value": [
+                        {
+                            "tag": "NameValue",
+                            "type": "TextString",
+                            "value": "cle_cosmian_01"
+                        },
+                        {
+                            "tag": "NameType",
+                            "type": "Enumeration",
+                            "value": "UninterpretedTextString"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

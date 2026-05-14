@@ -1,0 +1,27 @@
+name = "SLH-DSA-SHAKE-128f Sign and Verify"
+description = "Creates a SLH-DSA-SHAKE-128f key pair (non-FIPS), signs data, verifies the signature"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true
+
+[steps.capture]
+signature = "SignatureData"
+
+[[steps]]
+operation = "SignatureVerify"
+request = "step3_verify.json"
+assert_success = true
+
+[steps.assert_fields]
+ValidityIndicator = "Valid"
