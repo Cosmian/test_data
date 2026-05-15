@@ -1,0 +1,34 @@
+# Test KMS server — plain HTTP with Utimaco HSM and JWT authentication.
+# Used by create_kek_in_db() to bootstrap KEK creation.
+
+default_username = "tech@cosmian.com"
+kms_public_url = "http://localhost:10002/google_cse"
+hsm_model = "utimaco"
+hsm_admin = ["tech@cosmian.com"]
+hsm_slot = [0]
+hsm_password = ["12345678"]
+
+[http]
+port = 10002
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms_test_hsm_jwt"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_hsm_jwt"
+tmp_path = "/tmp"
+
+[idp_auth]
+jwt_auth_provider = [
+  "https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,kacls-migration,996739510374-2tauakcggau7kvk37784k0s2lmveb9c9.apps.googleusercontent.com",
+  "https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/v2.0,https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/discovery/v2.0/keys",
+  "https://demo-kms.eu.auth0.com/,https://demo-kms.eu.auth0.com/.well-known/jwks.json",
+]
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = false
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]
