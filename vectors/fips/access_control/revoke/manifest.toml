@@ -1,0 +1,20 @@
+name = "Revoke Key"
+description = "Creates a symmetric key, revokes it, then verifies it cannot be used for encryption"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_after_revoke.json"
+assert_success = false

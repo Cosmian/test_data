@@ -1,0 +1,23 @@
+name = "Locate by Attributes"
+description = "Creates two AES keys with distinct names, then locates them by ObjectType and Name"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key_alpha.json"
+assert_success = true
+
+[steps.capture]
+key_alpha_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Create"
+request = "step2_create_key_beta.json"
+assert_success = true
+
+[steps.capture]
+key_beta_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step3_locate_alpha.json"
+assert_success = true

@@ -1,0 +1,26 @@
+name = "PBKDF2 Key Derivation"
+description = "Creates a base symmetric key, derives a new AES-128 key using PBKDF2-SHA256, retrieves the derived key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_base_key.json"
+assert_success = true
+
+[steps.capture]
+base_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "DeriveKey"
+request = "step2_derive.json"
+assert_success = true
+
+[steps.capture]
+derived_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step3_get_derived.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"

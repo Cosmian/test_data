@@ -1,0 +1,25 @@
+name = "Destroy Key Lifecycle"
+description = "Creates a symmetric key, destroys it, then verifies Get fails"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step4_get_destroyed.json"
+assert_success = false
