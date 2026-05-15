@@ -18,11 +18,31 @@
           "tag": "KeyFormatType",
           "type": "Enumeration",
           "value": "TransparentRSAPrivateKey"
-        },
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKeyAttributes",
+      "value": [
         {
           "tag": "CryptographicUsageMask",
           "type": "Integer",
-          "value": 2097152
+          "value": 1
+        },
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "tag": "PublicKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 2
         },
         {
           "tag": "ActivationDate",
