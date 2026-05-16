@@ -1,0 +1,45 @@
+{
+  "tag": "Locate",
+  "value": [
+    {
+      "tag": "Attribute",
+      "value": [
+        {
+          "tag": "AttributeName",
+          "type": "TextString",
+          "value": "Object Type"
+        },
+        {
+          "tag": "AttributeValue",
+          "type": "Enumeration",
+          "value": "SymmetricKey"
+        }
+      ]
+    },
+    {
+      "tag": "Attribute",
+      "value": [
+        {
+          "tag": "AttributeName",
+          "type": "TextString",
+          "value": "Name"
+        },
+        {
+          "tag": "AttributeValue",
+          "value": [
+            {
+              "tag": "NameValue",
+              "type": "TextString",
+              "value": "kmip_1_3_test_key"
+            },
+            {
+              "tag": "NameType",
+              "type": "Enumeration",
+              "value": "UninterpretedTextString"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

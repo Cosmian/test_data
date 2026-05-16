@@ -1,0 +1,10 @@
+{
+  "tag": "Get",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{private_key_id}}"
+    }
+  ]
+}

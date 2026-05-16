@@ -1,0 +1,80 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {
+      "tag": "CommonTemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Algorithm"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Enumeration",
+              "value": "RSA"
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Length"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 2048
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKeyTemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Usage Mask"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "PublicKeyTemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Usage Mask"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

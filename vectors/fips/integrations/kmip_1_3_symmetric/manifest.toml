@@ -1,0 +1,40 @@
+name = "KMIP 1.3 Symmetric Key Lifecycle"
+description = """
+Tests KMIP 1.3 binary wire format with a full symmetric key lifecycle: \
+Create AES-256 key → Activate → Get → Locate (by name) → Revoke → Destroy. \
+KMIP 1.3 is processed identically to 1.4 (no special tweaks unlike 1.0/1.1/1.2).
+"""
+wire_format = "binary"
+kmip_version = [1, 3]
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step3_get.json"
+assert_success = true
+
+[[steps]]
+operation = "Locate"
+request = "step4_locate.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

@@ -1,0 +1,38 @@
+name = "KMIP 1.3 Asymmetric Key Lifecycle"
+description = """
+Tests KMIP 1.3 binary wire format with an RSA key pair lifecycle: \
+CreateKeyPair (RSA-2048, Sign/Verify) → Get (public) → Get (private) → \
+Destroy private → Destroy public. \
+KMIP 1.3 is processed identically to 1.4 (no special tweaks unlike 1.0/1.1/1.2).
+"""
+wire_format = "binary"
+kmip_version = [1, 3]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step3_get_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_public.json"
+assert_success = true
