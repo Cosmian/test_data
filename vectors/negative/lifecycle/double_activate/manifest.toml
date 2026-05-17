@@ -1,0 +1,21 @@
+name = "Negative: Double Activate"
+description = "Tests that activating an already-active key fails"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step3_activate_again.json"
+assert_success = false
+assert_error_contains = "already"

@@ -1,0 +1,26 @@
+name = "Negative: Reactivate Deactivated Key"
+description = "Tests that activating a deactivated (revoked) key fails"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step4_reactivate.json"
+assert_success = false
+assert_error_contains = "activate"

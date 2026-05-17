@@ -1,0 +1,22 @@
+name = "Negative: ReKeyKeyPair not supported for EC"
+description = "Verifies that ReKeyKeyPair returns 'not supported' for EC keys"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair.json"
+assert_success = false
+assert_error_reason = "Item_Not_Found"

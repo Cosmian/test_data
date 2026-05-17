@@ -1,0 +1,35 @@
+{
+  "tag": "Locate",
+  "value": [
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SymmetricKey"
+        },
+        {
+          "tag": "State",
+          "type": "Enumeration",
+          "value": "Active"
+        },
+        {
+          "tag": "Name",
+          "value": [
+            {
+              "tag": "NameValue",
+              "type": "TextString",
+              "value": "vec-locate-state-active"
+            },
+            {
+              "tag": "NameType",
+              "type": "Enumeration",
+              "value": "UninterpretedTextString"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

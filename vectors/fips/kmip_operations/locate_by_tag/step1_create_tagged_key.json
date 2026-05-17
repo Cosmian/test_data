@@ -1,0 +1,55 @@
+{
+  "tag": "Create",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 256
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 12
+        },
+        {
+          "tag": "VendorAttributes",
+          "value": [
+            {
+              "tag": "VendorAttributes",
+              "value": [
+                {
+                  "tag": "VendorIdentification",
+                  "type": "TextString",
+                  "value": "cosmian"
+                },
+                {
+                  "tag": "AttributeName",
+                  "type": "TextString",
+                  "value": "tag"
+                },
+                {
+                  "tag": "AttributeValue",
+                  "type": "ByteString",
+                  "value": "5B22766563746F722D6C6F636174652D746167225D"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

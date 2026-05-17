@@ -1,0 +1,35 @@
+{
+  "tag": "Locate",
+  "value": [
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SymmetricKey"
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 12
+        },
+        {
+          "tag": "Name",
+          "value": [
+            {
+              "tag": "NameValue",
+              "type": "TextString",
+              "value": "vec-locate-mask-encrypt"
+            },
+            {
+              "tag": "NameType",
+              "type": "Enumeration",
+              "value": "UninterpretedTextString"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

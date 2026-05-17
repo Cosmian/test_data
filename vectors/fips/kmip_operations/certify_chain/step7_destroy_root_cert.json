@@ -1,0 +1,10 @@
+{
+  "tag": "Destroy",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{root_cert_id}}"
+    }
+  ]
+}

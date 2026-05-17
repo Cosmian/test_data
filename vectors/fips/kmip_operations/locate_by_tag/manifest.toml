@@ -1,0 +1,18 @@
+name = "Locate by Vendor Tag"
+description = "Creates a key with a Cosmian vendor tag, then locates it using the tag filter"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_tagged_key.json"
+assert_success = true
+
+[steps.capture]
+tagged_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step2_locate_by_tag.json"
+assert_success = true
+
+[steps.assert_fields]
+UniqueIdentifier = "{{tagged_key_id}}"

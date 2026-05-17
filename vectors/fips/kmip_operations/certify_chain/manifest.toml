@@ -1,0 +1,74 @@
+name = "Certificate Chain: Root CA → Leaf, then Validate"
+description = "Creates a self-signed root CA certificate, then issues a leaf certificate signed by the root, and validates the chain"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_root_keypair.json"
+assert_success = true
+
+[steps.capture]
+root_private_key_id = "PrivateKeyUniqueIdentifier"
+root_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step2_self_sign_root.json"
+assert_success = true
+
+[steps.capture]
+root_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step3_create_leaf_keypair.json"
+assert_success = true
+
+[steps.capture]
+leaf_private_key_id = "PrivateKeyUniqueIdentifier"
+leaf_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step4_sign_leaf_with_root.json"
+assert_success = true
+
+[steps.capture]
+leaf_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Validate"
+request = "step5_validate_leaf.json"
+assert_success = true
+
+[steps.assert_fields]
+ValidityIndicator = "Valid"
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_leaf_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_root_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_leaf_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_leaf_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_root_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_root_public.json"
+assert_success = true

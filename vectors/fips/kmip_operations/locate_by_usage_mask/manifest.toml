@@ -1,0 +1,26 @@
+name = "Locate by Usage Mask"
+description = "Creates keys with different usage masks (encrypt-only vs sign-only), locates by CryptographicUsageMask"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_encrypt_key.json"
+assert_success = true
+
+[steps.capture]
+encrypt_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Create"
+request = "step2_create_sign_key.json"
+assert_success = true
+
+[steps.capture]
+sign_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step3_locate_encrypt.json"
+assert_success = true
+
+[steps.assert_fields]
+UniqueIdentifier = "{{encrypt_key_id}}"

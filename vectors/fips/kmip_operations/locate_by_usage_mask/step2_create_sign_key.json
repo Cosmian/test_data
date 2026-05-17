@@ -1,0 +1,45 @@
+{
+  "tag": "Create",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 256
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 2060
+        },
+        {
+          "tag": "Name",
+          "value": [
+            {
+              "tag": "NameValue",
+              "type": "TextString",
+              "value": "vec-locate-mask-mac"
+            },
+            {
+              "tag": "NameType",
+              "type": "Enumeration",
+              "value": "UninterpretedTextString"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

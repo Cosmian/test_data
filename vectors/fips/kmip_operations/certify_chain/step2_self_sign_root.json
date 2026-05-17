@@ -1,0 +1,145 @@
+{
+  "tag": "Certify",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{root_public_key_id}}"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CertificateType",
+          "type": "Enumeration",
+          "value": "X509"
+        },
+        {
+          "tag": "CertificateAttributes",
+          "value": [
+            {
+              "tag": "CertificateSubjectCn",
+              "type": "TextString",
+              "value": "Test Root CA"
+            },
+            {
+              "tag": "CertificateSubjectO",
+              "type": "TextString",
+              "value": "Cosmian"
+            },
+            {
+              "tag": "CertificateSubjectOu",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateSubjectEmail",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateSubjectC",
+              "type": "TextString",
+              "value": "FR"
+            },
+            {
+              "tag": "CertificateSubjectSt",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateSubjectL",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateSubjectUid",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateSubjectSerialNumber",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateSubjectTitle",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateSubjectDc",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateSubjectDnQualifier",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerCn",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerO",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerOu",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerEmail",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerC",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerSt",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerL",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerUid",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerSerialNumber",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerTitle",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerDc",
+              "type": "TextString",
+              "value": ""
+            },
+            {
+              "tag": "CertificateIssuerDnQualifier",
+              "type": "TextString",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

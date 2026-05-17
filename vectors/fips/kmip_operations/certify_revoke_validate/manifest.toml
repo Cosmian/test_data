@@ -1,0 +1,53 @@
+name = "Certify, Validate, Revoke, Re-Validate"
+description = "Creates a self-signed certificate, validates it (valid), revokes it, then re-validates (invalid)"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step2_certify.json"
+assert_success = true
+
+[steps.capture]
+cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Validate"
+request = "step3_validate.json"
+assert_success = true
+
+[steps.assert_fields]
+ValidityIndicator = "Valid"
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Validate"
+request = "step5_validate_after_revoke.json"
+assert_success = false
+assert_error_contains = "not found"
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_public.json"
+assert_success = true

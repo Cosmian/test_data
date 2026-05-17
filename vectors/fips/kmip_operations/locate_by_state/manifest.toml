@@ -1,0 +1,31 @@
+name = "Locate by State"
+description = "Creates two keys (one activated, one pre-active), locates only the active one by state filter"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_active_key.json"
+assert_success = true
+
+[steps.capture]
+active_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Create"
+request = "step3_create_preactive_key.json"
+assert_success = true
+
+[steps.capture]
+preactive_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step4_locate_active.json"
+assert_success = true
+
+[steps.assert_fields]
+UniqueIdentifier = "{{active_key_id}}"

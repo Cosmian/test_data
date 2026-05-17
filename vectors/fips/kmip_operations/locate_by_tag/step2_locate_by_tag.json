@@ -1,0 +1,40 @@
+{
+  "tag": "Locate",
+  "value": [
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SymmetricKey"
+        },
+        {
+          "tag": "VendorAttributes",
+          "value": [
+            {
+              "tag": "VendorAttributes",
+              "value": [
+                {
+                  "tag": "VendorIdentification",
+                  "type": "TextString",
+                  "value": "cosmian"
+                },
+                {
+                  "tag": "AttributeName",
+                  "type": "TextString",
+                  "value": "tag"
+                },
+                {
+                  "tag": "AttributeValue",
+                  "type": "ByteString",
+                  "value": "5B22766563746F722D6C6F636174652D746167225D"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
