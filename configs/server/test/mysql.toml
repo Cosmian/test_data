@@ -11,7 +11,7 @@ hostname = "0.0.0.0"
 [db]
 database_type = "mysql"
 database_url = "mysql://kms:kms@localhost:3306/kms"
-clear_database = false
+clear_database = true
 
 [workspace]
 root_data_path = "/tmp/kms_test_workspace_mysql"

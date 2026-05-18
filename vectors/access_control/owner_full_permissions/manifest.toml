@@ -1,0 +1,52 @@
+name = "Access Control: owner full permissions"
+description = "Owner performs Get/Encrypt/Decrypt/Revoke/Destroy without grants"
+server_config = "test_data/configs/server/test/cert_auth.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_owner_get.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_owner_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step4_owner_decrypt.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "6F776E65722066756C6C207065726D697373696F6E73"
+
+[[steps]]
+operation = "Revoke"
+request = "step5_owner_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_owner_destroy.json"
+assert_success = true

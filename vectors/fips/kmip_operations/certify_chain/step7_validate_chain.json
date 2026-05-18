@@ -1,0 +1,20 @@
+{
+  "tag": "Validate",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{root_cert_id}}"
+    },
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{int_cert_id}}"
+    },
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{leaf_cert_id}}"
+    }
+  ]
+}

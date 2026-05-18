@@ -4,7 +4,7 @@
     {
       "tag": "UniqueIdentifier",
       "type": "TextString",
-      "value": "{{leaf_public_key_id}}"
+      "value": "{{int_public_key_id}}"
     },
     {
       "tag": "Attributes",
@@ -50,7 +50,7 @@
             {
               "tag": "CertificateSubjectCn",
               "type": "TextString",
-              "value": "Test Leaf Certificate"
+              "value": "Test Intermediate CA"
             },
             {
               "tag": "CertificateSubjectO",
@@ -110,12 +110,12 @@
             {
               "tag": "CertificateIssuerCn",
               "type": "TextString",
-              "value": ""
+              "value": "Test Root CA"
             },
             {
               "tag": "CertificateIssuerO",
               "type": "TextString",
-              "value": ""
+              "value": "Cosmian"
             },
             {
               "tag": "CertificateIssuerOu",
@@ -130,7 +130,7 @@
             {
               "tag": "CertificateIssuerC",
               "type": "TextString",
-              "value": ""
+              "value": "FR"
             },
             {
               "tag": "CertificateIssuerSt",
@@ -166,6 +166,26 @@
               "tag": "CertificateIssuerDnQualifier",
               "type": "TextString",
               "value": ""
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "VendorIdentification",
+              "type": "TextString",
+              "value": "cosmian"
+            },
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "x509-extension"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "ByteString",
+              "value": "5B2076335F6361205D0A6261736963436F6E73747261696E74733D637269746963616C2C43413A747275652C706174686C656E3A300A6B657955736167653D637269746963616C2C6B6579436572745369676E2C63726C5369676E0A7375626A6563744B65794964656E7469666965723D686173680A617574686F726974794B65794964656E7469666965723D6B657969643A616C776179732C6973737565720A"
             }
           ]
         }

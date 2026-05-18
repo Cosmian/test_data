@@ -15,6 +15,36 @@
           "value": "X509"
         },
         {
+          "tag": "Link",
+          "value": [
+            {
+              "tag": "LinkType",
+              "type": "Enumeration",
+              "value": "CertificateLink"
+            },
+            {
+              "tag": "LinkedObjectIdentifier",
+              "type": "TextString",
+              "value": "{{root_bootstrap_cert_id}}"
+            }
+          ]
+        },
+        {
+          "tag": "Link",
+          "value": [
+            {
+              "tag": "LinkType",
+              "type": "Enumeration",
+              "value": "PrivateKeyLink"
+            },
+            {
+              "tag": "LinkedObjectIdentifier",
+              "type": "TextString",
+              "value": "{{root_private_key_id}}"
+            }
+          ]
+        },
+        {
           "tag": "CertificateAttributes",
           "value": [
             {
@@ -80,12 +110,12 @@
             {
               "tag": "CertificateIssuerCn",
               "type": "TextString",
-              "value": ""
+              "value": "Test Root CA"
             },
             {
               "tag": "CertificateIssuerO",
               "type": "TextString",
-              "value": ""
+              "value": "Cosmian"
             },
             {
               "tag": "CertificateIssuerOu",
@@ -100,7 +130,7 @@
             {
               "tag": "CertificateIssuerC",
               "type": "TextString",
-              "value": ""
+              "value": "FR"
             },
             {
               "tag": "CertificateIssuerSt",
@@ -155,7 +185,7 @@
             {
               "tag": "AttributeValue",
               "type": "ByteString",
-              "value": "5B2076335F6361205D0A6261736963436F6E73747261696E74733D637269746963616C2C43413A747275652C706174686C656E3A310A6B657955736167653D637269746963616C2C6B6579436572745369676E2C63726C5369676E0A7375626A6563744B65794964656E7469666965723D686173680A617574686F726974794B65794964656E7469666965723D6B657969640A"
+              "value": "5B2076335F6361205D0A6261736963436F6E73747261696E74733D637269746963616C2C43413A747275652C706174686C656E3A310A6B657955736167653D637269746963616C2C6B6579436572745369676E2C63726C5369676E0A7375626A6563744B65794964656E7469666965723D686173680A617574686F726974794B65794964656E7469666965723D6B657969643A616C776179732C6973737565720A"
             }
           ]
         }

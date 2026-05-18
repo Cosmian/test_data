@@ -1,0 +1,50 @@
+name = "Access Control: grant Get/Encrypt/Decrypt to user"
+description = "Owner creates AES key, grants user access, user can Get/Encrypt/Decrypt, owner destroys key"
+server_config = "test_data/configs/server/test/cert_auth.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GrantAccess"
+request = "step2_grant_access.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step3_user_get.json"
+identity = "user"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step4_user_encrypt.json"
+identity = "user"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step5_user_decrypt.json"
+identity = "user"
+assert_success = true
+
+[steps.assert_fields]
+Data = "48656C6C6F2061636365737320636F6E74726F6C"

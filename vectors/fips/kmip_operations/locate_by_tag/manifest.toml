@@ -14,5 +14,14 @@ operation = "Locate"
 request = "step2_locate_by_tag.json"
 assert_success = true
 
-[steps.assert_fields]
+# Use assert_any_field instead of assert_fields: the shared PostgreSQL/MySQL
+# database may contain leftover keys with the same tag from previous runs,
+# so Locate can return multiple results. We only require that the newly
+# created key is AMONG the results.
+[steps.assert_any_field]
 UniqueIdentifier = "{{tagged_key_id}}"
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy_key.json"
+assert_success = true

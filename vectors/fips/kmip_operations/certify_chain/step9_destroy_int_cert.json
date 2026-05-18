@@ -1,10 +1,10 @@
 {
-  "tag": "Validate",
+  "tag": "Destroy",
   "value": [
     {
       "tag": "UniqueIdentifier",
       "type": "TextString",
-      "value": "{{root_cert_id}}"
+      "value": "{{int_cert_id}}"
     }
   ]
 }

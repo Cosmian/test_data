@@ -1,5 +1,11 @@
-name = "Certificate Chain: Root CA → Leaf, then Validate"
-description = "Creates a self-signed root CA certificate, then issues a leaf certificate signed by the root, and validates the chain"
+name = "Certificate Chain: Root CA → Intermediate CA → Leaf, then Validate"
+description = """
+Creates a 3-level X.509 chain:
+  1. Root CA keypair + self-signed cert with basicConstraints CA:true
+  2. Intermediate CA keypair + cert signed by root with basicConstraints CA:true
+  3. Leaf keypair + cert signed by intermediate
+  4. Validate the full chain (root + intermediate + leaf)
+"""
 
 [[steps]]
 operation = "CreateKeyPair"
@@ -16,11 +22,36 @@ request = "step2_self_sign_root.json"
 assert_success = true
 
 [steps.capture]
+root_bootstrap_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step3_recertify_root_with_root.json"
+assert_success = true
+
+[steps.capture]
 root_cert_id = "UniqueIdentifier"
 
 [[steps]]
 operation = "CreateKeyPair"
-request = "step3_create_leaf_keypair.json"
+request = "step3_create_intermediate_keypair.json"
+assert_success = true
+
+[steps.capture]
+int_private_key_id = "PrivateKeyUniqueIdentifier"
+int_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step4_sign_intermediate_with_root.json"
+assert_success = true
+
+[steps.capture]
+int_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step5_create_leaf_keypair.json"
 assert_success = true
 
 [steps.capture]
@@ -29,7 +60,7 @@ leaf_public_key_id = "PublicKeyUniqueIdentifier"
 
 [[steps]]
 operation = "Certify"
-request = "step4_sign_leaf_with_root.json"
+request = "step6_sign_leaf_with_intermediate.json"
 assert_success = true
 
 [steps.capture]
@@ -37,38 +68,60 @@ leaf_cert_id = "UniqueIdentifier"
 
 [[steps]]
 operation = "Validate"
-request = "step5_validate_leaf.json"
+request = "step7_validate_chain.json"
 assert_success = true
 
 [steps.assert_fields]
 ValidityIndicator = "Valid"
 
+# ── Cleanup ──────────────────────────────────────────────────────────────
+
 [[steps]]
 operation = "Destroy"
-request = "step6_destroy_leaf_cert.json"
+request = "step8_destroy_leaf_cert.json"
 assert_success = true
 
 [[steps]]
 operation = "Destroy"
-request = "step7_destroy_root_cert.json"
+request = "step9_destroy_int_cert.json"
 assert_success = true
 
 [[steps]]
 operation = "Destroy"
-request = "step8_destroy_leaf_private.json"
+request = "step10_destroy_root_cert.json"
 assert_success = true
 
 [[steps]]
 operation = "Destroy"
-request = "step9_destroy_leaf_public.json"
+request = "step11_destroy_leaf_private.json"
 assert_success = true
 
 [[steps]]
 operation = "Destroy"
-request = "step10_destroy_root_private.json"
+request = "step12_destroy_leaf_public.json"
 assert_success = true
 
 [[steps]]
 operation = "Destroy"
-request = "step11_destroy_root_public.json"
+request = "step13_destroy_int_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step14_destroy_int_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step15_destroy_root_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step16_destroy_root_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step17_destroy_root_bootstrap_cert.json"
 assert_success = true

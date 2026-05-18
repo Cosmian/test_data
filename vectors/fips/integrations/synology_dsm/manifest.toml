@@ -10,6 +10,7 @@ wire_format = "binary"
 kmip_version = [1, 2]
 
 # Operations 1-3: three parallel capability-discovery Queries from DSM startup
+
 [[steps]]
 operation = "Query"
 request = "step1_query.json"
@@ -26,18 +27,21 @@ request = "step1_query.json"
 assert_success = true
 
 # Operation 4: Locate by volume UUID — must find nothing (new volume)
+
 [[steps]]
 operation = "Locate"
 request = "step2_locate_empty.json"
 assert_success = true
 
 # Operation 5: another Query right before Register
+
 [[steps]]
 operation = "Query"
 request = "step1_query.json"
 assert_success = true
 
 # Operation 6: Register the passphrase with OperationPolicyName("default")
+
 [[steps]]
 operation = "Register"
 request = "step3_register.json"
@@ -47,24 +51,28 @@ assert_success = true
 key_id = "UniqueIdentifier"
 
 # Operation 7: ModifyAttribute — rename initial SHA-512 name to volume UUID
+
 [[steps]]
 operation = "ModifyAttribute"
 request = "step4_modify_attribute.json"
 assert_success = true
 
 # Operation 8: Locate by volume UUID — must now find the renamed key
+
 [[steps]]
 operation = "Locate"
 request = "step5_locate_found.json"
 assert_success = true
 
 # Operation 9: Activate — transitions key from PreActive → Active
+
 [[steps]]
 operation = "Activate"
 request = "step6_activate.json"
 assert_success = true
 
 # Cleanup (not in original DSM sequence but needed for test isolation)
+
 [[steps]]
 operation = "Revoke"
 request = "step7_revoke.json"

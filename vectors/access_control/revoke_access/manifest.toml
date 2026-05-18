@@ -1,0 +1,43 @@
+name = "Access Control: revoke granted access"
+description = "Owner grants user Get, revokes it, user can no longer Get"
+server_config = "test_data/configs/server/test/cert_auth.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GrantAccess"
+request = "step2_grant_get.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step3_user_get_ok.json"
+identity = "user"
+assert_success = true
+
+[[steps]]
+operation = "RevokeAccess"
+request = "step4_revoke_get.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step5_user_get_denied.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+assert_error_contains = "not found"

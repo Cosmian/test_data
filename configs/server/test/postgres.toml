@@ -11,7 +11,7 @@ hostname = "0.0.0.0"
 [db]
 database_type = "postgresql"
 database_url = "postgresql://kms:kms@127.0.0.1:5432/kms"
-clear_database = false
+clear_database = true
 
 [workspace]
 root_data_path = "/tmp/kms_test_workspace_postgres"
