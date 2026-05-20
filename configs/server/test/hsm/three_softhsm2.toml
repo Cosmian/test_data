@@ -1,0 +1,50 @@
+# Test KMS server — plain HTTP with three SoftHSM2 instances.
+#
+# - Legacy single-HSM config (top-level `hsm_*` fields) on slot 1.
+#   Keys use prefix: hsm::<slot>::<key-id>
+# - First [[hsm_instances]] entry on slot 2.
+#   Keys use prefix: hsm::softhsm2::<slot>::<key-id>
+# - Second [[hsm_instances]] entry on slot 3 (same model, disambiguated as softhsm2_1).
+#   Keys use prefix: hsm::softhsm2_1::<slot>::<key-id>
+#
+# Slot IDs are overridden at runtime from HSM_SLOT_ID_1/2/3 environment variables.
+
+default_username = "admin"
+
+# Legacy single-HSM config (slot 1)
+hsm_model = "softhsm2"
+hsm_admin = ["admin"]
+hsm_slot = [0]
+hsm_password = ["12345678"]
+
+# Fire rotation checks every 10 seconds during tests
+auto_rotation_check_interval_secs = 10
+
+# New multi-HSM instances (slots 2 and 3)
+[[hsm_instances]]
+hsm_model = "softhsm2"
+hsm_admin = ["admin"]
+hsm_slot = [1]
+hsm_password = ["12345678"]
+
+[[hsm_instances]]
+hsm_model = "softhsm2"
+hsm_admin = ["admin"]
+hsm_slot = [2]
+hsm_password = ["12345678"]
+
+[http]
+hostname = "127.0.0.1"
+port = 9998
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-three-softhsm2-data"
+clear_database = true
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true
