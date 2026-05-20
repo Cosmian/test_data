@@ -1,9 +1,11 @@
 name = "VAST Data Storage Appliance Key Lifecycle"
 description = """
 Simulates VAST Data EKM key management: \
-Create AES-256 named key → Activate → Locate by name → Get → \
-GetAttributes (verify Active state) → Revoke → Destroy. \
-Derived from real VAST Data kmip_client.log traces (PyKMIP client, KMIP 1.2).
+Create AES-256 named key → Activate → Locate by name → ReKey → Check → \
+Get → GetAttributes (verify Active state) → Revoke → Destroy. \
+Derived from real VAST Data kmip_client.log traces (PyKMIP client, KMIP 1.2). \
+Covers the ReKey bug (issue #845): VAST sends ReKey requests that previously \
+returned 'unsupported KMIP 1 operation: ReKey'.
 """
 wire_format = "json"
 kmip_version = [1, 2]
@@ -26,21 +28,31 @@ request = "step3_locate_by_name.json"
 assert_success = true
 
 [[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+
+[[steps]]
+operation = "Check"
+request = "step5_check.json"
+assert_success = true
+
+[[steps]]
 operation = "Get"
-request = "step4_get.json"
+request = "step6_get.json"
 assert_success = true
 
 [[steps]]
 operation = "GetAttributes"
-request = "step5_get_attributes.json"
+request = "step7_get_attributes.json"
 assert_success = true
 
 [[steps]]
 operation = "Revoke"
-request = "step6_revoke.json"
+request = "step8_revoke.json"
 assert_success = true
 
 [[steps]]
 operation = "Destroy"
-request = "step7_destroy.json"
+request = "step9_destroy.json"
 assert_success = true
