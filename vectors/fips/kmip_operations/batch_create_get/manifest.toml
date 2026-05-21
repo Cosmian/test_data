@@ -1,0 +1,24 @@
+name = "Batch Request: Create + Get (JSON, BatchCount=2)"
+description = """
+Sends a single JSON RequestMessage with BatchCount=2: \
+first BatchItem creates an AES-256 key, second BatchItem gets it back. \
+Both items must succeed. Exercises the JSON batch endpoint.
+"""
+wire_format = "json"
+
+# Step 1: raw RequestMessage with 2 BatchItems (Create + Get)
+# key_id is captured from the first BatchItem's CreateResponse
+[[steps]]
+operation = "Batch Create+Get"
+request = "step1_batch_create_get.json"
+raw_request = true
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Step 2: clean up using a normal single-item Destroy
+[[steps]]
+operation = "Destroy"
+request = "step2_destroy.json"
+assert_success = true

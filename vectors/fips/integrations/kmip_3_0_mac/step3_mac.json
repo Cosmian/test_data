@@ -1,0 +1,15 @@
+{
+  "tag": "MAC",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "4B4D495020332E30204D41432054657374"
+    }
+  ]
+}

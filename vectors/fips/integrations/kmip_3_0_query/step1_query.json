@@ -1,0 +1,15 @@
+{
+  "tag": "Query",
+  "value": [
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryOperations"
+    },
+    {
+      "tag": "QueryFunction",
+      "type": "Enumeration",
+      "value": "QueryServerInformation"
+    }
+  ]
+}

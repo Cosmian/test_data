@@ -1,0 +1,49 @@
+name = "KMIP 3.0 EC Key Pair Sign/Verify (binary)"
+description = "Creates EC P-256 key pair, signs, and verifies using KMIP 3.0 binary wire format"
+wire_format = "binary"
+kmip_version = [3, 0]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_key_pair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step4_sign.json"
+assert_success = true
+
+[steps.capture]
+signature = "SignatureData"
+
+[[steps]]
+operation = "SignatureVerify"
+request = "step5_verify.json"
+assert_success = true
+
+[steps.assert_fields]
+ValidityIndicator = "Valid"
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_public.json"
+assert_success = true

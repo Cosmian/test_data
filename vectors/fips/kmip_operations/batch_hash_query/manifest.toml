@@ -1,0 +1,16 @@
+name = "Batch Request: Hash×2 + Query (binary, BatchCount=3)"
+description = """
+Sends a single binary KMIP RequestMessage with BatchCount=3: \
+Hash(SHA-256), Hash(SHA-384), and Query in one binary request. \
+All three BatchItems must succeed. Exercises the binary batch endpoint \
+with BatchOrderOption=true and stateless independent operations.
+"""
+wire_format = "binary"
+kmip_version = [2, 1]
+
+# Single batched binary request: Hash SHA-256 + Hash SHA-384 + Query
+[[steps]]
+operation = "Batch Hash+Hash+Query"
+request = "step1_batch.json"
+raw_request = true
+assert_success = true

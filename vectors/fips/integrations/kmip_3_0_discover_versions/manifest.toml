@@ -1,0 +1,13 @@
+name = "KMIP 3.0 Discover Versions (binary)"
+description = "Queries supported KMIP protocol versions using KMIP 3.0 binary wire format"
+wire_format = "binary"
+kmip_version = [3, 0]
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step1_discover_versions.json"
+assert_success = true
+
+[steps.assert_fields]
+ProtocolVersionMajor = "3"
+ProtocolVersionMinor = "0"

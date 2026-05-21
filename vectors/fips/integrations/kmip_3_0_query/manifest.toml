@@ -1,0 +1,12 @@
+name = "KMIP 3.0 Query (JSON)"
+description = "Queries server operations and objects using KMIP 3.0 JSON wire format"
+wire_format = "json"
+kmip_version = [3, 0]
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+assert_success = true
+
+[steps.assert_fields]
+VendorIdentification = "cosmian"

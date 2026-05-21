@@ -1,0 +1,30 @@
+{
+  "tag": "SignatureVerify",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{public_key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "DigitalSignatureAlgorithm",
+          "type": "Enumeration",
+          "value": "ECDSAWithSHA256"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "4B4D495020332E30205369676E61747572652054657374"
+    },
+    {
+      "tag": "SignatureData",
+      "type": "ByteString",
+      "value": "{{signature}}"
+    }
+  ]
+}

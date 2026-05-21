@@ -1,0 +1,34 @@
+name = "KMIP 3.0 Create, Locate, Get (JSON)"
+description = "Creates a symmetric key, locates it by attributes, and retrieves it using KMIP 3.0 JSON wire format"
+wire_format = "json"
+kmip_version = [3, 0]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step2_locate.json"
+assert_success = true
+
+[steps.assert_fields]
+UniqueIdentifier = "{{key_id}}"
+
+[[steps]]
+operation = "Get"
+request = "step3_get.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+UniqueIdentifier = "{{key_id}}"
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true
