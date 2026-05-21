@@ -1,0 +1,17 @@
+{
+  "_comment": "RFC 7515 Appendix A.1 — HMAC-SHA256 Known-Answer Test",
+  "_source": "https://www.rfc-editor.org/rfc/rfc7515#appendix-A.1",
+  "type": "mac_kat",
+  "algorithm": "HS256",
+  "key": {
+    "kty": "oct",
+    "k": "AyM1SysPpbyDfgZld3umj1qzKObwVMkoqQ-EstJQLr_T-1qS0gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr1Z9CAow"
+  },
+  "request": {
+    "alg": "HS256",
+    "data": "ZXlKMGVYQWlPaUpLVjFRaUxBMEtJQ0poYkdjaU9pSklVekkxTmlKOS5leUpwYzNNaU9pSnFiMlVpTEEwS0lDSmxlSEFpT2pFek1EQTRNVGt6T0RBc0RRb2dJbWgwZEhBNkx5OWxlR0Z0Y0d4bExtTnZiUzlwYzE5eWIyOTBJanAwY25WbGZR"
+  },
+  "expected": {
+    "mac": "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"
+  }
+}

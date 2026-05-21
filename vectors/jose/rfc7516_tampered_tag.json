@@ -1,0 +1,21 @@
+{
+  "_comment": "RFC 7516 — Tampered authentication tag must be rejected",
+  "_source": "https://www.rfc-editor.org/rfc/rfc7516#section-5.2",
+  "type": "encrypt_decrypt_tamper_reject",
+  "algorithm": "dir",
+  "enc": "A256GCM",
+  "subtype": "tamper_tag",
+  "key_spec": {
+    "type": "oct",
+    "bits": 256
+  },
+  "request": {
+    "alg": "dir",
+    "enc": "A256GCM",
+    "data_plaintext": "This message tests that a tampered GCM authentication tag is rejected"
+  },
+  "tamper": {
+    "field": "tag",
+    "_comment": "After encryption, flip the last byte of the base64url-encoded tag"
+  }
+}

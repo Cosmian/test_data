@@ -1,0 +1,17 @@
+{
+  "_comment": "RFC 7520 Section 4.4 — HMAC-SHA2 Integrity Protection (HS256 KAT from JOSE Cookbook)",
+  "_source": "https://www.rfc-editor.org/rfc/rfc7520#section-4.4",
+  "type": "mac_kat",
+  "algorithm": "HS256",
+  "key": {
+    "_comment": "Symmetric key from RFC 7520 Section 3.5",
+    "kty": "oct",
+    "kid": "018c0ae5-4d9b-471b-bfd6-eef314bc7037",
+    "k": "hJtXIZ2uSN5kbQfbtTNWbpdmhkV8FJG-Onbc6mxCcYg"
+  },
+  "request": {
+    "alg": "HS256",
+    "data_plaintext": "It\u2019s a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet, there's no knowing where you might be swept off to."
+  },
+  "rfc_expected_signature": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0"
+}

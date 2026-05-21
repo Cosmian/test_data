@@ -1,0 +1,21 @@
+{
+  "_comment": "RFC 7516 Section 5.1 — JWE AAD binding test (tampering protected header invalidates tag)",
+  "_source": "https://www.rfc-editor.org/rfc/rfc7516#section-5.1",
+  "type": "encrypt_decrypt_tamper_reject",
+  "algorithm": "dir",
+  "enc": "A256GCM",
+  "subtype": "tamper_aad",
+  "key_spec": {
+    "type": "oct",
+    "bits": 256
+  },
+  "request": {
+    "alg": "dir",
+    "enc": "A256GCM",
+    "data_plaintext": "This message tests that AAD binding works correctly in AES-GCM JWE"
+  },
+  "tamper": {
+    "field": "protected",
+    "_comment": "After encryption, flip one character in the base64url-encoded protected header to simulate AAD tampering"
+  }
+}

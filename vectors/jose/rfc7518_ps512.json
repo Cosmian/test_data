@@ -1,0 +1,14 @@
+{
+  "_comment": "RFC 7518 Section 3.5 — RSASSA-PSS SHA-512 (PS512) round-trip",
+  "_source": "https://www.rfc-editor.org/rfc/rfc7518#section-3.5",
+  "type": "sign_verify_round_trip",
+  "algorithm": "PS512",
+  "key_spec": {
+    "type": "RSA",
+    "bits": 2048
+  },
+  "request": {
+    "alg": "PS512",
+    "data_plaintext": "RFC 7518 test payload for PS512 RSASSA-PSS with SHA-512 and MGF1+SHA-512"
+  }
+}

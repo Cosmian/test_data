@@ -1,0 +1,23 @@
+{
+  "_comment": "RFC 7515 Appendix A.4 — ECDSA P-521 SHA-512 (ES512) round-trip",
+  "_source": "https://www.rfc-editor.org/rfc/rfc7515#appendix-A.4",
+  "type": "sign_verify_round_trip",
+  "algorithm": "ES512",
+  "key_spec": {
+    "type": "EC",
+    "curve": "P-521"
+  },
+  "request": {
+    "alg": "ES512",
+    "data_plaintext": "Payload"
+  },
+  "rfc_jwk": {
+    "_comment": "Exact P-521 key from RFC 7515 Appendix A.4 (for reference only; ECDSA is non-deterministic)",
+    "kty": "EC",
+    "crv": "P-521",
+    "x": "AekpBQ8ST8a8VcfVOTNl353vSrDCLLJXmPk06wTjxrrjcBpXp5EOnYG_NjFZ6OvLFV1jSfS9tsz4qUxcWceqwQGk",
+    "y": "ADSmRA43Z1DSNx_RvcLI87cdL07l6jQyyBXMoxVg_l2Th-x3S1WDhjDly79ajL4Kkd0AZMaZmh9ubmf63e3kyMj2",
+    "d": "AY5pb7A0UFiB3RELSD64fTLOSV_jazdF7fLYyuTw8lOfRhWg6Y6rUrPAxerEzgdRhajnu0ferB0d53vM9mE15j2C"
+  },
+  "rfc_compact_jws": "eyJhbGciOiJFUzUxMiJ9.UGF5bG9hZA.AdwMgeerwtHoh-l192l60hp9wAHZFVJbLfD_UxMi70cwnZOYaRI1bKPWROc-mZZqwqT2SI-KGDKB34XO0aw_7XdtAG8GaSwFKdCAPZgoXD2YBJZCPEX3xKpRwcdOO8KpEHwJjyqOgzDO7iKvU8vcnwNrmxYbSW9ERBXukOXolLzeO_Jn"
+}

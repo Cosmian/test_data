@@ -1,0 +1,14 @@
+{
+  "_comment": "RFC 7518 Section 3.3 — RSASSA-PKCS1-v1_5 SHA-384 (RS384) round-trip",
+  "_source": "https://www.rfc-editor.org/rfc/rfc7518#section-3.3",
+  "type": "sign_verify_round_trip",
+  "algorithm": "RS384",
+  "key_spec": {
+    "type": "RSA",
+    "bits": 2048
+  },
+  "request": {
+    "alg": "RS384",
+    "data_plaintext": "RFC 7518 test payload for RS384 RSASSA-PKCS1-v1_5 with SHA-384"
+  }
+}

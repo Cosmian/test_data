@@ -1,0 +1,14 @@
+{
+  "_comment": "RFC 7518 Section 3.2 — HMAC SHA-384 (HS384) Known-Answer Test",
+  "_source": "https://www.rfc-editor.org/rfc/rfc7518#section-3.2",
+  "type": "mac_round_trip",
+  "algorithm": "HS384",
+  "key_spec": {
+    "type": "oct",
+    "bits": 384
+  },
+  "request": {
+    "alg": "HS384",
+    "data_plaintext": "RFC 7518 test payload for HS384 HMAC using SHA-384"
+  }
+}
