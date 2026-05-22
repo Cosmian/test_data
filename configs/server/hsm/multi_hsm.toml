@@ -1,21 +1,20 @@
 default_username = "admin"
 hsm_model = "softhsm2"
-hsm_admin = ["admin"]
+hsm_admin = ["admin", "owner.client@acme.com"]
 hsm_slot = [473094471]
 hsm_password = ["12345678"]
 
-auto_rotation_check_interval_secs = 10
 # key_encryption_key = "hsm::473094471::aes"
 
 [[hsm_instances]]
 hsm_model = "softhsm2"
-hsm_admin = ["admin"]
+hsm_admin = ["admin", "owner.client@acme.com"]
 hsm_slot = [1355662635]
 hsm_password = ["12345678"]
 
 [[hsm_instances]]
 hsm_model = "softhsm2"
-hsm_admin = ["admin"]
+hsm_admin = ["admin", "owner.client@acme.com"]
 hsm_slot = [1667223158]
 hsm_password = ["12345678"]
 
