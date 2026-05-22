@@ -1,16 +1,16 @@
 {
-  "_comment": "RFC 7518 Section 5.3 / RFC 7516 — AES-192-GCM direct encryption round-trip",
+  "_comment": "RFC 7518 Section 5.3 / RFC 7516 \u2014 AES-192-GCM direct encryption round-trip",
   "_source": "https://www.rfc-editor.org/rfc/rfc7518#section-5.3",
   "type": "encrypt_decrypt_round_trip",
   "algorithm": "dir",
   "enc": "A192GCM",
-  "key_spec": {
-    "type": "oct",
-    "bits": 192
-  },
   "request": {
     "alg": "dir",
     "enc": "A192GCM",
     "data_plaintext": "RFC 7518 A192GCM test payload for direct key encryption. This message is exactly 80 bytes long."
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "A192GCM"
   }
 }

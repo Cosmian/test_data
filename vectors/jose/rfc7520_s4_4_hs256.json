@@ -11,7 +11,11 @@
   },
   "request": {
     "alg": "HS256",
-    "data_plaintext": "It\u2019s a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet, there's no knowing where you might be swept off to."
+    "data_plaintext": "It\u2019s a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet, there's no knowing where you might be swept off to.",
+    "data": "ZXlKaGJHY2lPaUpJVXpJMU5pSXNJbXRwWkNJNklqQXhPR013WVdVMUxUUmtPV0l0TkRjeFlpMWlabVEyTFdWbFpqTXhOR0pqTnpBek55SjkuU1hUaWdKbHpJR0VnWkdGdVoyVnliM1Z6SUdKMWMybHVaWE56TENCR2NtOWtieXdnWjI5cGJtY2diM1YwSUhsdmRYSWdaRzl2Y2k0Z1dXOTFJSE4wWlhBZ2IyNTBieUIwYUdVZ2NtOWhaQ3dnWVc1a0lHbG1JSGx2ZFNCa2IyNG5kQ0JyWldWd0lIbHZkWElnWm1WbGRDd2dkR2hsY21YaWdKbHpJRzV2SUd0dWIzZHBibWNnZDJobGNtVWdlVzkxSUcxcFoyaDBJR0psSUhOM1pYQjBJRzltWmlCMGJ5NA"
+  },
+  "expected": {
+    "mac": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0"
   },
   "rfc_expected_signature": "s0h6KThzkfBBBkLspW1h84VsJZFTsPPqMDA7g1Md7p0"
 }

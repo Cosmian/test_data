@@ -1,16 +1,16 @@
 {
-  "_comment": "RFC 7516 — Empty plaintext encryption round-trip",
+  "_comment": "RFC 7516 \u2014 Empty plaintext encryption round-trip",
   "_source": "https://www.rfc-editor.org/rfc/rfc7516#section-5.1",
   "type": "encrypt_decrypt_round_trip",
   "algorithm": "dir",
   "enc": "A256GCM",
-  "key_spec": {
-    "type": "oct",
-    "bits": 256
-  },
   "request": {
     "alg": "dir",
     "enc": "A256GCM",
     "data_plaintext": ""
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "A256GCM"
   }
 }

@@ -1,12 +1,8 @@
 {
-  "_comment": "RFC 7515 Appendix A.3 — ECDSA P-256 SHA-256 (ES256) round-trip",
+  "_comment": "RFC 7515 Appendix A.3 \u2014 ECDSA P-256 SHA-256 (ES256) round-trip",
   "_source": "https://www.rfc-editor.org/rfc/rfc7515#appendix-A.3",
   "type": "sign_verify_round_trip",
   "algorithm": "ES256",
-  "key_spec": {
-    "type": "EC",
-    "curve": "P-256"
-  },
   "request": {
     "alg": "ES256",
     "data_plaintext": "RFC 7515 A.3 test payload for ES256 signature"
@@ -19,5 +15,10 @@
     "y": "x_FEzRu9m36HLN_tue659LNpXW6pCyStikYjKIWI5a0",
     "d": "jpsQnnGQmL-YBIffH1136cspYG6-0iY7X1fCE9-E9LI"
   },
-  "rfc_compact_jws": "eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.DtEhU3ljbEg8L38VWAfUAqOyKAM6-Xx-F4GawxaepmXFCgfTjDxw5djxLa8ISlSApmWQxfKTUJqPP3-Kg6NU1Q"
+  "rfc_compact_jws": "eyJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.DtEhU3ljbEg8L38VWAfUAqOyKAM6-Xx-F4GawxaepmXFCgfTjDxw5djxLa8ISlSApmWQxfKTUJqPP3-Kg6NU1Q",
+  "key": {
+    "kty": "EC",
+    "crv": "P-256",
+    "alg": "ES256"
+  }
 }

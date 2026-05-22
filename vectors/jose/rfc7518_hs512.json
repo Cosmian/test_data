@@ -1,14 +1,14 @@
 {
-  "_comment": "RFC 7518 Section 3.2 — HMAC SHA-512 (HS512) Known-Answer Test",
+  "_comment": "RFC 7518 Section 3.2 \u2014 HMAC SHA-512 (HS512) Known-Answer Test",
   "_source": "https://www.rfc-editor.org/rfc/rfc7518#section-3.2",
   "type": "mac_round_trip",
   "algorithm": "HS512",
-  "key_spec": {
-    "type": "oct",
-    "bits": 512
-  },
   "request": {
     "alg": "HS512",
     "data_plaintext": "RFC 7518 test payload for HS512 HMAC using SHA-512"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "HS512"
   }
 }

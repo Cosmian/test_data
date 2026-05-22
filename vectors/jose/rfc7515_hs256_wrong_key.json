@@ -1,14 +1,14 @@
 {
-  "_comment": "RFC 7515 — Wrong HMAC key must produce verification failure",
+  "_comment": "RFC 7515 \u2014 Wrong HMAC key must produce verification failure",
   "_source": "https://www.rfc-editor.org/rfc/rfc7515#section-5.2",
   "type": "mac_wrong_key_reject",
   "algorithm": "HS256",
-  "key_spec": {
-    "type": "oct",
-    "bits": 256
-  },
   "request": {
     "alg": "HS256",
     "data_plaintext": "RFC 7515 test: MAC computed with key A, verified with key B must fail"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "HS256"
   }
 }

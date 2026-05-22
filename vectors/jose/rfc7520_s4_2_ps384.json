@@ -1,14 +1,14 @@
 {
-  "_comment": "RFC 7520 Section 4.2 — RSA-PSS Signature (PS384 from JOSE Cookbook)",
+  "_comment": "RFC 7520 Section 4.2 \u2014 RSA-PSS Signature (PS384 from JOSE Cookbook)",
   "_source": "https://www.rfc-editor.org/rfc/rfc7520#section-4.2",
   "type": "sign_verify_round_trip",
   "algorithm": "PS384",
-  "key_spec": {
-    "type": "RSA",
-    "bits": 2048
-  },
   "request": {
     "alg": "PS384",
     "data_plaintext": "It\u2019s a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet, there's no knowing where you might be swept off to."
+  },
+  "key": {
+    "kty": "RSA",
+    "alg": "PS384"
   }
 }

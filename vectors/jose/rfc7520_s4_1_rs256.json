@@ -1,12 +1,8 @@
 {
-  "_comment": "RFC 7520 Section 4.1 — RSA v1.5 Signature (RS256 known-key round-trip from JOSE Cookbook)",
+  "_comment": "RFC 7520 Section 4.1 \u2014 RSA v1.5 Signature (RS256 known-key round-trip from JOSE Cookbook)",
   "_source": "https://www.rfc-editor.org/rfc/rfc7520#section-4.1",
   "type": "sign_verify_round_trip",
   "algorithm": "RS256",
-  "key_spec": {
-    "type": "RSA",
-    "bits": 2048
-  },
   "request": {
     "alg": "RS256",
     "data_plaintext": "It\u2019s a dangerous business, Frodo, going out your door. You step onto the road, and if you don't keep your feet, there's no knowing where you might be swept off to."
@@ -18,5 +14,9 @@
     "n": "n4EPtAOCc9AlkeQHPzHStgAbgs7bTZLwUBZdR8_KuKPEHLd4rHVTeT-O-XV2jRojdNhxJWTDvNd7nqQ0VEiZQHz_AJmSCpMaJMRBSFKrKb2wqVwGU_NsYOYL-QtiWN2lbzcEe6XC0dApr5ydQLrHqkHHig3RBordaZ6Aj-oBHqFEHYpPe7Tpe-OfVfHd1E6cS6M1FZcD1NNLYD-lW2_GUzTsUDnqPAuYItSSHYUWNqBMZiFxkF3uM3K-X2zF1wkYi3nhEi4JO-RW9FBkRKI3Am_ePJCVXiRhLhgVkBXhc-NhSQyRbBNXntqS3JIB0LhMqPsuV7wJEJCZE2pkQ",
     "e": "AQAB",
     "d": "bWUC9B-EFRIo8kpGfh0ZuyGPvMNKvYWNtB_ikiH9k20eT-O1q_I78eiZkpXxXQ0UTEs2LsNRS-8uJbvQ-A1irkwMSMkK1J3XTGgdrhCku9gRldY7sNA_AKZGh-Q661_42rINLRCe8W-nZ34ui_qOfkLnSLcUWLN-5Qr_aYVj_8pKYWs46HKP_JfejpS0r0gMk4ICKjVuFnp8IA60ux9yyPLJqYaKnp4VX52b9JdFLmq6e7t6VmC8V2nrooHhAt2alw10JEaruqpxIwIGF_cSaFm1T_-J5TitbMQzmkbMORBMC2ETYS8LFKHCiPXKJJCD5JRYPIhVOB4OScYTqvB_Q"
+  },
+  "key": {
+    "kty": "RSA",
+    "alg": "RS256"
   }
 }

@@ -1,14 +1,14 @@
 {
-  "_comment": "RFC 7518 Section 3.3 — RSASSA-PKCS1-v1_5 SHA-512 (RS512) round-trip",
+  "_comment": "RFC 7518 Section 3.3 \u2014 RSASSA-PKCS1-v1_5 SHA-512 (RS512) round-trip",
   "_source": "https://www.rfc-editor.org/rfc/rfc7518#section-3.3",
   "type": "sign_verify_round_trip",
   "algorithm": "RS512",
-  "key_spec": {
-    "type": "RSA",
-    "bits": 2048
-  },
   "request": {
     "alg": "RS512",
     "data_plaintext": "RFC 7518 test payload for RS512 RSASSA-PKCS1-v1_5 with SHA-512"
+  },
+  "key": {
+    "kty": "RSA",
+    "alg": "RS512"
   }
 }

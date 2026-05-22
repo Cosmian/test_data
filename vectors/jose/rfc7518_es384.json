@@ -1,14 +1,15 @@
 {
-  "_comment": "RFC 7518 Section 3.4 — ECDSA P-384 SHA-384 (ES384) round-trip",
+  "_comment": "RFC 7518 Section 3.4 \u2014 ECDSA P-384 SHA-384 (ES384) round-trip",
   "_source": "https://www.rfc-editor.org/rfc/rfc7518#section-3.4",
   "type": "sign_verify_round_trip",
   "algorithm": "ES384",
-  "key_spec": {
-    "type": "EC",
-    "curve": "P-384"
-  },
   "request": {
     "alg": "ES384",
     "data_plaintext": "RFC 7518 test payload for ES384 ECDSA using P-384 and SHA-384"
+  },
+  "key": {
+    "kty": "EC",
+    "crv": "P-384",
+    "alg": "ES384"
   }
 }
