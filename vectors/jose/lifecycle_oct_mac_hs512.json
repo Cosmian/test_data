@@ -1,0 +1,13 @@
+{
+  "_comment": "Key lifecycle: create HMAC-SHA512 key → compute MAC → delete → verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "HS512",
+  "operation": "mac",
+  "request": {
+    "data_plaintext": "lifecycle test payload for HS512 MAC"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "HS512"
+  }
+}

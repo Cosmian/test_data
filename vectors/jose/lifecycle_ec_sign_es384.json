@@ -1,0 +1,14 @@
+{
+  "_comment": "Key lifecycle: create EC P-384 key → sign/verify ES384 → delete → verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "ES384",
+  "operation": "sign",
+  "request": {
+    "data_plaintext": "lifecycle test payload for ES384 signature"
+  },
+  "key": {
+    "kty": "EC",
+    "crv": "P-384",
+    "alg": "ES384"
+  }
+}

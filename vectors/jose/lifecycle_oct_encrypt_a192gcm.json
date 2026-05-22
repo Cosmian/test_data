@@ -1,0 +1,14 @@
+{
+  "_comment": "Key lifecycle: create AES-192-GCM key → encrypt/decrypt → delete → verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "dir",
+  "enc": "A192GCM",
+  "operation": "encrypt",
+  "request": {
+    "data_plaintext": "lifecycle test payload for A192GCM direct encryption"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "A192GCM"
+  }
+}

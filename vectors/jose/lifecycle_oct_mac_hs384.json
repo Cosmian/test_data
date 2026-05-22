@@ -1,0 +1,13 @@
+{
+  "_comment": "Key lifecycle: create HMAC-SHA384 key → compute MAC → delete → verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "HS384",
+  "operation": "mac",
+  "request": {
+    "data_plaintext": "lifecycle test payload for HS384 MAC"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "HS384"
+  }
+}

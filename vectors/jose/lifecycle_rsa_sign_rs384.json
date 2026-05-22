@@ -1,0 +1,13 @@
+{
+  "_comment": "Key lifecycle: create RSA 2048 key → sign/verify RS384 → delete → verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "RS384",
+  "operation": "sign",
+  "request": {
+    "data_plaintext": "lifecycle test payload for RS384 RSASSA-PKCS1-v1_5 signature"
+  },
+  "key": {
+    "kty": "RSA",
+    "alg": "RS384"
+  }
+}

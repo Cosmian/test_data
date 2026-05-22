@@ -1,0 +1,13 @@
+{
+  "_comment": "Key lifecycle: create RSA 2048 key → sign/verify PS512 → delete → verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "PS512",
+  "operation": "sign",
+  "request": {
+    "data_plaintext": "lifecycle test payload for PS512 RSA-PSS signature"
+  },
+  "key": {
+    "kty": "RSA",
+    "alg": "PS512"
+  }
+}

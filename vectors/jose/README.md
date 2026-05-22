@@ -19,6 +19,7 @@ This directory contains JSON test vector files for the JOSE (JSON Object Signing
 | `sign_verify_round_trip`         | Generate key pair, sign, verify                       |
 | `encrypt_decrypt_round_trip`     | Generate key, encrypt, decrypt, assert plaintext match |
 | `encrypt_decrypt_tamper_reject`  | Encrypt, tamper with a field, decrypt must fail       |
+| `key_lifecycle`                  | Create key → use (mac/sign/encrypt) → delete → verify gone |
 
 ## Algorithms Covered
 
