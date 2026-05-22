@@ -34,3 +34,13 @@ operation = "Encrypt"
 request = "step4_user_encrypt_denied.json"
 identity = "user"
 assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "owner_revoke_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_owner_destroy.json"
+assert_success = true

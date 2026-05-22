@@ -1,0 +1,17 @@
+{
+  "_comment": "Encrypt with unsupported key management algorithm (RSA-OAEP) must return 422",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/encrypt",
+  "setup_key": {
+    "kty": "oct",
+    "alg": "A256GCM"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "RSA-OAEP",
+    "enc": "A256GCM",
+    "data": "dGVzdA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

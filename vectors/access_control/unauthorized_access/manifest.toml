@@ -25,3 +25,13 @@ identity = "user"
 assert_success = false
 assert_error_reason = "Object_Not_Found"
 assert_error_contains = "not found"
+
+[[steps]]
+operation = "Revoke"
+request = "owner_revoke_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_owner_destroy.json"
+assert_success = true

@@ -1,0 +1,12 @@
+{
+  "_comment": "Verify with forged signature (all zeros) — server must not crash, returns 404 because kid in protected header does not exist",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/verify",
+  "body": {
+    "protected": "eyJhbGciOiJFUzI1NiIsImtpZCI6Im5vbi1leGlzdGVudC1rZXkifQ",
+    "data": "dGVzdA",
+    "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

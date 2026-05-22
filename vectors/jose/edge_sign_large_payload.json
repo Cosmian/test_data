@@ -1,0 +1,14 @@
+{
+  "_comment": "Large signing payload (64KB) — must not cause timeouts or memory issues",
+  "type": "sign_verify_round_trip",
+  "algorithm": "RS256",
+  "request": {
+    "data_plaintext_generator": "repeat_pattern",
+    "pattern": "The quick brown fox jumps over the lazy dog. ",
+    "repeat_bytes": 65536
+  },
+  "key": {
+    "kty": "RSA",
+    "alg": "RS256"
+  }
+}

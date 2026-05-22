@@ -1,0 +1,14 @@
+{
+  "_comment": "Decrypt with IV that is wrong length (not 12 bytes) must return 400",
+  "_detail": "base64url of {\"alg\":\"dir\",\"enc\":\"A256GCM\",\"kid\":\"fake-kid\"}",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/decrypt",
+  "body": {
+    "protected": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiZmFrZS1raWQifQ",
+    "iv": "AQID",
+    "ciphertext": "dGVzdA",
+    "tag": "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

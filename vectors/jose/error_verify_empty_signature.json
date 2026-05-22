@@ -1,0 +1,13 @@
+{
+  "_comment": "Verify with empty signature field — edge case that must not crash",
+  "_detail": "base64url of {\"alg\":\"ES256\",\"kid\":\"fake-kid\"}",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/verify",
+  "body": {
+    "protected": "eyJhbGciOiJFUzI1NiIsImtpZCI6ImZha2Uta2lkIn0",
+    "data": "dGVzdA",
+    "signature": ""
+  },
+  "expected_status": 500,
+  "expected_error": "internal_error"
+}

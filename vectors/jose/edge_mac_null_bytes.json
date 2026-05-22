@@ -1,0 +1,14 @@
+{
+  "_comment": "Plaintext with only null bytes — edge case for zero-filled buffer",
+  "type": "mac_round_trip",
+  "algorithm": "HS256",
+  "request": {
+    "data_plaintext_generator": "repeat_pattern",
+    "pattern": "\u0000",
+    "repeat_bytes": 64
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "HS256"
+  }
+}

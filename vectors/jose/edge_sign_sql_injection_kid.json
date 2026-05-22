@@ -1,0 +1,12 @@
+{
+  "_comment": "SQL injection attempt in kid — server must treat as literal string",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/sign",
+  "body": {
+    "kid": "' OR '1'='1' --",
+    "alg": "ES256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

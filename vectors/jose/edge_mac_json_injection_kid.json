@@ -1,0 +1,12 @@
+{
+  "_comment": "JSON injection in kid field — server must treat as literal string, not interpret",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/mac",
+  "body": {
+    "kid": "{\"$ne\": null}",
+    "alg": "HS256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

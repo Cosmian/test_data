@@ -1,0 +1,17 @@
+{
+  "_comment": "MAC with wrong key type (asymmetric EC key for HMAC) must return error",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/mac",
+  "setup_key": {
+    "kty": "EC",
+    "crv": "P-256",
+    "alg": "ES256"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "HS256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 500,
+  "expected_error": "internal_error"
+}

@@ -1,0 +1,17 @@
+{
+  "_comment": "MAC verify with invalid base64url in mac field must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/mac",
+  "setup_key": {
+    "kty": "oct",
+    "alg": "HS256"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "HS256",
+    "data": "dGVzdA",
+    "mac": "not-valid-base64!!!"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

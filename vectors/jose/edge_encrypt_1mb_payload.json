@@ -1,0 +1,15 @@
+{
+  "_comment": "Huge payload (1MB pattern) — must not crash the server, should encrypt/decrypt successfully",
+  "type": "encrypt_decrypt_round_trip",
+  "algorithm": "dir",
+  "enc": "A256GCM",
+  "request": {
+    "data_plaintext_generator": "repeat_pattern",
+    "pattern": "ABCDEFGHIJKLMNOP",
+    "repeat_bytes": 1048576
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "A256GCM"
+  }
+}

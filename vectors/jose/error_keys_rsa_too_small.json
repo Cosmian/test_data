@@ -1,0 +1,11 @@
+{
+  "_comment": "Key creation with kty=RSA and bits < 2048 must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys",
+  "body": {
+    "kty": "RSA",
+    "bits": 512
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

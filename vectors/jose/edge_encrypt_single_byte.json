@@ -1,0 +1,13 @@
+{
+  "_comment": "Single byte plaintext — edge case for minimal AES-GCM ciphertext",
+  "type": "encrypt_decrypt_round_trip",
+  "algorithm": "dir",
+  "enc": "A128GCM",
+  "request": {
+    "data_plaintext": "X"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "A128GCM"
+  }
+}

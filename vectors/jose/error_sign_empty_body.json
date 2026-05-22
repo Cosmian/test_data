@@ -1,0 +1,8 @@
+{
+  "_comment": "Sign with empty JSON body must return 400 (missing kid, alg, data)",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/sign",
+  "body": {},
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

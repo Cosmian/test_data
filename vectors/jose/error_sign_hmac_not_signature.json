@@ -1,0 +1,16 @@
+{
+  "_comment": "Sign with HMAC algorithm (HS256) which is not a signature algorithm must fail — sign endpoint requires asymmetric key",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/sign",
+  "setup_key": {
+    "kty": "oct",
+    "alg": "HS256"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "HS256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

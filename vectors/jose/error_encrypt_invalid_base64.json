@@ -1,0 +1,17 @@
+{
+  "_comment": "Encrypt with invalid base64url in data field must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/encrypt",
+  "setup_key": {
+    "kty": "oct",
+    "alg": "A256GCM"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "dir",
+    "enc": "A256GCM",
+    "data": "not!!!valid===base64@@"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

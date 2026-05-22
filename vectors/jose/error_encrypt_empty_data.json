@@ -1,0 +1,15 @@
+{
+  "_comment": "Encrypt with empty string data (valid base64url for zero bytes) — edge case for empty plaintext",
+  "type": "encrypt_decrypt_round_trip",
+  "algorithm": "dir",
+  "enc": "A256GCM",
+  "request": {
+    "alg": "dir",
+    "enc": "A256GCM",
+    "data_plaintext": ""
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "A256GCM"
+  }
+}

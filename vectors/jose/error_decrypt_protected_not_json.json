@@ -1,0 +1,13 @@
+{
+  "_comment": "Decrypt with protected header that is valid base64url but not JSON must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/decrypt",
+  "body": {
+    "protected": "bm90LWpzb24tdGhpcy1pcy1qdXN0LXBsYWluLXRleHQ",
+    "iv": "AAAAAAAAAAAAAAAA",
+    "ciphertext": "dGVzdA",
+    "tag": "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

@@ -1,0 +1,14 @@
+{
+  "_comment": "Decrypt with protected header JSON missing 'kid' must return 400",
+  "_detail": "base64url of {\"alg\":\"dir\",\"enc\":\"A256GCM\"}",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/decrypt",
+  "body": {
+    "protected": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0",
+    "iv": "AAAAAAAAAAAAAAAA",
+    "ciphertext": "dGVzdA",
+    "tag": "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

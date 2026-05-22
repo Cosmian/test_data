@@ -1,0 +1,12 @@
+{
+  "_comment": "Null bytes in kid field — must not crash, should return 404",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/mac",
+  "body": {
+    "kid": "key\u0000with\u0000nulls",
+    "alg": "HS256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

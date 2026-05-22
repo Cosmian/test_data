@@ -1,0 +1,17 @@
+{
+  "_comment": "Encrypt with wrong key type (RSA key for direct AES-GCM) must fail — server returns 404 because no suitable symmetric key exists at this kid",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/encrypt",
+  "setup_key": {
+    "kty": "RSA",
+    "alg": "RS256"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "dir",
+    "enc": "A256GCM",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

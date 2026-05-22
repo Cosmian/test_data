@@ -1,0 +1,14 @@
+{
+  "_comment": "Decrypt with tag that is wrong length (not 16 bytes) must return 400",
+  "_detail": "base64url of {\"alg\":\"dir\",\"enc\":\"A256GCM\",\"kid\":\"fake-kid\"}",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/decrypt",
+  "body": {
+    "protected": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiZmFrZS1raWQifQ",
+    "iv": "AAAAAAAAAAAAAAAA",
+    "ciphertext": "dGVzdA",
+    "tag": "AQID"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

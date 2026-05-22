@@ -1,0 +1,11 @@
+{
+  "_comment": "Key creation with kty=EC and unknown curve must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys",
+  "body": {
+    "kty": "EC",
+    "crv": "P-999"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

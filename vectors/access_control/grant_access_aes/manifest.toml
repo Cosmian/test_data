@@ -48,3 +48,13 @@ assert_success = true
 
 [steps.assert_fields]
 Data = "48656C6C6F2061636365737320636F6E74726F6C"
+
+[[steps]]
+operation = "Revoke"
+request = "owner_revoke_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_owner_destroy.json"
+assert_success = true

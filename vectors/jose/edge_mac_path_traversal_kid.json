@@ -1,0 +1,12 @@
+{
+  "_comment": "Path traversal attempt in kid — server must reject or treat as literal",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/mac",
+  "body": {
+    "kid": "../../../etc/passwd",
+    "alg": "HS256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

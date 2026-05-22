@@ -1,0 +1,16 @@
+{
+  "_comment": "MAC with invalid base64url in data must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/mac",
+  "setup_key": {
+    "kty": "oct",
+    "alg": "HS256"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "HS256",
+    "data": "====garbage!!!"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

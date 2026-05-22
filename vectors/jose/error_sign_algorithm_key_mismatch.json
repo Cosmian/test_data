@@ -1,0 +1,16 @@
+{
+  "_comment": "Sign with algorithm-key mismatch: ES256 alg with RSA key must fail with crypto error",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/sign",
+  "setup_key": {
+    "kty": "RSA",
+    "alg": "RS256"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "ES256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 422,
+  "expected_error": "crypto_failure"
+}

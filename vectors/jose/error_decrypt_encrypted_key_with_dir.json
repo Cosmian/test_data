@@ -1,0 +1,15 @@
+{
+  "_comment": "Decrypt with encrypted_key present (non-empty) for dir algorithm must return 400",
+  "_detail": "base64url of {\"alg\":\"dir\",\"enc\":\"A256GCM\",\"kid\":\"fake-kid\"}",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/decrypt",
+  "body": {
+    "protected": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiZmFrZS1raWQifQ",
+    "encrypted_key": "c29tZS1lbmNyeXB0ZWQta2V5LWRhdGE",
+    "iv": "AAAAAAAAAAAAAAAA",
+    "ciphertext": "dGVzdA",
+    "tag": "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

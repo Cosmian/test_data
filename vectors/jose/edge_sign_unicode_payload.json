@@ -1,0 +1,13 @@
+{
+  "_comment": "Unicode emoji payload — ensure no UTF-8 encoding issues in base64 round-trip",
+  "type": "sign_verify_round_trip",
+  "algorithm": "ES256",
+  "request": {
+    "data_plaintext": "🔑🔒🔓 Cosmian KMS JOSE test 日本語テスト données françaises Ñoño"
+  },
+  "key": {
+    "kty": "EC",
+    "crv": "P-256",
+    "alg": "ES256"
+  }
+}

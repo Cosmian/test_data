@@ -1,0 +1,25 @@
+{
+  "_comment": "Encrypt with extra unexpected fields in body — server must ignore or handle gracefully",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/encrypt",
+  "setup_key": {
+    "kty": "oct",
+    "alg": "A256GCM"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "dir",
+    "enc": "A256GCM",
+    "data": "dGVzdA",
+    "evil_field": "malicious",
+    "nested": {
+      "deep": true
+    },
+    "array": [
+      1,
+      2,
+      3
+    ]
+  },
+  "expected_status": 200
+}

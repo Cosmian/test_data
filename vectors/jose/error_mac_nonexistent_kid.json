@@ -1,0 +1,12 @@
+{
+  "_comment": "MAC with nonexistent kid must return 404",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/mac",
+  "body": {
+    "kid": "00000000-0000-0000-0000-000000000000",
+    "alg": "HS256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

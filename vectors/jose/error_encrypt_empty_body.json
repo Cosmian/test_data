@@ -1,0 +1,8 @@
+{
+  "_comment": "Empty JSON body to /v1/crypto/encrypt must return 400 (missing required fields)",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/encrypt",
+  "body": {},
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

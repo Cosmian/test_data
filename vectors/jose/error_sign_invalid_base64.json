@@ -1,0 +1,17 @@
+{
+  "_comment": "Sign with invalid base64url data must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/sign",
+  "setup_key": {
+    "kty": "EC",
+    "crv": "P-256",
+    "alg": "ES256"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "ES256",
+    "data": "===invalid%%%base64!!!"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

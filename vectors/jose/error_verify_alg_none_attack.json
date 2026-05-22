@@ -1,0 +1,13 @@
+{
+  "_comment": "Verify with alg='none' must be rejected (RFC 8725 §2.1 — algorithm 'none' attack)",
+  "_detail": "base64url of {\"alg\":\"none\",\"kid\":\"some-kid\"}",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/verify",
+  "body": {
+    "protected": "eyJhbGciOiJub25lIiwia2lkIjoic29tZS1raWQifQ",
+    "data": "dGVzdA",
+    "signature": ""
+  },
+  "expected_status": 422,
+  "expected_error": "unsupported_algorithm"
+}

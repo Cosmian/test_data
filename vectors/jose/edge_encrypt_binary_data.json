@@ -1,0 +1,13 @@
+{
+  "_comment": "Plaintext with null bytes, unicode, and special characters — must round-trip correctly",
+  "type": "encrypt_decrypt_round_trip",
+  "algorithm": "dir",
+  "enc": "A256GCM",
+  "request": {
+    "data_plaintext": "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\t\n\u000b\u000c\r\u000e\u000f\u0010\u0011\u0012\u0013"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "A256GCM"
+  }
+}

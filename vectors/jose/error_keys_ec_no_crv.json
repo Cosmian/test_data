@@ -1,0 +1,10 @@
+{
+  "_comment": "Key creation with kty=EC but no crv must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys",
+  "body": {
+    "kty": "EC"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

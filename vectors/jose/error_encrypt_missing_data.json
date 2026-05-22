@@ -1,0 +1,16 @@
+{
+  "_comment": "Encrypt request with kid and alg but missing data field must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/encrypt",
+  "setup_key": {
+    "kty": "oct",
+    "alg": "A256GCM"
+  },
+  "body": {
+    "kid": "$KID",
+    "alg": "dir",
+    "enc": "A256GCM"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}
