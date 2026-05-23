@@ -52,7 +52,7 @@
         {
           "tag": "CryptographicUsageMask",
           "type": "Integer",
-          "value": 2097152
+          "value": 1
         },
         {
           "tag": "KeyFormatType",
@@ -92,7 +92,7 @@
         {
           "tag": "CryptographicUsageMask",
           "type": "Integer",
-          "value": 2097152
+          "value": 2
         },
         {
           "tag": "KeyFormatType",
