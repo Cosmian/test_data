@@ -1,0 +1,60 @@
+name = "HSM Permissions: admin grants Encrypt/Decrypt to user"
+description = """
+HSM admin creates an AES-256 key in the HSM, grants Encrypt and Decrypt
+to user.client@acme.com. User can then encrypt and decrypt. Admin destroys key.
+Validates that grantable operations work for non-admin users on HSM keys.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+identity = "owner"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hsm_key.json"
+identity = "owner"
+assert_success = true
+
+[[steps]]
+operation = "GrantAccess"
+request = "step2_grant_encrypt_decrypt.json"
+identity = "owner"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_user_encrypt.json"
+identity = "user"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step4_user_decrypt.json"
+identity = "user"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F206772616E74656420757365722031"
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+identity = "owner"
+assert_success = true

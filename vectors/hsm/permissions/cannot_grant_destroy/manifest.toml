@@ -1,0 +1,38 @@
+name = "HSM Permissions: cannot grant Destroy on HSM key"
+description = """
+HSM admin creates an AES key in the HSM, then attempts to grant Destroy to
+user.client@acme.com. Destroy cannot be delegated to non-admin users on HSM
+keys — it is reserved for HSM admins only.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "owner"
+allow_failure = true
+[[steps]]
+operation = "Create"
+request = "step1_create_hsm_key.json"
+identity = "owner"
+assert_success = true
+
+# Admin tries to grant Destroy — must fail (Destroy is not grantable on HSM keys)
+[[steps]]
+operation = "GrantAccess"
+request = "step2_grant_destroy.json"
+identity = "owner"
+assert_success = false
+assert_error_contains = "reserved for HSM admins only"
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "owner"
+assert_success = true

@@ -1,0 +1,19 @@
+name = "HSM Permissions: non-admin user cannot create HSM key"
+description = """
+Non-admin user (user.client@acme.com) attempts to create an AES key directly
+in the HSM. This must be denied — only HSM admins can create HSM objects.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_user_create_hsm_key.json"
+identity = "user"
+assert_success = false
+assert_error_contains = "HSM Admin"

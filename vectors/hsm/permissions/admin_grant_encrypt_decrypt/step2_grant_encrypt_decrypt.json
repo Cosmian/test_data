@@ -1,0 +1,8 @@
+{
+  "user_id": "user.client@acme.com",
+  "unique_identifier": "hsm::{{$HSM_SLOT_ID}}::vec_perm_grant_ed",
+  "operation_types": [
+    "encrypt",
+    "decrypt"
+  ]
+}

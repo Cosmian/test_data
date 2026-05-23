@@ -13,4 +13,4 @@ pub_key_id = "PublicKeyUniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt_with_pubkey.json"
 assert_success = false
-assert_error_contains = "not found"
+assert_error_contains = "failed to retrieve the key"

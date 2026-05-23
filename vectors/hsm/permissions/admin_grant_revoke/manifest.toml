@@ -1,0 +1,63 @@
+name = "HSM Permissions: admin grants then revokes Encrypt from user"
+description = """
+HSM admin creates an AES key, grants Encrypt to user, user can encrypt,
+admin revokes Encrypt, user is now denied.
+Validates that RevokeAccess works for HSM keys and that revocation is immediate.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+identity = "owner"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hsm_key.json"
+identity = "owner"
+assert_success = true
+
+[[steps]]
+operation = "GrantAccess"
+request = "step2_grant_encrypt.json"
+identity = "owner"
+assert_success = true
+
+# User can encrypt after grant
+[[steps]]
+operation = "Encrypt"
+request = "step3_user_encrypt.json"
+identity = "user"
+assert_success = true
+
+[[steps]]
+operation = "RevokeAccess"
+request = "step4_revoke_encrypt.json"
+identity = "owner"
+assert_success = true
+
+# User can no longer encrypt after revocation
+[[steps]]
+operation = "Encrypt"
+request = "step5_user_encrypt_denied.json"
+identity = "user"
+assert_success = false
+assert_error_contains = "not found"
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+identity = "owner"
+assert_success = true

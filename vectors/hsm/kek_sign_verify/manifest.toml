@@ -1,0 +1,25 @@
+name = "HSM KEK: Ed25519 Sign with KEK-wrapped key (KAT)"
+description = """
+Imports an Ed25519 private key into a KMS server backed by a SoftHSM2 KEK.
+The key is stored wrapped by the HSM-resident KEK.
+Signs a message (Ed25519 is deterministic) and asserts the expected signature
+from RFC 8032 §7.1 Test Vector 2.
+Tests key-id selection: key stored in DB (not HSM) but wrapped by HSM KEK.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Import"
+request = "step1_import_privkey.json"
+assert_success = true
+[steps.capture]
+private_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true
+[steps.assert_fields]
+SignatureData = "92A009A9F0D4CAB8720E820B5F642540A2B27B5416503F8FB3762223EBDB69DA085AC1E43E15996E458F3613D0F11D8C387B2EAEB4302AEEB00D291612BB0C00"

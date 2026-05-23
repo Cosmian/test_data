@@ -1,0 +1,44 @@
+name = "HSM Permissions: non-admin user cannot grant access on HSM key"
+description = """
+HSM admin creates an AES key in the HSM. Non-admin user (user.client@acme.com)
+attempts to grant Encrypt access to themselves on the HSM key.
+Only HSM admins (who own all HSM keys) can grant/revoke permissions.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "owner"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hsm_key.json"
+identity = "owner"
+assert_success = true
+
+# Non-admin user attempts to grant access — must fail (not owner)
+[[steps]]
+operation = "GrantAccess"
+request = "step2_user_grant.json"
+identity = "user"
+assert_success = false
+assert_error_contains = "is not owned by"
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "owner"
+assert_success = true

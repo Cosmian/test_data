@@ -12,6 +12,6 @@
     "alg": "HS256",
     "data": "dGVzdA"
   },
-  "expected_status": 500,
-  "expected_error": "internal_error"
+  "expected_status": 404,
+  "expected_error": "not_found"
 }

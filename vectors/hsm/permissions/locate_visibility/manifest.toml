@@ -1,0 +1,97 @@
+name = "HSM Permissions: Locate — admin sees all, user sees only granted"
+description = """
+HSM admin creates two AES keys in the HSM. Grants user Encrypt on only the
+first key. Admin Locate returns both keys. User Locate returns only the
+granted key (non-admin users can only see HSM keys they have been explicitly
+granted at least one operation on).
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# Cleanup: destroy keys from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_key1.json"
+identity = "owner"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_key2.json"
+identity = "owner"
+allow_failure = true
+
+# Create first HSM key
+[[steps]]
+operation = "Create"
+request = "step1_create_key1.json"
+identity = "owner"
+assert_success = true
+
+# Create second HSM key
+[[steps]]
+operation = "Create"
+request = "step2_create_key2.json"
+identity = "owner"
+assert_success = true
+
+# Grant user Encrypt on key1 only
+[[steps]]
+operation = "GrantAccess"
+request = "step3_grant_user_key1.json"
+identity = "owner"
+assert_success = true
+
+# Admin Locate — sees both keys (admin sees all HSM keys)
+[[steps]]
+operation = "Locate"
+request = "step4_admin_locate.json"
+identity = "owner"
+assert_success = true
+
+[steps.assert_any_field]
+UniqueIdentifier = "hsm::{{$HSM_SLOT_ID}}::vec_perm_loc_k1"
+
+[[steps]]
+operation = "Locate"
+request = "step4_admin_locate.json"
+identity = "owner"
+assert_success = true
+
+[steps.assert_any_field]
+UniqueIdentifier = "hsm::{{$HSM_SLOT_ID}}::vec_perm_loc_k2"
+
+# User Locate — sees only the granted key (key1), NOT key2
+[[steps]]
+operation = "Locate"
+request = "step5_user_locate.json"
+identity = "user"
+assert_success = true
+
+[steps.assert_any_field]
+UniqueIdentifier = "hsm::{{$HSM_SLOT_ID}}::vec_perm_loc_k1"
+
+[steps.assert_none_field]
+UniqueIdentifier = "hsm::{{$HSM_SLOT_ID}}::vec_perm_loc_k2"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_key1.json"
+identity = "owner"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_key2.json"
+identity = "owner"
+assert_success = true

@@ -1,0 +1,22 @@
+name = "HSM KEK: DB-stored EC key sign on KEK server"
+description = """
+Creates an EC P-256 key pair on a KMS server with SoftHSM2 KEK enabled.
+The key pair is stored in the database, wrapped by the HSM-resident KEK (no HSM prefix).
+Signs a message with ECDSA to verify KEK-wrapped private keys can be used for signing.
+Tests key-id selection: no HSM prefix → key goes to DB wrapped by KEK.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true

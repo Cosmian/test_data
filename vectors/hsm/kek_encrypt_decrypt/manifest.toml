@@ -1,0 +1,33 @@
+name = "HSM KEK: AES-256-GCM Encrypt and Decrypt with KEK-wrapped key"
+description = """
+Imports an AES-256 key into a KMS server backed by a SoftHSM2 KEK.
+The key is stored wrapped (AES Key Wrap Padding, RFC 5649) by the HSM-resident KEK.
+Encrypts with a fixed IV to produce a deterministic ciphertext (KAT), then decrypts
+and verifies the plaintext matches.
+Tests key-id selection: key stored in DB (not HSM) but wrapped by HSM KEK.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "D9313225F88406E5A55909C5AFF5269A86A7A9531534F7DA2E4C303D8A318A721C3C0C95956809532FCF0E2449A6B525B16AEDF5AA0DE657BA637B391AAFD255"

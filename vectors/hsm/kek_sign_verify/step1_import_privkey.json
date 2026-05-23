@@ -1,0 +1,80 @@
+{
+  "tag": "Import",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "hsm-kek-vec-ed25519-privkey-001"
+    },
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "PrivateKey"
+    },
+    {
+      "tag": "ReplaceExisting",
+      "type": "Boolean",
+      "value": true
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "Ed25519"
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 1
+        },
+        {
+          "tag": "KeyFormatType",
+          "type": "Enumeration",
+          "value": "PKCS8"
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "PrivateKey"
+        },
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKey",
+      "value": [
+        {
+          "tag": "KeyBlock",
+          "value": [
+            {
+              "tag": "KeyFormatType",
+              "type": "Enumeration",
+              "value": "PKCS8"
+            },
+            {
+              "tag": "KeyValue",
+              "value": [
+                {
+                  "tag": "KeyMaterial",
+                  "type": "ByteString",
+                  "value": "302E020100300506032B6570042204204CCD089B28FF96DA9DB6C346EC114E0F5B8A319F35ABA624DA8CF6ED4FB8A6FB"
+                }
+              ]
+            },
+            {
+              "tag": "CryptographicAlgorithm",
+              "type": "Enumeration",
+              "value": "Ed25519"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

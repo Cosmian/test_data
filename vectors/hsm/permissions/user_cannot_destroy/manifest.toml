@@ -1,0 +1,45 @@
+name = "HSM Permissions: non-admin user cannot destroy HSM key"
+description = """
+HSM admin creates an AES key, then non-admin user (user.client@acme.com)
+attempts to destroy it. Destroy cannot be delegated to non-admin users.
+Admin cleans up afterward.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step3_admin_destroy.json"
+identity = "owner"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hsm_key.json"
+identity = "owner"
+assert_success = true
+
+# Non-admin user attempts destroy — must fail
+[[steps]]
+operation = "Destroy"
+request = "step2_user_destroy.json"
+identity = "user"
+assert_success = false
+assert_error_contains = "HSM admins"
+
+# Admin cleans up
+[[steps]]
+operation = "Destroy"
+request = "step3_admin_destroy.json"
+identity = "owner"
+assert_success = true

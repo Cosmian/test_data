@@ -1,0 +1,51 @@
+name = "HSM Permissions: admin creates AES key, encrypts, decrypts, destroys"
+description = """
+HSM admin (owner.client@acme.com) creates an AES-256 key directly in the HSM,
+encrypts data, decrypts it back, then destroys the key.
+Validates that HSM admins have full Create/Encrypt/Decrypt/Destroy permissions
+on HSM-resident keys.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+identity = "owner"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hsm_key.json"
+identity = "owner"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+identity = "owner"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+identity = "owner"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F2048534D207065726D697373696F6E73"
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+identity = "owner"
+assert_success = true

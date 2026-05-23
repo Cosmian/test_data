@@ -1,0 +1,59 @@
+name = "HSM Permissions: Get is not wildcard — user with Get cannot Encrypt"
+description = """
+HSM admin creates an AES-256 key in the HSM, grants only Get to
+user.client@acme.com. Unlike regular KMS keys, Get does NOT act as a
+wildcard for HSM keys — user can Get the key metadata but cannot Encrypt.
+Validates the stricter HSM permission model where each operation must be
+individually granted.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+identity = "owner"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hsm_key.json"
+identity = "owner"
+assert_success = true
+
+[[steps]]
+operation = "GrantAccess"
+request = "step2_grant_get_only.json"
+identity = "owner"
+assert_success = true
+
+# User can Get the key (grant was given)
+[[steps]]
+operation = "Get"
+request = "step3_user_get.json"
+identity = "user"
+assert_success = true
+
+# User CANNOT Encrypt — Get is not wildcard for HSM keys
+[[steps]]
+operation = "Encrypt"
+request = "step4_user_encrypt_denied.json"
+identity = "user"
+assert_success = false
+assert_error_contains = "not found"
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+identity = "owner"
+assert_success = true

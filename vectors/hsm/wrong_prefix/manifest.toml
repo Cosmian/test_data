@@ -1,0 +1,15 @@
+name = "HSM KEK: Wrong HSM prefix returns error"
+description = """
+Attempts to encrypt using a key ID with an invalid HSM slot prefix (hsm::99::nonexistent).
+The operation should fail because the slot does not exist.
+Tests error handling for incorrect key-id selection with HSM prefix.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Encrypt"
+request = "step1_encrypt_wrong_prefix.json"
+assert_success = false
+assert_error_contains = "slot 99 is not accessible"
