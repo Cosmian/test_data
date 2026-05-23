@@ -1,0 +1,14 @@
+{
+  "_comment": "Key lifecycle: create RSA-2048 key → RSA-OAEP encrypt/decrypt A256GCM → delete → verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "RSA-OAEP",
+  "enc": "A256GCM",
+  "operation": "encrypt",
+  "request": {
+    "data_plaintext": "lifecycle test payload for RSA-OAEP with A256GCM"
+  },
+  "key": {
+    "kty": "RSA",
+    "size": 2048
+  }
+}

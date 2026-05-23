@@ -1,5 +1,5 @@
 {
-  "_comment": "Encrypt with unsupported key management algorithm (RSA-OAEP) must return 422",
+  "_comment": "Encrypt with RSA-OAEP but a symmetric key must return 422 (key type mismatch)",
   "type": "expect_error",
   "endpoint": "/v1/crypto/encrypt",
   "setup_key": {
@@ -12,6 +12,6 @@
     "enc": "A256GCM",
     "data": "dGVzdA"
   },
-  "expected_status": 400,
-  "expected_error": "bad_request"
+  "expected_status": 422,
+  "expected_error": "crypto_failure"
 }

@@ -1,0 +1,16 @@
+{
+  "_comment": "RSA-OAEP: tampered encrypted_key triggers implicit rejection → decryption_failed",
+  "type": "encrypt_decrypt_tamper_reject",
+  "algorithm": "RSA-OAEP",
+  "enc": "A256GCM",
+  "key": {
+    "kty": "RSA",
+    "size": 2048
+  },
+  "request": {
+    "data_plaintext": "Tamper test for RSA-OAEP encrypted_key"
+  },
+  "tamper": {
+    "field": "encrypted_key"
+  }
+}

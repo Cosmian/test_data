@@ -1,0 +1,13 @@
+{
+  "_comment": "RSA-OAEP-256 encrypt/decrypt round-trip with A128GCM",
+  "type": "encrypt_decrypt_round_trip",
+  "algorithm": "RSA-OAEP-256",
+  "enc": "A128GCM",
+  "key": {
+    "kty": "RSA",
+    "size": 4096
+  },
+  "request": {
+    "data_plaintext": "Hello, RSA-OAEP-256 with 4096-bit key!"
+  }
+}

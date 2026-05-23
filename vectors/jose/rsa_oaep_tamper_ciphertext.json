@@ -1,0 +1,16 @@
+{
+  "_comment": "RSA-OAEP: tampered ciphertext must cause decryption failure",
+  "type": "encrypt_decrypt_tamper_reject",
+  "algorithm": "RSA-OAEP",
+  "enc": "A128GCM",
+  "key": {
+    "kty": "RSA",
+    "size": 2048
+  },
+  "request": {
+    "data_plaintext": "Tamper test for RSA-OAEP ciphertext"
+  },
+  "tamper": {
+    "field": "ciphertext"
+  }
+}

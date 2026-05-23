@@ -1,0 +1,13 @@
+{
+  "_comment": "RSA-OAEP-256 encrypt/decrypt round-trip with A192GCM",
+  "type": "encrypt_decrypt_round_trip",
+  "algorithm": "RSA-OAEP-256",
+  "enc": "A192GCM",
+  "key": {
+    "kty": "RSA",
+    "size": 2048
+  },
+  "request": {
+    "data_plaintext": "Testing RSA-OAEP-256 with A192GCM content encryption"
+  }
+}

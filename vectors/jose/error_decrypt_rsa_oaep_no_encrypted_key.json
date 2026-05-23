@@ -1,0 +1,17 @@
+{
+  "_comment": "RSA-OAEP decrypt with missing encrypted_key must fail with 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/decrypt",
+  "setup_key": {
+    "kty": "RSA",
+    "size": 2048
+  },
+  "body": {
+    "protected": "eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00iLCJraWQiOiIkS0lEIn0",
+    "iv": "AAAAAAAAAAAAAAAA",
+    "ciphertext": "dGVzdA",
+    "tag": "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}
