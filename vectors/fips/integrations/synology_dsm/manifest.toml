@@ -3,11 +3,13 @@ description = """
 Replays the exact KMIP 1.2 operation sequence observed from Synology DSM 7.x during \
 encrypted volume creation: Query ×4 → Locate (empty) → Register (SecretData/Password \
 with OperationPolicyName) → ModifyAttribute (rename to volume UUID) → Locate (find) \
-→ Activate → Revoke → Destroy. \
+→ Activate → GetAttributeList → GetAttributes → Get → Revoke → Destroy. \
 Mirrors crate/server/src/tests/ttlv_tests/integrations/synology_dsm.rs exactly.
 """
 wire_format = "binary"
 kmip_version = [1, 2]
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
 
 # Operations 1-3: three parallel capability-discovery Queries from DSM startup
 
@@ -71,14 +73,35 @@ operation = "Activate"
 request = "step6_activate.json"
 assert_success = true
 
+# Operation 10: GetAttributeList — DSM retrieves list of available attributes
+
+[[steps]]
+operation = "GetAttributeList"
+request = "step7_get_attribute_list.json"
+assert_success = true
+
+# Operation 11: GetAttributes — DSM retrieves State and ObjectType
+
+[[steps]]
+operation = "GetAttributes"
+request = "step8_get_attributes.json"
+assert_success = true
+
+# Operation 12: Get — DSM retrieves the key material (auto-unwrapped via default_unwrap_type)
+
+[[steps]]
+operation = "Get"
+request = "step9_get.json"
+assert_success = true
+
 # Cleanup (not in original DSM sequence but needed for test isolation)
 
 [[steps]]
 operation = "Revoke"
-request = "step7_revoke.json"
+request = "step10_revoke.json"
 assert_success = true
 
 [[steps]]
 operation = "Destroy"
-request = "step8_destroy.json"
+request = "step11_destroy.json"
 assert_success = true
