@@ -10,27 +10,22 @@
           "value": "SymmetricKey"
         },
         {
-          "tag": "VendorAttributes",
+          "tag": "Attribute",
           "value": [
             {
-              "tag": "VendorAttributes",
-              "value": [
-                {
-                  "tag": "VendorIdentification",
-                  "type": "TextString",
-                  "value": "cosmian"
-                },
-                {
-                  "tag": "AttributeName",
-                  "type": "TextString",
-                  "value": "tag"
-                },
-                {
-                  "tag": "AttributeValue",
-                  "type": "ByteString",
-                  "value": "5B22766563746F722D6C6F636174652D746167225D"
-                }
-              ]
+              "tag": "VendorIdentification",
+              "type": "TextString",
+              "value": "cosmian"
+            },
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "tag"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "TextString",
+              "value": "[\"vector-locate-tag\"]"
             }
           ]
         }

@@ -1,0 +1,46 @@
+name = "Duplicate tags: Encrypt must fail when two keys share the same tag"
+description = """
+Creates two AES-256 keys with the same tag ["dup-test-enc"], then attempts
+to encrypt using the tag as identifier. The server must reject the request
+because the tag resolves to multiple eligible keys (ambiguous selection).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key_a.json"
+assert_success = true
+[steps.capture]
+key_id_a = "UniqueIdentifier"
+
+[[steps]]
+operation = "Create"
+request = "step2_create_key_b.json"
+assert_success = true
+[steps.capture]
+key_id_b = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_by_tag.json"
+assert_success = false
+assert_error_contains = "resolves to"
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_a.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_b.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_a.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_b.json"
+assert_success = true
