@@ -1,0 +1,25 @@
+name = "KEK-wrapped: Create RSA-2048 keypair, sign round-trip"
+description = """
+Creates an RSA-2048 keypair on a KMS server with SoftHSM2 KEK enabled.
+The keypair is stored in the database, wrapped at rest by the HSM-resident KEK.
+Signs with SHA256WithRSA to confirm the key is usable after unwrapping.
+Tests: KEK-wrapped RSA keypair + standard sign with unwrapping.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true
+[steps.capture]
+signature = "SignatureData"

@@ -1,0 +1,42 @@
+name = "HSM Resident: RSA-2048 OAEP-SHA256 encrypt rejected (SoftHSM2 limitation)"
+description = """
+Creates an RSA-2048 keypair on the HSM, then attempts to encrypt with RSA-OAEP-SHA256.
+SoftHSM2 does not support OAEP with SHA-256 (CKR_MECHANISM_PARAM_INVALID).
+This vector documents the SoftHSM2 limitation — other HSMs may support this.
+Tests: SoftHSM2 rejects RSA-OAEP-SHA256 with return code 7.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Cleanup: destroy keys from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_sk.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_pk.json"
+allow_failure = true
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = false
+assert_error_contains = "Failed to initialize encryption"
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_pk.json"
+assert_success = true

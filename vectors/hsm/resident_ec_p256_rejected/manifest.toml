@@ -1,0 +1,16 @@
+name = "HSM Resident: EC P-256 keypair rejected (unsupported on HSM)"
+description = """
+Attempts to create an EC P-256 keypair with an HSM-resident UID.
+This fails because the HSM only supports RSA keypair creation.
+The error occurs at the HSM store level during atomic operation routing.
+Tests: HSM rejects non-RSA keypair algorithms.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = false
+assert_error_contains = "only support RSA keypair"

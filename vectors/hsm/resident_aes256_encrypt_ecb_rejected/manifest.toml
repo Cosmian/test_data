@@ -1,0 +1,32 @@
+name = "HSM Resident: AES-256 ECB mode rejected (unsupported on HSM)"
+description = """
+Creates an AES-256 key on the HSM, then attempts to encrypt with ECB mode.
+This fails because AES-ECB is not supported by the HSM crypto oracle
+(only GCM and CBC are supported).
+Tests: HSM rejects unsupported block cipher modes.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_ecb.json"
+assert_success = false
+assert_error_contains = "not supported"
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true

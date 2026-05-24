@@ -1,0 +1,15 @@
+name = "KEK-wrapped: RSA-1024 keypair rejected (FIPS minimum key length)"
+description = """
+Attempts to create an RSA-1024 keypair on a server with KEK enabled.
+This fails because FIPS 140 mode requires a minimum RSA key length of 2048 bits.
+Tests: FIPS algorithm policy enforcement for KEK-wrapped keypairs.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = false
+assert_error_contains = "minimum key length"

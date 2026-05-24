@@ -1,0 +1,41 @@
+name = "HSM Resident: RSA-2048 sign with ECDSA rejected"
+description = """
+Creates an RSA-2048 keypair on the HSM then attempts to sign using ECDSAWithSHA256.
+Expected: Rejected because ECDSA is not a valid signing algorithm for HSM RSA keys.
+Error: "Unsupported digital signature algorithm for HSM signing"
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step2_destroy_sk.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy_pk.json"
+allow_failure = true
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[[steps]]
+operation = "Sign"
+request = "step1_sign_ecdsa.json"
+assert_success = false
+assert_error_contains = "Unsupported digital signature algorithm for HSM signing"
+
+[[steps]]
+operation = "Destroy"
+request = "step2_destroy_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy_pk.json"
+assert_success = true

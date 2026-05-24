@@ -1,0 +1,15 @@
+name = "HSM Resident: Non-AES symmetric key rejected on HSM"
+description = """
+Attempts to create a 3DES symmetric key directly on the HSM.
+This fails because only AES symmetric keys can be created on the HSM.
+Tests: HSM rejects non-AES symmetric key algorithms.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = false
+assert_error_contains = "Only AES symmetric keys"

@@ -1,0 +1,49 @@
+name = "HSM Resident: RSA-2048 PKCS#1 v1.5 encrypt/decrypt round-trip"
+description = """
+Creates an RSA-2048 keypair on the HSM, then encrypts with RSA-PKCS#1v1.5
+and decrypts. Verifies PKCS#1v1.5 encryption is correctly delegated to the HSM.
+Tests: HSM-resident RSA key + oracle-delegated RSA-PKCS1v15 encrypt/decrypt.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Cleanup: destroy keys from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_sk.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_pk.json"
+allow_failure = true
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_pk.json"
+assert_success = true

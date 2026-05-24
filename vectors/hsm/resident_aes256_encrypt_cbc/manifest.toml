@@ -1,0 +1,40 @@
+name = "HSM Resident: AES-256-CBC encrypt/decrypt round-trip"
+description = """
+Creates an AES-256 key on the HSM, then encrypts and decrypts with AES-CBC mode.
+Verifies that CBC mode encryption is correctly delegated to the HSM oracle.
+Tests: HSM-resident AES key + oracle-delegated AES-CBC encrypt/decrypt.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

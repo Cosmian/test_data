@@ -1,0 +1,44 @@
+name = "HSM Resident: Create RSA-4096 keypair, sign with SHA256WithRSA"
+description = """
+Creates an RSA-4096 keypair directly on the HSM via CreateKeyPair.
+Signs with SHA256WithRSA (oracle-delegated).
+Note: SignatureVerify is not supported for oracle keys, so we only test
+that signing succeeds and produces a non-empty signature.
+Tests: HSM-resident RSA keypair creation + oracle-delegated signing.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Cleanup: destroy keys from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy_sk.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_pk.json"
+allow_failure = true
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[[steps]]
+operation = "Sign"
+request = "step2_sign.json"
+assert_success = true
+[steps.capture]
+signature = "SignatureData"
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_pk.json"
+assert_success = true
