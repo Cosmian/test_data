@@ -1,0 +1,34 @@
+name = "HSM KEK: DB-stored AES key encrypt/decrypt on KEK server"
+description = """
+Creates a new AES-256 key on a KMS server with SoftHSM2 KEK enabled.
+The key is stored in the database, wrapped by the HSM-resident KEK (no HSM prefix).
+Performs encrypt then decrypt round-trip to verify KEK-wrapped keys work for
+encryption when no explicit key-id prefix is used.
+Tests key-id selection: no HSM prefix → key goes to DB wrapped by KEK.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
