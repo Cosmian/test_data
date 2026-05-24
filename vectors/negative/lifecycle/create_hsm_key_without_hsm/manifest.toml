@@ -1,0 +1,14 @@
+name = "Negative: Create HSM key without HSM plugin"
+description = """
+Attempts to create an AES-256 key with an HSM-prefixed UID (hsm::0::no_hsm_key)
+on a standard KMS server that has no HSM plugin configured.
+The operation must be rejected: silently routing an HSM-prefixed object to the
+SQL backend would corrupt the key namespace.
+"""
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = false
+assert_error_contains = "No HSM is configured"
