@@ -1,0 +1,45 @@
+name = "Access Control: non-owner cannot grant access"
+description = "Owner creates AES key, user (non-owner) attempts to grant themselves access — must be denied because user does not own the key"
+server_config = "test_data/configs/server/test/cert_auth.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# User (non-owner) attempts to grant themselves access to the owner's key
+[[steps]]
+operation = "GrantAccess"
+request = "step2_user_grant_self.json"
+identity = "user"
+assert_success = false
+assert_error_contains = "is not owned by owner"
+
+# User (non-owner) attempts to grant access to a third party
+[[steps]]
+operation = "GrantAccess"
+request = "step3_user_grant_other.json"
+identity = "user"
+assert_success = false
+assert_error_contains = "is not owned by owner"
+
+[[steps]]
+operation = "Revoke"
+request = "owner_revoke_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "owner_destroy_key.json"
+assert_success = true

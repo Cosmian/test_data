@@ -1,0 +1,8 @@
+{
+  "user_id": "third.party@acme.com",
+  "unique_identifier": "{{key_id}}",
+  "operation_types": [
+    "get",
+    "encrypt"
+  ]
+}
