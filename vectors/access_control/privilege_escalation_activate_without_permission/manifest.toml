@@ -1,0 +1,51 @@
+name = "Access Control: non-owner cannot Activate without explicit grant"
+description = "Owner creates a PreActive AES key, grants user only Encrypt. User's Activate attempt is denied because Encrypt grant does not imply Activate permission."
+server_config = "test_data/configs/server/test/cert_auth.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# Step 1: Owner creates an AES-256 key without ActivationDate (stays PreActive)
+[[steps]]
+operation = "Create"
+request = "step1_create_preactive_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Step 2: Owner grants user only Encrypt
+[[steps]]
+operation = "GrantAccess"
+request = "step2_grant_encrypt_only.json"
+assert_success = true
+
+# Step 3: User attempts Activate — denied (Encrypt does not imply Activate)
+[[steps]]
+operation = "Activate"
+request = "step3_user_activate_denied.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+
+# Step 4: Owner activates the key successfully
+[[steps]]
+operation = "Activate"
+request = "step4_owner_activate_ok.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "owner_revoke_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "owner_destroy_key.json"
+assert_success = true
