@@ -1,0 +1,37 @@
+# OpenAPI path validation test — maximally-configured server.
+# Enables all enterprise scopes so the route validation test can verify
+# that every path in openapi.yaml is registered.
+# No real credentials are needed — routes just need to be *registered*.
+
+default_username = "tech@cosmian.com"
+kms_public_url = "http://localhost:12099/google_cse"
+ms_dke_service_url = "https://dke.example.com"
+
+[http]
+port = 12099
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "./sqlite-data-openapi-validation"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_openapi_validation"
+tmp_path = "/tmp"
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = true
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]
+
+[aws_xks_config]
+aws_xks_enable = true
+aws_xks_region = "us-east-1"
+aws_xks_service = "kms-xks-proxy"
+aws_xks_sigv4_access_key_id = "AKIAIOSFODNN7EXAMPLE"
+aws_xks_sigv4_secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+
+[azure_ekm_config]
+azure_ekm_enable = true
+azure_ekm_disable_client_auth = true
