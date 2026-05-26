@@ -1,0 +1,35 @@
+{
+  "tag": "AddAttribute",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "Attribute",
+      "value": [
+        {
+          "tag": "AttributeName",
+          "type": "TextString",
+          "value": "Name"
+        },
+        {
+          "tag": "AttributeValue",
+          "value": [
+            {
+              "tag": "NameValue",
+              "type": "TextString",
+              "value": "VAST_EKM_KEY_2_a9636868-fdd1-5ca0-af39-82e1a5c2cd50_0"
+            },
+            {
+              "tag": "NameType",
+              "type": "Enumeration",
+              "value": "UninterpretedTextString"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -13,6 +13,7 @@ key_id = "UniqueIdentifier"
 operation = "Encrypt"
 request = "step2_encrypt_before_activate.json"
 assert_success = false
+assert_error_contains = "not found"
 
 [[steps]]
 operation = "Activate"

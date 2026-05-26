@@ -1,0 +1,20 @@
+{
+  "tag": "GetAttributes",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{new_key_id}}"
+    },
+    {
+      "tag": "AttributeName",
+      "type": "TextString",
+      "value": "State"
+    },
+    {
+      "tag": "AttributeName",
+      "type": "TextString",
+      "value": "Activation Date"
+    }
+  ]
+}

@@ -23,3 +23,4 @@ assert_success = true
 operation = "Get"
 request = "step4_get_destroyed.json"
 assert_success = false
+assert_error_contains = "DENIED"

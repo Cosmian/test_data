@@ -1,0 +1,25 @@
+{
+  "tag": "Locate",
+  "value": [
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "Name",
+          "value": [
+            {
+              "tag": "NameValue",
+              "type": "TextString",
+              "value": "rekey-locate-test-key"
+            },
+            {
+              "tag": "NameType",
+              "type": "Enumeration",
+              "value": "UninterpretedTextString"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

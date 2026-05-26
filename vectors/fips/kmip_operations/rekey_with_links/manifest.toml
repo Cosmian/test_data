@@ -1,0 +1,56 @@
+name = "ReKey With Object Links"
+description = """
+Verifies that ReKey properly sets ReplacementObjectLink on the old key \
+and ReplacedObjectLink on the new key, forming a bidirectional chain.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify old key has ReplacementObjectLink pointing to new key
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes_old.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{new_key_id}}"
+
+# Verify new key has ReplacedObjectLink pointing to old key
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attributes_new.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{key_id}}"
+
+# Cleanup: old key remains Active after ReKey — must Revoke before Destroy
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new.json"
+assert_success = true

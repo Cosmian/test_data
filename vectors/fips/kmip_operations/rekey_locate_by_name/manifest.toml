@@ -1,0 +1,65 @@
+name = "ReKey Locate By Name"
+description = """
+Verifies that after ReKey, the replacement key inherits the Name attribute \
+and can be found via Locate by name. This is the critical behavior for VAST Data \
+and similar EKM integrations that poll by name after rotation.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step2_locate.json"
+assert_success = true
+[steps.assert_fields]
+UniqueIdentifier = "{{key_id}}"
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# After ReKey, Locate by name must return the NEW key (name transferred)
+[[steps]]
+operation = "Locate"
+request = "step4_locate.json"
+assert_success = true
+[steps.assert_fields]
+UniqueIdentifier = "{{new_key_id}}"
+
+# Verify the old key's State is still Active — ReKey does NOT deactivate the existing key
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attributes_old.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Cleanup: revoke old key (Active → Deactivated), then destroy
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old.json"
+assert_success = true
+
+# Cleanup: revoke then destroy new
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_new.json"
+assert_success = true
