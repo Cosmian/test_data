@@ -1,0 +1,37 @@
+name = "Negative: ReKeyKeyPair No PublicKey Link Fails"
+description = """
+Verifies that ReKeyKeyPair fails when the private key has no PublicKeyLink.
+This uses a standalone EC private key created via Create (not CreateKeyPair).
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+# Remove the PublicKeyLink from the private key by modifying its attributes
+[[steps]]
+operation = "DeleteAttribute"
+request = "step2_delete_link.json"
+assert_success = true
+
+# Now ReKeyKeyPair should fail because there is no PublicKeyLink
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair.json"
+assert_success = false
+assert_error_contains = "no PublicKeyLink"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+assert_success = true

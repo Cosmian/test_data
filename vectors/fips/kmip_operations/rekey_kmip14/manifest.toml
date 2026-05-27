@@ -1,0 +1,51 @@
+name = "ReKey via KMIP 1.4 protocol"
+description = """
+Exercises the ReKey operation through the KMIP 1.4 protocol path, verifying that \
+the V14→V21 request conversion and V21→V14 response conversion work correctly. \
+KMIP 1.4 uses TemplateAttribute containers and a required (non-optional) UniqueIdentifier. \
+The ReKey response must return a new UniqueIdentifier as a plain String (not wrapped in \
+UniqueIdentifier enum).
+"""
+wire_format = "json"
+kmip_version = [1, 4]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify old key still works (remains Active per spec)
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

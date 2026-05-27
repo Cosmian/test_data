@@ -1,0 +1,14 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {"tag": "CommonAttributes", "value": [
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "Ed25519"},
+      {"tag": "CryptographicDomainParameters", "value": [
+        {"tag": "RecommendedCurve", "type": "Enumeration", "value": "CURVEED25519"}
+      ]},
+      {"tag": "KeyFormatType", "type": "Enumeration", "value": "ECPrivateKey"},
+      {"tag": "CryptographicUsageMask", "type": "Integer", "value": 12},
+      {"tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z"}
+    ]}
+  ]
+}

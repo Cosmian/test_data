@@ -1,0 +1,25 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {"tag": "CommonTemplateAttribute", "value": [
+      {"tag": "Attribute", "value": [
+        {"tag": "AttributeName", "type": "TextString", "value": "Cryptographic Algorithm"},
+        {"tag": "AttributeValue", "type": "Enumeration", "value": "ECDH"}
+      ]},
+      {"tag": "Attribute", "value": [
+        {"tag": "AttributeName", "type": "TextString", "value": "Cryptographic Domain Parameters"},
+        {"tag": "AttributeValue", "value": [
+          {"tag": "RecommendedCurve", "type": "Enumeration", "value": "P256"}
+        ]}
+      ]},
+      {"tag": "Attribute", "value": [
+        {"tag": "AttributeName", "type": "TextString", "value": "Cryptographic Usage Mask"},
+        {"tag": "AttributeValue", "type": "Integer", "value": 12}
+      ]},
+      {"tag": "Attribute", "value": [
+        {"tag": "AttributeName", "type": "TextString", "value": "Activation Date"},
+        {"tag": "AttributeValue", "type": "DateTime", "value": "2024-01-01T00:00:00Z"}
+      ]}
+    ]}
+  ]
+}

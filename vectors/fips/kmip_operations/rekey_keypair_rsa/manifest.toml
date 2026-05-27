@@ -1,11 +1,13 @@
-name = "Negative: ReKeyKeyPair not supported for RSA"
-description = "Verifies that ReKeyKeyPair returns 'not supported' for RSA keys"
+name = "ReKeyKeyPair RSA-2048"
+description = """
+Verifies that ReKeyKeyPair succeeds for an RSA-2048 key pair, \
+returning new private and public key UIDs.
+"""
 
 [[steps]]
 operation = "CreateKeyPair"
 request = "step1_create_keypair.json"
 assert_success = true
-
 [steps.capture]
 private_key_id = "PrivateKeyUniqueIdentifier"
 public_key_id = "PublicKeyUniqueIdentifier"
@@ -18,5 +20,28 @@ assert_success = true
 [[steps]]
 operation = "ReKeyKeyPair"
 request = "step3_rekey_keypair.json"
-assert_success = false
-assert_error_reason = "Item_Not_Found"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new_sk.json"
+assert_success = true

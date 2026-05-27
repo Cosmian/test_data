@@ -1,0 +1,49 @@
+name = "ReKeyKeyPair Old Key Still Active"
+description = """
+Verifies that after ReKeyKeyPair, the old private key remains in Active state.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# Old key should still be Active
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attrs_old.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new_sk.json"
+assert_success = true

@@ -1,0 +1,12 @@
+{
+  "tag": "DeleteAttribute",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{private_key_id}}"},
+    {"tag": "CurrentAttribute", "value": [
+      {"tag": "Link", "value": [
+        {"tag": "LinkType", "type": "Enumeration", "value": "PublicKeyLink"},
+        {"tag": "LinkedObjectIdentifier", "type": "TextString", "value": "{{public_key_id}}"}
+      ]}
+    ]}
+  ]
+}

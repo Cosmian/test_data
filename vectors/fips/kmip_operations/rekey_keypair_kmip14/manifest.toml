@@ -1,0 +1,48 @@
+name = "ReKeyKeyPair via KMIP 1.4 protocol"
+description = """
+Exercises the ReKeyKeyPair operation through the KMIP 1.4 protocol path, verifying \
+that the V14→V21 request conversion (PrivateKeyUniqueIdentifier as required String, \
+CommonTemplateAttribute→CommonAttributes) and V21→V14 response conversion \
+(UniqueIdentifier→String) work correctly. This test was previously impossible because \
+the ReKeyKeyPair V14↔V21 conversion was not implemented.
+"""
+wire_format = "json"
+kmip_version = [1, 4]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+sk_id = "PrivateKeyUniqueIdentifier"
+pk_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_sk_id = "PrivateKeyUniqueIdentifier"
+new_pk_id = "PublicKeyUniqueIdentifier"
+
+# Cleanup: revoke + destroy old SK
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_old_sk.json"
+assert_success = true
+
+# Cleanup: revoke + destroy new SK
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_new_sk.json"
+assert_success = true

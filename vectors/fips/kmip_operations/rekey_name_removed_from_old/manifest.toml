@@ -1,0 +1,47 @@
+name = "ReKey Name Removed From Old Key"
+description = """
+Verifies that after ReKey, the old key no longer has the Name attribute \
+(it was transferred to the replacement key).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Old key should NOT have the Name attribute anymore
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attrs_old.json"
+assert_success = true
+assert_fields_absent = ["Name"]
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

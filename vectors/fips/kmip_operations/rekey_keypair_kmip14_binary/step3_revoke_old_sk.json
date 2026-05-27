@@ -1,0 +1,9 @@
+{
+  "tag": "Revoke",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{sk_id}}"},
+    {"tag": "RevocationReason", "value": [
+      {"tag": "RevocationReasonCode", "type": "Enumeration", "value": "CessationOfOperation"}
+    ]}
+  ]
+}

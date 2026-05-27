@@ -1,0 +1,82 @@
+name = "ReKey Double Chain"
+description = """
+Verifies that re-keying twice creates a proper chain: K1→K2→K3. \
+K1.ReplacementObjectLink=K2, K2.ReplacedObjectLink=K1, \
+K2.ReplacementObjectLink=K3, K3.ReplacedObjectLink=K2.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey_first.json"
+assert_success = true
+[steps.capture]
+new_key_id_1 = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey_second.json"
+assert_success = true
+[steps.capture]
+new_key_id_2 = "UniqueIdentifier"
+
+# K1 should have ReplacementObjectLink → K2
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attrs_k1.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{new_key_id_1}}"
+
+# K2 should have ReplacedObjectLink → K1 and ReplacementObjectLink → K3
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attrs_k2.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{new_key_id_2}}"
+
+# K3 should have ReplacedObjectLink → K2
+[[steps]]
+operation = "GetAttributes"
+request = "step6_get_attrs_k3.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{new_key_id_1}}"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_k1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_k1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_k2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_k2.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_k3.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_k3.json"
+assert_success = true

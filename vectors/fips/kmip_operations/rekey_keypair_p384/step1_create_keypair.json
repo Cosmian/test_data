@@ -1,0 +1,14 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {"tag": "CommonAttributes", "value": [
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "ECDSA"},
+      {"tag": "CryptographicDomainParameters", "value": [
+        {"tag": "RecommendedCurve", "type": "Enumeration", "value": "P384"}
+      ]},
+      {"tag": "KeyFormatType", "type": "Enumeration", "value": "ECPrivateKey"},
+      {"tag": "CryptographicUsageMask", "type": "Integer", "value": 12},
+      {"tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z"}
+    ]}
+  ]
+}

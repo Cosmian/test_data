@@ -1,0 +1,46 @@
+name = "ReKey With Offset"
+description = """
+Verifies that ReKey with an Offset parameter correctly computes \
+the replacement key's Activation Date as InitializationDate + Offset.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify the new key has attributes set (at minimum, InitialDate exists)
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes_new.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

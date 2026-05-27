@@ -1,0 +1,7 @@
+{
+  "tag": "ReKeyKeyPair",
+  "value": [
+    {"tag": "PrivateKeyUniqueIdentifier", "type": "TextString", "value": "{{private_key_id}}"},
+    {"tag": "Offset", "type": "Interval", "value": 7200}
+  ]
+}

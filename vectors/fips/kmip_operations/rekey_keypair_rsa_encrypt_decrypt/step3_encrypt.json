@@ -1,0 +1,11 @@
+{
+  "tag": "Encrypt",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{new_public_key_id}}"},
+    {"tag": "Data", "type": "ByteString", "value": "01020304"},
+    {"tag": "CryptographicParameters", "value": [
+      {"tag": "PaddingMethod", "type": "Enumeration", "value": "OAEP"},
+      {"tag": "HashingAlgorithm", "type": "Enumeration", "value": "SHA256"}
+    ]}
+  ]
+}

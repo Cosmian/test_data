@@ -1,0 +1,74 @@
+name = "ReKeyKeyPair EC P-256 With Links"
+description = """
+Verifies that ReKeyKeyPair on an EC P-256 key pair properly sets \
+ReplacementObjectLink on both old keys and ReplacedObjectLink on both new keys.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# Old SK has ReplacementObjectLink -> new SK
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attrs_old_sk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{new_private_key_id}}"
+
+# Old PK has ReplacementObjectLink -> new PK
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attrs_old_pk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{new_public_key_id}}"
+
+# New SK has ReplacedObjectLink -> old SK
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attrs_new_sk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{private_key_id}}"
+
+# New PK has ReplacedObjectLink -> old PK
+[[steps]]
+operation = "GetAttributes"
+request = "step6_get_attrs_new_pk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{public_key_id}}"
+
+# Cleanup (only private keys)
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new_sk.json"
+assert_success = true

@@ -1,0 +1,46 @@
+name = "ReKey Old Key Still Decrypts"
+description = """
+Verifies that after ReKey, the old key remains Active and can still \
+be used for encryption (proving it is not deactivated by ReKey).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Old key should still encrypt (proving it remains Active)
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new.json"
+assert_success = true

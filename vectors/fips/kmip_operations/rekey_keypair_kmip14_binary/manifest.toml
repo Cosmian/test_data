@@ -1,0 +1,47 @@
+name = "ReKeyKeyPair via KMIP 1.4 binary wire format"
+description = """
+Exercises ReKeyKeyPair through the binary TTLV wire format with KMIP 1.4 protocol \
+version. This mimics how real clients (VAST Data, Synology, FortiGate, etc.) communicate \
+with the KMS — sending binary TTLV over HTTP. Verifies the full path: \
+JSON→TTLV binary serialization→server parse→V14→V21 conversion→operation→V21→V14 \
+response conversion→binary serialization→JSON assertion.
+"""
+wire_format = "binary"
+kmip_version = [1, 4]
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+sk_id = "PrivateKeyUniqueIdentifier"
+pk_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_sk_id = "PrivateKeyUniqueIdentifier"
+new_pk_id = "PublicKeyUniqueIdentifier"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_new_sk.json"
+assert_success = true

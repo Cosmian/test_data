@@ -1,0 +1,58 @@
+name = "ReKeyKeyPair RSA-2048 With Links"
+description = """
+Verifies that ReKeyKeyPair on an RSA-2048 key pair properly sets \
+ReplacementObjectLink and ReplacedObjectLink.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# Old SK has ReplacementObjectLink -> new SK
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attrs_old_sk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{new_private_key_id}}"
+
+# New SK has ReplacedObjectLink -> old SK
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attrs_new_sk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{private_key_id}}"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_sk.json"
+assert_success = true

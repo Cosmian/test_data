@@ -1,0 +1,9 @@
+{
+  "tag": "ReKeyKeyPair",
+  "value": [
+    {"tag": "PrivateKeyUniqueIdentifier", "type": "TextString", "value": "{{private_key_id}}"},
+    {"tag": "CommonAttributes", "value": [
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "RSA"}
+    ]}
+  ]
+}

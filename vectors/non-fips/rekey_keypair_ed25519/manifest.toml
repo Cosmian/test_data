@@ -1,0 +1,39 @@
+name = "ReKeyKeyPair ed25519"
+description = "Verifies that ReKeyKeyPair succeeds for ed25519."
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_new_sk.json"
+assert_success = true

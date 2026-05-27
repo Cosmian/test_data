@@ -1,0 +1,58 @@
+name = "ReKeyKeyPair EC Locate By Name"
+description = """
+Verifies that after ReKeyKeyPair, the replacement private key inherits \
+the Name attribute and can be found via Locate by name.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+# Locate should find the original private key by name
+[[steps]]
+operation = "Locate"
+request = "step2_locate_before.json"
+assert_success = true
+[steps.assert_fields]
+UniqueIdentifier = "{{private_key_id}}"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# After ReKey, Locate by name should find the NEW private key
+[[steps]]
+operation = "Locate"
+request = "step4_locate_after.json"
+assert_success = true
+[steps.assert_fields]
+UniqueIdentifier = "{{new_private_key_id}}"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_sk.json"
+assert_success = true

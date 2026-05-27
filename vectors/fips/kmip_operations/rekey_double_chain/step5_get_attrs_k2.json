@@ -1,0 +1,6 @@
+{
+  "tag": "GetAttributes",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{new_key_id_1}}"}
+  ]
+}

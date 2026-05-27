@@ -5,21 +5,6 @@
       "tag": "PrivateKeyUniqueIdentifier",
       "type": "TextString",
       "value": "{{private_key_id}}"
-    },
-    {
-      "tag": "PrivateKeyAttributes",
-      "value": [
-        {
-          "tag": "CryptographicAlgorithm",
-          "type": "Enumeration",
-          "value": "RSA"
-        },
-        {
-          "tag": "CryptographicLength",
-          "type": "Integer",
-          "value": 2048
-        }
-      ]
     }
   ]
 }

@@ -5,26 +5,6 @@
       "tag": "PrivateKeyUniqueIdentifier",
       "type": "TextString",
       "value": "{{private_key_id}}"
-    },
-    {
-      "tag": "PrivateKeyAttributes",
-      "value": [
-        {
-          "tag": "CryptographicAlgorithm",
-          "type": "Enumeration",
-          "value": "ECDH"
-        },
-        {
-          "tag": "CryptographicDomainParameters",
-          "value": [
-            {
-              "tag": "RecommendedCurve",
-              "type": "Enumeration",
-              "value": "P256"
-            }
-          ]
-        }
-      ]
     }
   ]
 }

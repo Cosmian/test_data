@@ -1,0 +1,30 @@
+name = "Negative: ReKeyKeyPair Change Algorithm Fails"
+description = """
+Verifies that ReKeyKeyPair rejects a request that tries to change \
+the cryptographic algorithm (from EC to RSA).
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = false
+assert_error_contains = "changing the cryptographic algorithm is not allowed"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_sk.json"
+assert_success = true

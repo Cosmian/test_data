@@ -1,0 +1,12 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {"tag": "CommonAttributes", "value": [
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "RSA"},
+      {"tag": "CryptographicLength", "type": "Integer", "value": 4096},
+      {"tag": "KeyFormatType", "type": "Enumeration", "value": "PKCS8"},
+      {"tag": "CryptographicUsageMask", "type": "Integer", "value": 12},
+      {"tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z"}
+    ]}
+  ]
+}
