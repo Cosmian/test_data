@@ -1,0 +1,84 @@
+name = "FortiGate Locate Name Filter Returns Distinct Keys"
+description = """
+Non-regression for GitHub issue #824 comment (FortiOS 7.6 / FortiGate 40F). \
+FortiGate sends KMIP 1.0 Locate requests filtered on the Name attribute to \
+resolve IPsec keys (ENC and AUTH, both directions). The bug caused the server \
+to return the same UniqueIdentifier for all Locate requests regardless of the \
+requested NameValue. This test creates two keys with different names matching \
+the FortiGate naming pattern, locates each by name using KMIP 1.0 \
+TemplateAttribute, and verifies each Locate returns the correct (distinct) key.
+"""
+wire_format = "binary"
+kmip_version = [1, 0]
+
+# --- Setup: Register two keys with FortiGate-style names ---
+
+[[steps]]
+operation = "Register"
+request = "step1_register_enc_key.json"
+assert_success = true
+[steps.capture]
+enc_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step2_register_auth_key.json"
+assert_success = true
+[steps.capture]
+auth_key_id = "UniqueIdentifier"
+
+# --- Activate both keys ---
+
+[[steps]]
+operation = "Activate"
+request = "step3_activate_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step4_activate_auth.json"
+assert_success = true
+
+# --- Core test: Locate each key by name, verify correct distinct ID ---
+
+[[steps]]
+operation = "Locate ENC key"
+request = "step5_locate_enc.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{enc_key_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{auth_key_id}}"
+
+[[steps]]
+operation = "Locate AUTH key"
+request = "step6_locate_auth.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{auth_key_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{enc_key_id}}"
+
+# --- Cleanup ---
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_auth.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_auth.json"
+assert_success = true

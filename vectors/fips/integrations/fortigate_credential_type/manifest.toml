@@ -1,0 +1,46 @@
+name = "FortiGate CredentialType Numeric Enumeration Parsing"
+description = """
+Non-regression for GitHub issue #824 (FortiOS 7.6.0 / FortiGate 40F support). \
+FortiGate sends CredentialType as a raw numeric enumeration (0x00000001) rather \
+than the symbolic name "UsernameAndPassword". The server previously failed with \
+"missing field `CredentialType`" because the Authentication/Credential structure \
+was not being deserialized correctly. \
+This test sends a KMIP 1.0 Locate request with Authentication containing the \
+numeric CredentialType value and verifies the server processes it successfully.
+"""
+wire_format = "binary"
+kmip_version = [1, 0]
+
+# --- Setup: Create a named key so Locate has something to find ---
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate_key.json"
+assert_success = true
+
+# --- Core test: Locate with numeric CredentialType (0x00000001) ---
+
+[[steps]]
+operation = "Locate (numeric CredentialType)"
+request = "step3_locate_with_numeric_credential_type.json"
+raw_request = true
+assert_success = true
+
+# --- Cleanup ---
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_key.json"
+assert_success = true
