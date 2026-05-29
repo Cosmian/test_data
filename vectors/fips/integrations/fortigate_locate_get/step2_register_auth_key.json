@@ -1,0 +1,120 @@
+{
+  "tag": "Register",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "TemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Algorithm"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Enumeration",
+              "value": "HMACSHA1"
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Length"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 160
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Usage Mask"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 384
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Name"
+            },
+            {
+              "tag": "AttributeValue",
+              "value": [
+                {
+                  "tag": "NameValue",
+                  "type": "TextString",
+                  "value": "FORTIGATE1-FORTIGATE2-test-wo-kmip-AUTH-SHA1-20"
+                },
+                {
+                  "tag": "NameType",
+                  "type": "Enumeration",
+                  "value": "UninterpretedTextString"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "SymmetricKey",
+      "value": [
+        {
+          "tag": "KeyBlock",
+          "value": [
+            {
+              "tag": "KeyFormatType",
+              "type": "Enumeration",
+              "value": "Raw"
+            },
+            {
+              "tag": "KeyValue",
+              "value": [
+                {
+                  "tag": "KeyMaterial",
+                  "type": "ByteString",
+                  "value": "117F484CDC9B51E12AB29E1F6E0A3288E36DAF8C"
+                }
+              ]
+            },
+            {
+              "tag": "CryptographicAlgorithm",
+              "type": "Enumeration",
+              "value": "HMACSHA1"
+            },
+            {
+              "tag": "CryptographicLength",
+              "type": "Integer",
+              "value": 160
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

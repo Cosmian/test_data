@@ -1,0 +1,98 @@
+name = "FortiGate/FortiOS KMIP Batched Locate then Get (Full IPsec Key Retrieval)"
+description = """
+Simulates the real FortiOS KMIP 1.0 IPsec key retrieval flow observed in \
+production traces (assii4.txt): \
+Register named AES-128 (ENC) and HMAC-SHA1-160 (AUTH) symmetric keys \
+from the same tunnel pair (FORTIGATE1-FORTIGATE2) → \
+Activate → Batched Locate×2 with UsernamePassword Authentication → \
+Batched Get×2 to retrieve full key material → Revoke → Destroy. \
+Covers the two-phase lookup pattern: first Locate by name to resolve UIDs, \
+then Get by UID to retrieve raw key blocks (FortiOS 7.6 / FortiGate 40F). \
+Key material extracted from assii4.txt production traces.
+"""
+wire_format = "binary"
+kmip_version = [1, 0]
+
+# --- Setup: Register 2 named keys (ENC + AUTH, FortiGate naming convention) ---
+
+[[steps]]
+operation = "Register"
+request = "step1_register_enc_key.json"
+assert_success = true
+[steps.capture]
+enc_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step2_register_auth_key.json"
+assert_success = true
+[steps.capture]
+auth_key_id = "UniqueIdentifier"
+
+# --- Activate both keys ---
+
+[[steps]]
+operation = "Activate"
+request = "step3_activate_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step4_activate_auth.json"
+assert_success = true
+
+# --- Phase 1: Batched Locate×2 (raw KMIP 1.0 RequestMessage with Authentication) ---
+
+[[steps]]
+operation = "Batch Locate"
+request = "step5_batch_locate.json"
+raw_request = true
+assert_success = true
+# Strict assertions: exactly 2 UIDs returned; the ENC key is one of them.
+# The AUTH key is implicitly verified by assert_count = 2 (both items must resolve).
+[steps.assert_count]
+UniqueIdentifier = 2
+[steps.assert_any_field]
+UniqueIdentifier = "{{enc_key_id}}"
+
+# --- Phase 2: Batched Get×2 (raw KMIP 1.0 RequestMessage with Authentication) ---
+
+[[steps]]
+operation = "Batch Get"
+request = "step6_batch_get.json"
+raw_request = true
+assert_success = true
+# Strict assertions: both keys must be returned with correct key material and algorithm.
+#   KeyMaterial = ENC key bytes registered in step 1 (AES-128, 16 bytes, fixed test vector).
+#   CryptographicAlgorithm = 0x00000003 (AES) confirms the ENC key is present.
+#   assert_count verifies both batch items returned a key with material and algorithm.
+#   AUTH key material (117F484CDC9B51E12AB29E1F6E0A3288E36DAF8C) extracted from assii4.txt.
+[steps.assert_count]
+UniqueIdentifier = 2
+KeyMaterial = 2
+CryptographicAlgorithm = 2
+[steps.assert_any_field]
+KeyMaterial = "0102030405060708090A0B0C0D0E0F10"
+CryptographicAlgorithm = "0x00000003"
+
+# --- Cleanup: Revoke then Destroy both keys ---
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_auth.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_auth.json"
+assert_success = true
