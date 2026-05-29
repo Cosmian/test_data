@@ -1,0 +1,10 @@
+{
+  "tag": "ReCertify",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{old_leaf_cert_id}}"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+name = "ReCertify With Offset — State Verification"
+description = """
+Verifies that ReCertify with Offset=0 produces an Active certificate, \
+and ReCertify with Offset=86400 (24h future) produces a PreActive certificate.
+"""
+
+# ── Test 1: Offset=0 → Active ──
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step01_create_keypair.json"
+assert_success = true
+[steps.capture]
+sk_id_1 = "PrivateKeyUniqueIdentifier"
+pk_id_1 = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step02_certify.json"
+assert_success = true
+[steps.capture]
+old_cert_id_1 = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReCertify"
+request = "step03_recertify_offset_zero.json"
+assert_success = true
+[steps.capture]
+new_cert_id_1 = "UniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step04_get_attrs_new_1.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# ── Test 2: Offset=86400 → PreActive ──
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step05_create_keypair.json"
+assert_success = true
+[steps.capture]
+sk_id_2 = "PrivateKeyUniqueIdentifier"
+pk_id_2 = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step06_certify.json"
+assert_success = true
+[steps.capture]
+old_cert_id_2 = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReCertify"
+request = "step07_recertify_offset_future.json"
+assert_success = true
+[steps.capture]
+new_cert_id_2 = "UniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step08_get_attrs_new_2.json"
+assert_success = true
+[steps.assert_fields]
+State = "PreActive"
+
+# ── Cleanup — Active certs require Revoke before Destroy ──
+
+[[steps]]
+operation = "Revoke"
+request = "step09_revoke_old_cert_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_old_cert_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_new_cert_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_new_cert_1.json"
+assert_success = true
+
+# Keys are PreActive, can be destroyed directly
+[[steps]]
+operation = "Destroy"
+request = "step13_destroy_sk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step14_destroy_pk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step15_revoke_old_cert_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step16_destroy_old_cert_2.json"
+assert_success = true
+
+# new_cert_2 is PreActive (offset=86400), can be destroyed directly
+[[steps]]
+operation = "Destroy"
+request = "step17_destroy_new_cert_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step18_destroy_sk_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step19_destroy_pk_2.json"
+assert_success = true

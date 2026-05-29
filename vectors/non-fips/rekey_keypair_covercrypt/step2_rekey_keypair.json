@@ -1,0 +1,50 @@
+{
+  "tag": "ReKeyKeyPair",
+  "value": [
+    {
+      "tag": "PrivateKeyUniqueIdentifier",
+      "type": "TextString",
+      "value": "{{private_key_id}}"
+    },
+    {
+      "tag": "PrivateKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "CoverCrypt"
+        },
+        {
+          "tag": "KeyFormatType",
+          "type": "Enumeration",
+          "value": "CoverCryptSecretKey"
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "PrivateKey"
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "VendorIdentification",
+              "type": "TextString",
+              "value": "cosmian"
+            },
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "cover_crypt_rekey_action"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "ByteString",
+              "value": "7B2252656B6579416363657373506F6C696379223A224465706172746D656E743A3A4D4B47227D"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "tag": "ResponseMessage",
+  "value": [
+    {
+      "tag": "ResponseHeader",
+      "value": [
+        {
+          "tag": "ProtocolVersion",
+          "value": [
+            {
+              "tag": "ProtocolVersionMajor",
+              "type": "Integer",
+              "value": 2
+            },
+            {
+              "tag": "ProtocolVersionMinor",
+              "type": "Integer",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "tag": "TimeStamp",
+          "type": "DateTime",
+          "value": "2026-05-29T11:57:35Z"
+        },
+        {
+          "tag": "BatchCount",
+          "type": "Integer",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "tag": "BatchItem",
+      "value": [
+        {
+          "tag": "Operation",
+          "type": "Enumeration",
+          "value": "ReCertify"
+        },
+        {
+          "tag": "ResultStatus",
+          "type": "Enumeration",
+          "value": "OperationFailed"
+        },
+        {
+          "tag": "ResultReason",
+          "type": "Enumeration",
+          "value": "Item_Not_Found"
+        },
+        {
+          "tag": "ResultMessage",
+          "type": "TextString",
+          "value": "b603a25b-8e4f-4e15-9e7f-44b67f466233"
+        }
+      ]
+    }
+  ]
+}

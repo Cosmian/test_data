@@ -1,0 +1,43 @@
+name = "ReKeyKeyPair Covercrypt (in-place attribute rekey)"
+description = """
+Verifies that ReKeyKeyPair on a Covercrypt master secret key with a \
+RekeyAccessPolicy action performs an in-place attribute-level rekey, \
+returning the same UIDs (no new key pair is created).
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.assert_fields]
+PrivateKeyUniqueIdentifier = "{{private_key_id}}"
+PublicKeyUniqueIdentifier = "{{public_key_id}}"
+
+# Cleanup: revoke and destroy both keys
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_pk.json"
+assert_success = true

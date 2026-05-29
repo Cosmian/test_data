@@ -1,0 +1,1 @@
+{"tag":"Revoke","value":[{"tag":"UniqueIdentifier","type":"TextString","value":"{{pk_id_2}}"},{"tag":"RevocationReason","value":[{"tag":"RevocationReasonCode","type":"Enumeration","value":"Superseded"}]}]}

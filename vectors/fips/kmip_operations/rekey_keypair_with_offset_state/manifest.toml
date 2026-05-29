@@ -1,0 +1,127 @@
+name = "ReKeyKeyPair With Offset — State Verification"
+description = """
+Verifies that ReKeyKeyPair with Offset=0 produces Active keys, \
+and ReKeyKeyPair with Offset=86400 (24h future) produces PreActive keys.
+"""
+
+# Create key pair for offset=0 → Active
+[[steps]]
+operation = "CreateKeyPair"
+request = "step01_create_keypair.json"
+assert_success = true
+[steps.capture]
+sk_id_1 = "PrivateKeyUniqueIdentifier"
+pk_id_1 = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step02_rekey_offset_zero.json"
+assert_success = true
+[steps.capture]
+new_sk_id_1 = "PrivateKeyUniqueIdentifier"
+new_pk_id_1 = "PublicKeyUniqueIdentifier"
+
+# Verify new private key is Active
+[[steps]]
+operation = "GetAttributes"
+request = "step03_get_attrs_new_sk_1.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Create key pair for offset=86400 → PreActive
+[[steps]]
+operation = "CreateKeyPair"
+request = "step04_create_keypair.json"
+assert_success = true
+[steps.capture]
+sk_id_2 = "PrivateKeyUniqueIdentifier"
+pk_id_2 = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step05_rekey_offset_future.json"
+assert_success = true
+[steps.capture]
+new_sk_id_2 = "PrivateKeyUniqueIdentifier"
+new_pk_id_2 = "PublicKeyUniqueIdentifier"
+
+# Verify new private key is PreActive
+[[steps]]
+operation = "GetAttributes"
+request = "step06_get_attrs_new_sk_2.json"
+assert_success = true
+[steps.assert_fields]
+State = "PreActive"
+
+# Cleanup — Active keys require Revoke before Destroy
+[[steps]]
+operation = "Revoke"
+request = "step07_revoke_old_sk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step08_destroy_old_sk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step09_revoke_old_pk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_old_pk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_new_sk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_new_sk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step13_revoke_new_pk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step14_destroy_new_pk_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step15_revoke_old_sk_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step16_destroy_old_sk_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step17_revoke_old_pk_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step18_destroy_old_pk_2.json"
+assert_success = true
+
+# PreActive keys can be destroyed directly
+[[steps]]
+operation = "Destroy"
+request = "step19_destroy_new_sk_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step20_destroy_new_pk_2.json"
+assert_success = true

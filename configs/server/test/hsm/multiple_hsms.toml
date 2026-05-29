@@ -24,14 +24,6 @@ hsm_admin = ["admin"]
 hsm_slot = [1355662635]
 hsm_password = ["12345678"]
 
-# ── Mock SMTP relay ────────────────────────────────────────────────────────────
-# Mailpit / MailHog default: SMTP on 1025, web UI on 8025.
-[notifications.smtp]
-host = "127.0.0.1"
-port = 1025
-from = "kms@test.local"
-to = "test@test.local"
-
 [http]
 hostname = "127.0.0.1"
 port = 9998

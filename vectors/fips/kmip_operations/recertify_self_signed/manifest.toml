@@ -1,0 +1,67 @@
+name = "ReCertify Self-Signed Certificate"
+description = """
+Creates a self-signed certificate, performs ReCertify to rotate it, \
+and verifies the new certificate has a fresh UID and Active state.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step2_certify.json"
+assert_success = true
+[steps.capture]
+old_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReCertify"
+request = "step3_recertify.json"
+assert_success = true
+[steps.capture]
+new_cert_id = "UniqueIdentifier"
+
+# Verify the new cert has Active state
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attributes_new.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Cleanup — certificates are Active, require Revoke before Destroy
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_old_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_cert.json"
+assert_success = true
+
+# Keys are PreActive (no activation_date in CreateKeyPair), can be destroyed directly
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_public.json"
+assert_success = true

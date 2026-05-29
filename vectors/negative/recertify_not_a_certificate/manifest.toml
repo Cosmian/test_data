@@ -1,0 +1,26 @@
+name = "Negative: ReCertify on Non-Certificate"
+description = "Tests that ReCertify fails when given a symmetric key instead of a certificate"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_symmetric.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReCertify"
+request = "step2_recertify.json"
+assert_success = false
+assert_error_contains = "not a Certificate"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

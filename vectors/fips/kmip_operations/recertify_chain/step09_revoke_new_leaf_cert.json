@@ -1,0 +1,1 @@
+{"tag":"Revoke","value":[{"tag":"UniqueIdentifier","type":"TextString","value":"{{new_leaf_cert_id}}"},{"tag":"RevocationReason","value":[{"tag":"RevocationReasonCode","type":"Enumeration","value":"Superseded"}]}]}

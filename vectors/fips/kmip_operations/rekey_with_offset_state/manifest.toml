@@ -1,0 +1,87 @@
+name = "ReKey With Offset — State Verification"
+description = """
+Verifies that ReKey with Offset=0 produces an Active key, \
+and ReKey with Offset=86400 (24h future) produces a PreActive key.
+"""
+
+# Create a key for the first rekey (offset=0 → Active)
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id_1 = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey_offset_zero.json"
+assert_success = true
+[steps.capture]
+new_key_id_1 = "UniqueIdentifier"
+
+# Verify new key is Active when offset=0
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes_new_1.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Create a second key for offset=86400 → PreActive
+[[steps]]
+operation = "Create"
+request = "step4_create.json"
+assert_success = true
+[steps.capture]
+key_id_2 = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step5_rekey_offset_future.json"
+assert_success = true
+[steps.capture]
+new_key_id_2 = "UniqueIdentifier"
+
+# Verify new key is PreActive when offset=86400
+[[steps]]
+operation = "GetAttributes"
+request = "step6_get_attributes_new_2.json"
+assert_success = true
+[steps.assert_fields]
+State = "PreActive"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_old_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_old_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new_1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_old_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_old_2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step13_destroy_new_2.json"
+assert_success = true
