@@ -14,4 +14,4 @@ public_key_id = "PublicKeyUniqueIdentifier"
 operation = "Sign"
 request = "step2_sign.json"
 assert_success = false
-assert_error_contains = "no valid private key"
+assert_error_contains = "no valid key for id"
