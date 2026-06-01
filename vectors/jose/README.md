@@ -20,6 +20,7 @@ This directory contains JSON test vector files for the JOSE (JSON Object Signing
 | `sign_verify_round_trip`         | Generate key pair, sign, verify                       |
 | `encrypt_decrypt_round_trip`     | Generate key, encrypt, decrypt, assert plaintext match |
 | `encrypt_decrypt_tamper_reject`  | Encrypt, tamper with a field, decrypt must fail       |
+| `unwrap_key_round_trip`          | RSA-OAEP encrypt → unwrap CEK → encrypt/decrypt with CEK |
 | `key_lifecycle`                  | Create key → use (mac/sign/encrypt) → delete → verify gone |
 | `expect_error`                   | Send malformed/invalid request, assert HTTP error status and code |
 
@@ -35,6 +36,7 @@ This directory contains JSON test vector files for the JOSE (JSON Object Signing
 
 ### Encryption (JWE)
 - `dir` + A128GCM, A192GCM, A256GCM (direct key agreement with AES-GCM)
+- RSA-OAEP, RSA-OAEP-256 key wrapping + A128GCM, A192GCM, A256GCM (via key unwrap endpoint)
 
 ## Error / Edge Case Coverage
 
@@ -48,6 +50,7 @@ This directory contains JSON test vector files for the JOSE (JSON Object Signing
 | Verify errors | `error_verify_*.json` | empty body, `alg:none` attack (RFC 8725), forged signature, empty signature |
 | MAC errors | `error_mac_*.json` | empty body, nonexistent kid, invalid base64, invalid mac base64, wrong key type |
 | Keys errors | `error_keys_*.json` | empty body, unknown kty, oct without alg, EC without crv, unknown curve, RSA bits too small, delete nonexistent |
+| Unwrap errors | `error_unwrap_*.json` | unsupported alg (dir), missing enc, empty encrypted_key, invalid protected base64 |
 
 ### Edge Case / Stress Tests (`edge_*` vectors)
 
@@ -69,7 +72,7 @@ This directory contains JSON test vector files for the JOSE (JSON Object Signing
 
 ## Not Covered (unsupported by server)
 
-- RSA-OAEP, RSA1_5 key management (RFC 7516 A.1, A.2)
+- RSA1_5 key management (RFC 7516 A.2)
 - AES Key Wrap: A128KW, A192KW, A256KW (RFC 7518 §4.4)
 - AES-CBC-HMAC: A128CBC-HS256, A192CBC-HS384, A256CBC-HS512 (RFC 7518 §5.2)
 - ECDH-ES key agreement (RFC 7518 §4.6)

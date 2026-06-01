@@ -1,0 +1,10 @@
+{
+  "_comment": "Error: unwrap with empty encrypted_key",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys/unwrap",
+  "body": {
+    "protected": "eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00iLCJraWQiOiJmYWtlLWtpZCJ9",
+    "encrypted_key": ""
+  },
+  "expected_status": 400
+}

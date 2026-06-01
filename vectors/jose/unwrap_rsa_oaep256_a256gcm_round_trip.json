@@ -1,0 +1,13 @@
+{
+  "_comment": "Unwrap round-trip: RSA-OAEP-256 encrypt → unwrap CEK → use symmetric key for A256GCM encrypt/decrypt",
+  "type": "unwrap_key_round_trip",
+  "algorithm": "RSA-OAEP-256",
+  "enc": "A256GCM",
+  "request": {
+    "data_plaintext": "unwrap test payload for RSA-OAEP-256 with A256GCM"
+  },
+  "key": {
+    "kty": "RSA",
+    "size": 2048
+  }
+}

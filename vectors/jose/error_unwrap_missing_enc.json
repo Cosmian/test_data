@@ -1,0 +1,10 @@
+{
+  "_comment": "Error: unwrap with missing enc field in protected header",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys/unwrap",
+  "body": {
+    "protected": "eyJhbGciOiJSU0EtT0FFUCIsImtpZCI6ImZha2Uta2lkIn0",
+    "encrypted_key": "dGVzdA"
+  },
+  "expected_status": 400
+}

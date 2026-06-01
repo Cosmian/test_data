@@ -1,0 +1,10 @@
+{
+  "_comment": "Error: unwrap with invalid base64 in protected header",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys/unwrap",
+  "body": {
+    "protected": "not-valid-base64!!!",
+    "encrypted_key": "dGVzdA"
+  },
+  "expected_status": 400
+}
