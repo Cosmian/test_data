@@ -1,0 +1,12 @@
+{
+  "_comment": "Import oct key with invalid base64url in 'k' field must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys",
+  "body": {
+    "kty": "oct",
+    "alg": "HS256",
+    "k": "not!valid@base64url###"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

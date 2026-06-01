@@ -1,0 +1,15 @@
+{
+  "_comment": "Import symmetric AES-256-GCM key, encrypt/decrypt round-trip, delete, verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "dir",
+  "enc": "A256GCM",
+  "operation": "encrypt",
+  "request": {
+    "data_plaintext": "import test payload for A256GCM encrypt"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "A256GCM",
+    "k": "EOPgtkv3Ncw7Y6h6_S-bZBOH3oz4QLm1FOUvWFGUqWY"
+  }
+}

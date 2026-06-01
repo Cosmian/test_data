@@ -1,0 +1,15 @@
+{
+  "_comment": "Import Ed25519 private key (OKP), sign/verify EdDSA, delete, verify gone (non-FIPS only)",
+  "type": "key_lifecycle",
+  "algorithm": "EdDSA",
+  "operation": "sign",
+  "request": {
+    "data_plaintext": "import test payload for EdDSA signature"
+  },
+  "key": {
+    "kty": "OKP",
+    "crv": "Ed25519",
+    "alg": "EdDSA",
+    "d": "S34H2mbI3cTJJx5C7_50jpjIwCliSiE20xqNdMEnIjM"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "_comment": "Import EC key with invalid 'd' value (not valid on curve) must return 400",
+  "body": {
+    "alg": "ES256",
+    "crv": "P-256",
+    "d": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "kty": "EC"
+  },
+  "endpoint": "/v1/crypto/keys",
+  "expected_error": "bad_request",
+  "expected_status": 400,
+  "type": "expect_error"
+}

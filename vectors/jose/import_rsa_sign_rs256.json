@@ -1,0 +1,21 @@
+{
+  "_comment": "Import RSA 2048-bit private key, sign/verify RS256, delete, verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "RS256",
+  "operation": "sign",
+  "request": {
+    "data_plaintext": "import test payload for RS256 signature"
+  },
+  "key": {
+    "kty": "RSA",
+    "alg": "RS256",
+    "n": "tNs-vr-tV-WJBJb0CTgYh-pamXWktm_VUYZW3ZN759_mwudC4sj4V0kC1Vqn_uGPsi5YNTPnDF0dIScs0EwEZTHjsY--BeJh2E4AfZjF8GFjUqq22G5niKAYgjgu1KoZDI3W3FP18K-7SGEW_GxY2s7ItrNB-BoW2APirTxad-rdFXvqLE7Z5HoDxR3v-vIVCAw64LrFFaSCttcpYzShyXKjYTwNarPxRmwBpeT7l4SQhpj1sM01MlKIVVpcuNbcK5ZTugIkux-nDAflzBT1lt6J3x-lYPRyD1TOe9Rlo-nxqAVjnr1oCTpHN5WgoIW24AU4POi37Fr0I6Ss_TJACQ",
+    "e": "AQAB",
+    "d": "VHlvlkMLYVnKJQWpGMFF2_4fsTwc4kXcGocn_bjMkCKps3G3cRwzuvlURHlirI-Iwc4Zz0fd7I11dK3KpcRL7URfOOmN9UunLhRI8GEyWzPx44PvgaoX294DdJdvcE-_AXki2aix4GkEjisjRGYLHrClWYjjEFKHRwCRmR7ulsGmf4yai5QXUv6tS4bDSI71u_nKwcYVV0kSugI9J2Ga7X4RbLa4aEu0jc4HaFspl9C_-o7swXHLVCaQ6gGsayONEB2pWkWN10kDb2m397oXOQdcNlDiSfN9x2s37zW6RxPJUO93hwa-a7iLAYJ4EAFMXn_XVuDOOQl0fmrkt-bIDQ",
+    "p": "-tf2EORDWulDcZZFx0ERA3m8aNbcuMI3F136PUxNarmo3s6sPb8NJP6flRDiICuU17JrFSZjuSXQVSkjMaYD78nl-EabORryc-orY2agylMpwASCYRiflBGnaZaNfVo67wQZCE3ttUYpeBG_Iq79M0OGGNoDV83qeCeNLXAJQbs",
+    "q": "uJL7ypx20b2rd3prngGXBSMrPi8oy7XQki8qUgvKb3YCXGvj13kaxwQPyVD05C2JgtOJO2KKfsi16GcT6iUMExAzulAcZY9GsUjfngHZkiUrAYVWACAbdzogCiUhoR7KC2x-vSiiF1CcH1cZsTrXIbDIkWBegSEGuKarNoCT9ws",
+    "dp": "Ne0BiEYaOMwW5K9iluBlEPM1zvAKCWovP8XDSzRBHGWHaUbS_n85Cy_2DKzRgAr-d5RystxK6f24GOa8GytOg1lLKCG9svwZDVRVOYxRms1gF1ig0tDhVYqqC-gCyOUB8GpYG1HtfV_1AEwIZCNsaX3lsSgFOfYZpvURw6fnRYs",
+    "dq": "EB7mVv_rcM48F6ddluNUqWI0-K1txr0OhnYQIDJfb_TCqAfUUpGFQTSdnFuxx-wiQobvSXyF1CT7nlzCZITv1QppOjCdClHFPt66iTZoJleQtgVLSZ-ERpmRCtHLaiMiSnUjbKoL3jVwLVySJeSZvZuPKQNdvbGAwMft1EjOo5k",
+    "qi": "UKfYFe5d8e99M3O3zY3d9JUpbWgGG-R2gGbgve0MJQdOeIeeEq-DnfAIYq9ZIZ0ML0pwCwEuq4claSd9CwSnd3cq7pDFHpKkvVUIeNcVH4IV2HCtc9HjHANju0tUZ2xwIlb3C2iij4lA3_3tDwHWRduTxgTuGaXf7ntiFbADtCY"
+  }
+}

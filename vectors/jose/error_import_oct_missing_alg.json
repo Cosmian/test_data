@@ -1,0 +1,11 @@
+{
+  "_comment": "Import oct key with key material but no alg (cannot determine algorithm) must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys",
+  "body": {
+    "kty": "oct",
+    "k": "3gT1DdYqGhKwYIr7hKhLgIDu7PjgsHQDcTk_E5FSsZA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

@@ -1,0 +1,15 @@
+{
+  "_comment": "Import EC P-256 private key, sign/verify ES256, delete, verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "ES256",
+  "operation": "sign",
+  "request": {
+    "data_plaintext": "import test payload for ES256 signature"
+  },
+  "key": {
+    "kty": "EC",
+    "crv": "P-256",
+    "alg": "ES256",
+    "d": "irbrwHPx0Wn1S4-_gcKGV_-I85DmNcz9tldzkPtZW3g"
+  }
+}

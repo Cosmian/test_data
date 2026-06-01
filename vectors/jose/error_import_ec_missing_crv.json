@@ -1,0 +1,12 @@
+{
+  "_comment": "Import EC key without 'crv' field must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys",
+  "body": {
+    "kty": "EC",
+    "alg": "ES256",
+    "d": "irbrwHPx0Wn1S4-_gcKGV_-I85DmNcz9tldzkPtZW3g"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

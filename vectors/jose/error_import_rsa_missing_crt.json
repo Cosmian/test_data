@@ -1,0 +1,14 @@
+{
+  "_comment": "Import RSA key missing CRT parameters (no p,q,dp,dq,qi) must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys",
+  "body": {
+    "kty": "RSA",
+    "alg": "RS256",
+    "n": "tNs-vr-tV-WJBJb0CTgYh-pamXWktm_VUYZW3ZN759_mwudC4sj4V0kC1Vqn_uGPsi5YNTPnDF0dIScs0EwEZTHjsY--BeJh2E4AfZjF8GFjUqq22G5niKAYgjgu1KoZDI3W3FP18K-7SGEW_GxY2s7ItrNB-BoW2APirTxad-rdFXvqLE7Z5HoDxR3v-vIVCAw64LrFFaSCttcpYzShyXKjYTwNarPxRmwBpeT7l4SQhpj1sM01MlKIVVpcuNbcK5ZTugIkux-nDAflzBT1lt6J3x-lYPRyD1TOe9Rlo-nxqAVjnr1oCTpHN5WgoIW24AU4POi37Fr0I6Ss_TJACQ",
+    "e": "AQAB",
+    "d": "VHlvlkMLYVnKJQWpGMFF2_4fsTwc4kXcGocn_bjMkCKps3G3cRwzuvlURHlirI-Iwc4Zz0fd7I11dK3KpcRL7URfOOmN9UunLhRI8GEyWzPx44PvgaoX294DdJdvcE-_AXki2aix4GkEjisjRGYLHrClWYjjEFKHRwCRmR7ulsGmf4yai5QXUv6tS4bDSI71u_nKwcYVV0kSugI9J2Ga7X4RbLa4aEu0jc4HaFspl9C_-o7swXHLVCaQ6gGsayONEB2pWkWN10kDb2m397oXOQdcNlDiSfN9x2s37zW6RxPJUO93hwa-a7iLAYJ4EAFMXn_XVuDOOQl0fmrkt-bIDQ"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

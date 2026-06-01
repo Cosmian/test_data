@@ -1,10 +1,11 @@
 {
-  "_comment": "Error: unwrap with unsupported algorithm (dir is not a valid key-wrapping algorithm)",
+  "_comment": "Error: unwrap with unsupported algorithm (dir is not a valid key-wrapping algorithm) must return 422",
   "type": "expect_error",
   "endpoint": "/v1/crypto/keys/unwrap",
   "body": {
     "protected": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiZmFrZS1raWQifQ",
     "encrypted_key": "dGVzdA"
   },
-  "expected_status": 422
+  "expected_status": 422,
+  "expected_error": "unsupported_algorithm"
 }

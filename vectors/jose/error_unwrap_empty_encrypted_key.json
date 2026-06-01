@@ -1,10 +1,11 @@
 {
-  "_comment": "Error: unwrap with empty encrypted_key",
+  "_comment": "Error: unwrap with empty encrypted_key must return 400 (invalid base64url)",
   "type": "expect_error",
   "endpoint": "/v1/crypto/keys/unwrap",
   "body": {
     "protected": "eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00iLCJraWQiOiJmYWtlLWtpZCJ9",
     "encrypted_key": ""
   },
-  "expected_status": 400
+  "expected_status": 400,
+  "expected_error": "bad_request"
 }

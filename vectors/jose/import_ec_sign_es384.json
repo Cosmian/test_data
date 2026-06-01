@@ -1,0 +1,15 @@
+{
+  "_comment": "Import EC P-384 private key, sign/verify ES384, delete, verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "ES384",
+  "operation": "sign",
+  "request": {
+    "data_plaintext": "import test payload for ES384 signature"
+  },
+  "key": {
+    "kty": "EC",
+    "crv": "P-384",
+    "alg": "ES384",
+    "d": "yWwkFoaqpP-GsDrZ4YY-Ds9s1IvLq0l-fnT4S4Oj0rxHssKC_yqD6LsiEIw_OZnB"
+  }
+}

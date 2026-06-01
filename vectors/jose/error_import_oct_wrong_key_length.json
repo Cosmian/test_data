@@ -1,0 +1,12 @@
+{
+  "_comment": "Import oct key with wrong length for HS256 (16 bytes instead of 32) must return 400",
+  "type": "expect_error",
+  "endpoint": "/v1/crypto/keys",
+  "body": {
+    "kty": "oct",
+    "alg": "HS256",
+    "k": "dGhpc19pc18xNl9ieXRlcw"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

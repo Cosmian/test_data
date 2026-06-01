@@ -1,0 +1,14 @@
+{
+  "_comment": "Import symmetric HMAC-SHA256 key from JWK material, compute MAC, delete, verify gone",
+  "type": "key_lifecycle",
+  "algorithm": "HS256",
+  "operation": "mac",
+  "request": {
+    "data_plaintext": "import test payload for HS256 MAC"
+  },
+  "key": {
+    "kty": "oct",
+    "alg": "HS256",
+    "k": "3gT1DdYqGhKwYIr7hKhLgIDu7PjgsHQDcTk_E5FSsZA"
+  }
+}
