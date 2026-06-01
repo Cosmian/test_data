@@ -1,0 +1,124 @@
+name = "ReKey Wrapping Key With Links (multiple dependants)"
+description = """
+Creates a wrapping key and two dependent wrapped keys. Re-keys the wrapping \
+key and verifies: (1) dependants are actually wrapped, (2) bidirectional \
+replacement links on the wrapping keys, (3) both dependants are re-wrapped \
+and still work for encryption.
+"""
+
+# Step 1: Create AES-256 wrapping key
+[[steps]]
+operation = "Create"
+request = "step1_create_wrapping_key.json"
+assert_success = true
+[steps.capture]
+wrapping_key_id = "UniqueIdentifier"
+
+# Step 2: Create first dependent wrapped key
+[[steps]]
+operation = "Create"
+request = "step2_create_dep1.json"
+assert_success = true
+[steps.capture]
+dep1_id = "UniqueIdentifier"
+
+# Step 3: Create second dependent wrapped key
+[[steps]]
+operation = "Create"
+request = "step3_create_dep2.json"
+assert_success = true
+[steps.capture]
+dep2_id = "UniqueIdentifier"
+
+# Step 4: Verify dep1 is actually stored wrapped
+[[steps]]
+operation = "Get"
+request = "step4_get_dep1.json"
+assert_success = true
+[steps.assert_fields]
+WrappingMethod = "Encrypt"
+
+# Step 5: ReKey the wrapping key
+[[steps]]
+operation = "ReKey"
+request = "step5_rekey_wrapping_key.json"
+assert_success = true
+[steps.capture]
+new_wrapping_key_id = "UniqueIdentifier"
+
+# Step 6: Verify dep1 is still wrapped after re-wrapping
+[[steps]]
+operation = "Get"
+request = "step6_get_dep1_after_rekey.json"
+assert_success = true
+[steps.assert_fields]
+WrappingMethod = "Encrypt"
+
+# Step 7: Old wrapping key has ReplacementObjectLink → new
+[[steps]]
+operation = "GetAttributes"
+request = "step7_get_attrs_old.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{new_wrapping_key_id}}"
+
+# Step 8: New wrapping key has ReplacedObjectLink → old
+[[steps]]
+operation = "GetAttributes"
+request = "step8_get_attrs_new.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{wrapping_key_id}}"
+
+# Step 9: First dependant still encrypts after re-wrap
+[[steps]]
+operation = "Encrypt"
+request = "step9_encrypt_dep1.json"
+assert_success = true
+
+# Step 10: Second dependant still encrypts after re-wrap
+[[steps]]
+operation = "Encrypt"
+request = "step10_encrypt_dep2.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_dep1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_dep1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step13_revoke_dep2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step14_destroy_dep2.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step15_revoke_old_wrapping.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step16_destroy_old_wrapping.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step17_revoke_new_wrapping.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step18_destroy_new_wrapping.json"
+assert_success = true

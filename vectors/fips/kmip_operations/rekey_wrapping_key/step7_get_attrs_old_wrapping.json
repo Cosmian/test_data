@@ -1,0 +1,10 @@
+{
+  "tag": "GetAttributes",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{wrapping_key_id}}"
+    }
+  ]
+}

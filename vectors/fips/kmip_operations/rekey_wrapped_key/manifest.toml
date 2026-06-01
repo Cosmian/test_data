@@ -1,0 +1,91 @@
+name = "ReKey Wrapped Key (unwrap, new material, re-wrap)"
+description = """
+Creates a wrapping key and a wrapped dependent key, then re-keys the \
+wrapped key. Verifies the new key has fresh material, is still wrapped, \
+and works for encryption.
+"""
+
+# Step 1: Create AES-256 wrapping key
+[[steps]]
+operation = "Create"
+request = "step1_create_wrapping_key.json"
+assert_success = true
+[steps.capture]
+wrapping_key_id = "UniqueIdentifier"
+
+# Step 2: Create AES-256 key wrapped by the wrapping key (via vendor attribute)
+[[steps]]
+operation = "Create"
+request = "step2_create_wrapped_key.json"
+assert_success = true
+[steps.capture]
+wrapped_key_id = "UniqueIdentifier"
+
+# Step 3: Verify the key is actually stored wrapped (WrappingMethod present)
+[[steps]]
+operation = "Get"
+request = "step3_get_wrapped_key.json"
+assert_success = true
+[steps.assert_fields]
+WrappingMethod = "Encrypt"
+
+# Step 4: ReKey the wrapped key — should unwrap, generate new material, re-wrap
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey_wrapped_key.json"
+assert_success = true
+[steps.capture]
+new_wrapped_key_id = "UniqueIdentifier"
+
+# Step 5: Verify the new key is also wrapped
+[[steps]]
+operation = "Get"
+request = "step5_get_new_wrapped_key.json"
+assert_success = true
+[steps.assert_fields]
+WrappingMethod = "Encrypt"
+
+# Step 6: Encrypt with the new wrapped key — verify it works
+[[steps]]
+operation = "Encrypt"
+request = "step6_encrypt_with_new.json"
+assert_success = true
+
+# Step 7: Verify new wrapped key has ReplacedObjectLink → old key
+[[steps]]
+operation = "GetAttributes"
+request = "step7_get_attrs_new.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{wrapped_key_id}}"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_old_wrapped.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_old_wrapped.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step10_revoke_new_wrapped.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_new_wrapped.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step12_revoke_wrapping.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step13_destroy_wrapping.json"
+assert_success = true

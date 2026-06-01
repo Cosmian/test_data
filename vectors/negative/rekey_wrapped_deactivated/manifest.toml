@@ -1,0 +1,59 @@
+name = "Negative: ReKey Wrapped Deactivated Key"
+description = """
+Creates a wrapping key and a wrapped dependent key, verifies wrapping, \
+revokes the dependent, then verifies that ReKey on the deactivated \
+wrapped key fails.
+"""
+
+# Step 1: Create wrapping key
+[[steps]]
+operation = "Create"
+request = "step1_create_wrapping_key.json"
+assert_success = true
+[steps.capture]
+wrapping_key_id = "UniqueIdentifier"
+
+# Step 2: Create wrapped key
+[[steps]]
+operation = "Create"
+request = "step2_create_wrapped_key.json"
+assert_success = true
+[steps.capture]
+wrapped_key_id = "UniqueIdentifier"
+
+# Step 3: Verify the key is actually stored wrapped
+[[steps]]
+operation = "Get"
+request = "step3_get_wrapped_key.json"
+assert_success = true
+[steps.assert_fields]
+WrappingMethod = "Encrypt"
+
+# Step 4: Revoke the wrapped key
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_wrapped.json"
+assert_success = true
+
+# Step 5: ReKey on deactivated wrapped key should fail
+[[steps]]
+operation = "ReKey"
+request = "step5_rekey_fails.json"
+assert_success = false
+assert_error_contains = "no active symmetric key found"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_wrapped.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_wrapping.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_wrapping.json"
+assert_success = true

@@ -1,0 +1,159 @@
+name = "ReKey Wrapping Key Double Chain (K0 → K1 → K2)"
+description = """
+Creates a wrapping key K0 with two wrapped dependants. Rotates K0 → K1, \
+then K1 → K2. Verifies the full link chain (K0 → K1 → K2) and that both \
+dependants are re-wrapped each time and still work for encryption.
+"""
+
+# Step 1: Create wrapping key K0
+[[steps]]
+operation = "Create"
+request = "step1_create_wrapping_key.json"
+assert_success = true
+[steps.capture]
+k0_id = "UniqueIdentifier"
+
+# Step 2: Create first dependant wrapped by K0
+[[steps]]
+operation = "Create"
+request = "step2_create_dep1.json"
+assert_success = true
+[steps.capture]
+dep1_id = "UniqueIdentifier"
+
+# Step 3: Create second dependant wrapped by K0
+[[steps]]
+operation = "Create"
+request = "step3_create_dep2.json"
+assert_success = true
+[steps.capture]
+dep2_id = "UniqueIdentifier"
+
+# Step 4: Verify dep1 is actually stored wrapped
+[[steps]]
+operation = "Get"
+request = "step4_get_dep1_wrapped.json"
+assert_success = true
+[steps.assert_fields]
+WrappingMethod = "Encrypt"
+
+# Step 5: First rotation — K0 → K1
+[[steps]]
+operation = "ReKey"
+request = "step5_rekey_k0.json"
+assert_success = true
+[steps.capture]
+k1_id = "UniqueIdentifier"
+
+# Step 6: Verify K0 → K1 link
+[[steps]]
+operation = "GetAttributes"
+request = "step6_get_attrs_k0.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{k1_id}}"
+
+# Step 7: Verify dep1 is still wrapped after first rotation
+[[steps]]
+operation = "Get"
+request = "step7_get_dep1_after_rekey.json"
+assert_success = true
+[steps.assert_fields]
+WrappingMethod = "Encrypt"
+
+# Step 8: Verify dependants still encrypt after first rotation
+[[steps]]
+operation = "Encrypt"
+request = "step8_encrypt_dep1.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step9_encrypt_dep2.json"
+assert_success = true
+
+# Step 10: Second rotation — K1 → K2
+[[steps]]
+operation = "ReKey"
+request = "step10_rekey_k1.json"
+assert_success = true
+[steps.capture]
+k2_id = "UniqueIdentifier"
+
+# Step 11: Verify K1 → K2 link
+[[steps]]
+operation = "GetAttributes"
+request = "step11_get_attrs_k1.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{k2_id}}"
+
+# Step 12: Verify K2 → K1 back-link
+[[steps]]
+operation = "GetAttributes"
+request = "step12_get_attrs_k2.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{k1_id}}"
+
+# Step 13-14: Verify dependants still encrypt after second rotation
+[[steps]]
+operation = "Encrypt"
+request = "step13_encrypt_dep1.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step14_encrypt_dep2.json"
+assert_success = true
+
+# Cleanup (revoke + destroy: dep1, dep2, K0, K1, K2)
+[[steps]]
+operation = "Revoke"
+request = "step15_revoke_dep1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step16_destroy_dep1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step17_revoke_dep2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step18_destroy_dep2.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step19_revoke_k0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step20_destroy_k0.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step21_revoke_k1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step22_destroy_k1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step23_revoke_k2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step24_destroy_k2.json"
+assert_success = true

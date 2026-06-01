@@ -1,0 +1,67 @@
+name = "HSM KEK: ReKey a KEK-wrapped symmetric key"
+description = """
+Creates an AES-256 key in a KMS server backed by a SoftHSM2 KEK. \
+The key is auto-wrapped by the HSM-resident KEK at rest. \
+Re-keys the wrapped key (unwrap from KEK, generate new material, re-wrap). \
+Verifies the new key works for encryption.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Step 1: Create AES-256 key (auto-wrapped by server KEK)
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Step 2: Encrypt with the key — verify it works before rotation
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+# Step 3: ReKey — unwrap from KEK, new material, re-wrap with KEK
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Step 4: Encrypt with new key — verify it works after rotation
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_new.json"
+assert_success = true
+
+# Step 5: Verify new key has ReplacedObjectLink → old key
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attrs_new.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{key_id}}"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_new.json"
+assert_success = true
