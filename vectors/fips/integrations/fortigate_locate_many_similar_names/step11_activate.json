@@ -1,0 +1,10 @@
+{
+  "tag": "Activate",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{auth_sha256_fwd_id}}"
+    }
+  ]
+}

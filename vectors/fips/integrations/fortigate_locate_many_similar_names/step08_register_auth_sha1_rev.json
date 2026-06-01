@@ -1,0 +1,85 @@
+{
+  "tag": "Register",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SecretData"
+    },
+    {
+      "tag": "TemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Usage Mask"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Name"
+            },
+            {
+              "tag": "AttributeValue",
+              "value": [
+                {
+                  "tag": "NameValue",
+                  "type": "TextString",
+                  "value": "msn-fw-b.kmip.local-msn-fw-a.kmip.local-s2s-kmip-AUTH-SHA1-20"
+                },
+                {
+                  "tag": "NameType",
+                  "type": "Enumeration",
+                  "value": "UninterpretedTextString"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "SecretData",
+      "value": [
+        {
+          "tag": "SecretDataType",
+          "type": "Enumeration",
+          "value": "Seed"
+        },
+        {
+          "tag": "KeyBlock",
+          "value": [
+            {
+              "tag": "KeyFormatType",
+              "type": "Enumeration",
+              "value": "Opaque"
+            },
+            {
+              "tag": "KeyValue",
+              "value": [
+                {
+                  "tag": "KeyMaterial",
+                  "type": "ByteString",
+                  "value": "99887766554433221100AABBCCDDEEFF99887766"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

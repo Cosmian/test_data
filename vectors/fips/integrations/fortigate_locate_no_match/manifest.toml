@@ -1,0 +1,88 @@
+name = "FortiGate Locate No False Positives From Partial Name Matches"
+description = """
+Non-regression proving the server uses EXACT name matching (not substring, \
+prefix, or LIKE). Registers two keys with FortiGate naming patterns, then \
+attempts Locate with: (1) a substring of an existing name, (2) a superstring \
+of an existing name, (3) a completely non-existent name. All three must return \
+success with zero UniqueIdentifiers — proving no partial/fuzzy matching occurs.
+"""
+wire_format = "binary"
+kmip_version = [1, 0]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Setup: Register and activate two keys
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Register"
+request = "step01_register_enc.json"
+assert_success = true
+[steps.capture]
+enc_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step02_register_auth.json"
+assert_success = true
+[steps.capture]
+auth_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step03_activate_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step04_activate_auth.json"
+assert_success = true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Core test: Locate with names that are substrings/superstrings of existing
+# keys — all must return Item_Not_Found (no partial matching)
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Locate substring (no match expected)"
+request = "step05_locate_substring.json"
+raw_request = true
+assert_success = true
+assert_fields_absent = ["UniqueIdentifier"]
+
+[[steps]]
+operation = "Locate superstring (no match expected)"
+request = "step06_locate_superstring.json"
+raw_request = true
+assert_success = true
+assert_fields_absent = ["UniqueIdentifier"]
+
+[[steps]]
+operation = "Locate non-existent (no match expected)"
+request = "step07_locate_nonexistent.json"
+raw_request = true
+assert_success = true
+assert_fields_absent = ["UniqueIdentifier"]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Cleanup
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Revoke"
+request = "step08_revoke_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step09_revoke_auth.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_enc.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_auth.json"
+assert_success = true

@@ -1,0 +1,238 @@
+name = "FortiGate Locate Multi-Tunnel Isolation"
+description = """
+Non-regression verifying that keys from different IPsec tunnels are strictly \
+isolated during Locate. Creates 6 keys across 3 tunnel configurations \
+(alpha forward, beta forward, alpha reverse) and verifies each Locate returns \
+only the key for its specific tunnel — no cross-tunnel contamination. \
+Tests that: (1) different tunnel names (alpha vs beta) don't interfere, \
+(2) same tunnel name in different direction (fw1-fw2 vs fw2-fw1) stays isolated, \
+(3) same direction but different type (ENC vs AUTH) returns the correct type.
+"""
+wire_format = "binary"
+kmip_version = [1, 0]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Register 6 keys across 3 tunnels
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Register"
+request = "step01_register_alpha_enc_fwd.json"
+assert_success = true
+[steps.capture]
+alpha_enc_fwd_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step02_register_alpha_auth_fwd.json"
+assert_success = true
+[steps.capture]
+alpha_auth_fwd_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step03_register_beta_enc_fwd.json"
+assert_success = true
+[steps.capture]
+beta_enc_fwd_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step04_register_beta_auth_fwd.json"
+assert_success = true
+[steps.capture]
+beta_auth_fwd_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step05_register_alpha_enc_rev.json"
+assert_success = true
+[steps.capture]
+alpha_enc_rev_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step06_register_alpha_auth_rev.json"
+assert_success = true
+[steps.capture]
+alpha_auth_rev_id = "UniqueIdentifier"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Activate all 6 keys
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Activate"
+request = "step07_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step08_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step09_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step10_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step11_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step12_activate.json"
+assert_success = true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Locate each key — verify tunnel isolation
+# Each assert_none_field checks the most confusable key (same type, different tunnel)
+# assert_count=1 + assert_any_field = no leakage from other tunnels
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Locate alpha ENC forward (vs beta ENC forward)"
+request = "step13_locate_alpha_enc_fwd.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{alpha_enc_fwd_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{beta_enc_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate alpha AUTH forward (vs beta AUTH forward)"
+request = "step14_locate_alpha_auth_fwd.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{alpha_auth_fwd_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{beta_auth_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate beta ENC forward (vs alpha ENC forward)"
+request = "step15_locate_beta_enc_fwd.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{beta_enc_fwd_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{alpha_enc_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate beta AUTH forward (vs alpha AUTH forward)"
+request = "step16_locate_beta_auth_fwd.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{beta_auth_fwd_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{alpha_auth_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate alpha ENC reverse (vs alpha ENC forward)"
+request = "step17_locate_alpha_enc_rev.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{alpha_enc_rev_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{alpha_enc_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate alpha AUTH reverse (vs alpha AUTH forward)"
+request = "step18_locate_alpha_auth_rev.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{alpha_auth_rev_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{alpha_auth_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Cleanup: Revoke all 6 keys
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Revoke"
+request = "step19_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step20_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step21_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step22_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step23_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step24_revoke.json"
+assert_success = true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Cleanup: Destroy all 6 keys
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Destroy"
+request = "step25_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step26_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step27_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step28_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step29_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step30_destroy.json"
+assert_success = true

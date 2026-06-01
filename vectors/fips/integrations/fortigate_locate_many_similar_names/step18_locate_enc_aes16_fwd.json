@@ -1,0 +1,115 @@
+{
+  "tag": "RequestMessage",
+  "value": [
+    {
+      "tag": "RequestHeader",
+      "value": [
+        {
+          "tag": "ProtocolVersion",
+          "value": [
+            {
+              "tag": "ProtocolVersionMajor",
+              "type": "Integer",
+              "value": 1
+            },
+            {
+              "tag": "ProtocolVersionMinor",
+              "type": "Integer",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "tag": "MaximumResponseSize",
+          "type": "Integer",
+          "value": 65536
+        },
+        {
+          "tag": "Authentication",
+          "value": [
+            {
+              "tag": "Credential",
+              "value": [
+                {
+                  "tag": "CredentialType",
+                  "type": "Enumeration",
+                  "value": "0x00000001"
+                },
+                {
+                  "tag": "CredentialValue",
+                  "value": [
+                    {
+                      "tag": "Username",
+                      "type": "TextString",
+                      "value": "fg-client"
+                    },
+                    {
+                      "tag": "Password",
+                      "type": "TextString",
+                      "value": "password"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "BatchCount",
+          "type": "Integer",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "tag": "BatchItem",
+      "value": [
+        {
+          "tag": "Operation",
+          "type": "Enumeration",
+          "value": "Locate"
+        },
+        {
+          "tag": "RequestPayload",
+          "value": [
+            {
+              "tag": "MaximumItems",
+              "type": "Integer",
+              "value": 1
+            },
+            {
+              "tag": "TemplateAttribute",
+              "value": [
+                {
+                  "tag": "Attribute",
+                  "value": [
+                    {
+                      "tag": "AttributeName",
+                      "type": "TextString",
+                      "value": "Name"
+                    },
+                    {
+                      "tag": "AttributeValue",
+                      "value": [
+                        {
+                          "tag": "NameValue",
+                          "type": "TextString",
+                          "value": "msn-fw-a.kmip.local-msn-fw-b.kmip.local-s2s-kmip-ENC-AES-16"
+                        },
+                        {
+                          "tag": "NameType",
+                          "type": "Enumeration",
+                          "value": "UninterpretedTextString"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

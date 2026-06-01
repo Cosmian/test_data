@@ -1,0 +1,20 @@
+{
+  "tag": "Revoke",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{enc_aes16_rev_id}}"
+    },
+    {
+      "tag": "RevocationReason",
+      "value": [
+        {
+          "tag": "RevocationReasonCode",
+          "type": "Enumeration",
+          "value": "CessationOfOperation"
+        }
+      ]
+    }
+  ]
+}

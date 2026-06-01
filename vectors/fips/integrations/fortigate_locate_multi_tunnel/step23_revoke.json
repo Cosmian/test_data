@@ -1,0 +1,20 @@
+{
+  "tag": "Revoke",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{alpha_enc_rev_id}}"
+    },
+    {
+      "tag": "RevocationReason",
+      "value": [
+        {
+          "tag": "RevocationReasonCode",
+          "type": "Enumeration",
+          "value": "CessationOfOperation"
+        }
+      ]
+    }
+  ]
+}

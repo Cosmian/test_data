@@ -1,0 +1,10 @@
+{
+  "tag": "Activate",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{enc_aes16_rev_id}}"
+    }
+  ]
+}

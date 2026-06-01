@@ -1,0 +1,10 @@
+{
+  "tag": "Activate",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{alpha_auth_rev_id}}"
+    }
+  ]
+}

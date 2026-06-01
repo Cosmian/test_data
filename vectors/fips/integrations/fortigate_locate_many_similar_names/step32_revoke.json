@@ -1,0 +1,20 @@
+{
+  "tag": "Revoke",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{auth_sha1_rev_id}}"
+    },
+    {
+      "tag": "RevocationReason",
+      "value": [
+        {
+          "tag": "RevocationReasonCode",
+          "type": "Enumeration",
+          "value": "CessationOfOperation"
+        }
+      ]
+    }
+  ]
+}

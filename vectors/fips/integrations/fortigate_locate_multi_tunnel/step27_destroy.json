@@ -1,0 +1,10 @@
+{
+  "tag": "Destroy",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{beta_enc_fwd_id}}"
+    }
+  ]
+}

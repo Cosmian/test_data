@@ -1,0 +1,309 @@
+name = "FortiGate Locate Strict Name Matching With Many Similar Keys"
+description = """
+Non-regression for strict name filtering under FortiGate IPsec key patterns. \
+Creates 8 keys with names that share a very long common prefix and differ only \
+in the last few characters (ENC/AUTH, algorithm, key length, tunnel direction). \
+Locates each individually with MaximumItems=1 and verifies that ONLY the \
+exact-match key is returned — proving no aggregation or truncation occurs. \
+assert_count=1 combined with assert_any_field proves exactly one result \
+was returned and it matches the expected key.
+"""
+wire_format = "binary"
+kmip_version = [1, 0]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Register 8 keys with confusingly similar names
+# Forward: msn-fw-a.kmip.local-msn-fw-b.kmip.local-s2s-kmip-{ENC-AES-32,ENC-AES-16,AUTH-SHA256-32,AUTH-SHA1-20}
+# Reverse: msn-fw-b.kmip.local-msn-fw-a.kmip.local-s2s-kmip-{ENC-AES-32,ENC-AES-16,AUTH-SHA256-32,AUTH-SHA1-20}
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Register"
+request = "step01_register_enc_aes32_fwd.json"
+assert_success = true
+[steps.capture]
+enc_aes32_fwd_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step02_register_enc_aes16_fwd.json"
+assert_success = true
+[steps.capture]
+enc_aes16_fwd_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step03_register_auth_sha256_fwd.json"
+assert_success = true
+[steps.capture]
+auth_sha256_fwd_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step04_register_auth_sha1_fwd.json"
+assert_success = true
+[steps.capture]
+auth_sha1_fwd_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step05_register_enc_aes32_rev.json"
+assert_success = true
+[steps.capture]
+enc_aes32_rev_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step06_register_enc_aes16_rev.json"
+assert_success = true
+[steps.capture]
+enc_aes16_rev_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step07_register_auth_sha256_rev.json"
+assert_success = true
+[steps.capture]
+auth_sha256_rev_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Register"
+request = "step08_register_auth_sha1_rev.json"
+assert_success = true
+[steps.capture]
+auth_sha1_rev_id = "UniqueIdentifier"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Activate all 8 keys
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Activate"
+request = "step09_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step10_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step11_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step12_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step13_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step14_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step15_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step16_activate.json"
+assert_success = true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Locate each key by exact name — verify strict isolation
+# assert_count=1 proves exactly one UniqueIdentifier in the response
+# assert_any_field proves it is the correct key
+# Together they guarantee no other key leaked into the result
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Locate ENC-AES-32 forward"
+request = "step17_locate_enc_aes32_fwd.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{enc_aes32_fwd_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{enc_aes16_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate ENC-AES-16 forward"
+request = "step18_locate_enc_aes16_fwd.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{enc_aes16_fwd_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{enc_aes32_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate AUTH-SHA256-32 forward"
+request = "step19_locate_auth_sha256_fwd.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{auth_sha256_fwd_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{auth_sha1_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate AUTH-SHA1-20 forward"
+request = "step20_locate_auth_sha1_fwd.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{auth_sha1_fwd_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{auth_sha256_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate ENC-AES-32 reverse"
+request = "step21_locate_enc_aes32_rev.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{enc_aes32_rev_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{enc_aes32_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate ENC-AES-16 reverse"
+request = "step22_locate_enc_aes16_rev.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{enc_aes16_rev_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{enc_aes16_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate AUTH-SHA256-32 reverse"
+request = "step23_locate_auth_sha256_rev.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{auth_sha256_rev_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{auth_sha256_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+[[steps]]
+operation = "Locate AUTH-SHA1-20 reverse"
+request = "step24_locate_auth_sha1_rev.json"
+raw_request = true
+assert_success = true
+[steps.assert_any_field]
+UniqueIdentifier = "{{auth_sha1_rev_id}}"
+[steps.assert_none_field]
+UniqueIdentifier = "{{auth_sha1_fwd_id}}"
+[steps.assert_count]
+UniqueIdentifier = 1
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Cleanup: Revoke all 8 keys
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Revoke"
+request = "step25_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step26_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step27_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step28_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step29_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step30_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step31_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step32_revoke.json"
+assert_success = true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Cleanup: Destroy all 8 keys
+# ═══════════════════════════════════════════════════════════════════════════
+
+[[steps]]
+operation = "Destroy"
+request = "step33_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step34_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step35_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step36_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step37_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step38_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step39_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step40_destroy.json"
+assert_success = true
