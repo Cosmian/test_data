@@ -1,0 +1,8 @@
+name = "Negative: Delete Attribute - Item Not Found"
+description = "Tests that Delete Attribute returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "DeleteAttribute"
+request = "step1_deleteattribute.json"
+assert_success = false
+assert_error_reason = "Object_Not_Found"

@@ -1,0 +1,21 @@
+name = "Negative: Destroy - Wrong Key Lifecycle State"
+description = "Tests that Destroy returns Wrong_Key_Lifecycle_State error as per KMIP spec"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = false
+assert_error_contains = "DENIED"

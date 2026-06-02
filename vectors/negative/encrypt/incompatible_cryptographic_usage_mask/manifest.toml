@@ -1,0 +1,21 @@
+name = "Negative: Encrypt - Incompatible Cryptographic Usage Mask"
+description = "Tests that Encrypt returns Incompatible_Cryptographic_Usage_Mask error as per KMIP spec"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = false
+assert_error_contains = "not found"

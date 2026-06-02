@@ -1,0 +1,15 @@
+{
+  "tag": "Get",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "KeyFormatType",
+      "type": "Enumeration",
+      "value": "PKCS8"
+    }
+  ]
+}

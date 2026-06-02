@@ -1,0 +1,16 @@
+name = "Negative: Add Attribute - Read Only Attribute"
+description = "Tests that Add Attribute returns Read_Only_Attribute error as per KMIP spec"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_setattribute.json"
+assert_success = false
+assert_error_contains = "State cannot be set"

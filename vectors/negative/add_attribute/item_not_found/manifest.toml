@@ -1,0 +1,8 @@
+name = "Negative: Add Attribute - Item Not Found"
+description = "Tests that Add Attribute returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "AddAttribute"
+request = "step1_addattribute.json"
+assert_success = false
+assert_error_reason = "Object_Not_Found"

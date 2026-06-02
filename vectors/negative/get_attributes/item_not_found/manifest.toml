@@ -1,0 +1,8 @@
+name = "Negative: Get Attributes - Item Not Found"
+description = "Tests that Get Attributes returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step1_getattributes.json"
+assert_success = false
+assert_error_reason = "Object_Not_Found"

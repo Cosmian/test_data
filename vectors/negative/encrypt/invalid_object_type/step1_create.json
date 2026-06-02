@@ -1,0 +1,25 @@
+{
+  "tag": "Create",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SecretData"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "SecretDataType",
+          "type": "Enumeration",
+          "value": "Password"
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SecretData"
+        }
+      ]
+    }
+  ]
+}

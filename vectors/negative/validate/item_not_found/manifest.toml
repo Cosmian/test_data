@@ -1,0 +1,8 @@
+name = "Negative: Validate - Object Not Found"
+description = "Tests that Validate returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "Validate"
+request = "step1_validate.json"
+assert_success = false
+assert_error_reason = "Object_Not_Found"

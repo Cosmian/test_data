@@ -1,0 +1,41 @@
+name = "Serialization: Import + Destroy + Re-import lifecycle"
+description = "Imports a key with explicit UID, destroys it, then re-imports with the same UID — verifies lifecycle state transitions work correctly with the new serialization format"
+
+[[steps]]
+operation = "Import"
+request = "step1_import.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true
+
+[[steps]]
+operation = "Import"
+request = "step5_reimport.json"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step6_get.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"

@@ -1,0 +1,15 @@
+name = "Serialization: Create + Locate round-trip"
+description = "Creates an AES key with a unique name, then Locates it by name — verifies attributes survive DB serialization (kmip_3_0 JSON format) and json_extract queries work"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step2_locate.json"
+assert_success = true

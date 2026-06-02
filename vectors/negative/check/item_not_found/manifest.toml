@@ -1,0 +1,8 @@
+name = "Negative: Check - Item Not Found"
+description = "Tests that Check returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "Check"
+request = "step1_check.json"
+assert_success = false
+assert_error_reason = "Object_Not_Found"

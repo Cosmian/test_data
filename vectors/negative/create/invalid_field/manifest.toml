@@ -1,0 +1,8 @@
+name = "Negative: Create - Invalid Field"
+description = "Tests that Create returns Invalid_Field error as per KMIP spec"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = false
+assert_error_contains = "Blowfish"

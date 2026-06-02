@@ -1,0 +1,8 @@
+name = "Negative: Register - Invalid Message"
+description = "Tests that Register returns Invalid_Message error as per KMIP spec"
+
+[[steps]]
+operation = "Register"
+request = "step1_register.json"
+assert_success = false
+assert_error_contains = "missing field"

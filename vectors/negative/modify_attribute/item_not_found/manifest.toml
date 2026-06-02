@@ -1,0 +1,8 @@
+name = "Negative: Modify Attribute - Item Not Found"
+description = "Tests that Modify Attribute returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "ModifyAttribute"
+request = "step1_modifyattribute.json"
+assert_success = false
+assert_error_reason = "Object_Not_Found"

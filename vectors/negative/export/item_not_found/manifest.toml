@@ -1,0 +1,8 @@
+name = "Negative: Export - Item Not Found"
+description = "Tests that Export returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "Export"
+request = "step1_export.json"
+assert_success = false
+assert_error_reason = "Object_Not_Found"

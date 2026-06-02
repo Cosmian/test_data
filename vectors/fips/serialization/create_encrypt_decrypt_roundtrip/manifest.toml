@@ -1,0 +1,28 @@
+name = "Serialization: Create + Encrypt + Decrypt round-trip"
+description = "Creates an AES-256 key, encrypts data, then decrypts — verifies key material survives DB serialization through KMIP3: prefixed object storage"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_decrypt.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "48656C6C6F20574F524C4421"

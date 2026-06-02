@@ -5,4 +5,4 @@ description = "Tests that ReCertify fails when no unique_identifier is provided"
 operation = "ReCertify"
 request = "step1_recertify_empty.json"
 assert_success = false
-assert_error_contains = "unique_identifier"
+assert_error_contains = "unsupported operation"

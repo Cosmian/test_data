@@ -1,0 +1,8 @@
+name = "Negative: Sign - Invalid Message"
+description = "Tests that Sign returns Invalid_Message error as per KMIP spec"
+
+[[steps]]
+operation = "Sign"
+request = "step1_sign.json"
+assert_success = false
+assert_error_contains = "place holder id"

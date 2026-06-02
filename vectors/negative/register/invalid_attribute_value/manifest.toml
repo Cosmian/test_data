@@ -1,0 +1,8 @@
+name = "Negative: Register - Invalid Attribute Value"
+description = "Tests that Register returns Invalid_Attribute_Value error as per KMIP spec"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = false
+assert_error_contains = "length"

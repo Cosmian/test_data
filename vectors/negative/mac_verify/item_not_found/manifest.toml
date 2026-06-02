@@ -1,0 +1,8 @@
+name = "Negative: MAC Verify - Item Not Found"
+description = "Tests that MAC Verify returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "MACVerify"
+request = "step1_macverify.json"
+assert_success = false
+assert_error_reason = "Item_Not_Found"

@@ -1,0 +1,16 @@
+name = "Negative: Certify - Invalid Object Type"
+description = "Tests that Certify returns Invalid_Object_Type error as per KMIP spec"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step2_certify.json"
+assert_success = false
+assert_error_contains = "Invalid Certify request"

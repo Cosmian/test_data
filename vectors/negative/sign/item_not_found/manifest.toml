@@ -1,0 +1,8 @@
+name = "Negative: Sign - Item Not Found"
+description = "Tests that Sign returns Item_Not_Found error as per KMIP spec"
+
+[[steps]]
+operation = "Sign"
+request = "step1_sign.json"
+assert_success = false
+assert_error_reason = "Item_Not_Found"

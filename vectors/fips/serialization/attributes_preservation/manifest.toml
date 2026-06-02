@@ -1,0 +1,27 @@
+name = "Serialization: Attributes preservation"
+description = "Creates an AES key with multiple attributes (name, algorithm, length, usage mask), retrieves it with Get, and verifies all attributes are preserved through DB serialization"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+assert_success = true
+
+[steps.assert_fields]
+CryptographicAlgorithm = "AES"
+CryptographicLength = "256"

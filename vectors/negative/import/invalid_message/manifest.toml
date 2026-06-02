@@ -1,0 +1,8 @@
+name = "Negative: Import - Invalid Message"
+description = "Tests that Import returns Invalid_Message error as per KMIP spec"
+
+[[steps]]
+operation = "Import"
+request = "step1_import.json"
+assert_success = false
+assert_error_contains = "missing field"

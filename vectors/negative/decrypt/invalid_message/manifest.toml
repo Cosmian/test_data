@@ -1,0 +1,8 @@
+name = "Negative: Decrypt - Invalid Message"
+description = "Tests that Decrypt returns Invalid_Message error as per KMIP spec"
+
+[[steps]]
+operation = "Decrypt"
+request = "step1_decrypt.json"
+assert_success = false
+assert_error_contains = "place holder id"

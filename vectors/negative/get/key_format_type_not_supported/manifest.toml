@@ -1,0 +1,16 @@
+name = "Negative: Get - Key Format Type Not Supported"
+description = "Tests that Get returns Key_Format_Type_Not_Supported error as per KMIP spec"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+assert_success = false
+assert_error_contains = "unsupported"
