@@ -5,4 +5,4 @@ description = "Tests that ReCertify fails when given a UID that does not exist"
 operation = "ReCertify"
 request = "step1_recertify.json"
 assert_success = false
-assert_error_contains = "unsupported operation"
+assert_error_contains = "not found"

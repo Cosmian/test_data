@@ -38,15 +38,15 @@ old_leaf_cert_id = "UniqueIdentifier"
 [[steps]]
 operation = "ReCertify"
 request = "step05_recertify_leaf.json"
-assert_success = false
-assert_error_contains = "unsupported operation"
+assert_success = true
+[steps.capture]
+new_leaf_cert_id = "UniqueIdentifier"
 
 # Verify the new leaf cert has ReplacedObjectLink and Active state
 [[steps]]
 operation = "GetAttributes"
 request = "step06_get_attributes_new_leaf.json"
 assert_success = true
-allow_failure = true
 [steps.assert_any_field]
 LinkedObjectIdentifier = "{{old_leaf_cert_id}}"
 [steps.assert_fields]

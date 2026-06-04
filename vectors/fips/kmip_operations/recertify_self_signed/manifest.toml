@@ -22,15 +22,15 @@ old_cert_id = "UniqueIdentifier"
 [[steps]]
 operation = "ReCertify"
 request = "step3_recertify.json"
-assert_success = false
-assert_error_contains = "unsupported operation"
+assert_success = true
+[steps.capture]
+new_cert_id = "UniqueIdentifier"
 
 # Verify the new cert has Active state
 [[steps]]
 operation = "GetAttributes"
 request = "step4_get_attributes_new.json"
 assert_success = true
-allow_failure = true
 [steps.assert_fields]
 State = "Active"
 

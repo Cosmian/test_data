@@ -12,7 +12,7 @@ key_id = "UniqueIdentifier"
 operation = "ReCertify"
 request = "step2_recertify.json"
 assert_success = false
-assert_error_contains = "unsupported operation"
+assert_error_contains = "not a Certificate"
 
 # Cleanup
 [[steps]]

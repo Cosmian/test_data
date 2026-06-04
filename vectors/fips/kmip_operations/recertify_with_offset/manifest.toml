@@ -24,14 +24,14 @@ old_cert_id_1 = "UniqueIdentifier"
 [[steps]]
 operation = "ReCertify"
 request = "step03_recertify_offset_zero.json"
-assert_success = false
-assert_error_contains = "unsupported operation"
+assert_success = true
+[steps.capture]
+new_cert_id_1 = "UniqueIdentifier"
 
 [[steps]]
 operation = "GetAttributes"
 request = "step04_get_attrs_new_1.json"
 assert_success = true
-allow_failure = true
 [steps.assert_fields]
 State = "Active"
 
@@ -41,7 +41,6 @@ State = "Active"
 operation = "CreateKeyPair"
 request = "step05_create_keypair.json"
 assert_success = true
-allow_failure = true
 [steps.capture]
 sk_id_2 = "PrivateKeyUniqueIdentifier"
 pk_id_2 = "PublicKeyUniqueIdentifier"
@@ -50,21 +49,20 @@ pk_id_2 = "PublicKeyUniqueIdentifier"
 operation = "Certify"
 request = "step06_certify.json"
 assert_success = true
-allow_failure = true
 [steps.capture]
 old_cert_id_2 = "UniqueIdentifier"
 
 [[steps]]
 operation = "ReCertify"
 request = "step07_recertify_offset_future.json"
-assert_success = false
-assert_error_contains = "unsupported operation"
+assert_success = true
+[steps.capture]
+new_cert_id_2 = "UniqueIdentifier"
 
 [[steps]]
 operation = "GetAttributes"
 request = "step08_get_attrs_new_2.json"
 assert_success = true
-allow_failure = true
 [steps.assert_fields]
 State = "PreActive"
 

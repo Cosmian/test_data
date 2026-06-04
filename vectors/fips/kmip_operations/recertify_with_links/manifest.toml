@@ -23,15 +23,15 @@ old_cert_id = "UniqueIdentifier"
 [[steps]]
 operation = "ReCertify"
 request = "step3_recertify.json"
-assert_success = false
-assert_error_contains = "unsupported operation"
+assert_success = true
+[steps.capture]
+new_cert_id = "UniqueIdentifier"
 
 # Verify old cert has ReplacementObjectLink pointing to new cert
 [[steps]]
 operation = "GetAttributes"
 request = "step4_get_attributes_old.json"
 assert_success = true
-allow_failure = true
 [steps.assert_any_field]
 LinkedObjectIdentifier = "{{new_cert_id}}"
 
@@ -40,7 +40,6 @@ LinkedObjectIdentifier = "{{new_cert_id}}"
 operation = "GetAttributes"
 request = "step5_get_attributes_new.json"
 assert_success = true
-allow_failure = true
 [steps.assert_any_field]
 LinkedObjectIdentifier = "{{old_cert_id}}"
 [steps.assert_fields]
