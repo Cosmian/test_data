@@ -1,0 +1,29 @@
+name = "Negative: SetAttribute RotateName with @ rejected"
+description = """
+Verifies that setting a rotate_name containing '@' is rejected with \
+an InvalidRequest error, since '@' is reserved for keyset versioning syntax.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name_with_at.json"
+assert_success = false
+assert_error_contains = "must not contain '@'"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true
