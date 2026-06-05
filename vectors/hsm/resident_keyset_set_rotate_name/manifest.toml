@@ -1,0 +1,53 @@
+name = "HSM Resident Keyset: SetAttribute rotate_name and encrypt by keyset name"
+description = """
+Creates an AES-256 key directly on the HSM, assigns a rotate_name via SetAttribute
+(which writes CKA_LABEL on the PKCS#11 object), then encrypts data using the keyset
+bare-name syntax. Verifies that HSM keyset resolution via CKA_LABEL works correctly.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Pre-cleanup: destroy key from any prior run (may not exist)
+[[steps]]
+operation = "Destroy"
+request = "step0_cleanup.json"
+allow_failure = true
+
+# Create an AES-256 key directly on the HSM
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Assign the keyset name via SetAttribute — writes CKA_LABEL to PKCS#11
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# Encrypt using the bare keyset name — exercises HSM keyset resolution
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_by_keyset.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# Decrypt using the direct UID to confirm the ciphertext is valid
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt_by_uid.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step0_cleanup.json"
+assert_success = true

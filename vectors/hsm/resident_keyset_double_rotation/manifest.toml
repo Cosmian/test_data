@@ -1,0 +1,94 @@
+name = "HSM Resident Keyset: Double rotation (3-generation chain)"
+description = """
+Tests HSM keyset traversal across a 3-generation chain:
+1. Create AES-256 HSM-resident key (gen 0), assign keyset name
+2. Encrypt data with gen-0 key
+3. ReKey once (gen 0 → gen 1)
+4. ReKey again (gen 1 → gen 2)
+5. Decrypt using bare keyset name — walks gen2→gen1→gen0 via CKA_LABEL
+
+Proves HSM keyset chain traversal works beyond a single hop.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Pre-cleanup: destroy all three possible keys from prior runs
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
+allow_failure = true
+
+# Create gen-0 key on HSM
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Assign keyset name
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# Encrypt with gen-0 key
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# First rotation: gen 0 → gen 1
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey1.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Second rotation: gen 1 → gen 2
+[[steps]]
+operation = "ReKey"
+request = "step5_rekey2.json"
+assert_success = true
+[steps.capture]
+gen2_id = "UniqueIdentifier"
+
+# Decrypt with bare keyset name: walks gen2→gen1→gen0
+[[steps]]
+operation = "Decrypt"
+request = "step6_decrypt_by_keyset.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# Cleanup all 3 generations
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
+assert_success = true
