@@ -1,0 +1,67 @@
+name = "Keyset Decrypt Try-Each After Rotation"
+description = """
+The primary keyset try-each-key test:
+1. Create an AES key with rotate_name
+2. Encrypt data with the original key
+3. ReKey (creates a new key, old key remains Active)
+4. Decrypt using the bare keyset name — the server walks the chain \
+   (new key fails, old key succeeds)
+This proves the try-each-key mechanism works for decryption after rotation.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# Encrypt with the original key
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# ReKey: creates a new key generation
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Decrypt using the bare keyset name — must try new key (fails), then old key (succeeds)
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_by_keyset.json"
+assert_success = true
+
+# Cleanup: revoke and destroy both keys
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_new.json"
+assert_success = true

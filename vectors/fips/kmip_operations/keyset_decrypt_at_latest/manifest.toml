@@ -1,0 +1,63 @@
+name = "Keyset Decrypt with @latest (single key, no chain walk)"
+description = """
+Decrypt using name@latest resolves to the single latest key rather \
+than walking the chain. After rotation, encrypts with the new key, \
+then decrypts using name@latest which should find the new key directly.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ReKey to create gen 1
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Encrypt with the new key directly
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_new.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# Decrypt using name@latest (resolves to new key, no chain walk)
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_at_latest.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_new.json"
+assert_success = true

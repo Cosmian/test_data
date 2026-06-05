@@ -1,0 +1,44 @@
+name = "Keyset Encrypt with @latest"
+description = """
+Creates a symmetric key, assigns a rotate_name via SetAttribute, \
+then encrypts data using the keyset name@latest syntax. Verifies \
+that keyset resolution correctly finds the latest key.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_by_keyset.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# Decrypt with the actual key_id to confirm the ciphertext is valid
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt_by_uid.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

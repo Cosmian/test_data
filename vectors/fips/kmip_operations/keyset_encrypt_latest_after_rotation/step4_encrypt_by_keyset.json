@@ -1,0 +1,11 @@
+{
+  "tag": "Encrypt",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "test-keyset-enc-after-rot"},
+    {"tag": "CryptographicParameters", "value": [
+      {"tag": "BlockCipherMode", "type": "Enumeration", "value": "GCM"},
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES"}
+    ]},
+    {"tag": "Data", "type": "ByteString", "value": "456E637279707420746869732064617461"}
+  ]
+}

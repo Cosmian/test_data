@@ -1,0 +1,66 @@
+name = "Keyset Encrypt Uses Latest After Rotation"
+description = """
+After rotation, encrypting by the bare keyset name must use the new key:
+1. Create key, set rotate_name
+2. ReKey (creates gen 1)
+3. Encrypt using bare keyset name (should use gen 1)
+4. Decrypt using the new key's direct UID (proves new key encrypted it)
+5. Decrypt using the old key fails (proves old key was NOT used)
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ReKey: create gen 1
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Encrypt using bare keyset name — should use the latest (gen 1) key
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_by_keyset.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# Decrypt with new key UID — must succeed
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_new_key.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_new.json"
+assert_success = true
