@@ -1,0 +1,35 @@
+name = "Negative: ReKey PreActive Key Fails"
+description = """
+Creates a symmetric key without ActivationDate (enters PreActive state), \
+then verifies that ReKey on a PreActive key is rejected. \
+Only Active keys can be rotated.
+"""
+
+# Step 1: Create a symmetric key without ActivationDate → PreActive
+[[steps]]
+operation = "Create"
+request = "step1_create_preactive_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Step 2: Verify the key is PreActive via GetAttributes
+[[steps]]
+operation = "GetAttributes"
+request = "step2_get_attributes.json"
+assert_success = true
+[steps.assert_fields]
+State = "PreActive"
+
+# Step 3: ReKey on PreActive key should fail
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey_fails.json"
+assert_success = false
+assert_error_contains = "only Active or Deactivated keys can be rotated"
+
+# Cleanup: Destroy the key (PreActive keys can be destroyed directly)
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

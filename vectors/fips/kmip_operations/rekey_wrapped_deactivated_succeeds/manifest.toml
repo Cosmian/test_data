@@ -1,8 +1,8 @@
-name = "Negative: ReKey Wrapped Deactivated Key"
+name = "ReKey Wrapped Deactivated Key Succeeds"
 description = """
 Creates a wrapping key and a wrapped dependent key, verifies wrapping, \
 revokes the dependent, then verifies that ReKey on the deactivated \
-wrapped key fails.
+wrapped key succeeds per KMIP §6.1.46.
 """
 
 # Step 1: Create wrapping key
@@ -35,17 +35,39 @@ operation = "Revoke"
 request = "step4_revoke_wrapped.json"
 assert_success = true
 
-# Step 5: ReKey on deactivated wrapped key should fail
+# Step 5: ReKey on deactivated wrapped key should succeed
 [[steps]]
 operation = "ReKey"
 request = "step5_rekey_fails.json"
-assert_success = false
-assert_error_contains = "no active symmetric key found"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
 
 # Cleanup
 [[steps]]
 operation = "Destroy"
 request = "step6_destroy_wrapped.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_wrapping.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_wrapping.json"
+assert_success = true
+
+# Cleanup new key from re-keying the deactivated wrapped key
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new.json"
 assert_success = true
 
 [[steps]]
