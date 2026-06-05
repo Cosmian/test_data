@@ -1,0 +1,10 @@
+{
+  "tag": "Destroy",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{rekey_deactivated_id}}"
+    }
+  ]
+}

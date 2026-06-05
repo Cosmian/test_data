@@ -1,0 +1,41 @@
+name = "Negative: ReKeyKeyPair PreActive Key Fails"
+description = """
+Creates an EC P-256 key pair without ActivationDate (enters PreActive state), \
+then verifies that ReKeyKeyPair on a PreActive private key is rejected. \
+Only Active keys can be rotated.
+"""
+
+# Step 1: Create an EC P-256 key pair without ActivationDate → PreActive
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+# Step 2: Verify the private key is PreActive
+[[steps]]
+operation = "GetAttributes"
+request = "step2_get_sk_attributes.json"
+assert_success = true
+[steps.assert_fields]
+State = "PreActive"
+
+# Step 3: ReKeyKeyPair on PreActive key should fail
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair_fails.json"
+assert_success = false
+assert_error_contains = "only Active or Deactivated keys can be rotated"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_pk.json"
+assert_success = true

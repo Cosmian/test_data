@@ -1,7 +1,8 @@
-name = "ReKey Deactivated Key Fails"
+name = "ReKey Deactivated Key Succeeds"
 description = """
-Verifies that ReKey on a non-Active key fails with an appropriate error. \
-Only Active symmetric keys can be re-keyed.
+Verifies that ReKey on a Deactivated key succeeds. \
+Per KMIP §6.1.46, Wrong_Key_Lifecycle_State is NOT listed in the Re-Key error table, \
+meaning Deactivated keys are eligible for rotation.
 """
 
 [[steps]]
@@ -19,18 +20,19 @@ assert_success = true
 [steps.capture]
 new_key_id = "UniqueIdentifier"
 
-# Revoke the old key explicitly (Active → Deactivated); ReKey does NOT deactivate it
+# Revoke the old key explicitly (Active → Deactivated)
 [[steps]]
 operation = "Revoke"
 request = "step3_revoke_old.json"
 assert_success = true
 
-# Try to ReKey the now-deactivated old key (should fail)
+# ReKey the now-deactivated old key (should succeed per KMIP spec)
 [[steps]]
 operation = "ReKey"
 request = "step4_rekey_old_fails.json"
-assert_success = false
-assert_error_contains = "no active symmetric key found"
+assert_success = true
+[steps.capture]
+rekey_deactivated_id = "UniqueIdentifier"
 
 # Cleanup
 [[steps]]
@@ -46,4 +48,15 @@ assert_success = true
 [[steps]]
 operation = "Destroy"
 request = "step7_destroy_new.json"
+assert_success = true
+
+# Cleanup the key created from re-keying the deactivated key
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_rekey_deactivated.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_rekey_deactivated.json"
 assert_success = true

@@ -1,0 +1,65 @@
+name = "ReKeyKeyPair Deactivated Succeeds"
+description = """
+Verifies that ReKeyKeyPair on a revoked/deactivated private key succeeds. \
+Per KMIP §6.1.47, Wrong_Key_Lifecycle_State is NOT listed in the Re-Key Key Pair \
+error table, meaning Deactivated keys are eligible for rotation.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke.json"
+assert_success = true
+
+# ReKeyKeyPair on deactivated key should succeed per KMIP spec
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# Cleanup original keys (private already deactivated from step 2)
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_pk.json"
+assert_success = true
+
+# Cleanup new keys from rekeying the deactivated key
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new_pk.json"
+assert_success = true
