@@ -1,0 +1,36 @@
+name = "Negative: HSM Key - rotate_offset not supported"
+description = """
+Tests that SetAttribute rotate_offset on an HSM-resident key is rejected
+with a NotSupported error. HSM keys use CKA_START_DATE/CKA_END_DATE for
+rotation scheduling and do not support arbitrary offset windows.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Pre-cleanup
+[[steps]]
+operation = "Destroy"
+request = "step0_cleanup.json"
+allow_failure = true
+
+# Create an HSM-resident key
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Attempt to set rotate_offset — must be rejected
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_offset.json"
+assert_success = false
+assert_error_contains = "rotate_offset is not supported for HSM keys"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step0_cleanup.json"
+assert_success = true

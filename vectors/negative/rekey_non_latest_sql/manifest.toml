@@ -1,0 +1,54 @@
+name = "Negative: Re-Key on non-latest keyset member (SQL-backed)"
+description = """
+Tests that Re-Key on a retired (non-latest) SQL-backed key is rejected.
+Creates a key, assigns keyset, rotates to gen-1, then attempts to
+Re-Key gen-0 again — must fail because gen-0 has rotate_latest=false.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ReKey: gen-0 → gen-1 (succeeds)
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Attempt to ReKey gen-0 AGAIN — must be rejected
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey_old.json"
+assert_success = false
+assert_error_contains = "not the latest"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_gen1.json"
+assert_success = true

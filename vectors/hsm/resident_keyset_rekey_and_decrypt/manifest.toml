@@ -1,0 +1,76 @@
+name = "HSM Resident Keyset: ReKey and decrypt by keyset name"
+description = """
+Full HSM keyset rotation test:
+1. Create AES-256 HSM-resident key (gen 0)
+2. Assign keyset name via SetAttribute rotate_name (writes CKA_LABEL)
+3. Encrypt data with gen-0 key
+4. ReKey: creates gen-1 key on HSM, updates CKA_LABEL on both keys
+5. Decrypt using bare keyset name — must resolve gen-1 first, then try gen-0
+
+Tests: HSM keyset via CKA_LABEL, ReKey creates new HSM key, keyset decrypt chain.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Pre-cleanup: destroy both possible keys from prior runs
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+# Create AES-256 key on HSM (gen 0)
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Assign keyset name — writes CKA_LABEL "hsm-keyset-rk::0::vec_rk::latest"
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# Encrypt with gen-0 key
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_gen0.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# ReKey: creates gen-1 key, updates CKA_LABELs
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Decrypt using bare keyset name — walks gen1→gen0 to find the right key
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_by_keyset.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# Cleanup both keys
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+assert_success = true

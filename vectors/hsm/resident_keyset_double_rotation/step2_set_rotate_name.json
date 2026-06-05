@@ -1,0 +1,9 @@
+{
+  "tag": "SetAttribute",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{key_id}}"},
+    {"tag": "NewAttribute", "value": [
+      {"tag": "RotateName", "type": "TextString", "value": "hsm-keyset-double-rot"}
+    ]}
+  ]
+}
