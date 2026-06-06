@@ -1,0 +1,68 @@
+name = "KEK bootstrap: create HSM KEK on server with key_encryption_key configured"
+description = """
+Regression test for the self-wrap bug introduced by PR #968.
+
+Before the fix, `wrap_and_cache` would attempt to wrap any key created on a server
+with `key_encryption_key` configured. When the key being created IS the configured
+KEK (same HSM UID), this would hit the self-wrap guard and fail with:
+  "Key 'hsm::<slot>::kek_bootstrap' cannot be used as its own wrapping key"
+
+After the fix, HSM-resident keys (UID with 'hsm::' prefix) skip the server-wide KEK
+wrapping entirely — they are hardware-protected and do not need software wrapping.
+
+This vector uses server_type = "hsm_kek_uncreated": the server starts with
+key_encryption_key = "hsm::<slot>::kek_bootstrap" but that key does not exist yet.
+Steps:
+  1. Create the KEK itself (HSM-resident, same UID as key_encryption_key) — must succeed.
+  2. Create a database-resident DEK (gets wrapped by the KEK at rest).
+  3. Encrypt / Decrypt round-trip via the DEK to prove the full stack works.
+  4. Revoke + Destroy the DEK.
+  5. Destroy the KEK.
+"""
+server_type = "hsm_kek_uncreated"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Step 1: Create the KEK (HSM-resident, same UID as key_encryption_key).
+# This was failing before the fix with the self-wrap guard.
+[[steps]]
+operation = "Create"
+request = "step1_create_kek.json"
+assert_success = true
+
+# Step 2: Create a normal (database-resident) DEK; it will be wrapped by the KEK.
+[[steps]]
+operation = "Create"
+request = "step2_create_dek.json"
+assert_success = true
+[steps.capture]
+dek_id = "UniqueIdentifier"
+
+# Step 3a: Encrypt with the DEK
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# Step 3b: Decrypt with the DEK — verifies the round-trip
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_dek.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_dek.json"
+assert_success = true
