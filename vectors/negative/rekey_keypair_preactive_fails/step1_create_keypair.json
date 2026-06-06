@@ -15,11 +15,6 @@
           "value": 256
         },
         {
-          "tag": "CryptographicUsageMask",
-          "type": "Integer",
-          "value": 12
-        },
-        {
           "tag": "KeyFormatType",
           "type": "Enumeration",
           "value": "ECPrivateKey"
@@ -38,6 +33,26 @@
               "value": "P-256"
             }
           ]
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 1063425
+        }
+      ]
+    },
+    {
+      "tag": "PublicKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 1051138
         }
       ]
     }
