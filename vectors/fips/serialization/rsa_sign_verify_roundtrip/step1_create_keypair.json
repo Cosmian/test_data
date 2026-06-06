@@ -20,14 +20,29 @@
           "value": "TransparentRSAPrivateKey"
         },
         {
-          "tag": "CryptographicUsageMask",
-          "type": "Integer",
-          "value": 2097152
-        },
-        {
           "tag": "ActivationDate",
           "type": "DateTime",
           "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 2601
+        }
+      ]
+    },
+    {
+      "tag": "PublicKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 2582
         }
       ]
     }
