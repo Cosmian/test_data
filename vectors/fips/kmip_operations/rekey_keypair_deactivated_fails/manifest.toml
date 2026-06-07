@@ -1,7 +1,7 @@
-name = "Negative: ReKeyKeyPair Destroyed Key Fails"
+name = "Negative: ReKeyKeyPair Deactivated Key Fails"
 description = """
-Verifies that ReKeyKeyPair on a Destroyed keypair fails.
-A Destroyed private key cannot be rotated.
+Verifies that ReKeyKeyPair on a Deactivated private key fails.
+Only Active or PreActive private keys are eligible for rekey.
 """
 
 [[steps]]
@@ -18,20 +18,20 @@ operation = "Revoke"
 request = "step2_revoke.json"
 assert_success = true
 
-# Destroy the private key (Deactivated → Destroyed)
-[[steps]]
-operation = "Destroy"
-request = "step3_destroy.json"
-assert_success = true
-
-# Try to ReKeyKeyPair the destroyed private key — must fail
+# Try to ReKeyKeyPair the deactivated private key — must fail
 [[steps]]
 operation = "ReKeyKeyPair"
-request = "step4_rekey_keypair.json"
+request = "step3_rekey_keypair.json"
 assert_success = false
-assert_error_contains = "not found"
+assert_error_reason = "Item_Not_Found"
 
-# Cleanup public key
+# Cleanup: private key is already Deactivated, can Destroy directly
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_sk.json"
+assert_success = true
+
+# Cleanup: public key is still Active (Revoke was not cascaded), must Revoke first
 [[steps]]
 operation = "Revoke"
 request = "step5_revoke_public.json"
