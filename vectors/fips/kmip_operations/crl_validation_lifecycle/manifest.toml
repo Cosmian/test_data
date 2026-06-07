@@ -1,0 +1,100 @@
+name = "CRL Validation Lifecycle"
+description = "Full CRL validation: create CA+EE cert chain, generate empty CRL (valid), revoke EE cert, regenerate CRL, validate again (invalid due to revocation in CRL)"
+
+[[steps]]
+operation = "AllocTempFile"
+request = "step01_alloc_crl_path.json"
+assert_success = true
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step02_create_ca_keypair.json"
+assert_success = true
+
+[steps.capture]
+ca_private_key_id = "PrivateKeyUniqueIdentifier"
+ca_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step03_certify_ca.json"
+assert_success = true
+
+[steps.capture]
+ca_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step04_create_ee_keypair.json"
+assert_success = true
+
+[steps.capture]
+ee_private_key_id = "PrivateKeyUniqueIdentifier"
+ee_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step05_certify_ee.json"
+assert_success = true
+
+[steps.capture]
+ee_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GenerateCrl"
+request = "step06_generate_crl_empty.json"
+assert_success = true
+
+[[steps]]
+operation = "Validate"
+request = "step07_validate_ee_valid.json"
+assert_success = true
+
+[steps.assert_fields]
+ValidityIndicator = "Valid"
+
+[[steps]]
+operation = "Revoke"
+request = "step08_revoke_ee_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "GenerateCrl"
+request = "step09_generate_crl_revoked.json"
+assert_success = true
+
+[[steps]]
+operation = "Validate"
+request = "step10_validate_ee_revoked.json"
+assert_success = false
+assert_error_contains = "revoked"
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_ee_cert.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_ee_private.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step13_destroy_ee_public.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step14_destroy_ca_cert.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step15_destroy_ca_private.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step16_destroy_ca_public.json"
+allow_failure = true

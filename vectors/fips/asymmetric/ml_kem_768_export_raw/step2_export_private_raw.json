@@ -1,0 +1,15 @@
+{
+  "tag": "Export",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{private_key_id}}"
+    },
+    {
+      "tag": "KeyFormatType",
+      "type": "Enumeration",
+      "value": "Raw"
+    }
+  ]
+}

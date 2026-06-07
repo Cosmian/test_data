@@ -1,0 +1,10 @@
+{
+  "tag": "Destroy",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{ca_private_key_id}}"
+    }
+  ]
+}
