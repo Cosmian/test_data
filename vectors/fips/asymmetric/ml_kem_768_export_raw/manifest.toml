@@ -1,0 +1,33 @@
+name = "ML-KEM-768 Export as Raw"
+description = "Creates a ML-KEM-768 key pair (PKCS8 format), exports both private and public keys as Raw format"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Export"
+request = "step2_export_private_raw.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "PrivateKey"
+
+[steps.assert_any_field]
+KeyFormatType = "Raw"
+
+[[steps]]
+operation = "Export"
+request = "step3_export_public_raw.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "PublicKey"
+
+[steps.assert_any_field]
+KeyFormatType = "Raw"

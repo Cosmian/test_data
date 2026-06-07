@@ -1,0 +1,15 @@
+{
+  "tag": "Validate",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{ca_cert_id}}"
+    },
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{ee_cert_id}}"
+    }
+  ]
+}

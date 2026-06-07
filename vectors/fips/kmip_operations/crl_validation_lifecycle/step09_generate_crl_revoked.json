@@ -1,0 +1,5 @@
+{
+  "issuer_id": "{{ca_cert_id}}",
+  "format": "pem",
+  "output_path": "{{crl_file_path}}"
+}
