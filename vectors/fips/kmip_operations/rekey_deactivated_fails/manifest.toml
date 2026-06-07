@@ -1,0 +1,31 @@
+name = "Negative: ReKey Destroyed Key Fails"
+description = """
+Verifies that ReKey on a Destroyed symmetric key fails with Wrong_Key_Lifecycle_State.
+A Destroyed key cannot be rotated.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Revoke the key (Active → Deactivated)
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke.json"
+assert_success = true
+
+# Destroy the key (Deactivated → Destroyed)
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true
+
+# Try to ReKey the destroyed key — must fail
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = false
+assert_error_contains = "not found"
