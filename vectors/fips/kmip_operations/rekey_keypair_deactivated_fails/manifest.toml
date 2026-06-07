@@ -1,0 +1,43 @@
+name = "Negative: ReKeyKeyPair Destroyed Key Fails"
+description = """
+Verifies that ReKeyKeyPair on a Destroyed keypair fails.
+A Destroyed private key cannot be rotated.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+# Revoke the private key (Active → Deactivated)
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke.json"
+assert_success = true
+
+# Destroy the private key (Deactivated → Destroyed)
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true
+
+# Try to ReKeyKeyPair the destroyed private key — must fail
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step4_rekey_keypair.json"
+assert_success = false
+assert_error_contains = "not found"
+
+# Cleanup public key
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_public.json"
+assert_success = true
