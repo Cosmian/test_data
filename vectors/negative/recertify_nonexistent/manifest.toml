@@ -1,8 +1,8 @@
 name = "Negative: ReCertify Nonexistent UID"
-description = "Tests that ReCertify fails — ReCertify is a KMIP 1.4 operation not supported in KMIP 2.1"
+description = "Tests that ReCertify fails when the referenced certificate UID does not exist"
 
 [[steps]]
 operation = "ReCertify"
 request = "step1_recertify.json"
 assert_success = false
-assert_error_contains = "ReCertify"
+assert_error_contains = "object not found"
