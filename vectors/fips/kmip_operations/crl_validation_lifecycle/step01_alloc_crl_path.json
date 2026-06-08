@@ -2,6 +2,6 @@
   "capture_as": "crl_file_path",
   "extension": "pem",
   "additional_captures": {
-    "ee_extension_text": "[ v3_ca ]\nsubjectKeyIdentifier=hash\nauthorityKeyIdentifier=keyid\ncrlDistributionPoints=URI:file://{{crl_file_path}}\n"
+    "ee_extension_text": "[ v3_ca ]\nsubjectKeyIdentifier=hash\nauthorityKeyIdentifier=keyid\ncrlDistributionPoints=URI:{{crl_file_path_url}}\n"
   }
 }
