@@ -1,0 +1,61 @@
+name = "Negative: ReKeyKeyPair on non-latest keyset member"
+description = """
+Tests that ReKeyKeyPair on a retired (non-latest) keyset member is rejected.
+Creates an EC P-256 key pair, assigns a rotate_name to enroll it in a keyset,
+rotates to gen-1 (key-b), then attempts to ReKeyKeyPair gen-0 (key-a) again —
+must fail because gen-0 has rotate_latest=false.
+
+The vector uses FIPS-compliant CryptographicUsageMask values (PrivateKey: 1063425,
+PublicKey: 1051138 = FIPS_PRIVATE/PUBLIC_ECC_MASK_SIGN_ECDH) so it runs in both
+FIPS and non-FIPS mode.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ReKeyKeyPair: gen-0 → gen-1 (key-a → key-b, succeeds)
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+
+# Attempt to ReKeyKeyPair gen-0 AGAIN — must be rejected because
+# gen-0 has rotate_latest=false after the first rotation.
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step4_rekey_keypair_old.json"
+assert_success = false
+assert_error_contains = "not the latest"
+
+# Cleanup: revoke and destroy gen-0 and gen-1 private keys
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_sk.json"
+assert_success = true
