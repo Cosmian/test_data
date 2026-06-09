@@ -1,8 +1,8 @@
 name = "Negative: ReCertify Nonexistent UID"
-description = "Tests that ReCertify fails when the referenced certificate UID does not exist"
+description = "Tests that ReCertify fails when the certificate UID does not exist in the database"
 
 [[steps]]
 operation = "ReCertify"
 request = "step1_recertify.json"
 assert_success = false
-assert_error_contains = "object not found"
+assert_error_contains = "nonexistent-uid"
