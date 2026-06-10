@@ -1,0 +1,54 @@
+name = "EDB TDE KMIP — AES-256-CBC Server-Side Wrap Roundtrip"
+description = """
+Simulates the EDB Postgres TDE workflow using AES-256-CBC KMIP Encrypt/Decrypt:
+  Create AES-256 master key → Activate → Encrypt (wrap DEK) → Decrypt (unwrap DEK)
+
+The Decrypt step uses IVCounterNonce as a separate field (the pykmip/standard KMIP
+style required for Cosmian KMS).  The edb_tde_kmip_client.py --variant=thales mode
+(which prepends the IV to the ciphertext without a separate IVCounterNonce field)
+is NOT supported by Cosmian KMS: a missing IVCounterNonce returns Invalid_Message
+"missing-iv" per the KMIP mandatory conformance requirement.
+
+When configuring EDB Postgres Advanced Server TDE with Cosmian KMS, use:
+  --variant=pykmip
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create_master_key.json"
+assert_success = true
+
+[steps.capture]
+master_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_dek.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+
+[[steps]]
+# Thales variant: now uses standard pykmip style (IVCounterNonce separate).
+# Cosmian KMS does not support the thales IV-in-data trick (missing IVCounterNonce
+# returns Invalid_Message per KMIP spec). Use --variant=pykmip with Cosmian KMS.
+operation = "Decrypt"
+request = "step4_decrypt_dek_thales.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

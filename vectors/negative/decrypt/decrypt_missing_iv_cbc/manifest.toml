@@ -1,5 +1,12 @@
-name = "Negative: Decrypt AES-CBC without IV"
-description = "Tests that AES-CBC decryption fails when IVCounterNonce is not provided"
+name = "Negative: Decrypt AES-CBC with missing IVCounterNonce returns Invalid_Message"
+description = """
+When IVCounterNonce is absent from a CBC Decrypt request the KMS must return
+Invalid_Message with reason "missing-iv" (KMIP mandatory conformance requirement,
+CS-BC-M-11-14 and CS-BC-M-11-21).
+
+This is distinct from an explicitly empty IVCounterNonce (Some([])), which the
+KMS treats as a request for an all-zero IV.
+"""
 
 [[steps]]
 operation = "Create"
@@ -12,4 +19,4 @@ key_id = "UniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt_no_iv.json"
 assert_success = false
-assert_error_contains = "missing"
+assert_error_contains = "missing-iv"
