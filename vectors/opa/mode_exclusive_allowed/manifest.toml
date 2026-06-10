@@ -1,0 +1,22 @@
+name = "OPA Mode 2 (Exclusive): owner key lifecycle allowed"
+description = "OPA exclusive mode; JWT with CryptoOfficer role from auth server; Create then Get allowed by is_owner=true."
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+allow_failure = true
