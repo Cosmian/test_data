@@ -1,0 +1,39 @@
+name = "OPA Mode 2 (Exclusive): User-role JWT denied Get (operation not in user_ops)"
+description = """
+OPA exclusive mode. The CryptoOfficer (default JWT client, owner) creates an AES key.
+A second user holding only the `User` role (kms-opa-user, non-owner) attempts `Get` —
+which is intentionally absent from `user_ops` in kms.rego because it exports raw key
+material. OPA returns allow=false → KMS returns Object_Not_Found.
+
+Ref: kms.rego user_ops set (FIPS 140-3 §7.4 "User" role; PKCS#11 v3.0 CKU_USER).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL"]
+backends = ["sqlite"]
+
+# JWT-based identity: the env var is set by setup_auth_server_for_opa()
+# before any vector step runs.
+[identities.user_role]
+access_token_env = "KMS_TEST_OPA_USER_ROLE_JWT"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# User-role identity (non-owner): Get is not in user_ops → OPA denies.
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+identity = "user_role"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+assert_error_contains = "not found"
+
+# Cleanup: officer (owner) destroys the key.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+allow_failure = true

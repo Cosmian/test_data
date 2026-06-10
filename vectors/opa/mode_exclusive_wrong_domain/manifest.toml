@@ -1,0 +1,41 @@
+name = "OPA Mode 2 (Exclusive): CryptoOfficer wrong domain denied (cross-domain isolation)"
+description = """
+OPA exclusive mode. The CryptoOfficer from realm `kms-opa-test` (default JWT client,
+owner, domain=kms-opa-test) creates an AES key. A second CryptoOfficer from realm
+`kms-opa-other` (domain=kms-opa-other, non-owner) attempts `Get` — the `same_domain`
+helper in kms.rego fails because user_domain != object_domain. OPA returns allow=false
+→ KMS returns Object_Not_Found.
+
+Ref: kms.rego same_domain helper (ANSI/INCITS 359-2004 §4.2 Constrained RBAC;
+NIST SP 800-53 Rev 5 AC-6 least privilege; domain isolation requirement).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL"]
+backends = ["sqlite"]
+
+# JWT-based identity: the env var is set by setup_auth_server_for_opa()
+# before any vector step runs.
+[identities.other_domain]
+access_token_env = "KMS_TEST_OPA_OTHER_DOMAIN_JWT"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Other-domain CryptoOfficer (non-owner, wrong domain): same_domain fails → OPA denies.
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+identity = "other_domain"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+assert_error_contains = "not found"
+
+# Cleanup: kms-opa-test officer (owner) destroys the key.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+allow_failure = true

@@ -1,0 +1,43 @@
+name = "OPA Mode 2 (Exclusive): DomainAdmin wrong domain denied (cross-domain isolation)"
+description = """
+OPA exclusive mode. The CryptoOfficer from realm `kms-opa-test` (default JWT client,
+owner, domain=kms-opa-test) creates an AES key. A `DomainAdmin` from realm
+`kms-opa-other` (domain=kms-opa-other, non-owner) attempts `Get` — the `same_domain`
+helper in kms.rego fails because user_domain (kms-opa-other) != object_domain
+(kms-opa-test). OPA returns allow=false → KMS returns Object_Not_Found.
+
+This proves that domain isolation holds even for the most privileged non-super role:
+DomainAdmin has full control within their domain but zero access outside it.
+
+Ref: kms.rego same_domain helper + DomainAdmin rule (ANSI/INCITS 359-2004 §4.2
+Constrained RBAC; NIST SP 800-53 Rev 5 AC-6 least privilege).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL"]
+backends = ["sqlite"]
+
+# DomainAdmin JWT in kms-opa-other — wrong domain for the key.
+[identities.domain_admin_other]
+access_token_env = "KMS_TEST_OPA_DOMAIN_ADMIN_OTHER_JWT"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# DomainAdmin from kms-opa-other (non-owner, wrong domain): same_domain fails → OPA denies.
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+identity = "domain_admin_other"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+assert_error_contains = "not found"
+
+# Cleanup: kms-opa-test officer (owner) destroys the key.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+allow_failure = true

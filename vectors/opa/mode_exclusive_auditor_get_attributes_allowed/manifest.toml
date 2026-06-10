@@ -1,0 +1,40 @@
+name = "OPA Mode 2 (Exclusive): Auditor allowed GetAttributes (operation in auditor_ops)"
+description = """
+OPA exclusive mode. The CryptoOfficer (default JWT client, owner) creates an AES key.
+A second user holding the `Auditor` role (kms-opa-auditor, non-owner, same domain)
+calls `GetAttributes` — which IS in `auditor_ops` in kms.rego.
+OPA returns allow=true: the Auditor can read key metadata without owning the key
+or having been explicitly granted access by the owner.
+
+This positive test validates the domain-scoped read-only audit path end-to-end.
+
+Ref: kms.rego auditor_ops set (NIST SP 800-57 Part 2 §4.3 "Audit and Compliance
+Officer"; NIST SP 800-53 AU-9).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL"]
+backends = ["sqlite"]
+
+# Auditor JWT in the same domain as the key (kms-opa-test).
+[identities.auditor]
+access_token_env = "KMS_TEST_OPA_AUDITOR_JWT"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Auditor (non-owner, same domain): GetAttributes ∈ auditor_ops → OPA allows.
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+identity = "auditor"
+assert_success = true
+
+# Cleanup: officer (owner) destroys the key.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+allow_failure = true

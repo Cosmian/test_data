@@ -1,0 +1,21 @@
+name = "OPA Mode 1 (Disabled): owner key lifecycle"
+description = "OPA not configured; KMS legacy permission logic applies. Creates an AES key, retrieves it, and destroys it."
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+allow_failure = true

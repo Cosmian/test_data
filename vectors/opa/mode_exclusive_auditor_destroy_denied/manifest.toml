@@ -1,0 +1,40 @@
+name = "OPA Mode 2 (Exclusive): Auditor denied Destroy (operation not in auditor_ops)"
+description = """
+OPA exclusive mode. The CryptoOfficer (default JWT client, owner) creates an AES key.
+A second user holding the `Auditor` role (kms-opa-auditor, non-owner, same domain)
+attempts `Destroy` — which is intentionally absent from `auditor_ops` in kms.rego
+because auditors must not be able to delete evidence or key material.
+OPA returns allow=false → KMS returns Item_Not_Found (Destroy uses a
+count-based guard: when no object passes the permission check count==0 → Item_Not_Found).
+
+Ref: kms.rego auditor_ops set (NIST SP 800-53 AU-9 separation-of-duties;
+PCI-DSS v4.0 Req 10 — auditor cannot erase audit evidence).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL"]
+backends = ["sqlite"]
+
+# Auditor JWT in the same domain as the key (kms-opa-test).
+[identities.auditor]
+access_token_env = "KMS_TEST_OPA_AUDITOR_JWT"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Auditor (non-owner, same domain): Destroy ∉ auditor_ops → OPA denies.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "auditor"
+assert_success = false
+assert_error_reason = "Item_Not_Found"
+
+# Cleanup: officer (owner) destroys the key.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+allow_failure = true
