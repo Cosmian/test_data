@@ -1,0 +1,87 @@
+name = "EDB TDE KMIP — Key Rotation"
+description = """
+Simulates EDB Postgres TDE master key rotation:
+Create key1 → Activate → Encrypt DEK with key1 →
+Create key2 → Activate → Decrypt DEK with key1 → Encrypt DEK with key2 →
+Decrypt DEK with key2 → verify roundtrip → cleanup.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key1.json"
+assert_success = true
+
+[steps.capture]
+key1_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate_key1.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_with_key1.json"
+assert_success = true
+
+[steps.capture]
+ciphertext1 = "Data"
+nonce1 = "IVCounterNonce"
+
+[[steps]]
+operation = "Create"
+request = "step4_create_key2.json"
+assert_success = true
+
+[steps.capture]
+key2_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step5_activate_key2.json"
+assert_success = true
+
+[[steps]]
+operation = "Decrypt"
+request = "step6_decrypt_with_key1.json"
+assert_success = true
+
+[steps.capture]
+plaintext_dek = "Data"
+
+[[steps]]
+operation = "Encrypt"
+request = "step7_encrypt_with_key2.json"
+assert_success = true
+
+[steps.capture]
+ciphertext2 = "Data"
+nonce2 = "IVCounterNonce"
+
+[[steps]]
+operation = "Decrypt"
+request = "step8_decrypt_with_key2.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "48656C6C6F20454442205444452044454B2064617461"
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_key1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_key1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_key2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_key2.json"
+assert_success = true

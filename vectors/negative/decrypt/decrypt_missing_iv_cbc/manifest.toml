@@ -1,5 +1,14 @@
-name = "Negative: Decrypt AES-CBC without IV"
-description = "Tests that AES-CBC decryption fails when IVCounterNonce is not provided"
+name = "Negative: Decrypt AES-CBC with missing IV and random ciphertext fails with bad padding"
+description = """
+When IVCounterNonce is absent the KMS now treats it as an all-zero IV (to support
+the Thales KMIP variant used by EDB Postgres TDE, which prepends the IV to the
+ciphertext in the Data field rather than passing it in IVCounterNonce).
+
+Sending a random 16-byte blob as ciphertext with no IVCounterNonce therefore no
+longer fails with a 'missing-iv' protocol error.  Instead the KMS decrypts with
+zero IV and OpenSSL rejects the result because the random bytes do not form valid
+PKCS#5 padding — 'bad decrypt' / 'unpadblock'.
+"""
 
 [[steps]]
 operation = "Create"
@@ -12,4 +21,4 @@ key_id = "UniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt_no_iv.json"
 assert_success = false
-assert_error_contains = "missing"
+assert_error_contains = "bad decrypt"
