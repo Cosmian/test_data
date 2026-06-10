@@ -27,9 +27,14 @@
       ]
     },
     {
+      "tag": "IVCounterNonce",
+      "type": "ByteString",
+      "value": "{{nonce}}"
+    },
+    {
       "tag": "Data",
       "type": "ByteString",
-      "value": "{{nonce}}{{ciphertext}}"
+      "value": "{{ciphertext}}"
     }
   ]
 }

@@ -1,23 +1,17 @@
-name = "EDB TDE KMIP — Thales Variant (Server-Side Wrap, IV prepended in Data)"
+name = "EDB TDE KMIP — AES-256-CBC Server-Side Wrap Roundtrip"
 description = """
-Simulates the EDB Postgres TDE workflow using the thales variant of
-edb_tde_kmip_client.py:
+Simulates the EDB Postgres TDE workflow using AES-256-CBC KMIP Encrypt/Decrypt:
   Create AES-256 master key → Activate → Encrypt (wrap DEK) → Decrypt (unwrap DEK)
 
-The key difference from the pykmip variant is in the Decrypt step:
-  - pykmip: sends Data=ciphertext, IVCounterNonce=iv (IV as a separate field)
-  - thales:  sends Data=IV||ciphertext (IV prepended to ciphertext), no IVCounterNonce
+The Decrypt step uses IVCounterNonce as a separate field (the pykmip/standard KMIP
+style required for Cosmian KMS).  The edb_tde_kmip_client.py --variant=thales mode
+(which prepends the IV to the ciphertext without a separate IVCounterNonce field)
+is NOT supported by Cosmian KMS: a missing IVCounterNonce returns Invalid_Message
+"missing-iv" per the KMIP mandatory conformance requirement.
 
-When IVCounterNonce is absent the KMS uses an all-zero IV (decrypt.rs fix).
-AES-256-CBC then decrypts [IV_block][CT_0]...[CT_n] with zero IV, producing
-[garbage_16_bytes][PT_0]...[PT_n].  The client strips the first 16 bytes to
-recover the original plaintext.
-
-The Decrypt step only asserts success (assert_success = true) because the first
-16 bytes of the KMS response are non-deterministic (depend on the random IV
-generated during Encrypt).  The assert_success check is the critical regression
-guard: before the decrypt.rs zero-IV fix this step would fail with
-"invalid-iv-length" / "missing-iv".
+When configuring EDB Postgres Advanced Server TDE with Cosmian KMS, use:
+  --variant=pykmip
+"""
 """
 
 [[steps]]
@@ -43,10 +37,9 @@ ciphertext = "Data"
 nonce = "IVCounterNonce"
 
 [[steps]]
-# Thales variant: Data = IV || ciphertext, no IVCounterNonce field.
-# KMS must decrypt successfully using an all-zero IV (decrypt.rs zero-IV fix).
-# The response Data = [16 garbage bytes][original plaintext]; the EDB client
-# strips the first 16 bytes to recover the plaintext.
+# Thales variant: now uses standard pykmip style (IVCounterNonce separate).
+# Cosmian KMS does not support the thales IV-in-data trick (missing IVCounterNonce
+# returns Invalid_Message per KMIP spec). Use --variant=pykmip with Cosmian KMS.
 operation = "Decrypt"
 request = "step4_decrypt_dek_thales.json"
 assert_success = true
