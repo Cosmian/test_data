@@ -12,7 +12,6 @@ is NOT supported by Cosmian KMS: a missing IVCounterNonce returns Invalid_Messag
 When configuring EDB Postgres Advanced Server TDE with Cosmian KMS, use:
   --variant=pykmip
 """
-"""
 
 [[steps]]
 operation = "Create"
