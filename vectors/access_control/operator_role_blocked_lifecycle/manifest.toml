@@ -1,0 +1,25 @@
+name = "Access Control: Operator blocked from lifecycle operations"
+description = "Operator role cannot perform lifecycle operations (Create, CreateKeyPair) without explicit Create grant."
+server_config = "test_data/configs/server/test/cert_auth_operator_and_crypto_officer.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_operator_create_blocked.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step2_operator_create_keypair_blocked.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"
