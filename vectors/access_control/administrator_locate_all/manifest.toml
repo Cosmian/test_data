@@ -1,0 +1,46 @@
+name = "Administrator: Locate returns all users' objects"
+description = """
+A user declared as Administrator can Locate objects owned by another user.
+"""
+server_config = "test_data/configs/server/test/cert_auth_administrator.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key  = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key  = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# ── Step 1: owner creates a named AES-256 key ────────────────────────────────
+
+[[steps]]
+operation = "Create"
+request   = "step1_owner_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── Step 2: Administrator (user identity) locates by name ────────────────────────
+
+[[steps]]
+operation = "Locate"
+request   = "step2_user_locate.json"
+identity  = "user"
+assert_success = true
+
+[steps.assert_any_field]
+UniqueIdentifier = "{{key_id}}"
+
+# ── Cleanup ──────────────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Revoke"
+request   = "cleanup_revoke_key.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request   = "cleanup_destroy_key.json"
+assert_success = true

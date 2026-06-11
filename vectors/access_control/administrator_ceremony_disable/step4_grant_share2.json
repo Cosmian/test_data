@@ -1,0 +1,5 @@
+{
+  "user_id": "user.client@acme.com",
+  "unique_identifier": "{{share2_id}}",
+  "operation_types": ["get"]
+}

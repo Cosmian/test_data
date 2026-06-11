@@ -1,0 +1,200 @@
+name = "Administrator: ceremony activate → access → disable → access denied"
+description = """
+Full lifecycle of the split-key ceremony Administrator role:
+1. Owner creates a secret AES key and splits it 2-of-3 (the ceremony master key).
+2. Owner grants the user access to the two shares they will present.
+3. User joins 2 shares → ceremony activates → user becomes Administrator.
+4. User calls AdministratorStatus and verifies ceremony_activated and is_administrator are true.
+5. Owner creates a victim key to probe Administrator access.
+6. User retrieves the victim key successfully (Administrator access confirmed).
+7. User calls AdministratorDisable → ceremony revoked.
+8. User calls AdministratorStatus and verifies ceremony_activated and is_administrator are false.
+9. User attempts to retrieve the victim key → access denied (Object_Not_Found).
+"""
+server_config = "test_data/configs/server/test/cert_auth_administrator_ceremony.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key  = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key  = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+# ── Step 1: owner creates the ceremony master key ────────────────────────────
+
+[[steps]]
+operation      = "Create"
+request        = "step1_owner_create_ceremony_key.json"
+assert_success = true
+
+[steps.capture]
+ceremony_key_id = "UniqueIdentifier"
+
+# ── Step 2: owner splits the ceremony key 2-of-3 ─────────────────────────────
+
+[[steps]]
+operation      = "CreateSplitKey"
+request        = "step2_owner_create_split_key.json"
+assert_success = true
+
+[steps.assert_count]
+PrivateKeyUniqueIdentifier = 3
+
+[steps.capture]
+share1_id = "PrivateKeyUniqueIdentifier"
+
+[steps.capture_nth.share2_id]
+tag   = "PrivateKeyUniqueIdentifier"
+index = 1
+
+[steps.capture_nth.share3_id]
+tag   = "PrivateKeyUniqueIdentifier"
+index = 2
+
+# ── Step 3: owner grants the user access (Get) to share1 and share2 ──────────
+
+[[steps]]
+operation      = "GrantAccess"
+request        = "step3_grant_share1.json"
+assert_success = true
+
+[[steps]]
+operation      = "GrantAccess"
+request        = "step4_grant_share2.json"
+assert_success = true
+
+# ── Step 5: user joins 2 shares → ceremony activates ─────────────────────────
+
+[[steps]]
+operation      = "JoinSplitKey"
+request        = "step5_user_join_split_key.json"
+identity       = "user"
+assert_success = true
+
+[steps.capture]
+joined_id = "UniqueIdentifier"
+
+# ── Step 6: user verifies ceremony is activated ──────────────────────────────
+
+[[steps]]
+operation      = "AdministratorStatus"
+request        = "noop.json"
+identity       = "user"
+assert_success = true
+
+[steps.assert_fields]
+ceremony_activated = "true"
+is_administrator   = "true"
+
+# ── Step 7: owner creates a victim key ───────────────────────────────────────
+
+[[steps]]
+operation      = "Create"
+request        = "step7_owner_create_victim_key.json"
+assert_success = true
+
+[steps.capture]
+victim_key_id = "UniqueIdentifier"
+
+# ── Step 8: user retrieves victim key (Administrator access confirmed) ────────────
+
+[[steps]]
+operation      = "Get"
+request        = "step8_user_get_victim_key.json"
+identity       = "user"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+
+# ── Step 9: user disables the Administrator ceremony ────────────────────────────────
+
+[[steps]]
+operation      = "AdministratorDisable"
+request        = "noop.json"
+identity       = "user"
+assert_success = true
+
+# ── Step 10: user verifies ceremony is no longer active ──────────────────────
+
+[[steps]]
+operation      = "AdministratorStatus"
+request        = "noop.json"
+identity       = "user"
+assert_success = true
+
+[steps.assert_fields]
+ceremony_activated = "false"
+is_administrator   = "false"
+
+# ── Step 11: user is now denied access to the victim key ─────────────────────
+
+[[steps]]
+operation             = "Get"
+request               = "step8_user_get_victim_key.json"
+identity              = "user"
+assert_success        = false
+assert_error_contains = "not found"
+
+# ── Cleanup (all allow_failure) ───────────────────────────────────────────────
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_ceremony_key.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_ceremony_key.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_share1.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_share1.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_share2.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_share2.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_share3.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_share3.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_joined.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_joined.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_victim_key.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_victim_key.json"
+allow_failure = true

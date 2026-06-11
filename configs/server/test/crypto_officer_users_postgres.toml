@@ -1,6 +1,6 @@
-# Test KMS server — TLS + JWT auth, for privileged-user tests, MySQL backend.
+# Test KMS server — TLS + JWT auth, for privileged-user tests, PostgreSQL backend.
 # Uses PEM cert + key (works in both FIPS and non-FIPS mode).
-# Bound to port 10003. privileged_users is injected at runtime.
+# Bound to port 10003. crypto_officer_users is injected at runtime.
 
 default_username = "tech@cosmian.com"
 kms_public_url = "https://localhost:10003/google_cse"
@@ -10,12 +10,12 @@ port = 10003
 hostname = "0.0.0.0"
 
 [db]
-database_type = "mysql"
-database_url = "mysql://kms:kms@localhost:3306/kms"
+database_type = "postgresql"
+database_url = "postgresql://kms:kms@127.0.0.1:5432/kms"
 clear_database = false
 
 [workspace]
-root_data_path = "/tmp/kms_test_workspace_privileged_users_mysql"
+root_data_path = "/tmp/kms_test_workspace_crypto_officer_users_postgres"
 tmp_path = "/tmp"
 
 [tls]

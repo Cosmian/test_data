@@ -1,0 +1,25 @@
+{
+  "tag": "CreateSplitKey",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "SplitKeyParts",
+      "type": "Integer",
+      "value": 3
+    },
+    {
+      "tag": "SplitKeyThreshold",
+      "type": "Integer",
+      "value": 5
+    },
+    {
+      "tag": "SplitKeyMethod",
+      "type": "Enumeration",
+      "value": "PolynomialSharingGf28"
+    }
+  ]
+}

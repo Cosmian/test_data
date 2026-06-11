@@ -1,0 +1,28 @@
+name = "CreateSplitKey: threshold < 2 is rejected"
+description = """
+A CreateSplitKey request with split_key_threshold = 1 must be rejected by the server.
+A threshold of at least 2 is required for meaningful secret sharing.
+"""
+
+[[steps]]
+operation      = "Create"
+request        = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── Attempt CreateSplitKey with an invalid threshold ─────────────────────────
+
+[[steps]]
+operation             = "CreateSplitKey"
+request               = "step2_create_split_key_bad_threshold.json"
+assert_success        = false
+assert_error_contains = "split_key_threshold must be at least 2"
+
+# ── Cleanup ──────────────────────────────────────────────────────────────────
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_key.json"
+allow_failure = true

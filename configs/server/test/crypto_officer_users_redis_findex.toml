@@ -1,6 +1,7 @@
-# Test KMS server — TLS + JWT auth, for privileged-user tests, PostgreSQL backend.
+# Test KMS server — TLS + JWT auth, for privileged-user tests, Redis-Findex backend.
+# Only valid in non-FIPS mode (redis-findex is gated behind the non-fips feature).
 # Uses PEM cert + key (works in both FIPS and non-FIPS mode).
-# Bound to port 10003. privileged_users is injected at runtime.
+# Bound to port 10003. crypto_officer_users is injected at runtime.
 
 default_username = "tech@cosmian.com"
 kms_public_url = "https://localhost:10003/google_cse"
@@ -10,12 +11,13 @@ port = 10003
 hostname = "0.0.0.0"
 
 [db]
-database_type = "postgresql"
-database_url = "postgresql://kms:kms@127.0.0.1:5432/kms"
-clear_database = false
+database_type = "redis-findex"
+database_url = "redis://localhost:6379"
+clear_database = true
+redis_master_password = "password"
 
 [workspace]
-root_data_path = "/tmp/kms_test_workspace_privileged_users_postgres"
+root_data_path = "/tmp/kms_test_workspace_crypto_officer_users_redis"
 tmp_path = "/tmp"
 
 [tls]

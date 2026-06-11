@@ -1,0 +1,109 @@
+name = "CreateSplitKey + JoinSplitKey: GF(2^8) SSS 2-of-3 round-trip"
+description = """
+Creates an AES-256 symmetric key, splits it into 3 shares using Shamir's Secret Sharing over
+GF(2^8) with a threshold of 2. Then joins any 2 shares to reconstruct the key and verifies
+the reconstructed object is a SymmetricKey.
+"""
+
+# Uses the default SQLite backend (single user, no cert auth required).
+
+[[steps]]
+operation      = "Create"
+request        = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── Split the key into 3 shares (threshold = 2) ──────────────────────────────
+
+[[steps]]
+operation      = "CreateSplitKey"
+request        = "step2_create_split_key.json"
+assert_success = true
+
+[steps.assert_count]
+PrivateKeyUniqueIdentifier = 3
+
+[steps.capture]
+share1_id = "PrivateKeyUniqueIdentifier"
+
+[steps.capture_nth.share2_id]
+tag   = "PrivateKeyUniqueIdentifier"
+index = 1
+
+[steps.capture_nth.share3_id]
+tag   = "PrivateKeyUniqueIdentifier"
+index = 2
+
+# ── Join 2 of the 3 shares to reconstruct the key ───────────────────────────
+
+[[steps]]
+operation      = "JoinSplitKey"
+request        = "step3_join_split_key.json"
+assert_success = true
+
+[steps.capture]
+reconstructed_id = "UniqueIdentifier"
+
+# ── Verify the reconstructed key is retrievable ──────────────────────────────
+
+[[steps]]
+operation      = "Get"
+request        = "step4_get_reconstructed.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+
+# ── Cleanup: revoke + destroy all objects (best-effort) ──────────────────────
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_key_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_key_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_share1_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_share1_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_share2_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_share2_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_share3_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_share3_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Revoke"
+request      = "cleanup_revoke_reconstructed_id.json"
+allow_failure = true
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_reconstructed_id.json"
+allow_failure = true

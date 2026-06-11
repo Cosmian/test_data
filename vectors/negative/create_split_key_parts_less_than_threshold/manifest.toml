@@ -1,0 +1,28 @@
+name = "CreateSplitKey: parts < threshold is rejected"
+description = """
+A CreateSplitKey request where split_key_parts < split_key_threshold must be rejected.
+You cannot require more shares than exist.
+"""
+
+[[steps]]
+operation      = "Create"
+request        = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── Attempt CreateSplitKey with parts(3) < threshold(5) ──────────────────────
+
+[[steps]]
+operation             = "CreateSplitKey"
+request               = "step2_create_split_key_bad_parts.json"
+assert_success        = false
+assert_error_contains = "split_key_parts must be >= split_key_threshold"
+
+# ── Cleanup ──────────────────────────────────────────────────────────────────
+
+[[steps]]
+operation    = "Destroy"
+request      = "cleanup_destroy_key.json"
+allow_failure = true
