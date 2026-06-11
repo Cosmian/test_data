@@ -8,8 +8,6 @@
 #   input.roles           — array of role strings from JWT `roles` claim (RFC 9068).
 #                           For non-JWT auth schemes (mTLS, API token) this is []
 #                           and all role-based rules deny (fail-closed).
-#   input.is_super_admin  — boolean: true when KMS ceremony super-admin is activated
-#                           (SA3: Shamir ceremony, separate from JWT "SuperAdmin" role)
 #   input.operation       — KMIP operation name in lowercase snake_case, e.g. "create", "get_attributes"
 #   input.object_uid      — UID of the target KMIP object ("*" for object-less ops)
 #   input.object_domain   — domain the target object belongs to ("" for object-less ops)
@@ -44,15 +42,6 @@ default allow := false
 # ---------------------------------------------------------------------------
 allow if {
     input.is_owner == true
-}
-
-# ---------------------------------------------------------------------------
-# Ceremony super-admin (SA3) — Shamir-activated, cross-domain.
-# This is distinct from the JWT "SuperAdmin" role: ceremony activation is a
-# KMS-internal state (split-key ceremony) mapped into OPA input for auditability.
-# ---------------------------------------------------------------------------
-allow if {
-    input.is_super_admin == true
 }
 
 # ---------------------------------------------------------------------------
@@ -171,11 +160,10 @@ same_domain if {
 # Returns a set of matching reasons (avoids Rego "complete rule" conflicts).
 # ---------------------------------------------------------------------------
 reasons contains "owner"                  if { input.is_owner == true }
-reasons contains "super_admin_ceremony"   if { input.is_super_admin == true; not input.is_owner }
-reasons contains "super_admin_role"       if { input.roles[_] == "SuperAdmin"; not input.is_super_admin; not input.is_owner }
+reasons contains "super_admin_role"       if { input.roles[_] == "SuperAdmin"; not input.is_owner }
 reasons contains "domain_admin"           if { input.roles[_] == "DomainAdmin"; same_domain; not input.is_owner }
 reasons contains "crypto_officer"         if { input.roles[_] == "CryptoOfficer"; same_domain; crypto_officer_ops[input.operation]; not input.is_owner }
 reasons contains "auditor"                if { input.roles[_] == "Auditor"; same_domain; auditor_ops[input.operation]; not input.is_owner }
 reasons contains "user"                   if { input.roles[_] == "User"; same_domain; user_ops[input.operation]; not input.is_owner }
-reasons contains "no_role"                if { count(input.roles) == 0; not input.is_super_admin; not input.is_owner }
+reasons contains "no_role"                if { count(input.roles) == 0; not input.is_owner }
 reasons contains "denied"                 if { not allow }
