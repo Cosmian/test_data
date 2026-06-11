@@ -1,6 +1,6 @@
 name = "Transport: HTTPS mTLS (mutual TLS with client certificate)"
 description = "Verifies the KMS can be reached over HTTPS with mutual TLS (client certificate required)"
-server_config = "test_data/configs/server/cert_auth.toml"
+server_config = "test_data/configs/server/auth/cert.toml"
 
 [[steps]]
 operation = "Create"

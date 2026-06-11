@@ -1,6 +1,6 @@
 name = "Access Control: non-owner cannot grant access"
 description = "Owner creates AES key, user (non-owner) attempts to grant themselves access — must be denied because user does not own the key"
-server_config = "test_data/configs/server/cert_auth.toml"
+server_config = "test_data/configs/server/auth/cert.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"

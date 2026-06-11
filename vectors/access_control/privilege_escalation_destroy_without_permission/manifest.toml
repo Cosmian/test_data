@@ -1,6 +1,6 @@
 name = "Access Control: user cannot destroy without permission"
 description = "Owner creates AES key, grants user only Get. Get acts as wildcard for crypto ops but NOT for Destroy — user's Destroy attempt is denied."
-server_config = "test_data/configs/server/cert_auth.toml"
+server_config = "test_data/configs/server/auth/cert.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"

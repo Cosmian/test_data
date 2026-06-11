@@ -1,3 +1,6 @@
+# Test KMS client — HTTPS with a PQC (ML-DSA-44) TLS server certificate.
+# Port is patched at runtime by load_client_config().
+# accept_invalid_certs is required because the server cert is self-signed.
 vendor_id = "cosmian"
 
 [http_config]

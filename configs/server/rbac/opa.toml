@@ -1,0 +1,140 @@
+# =============================================================================
+# KMS server — OPA RBAC + Cosmian Authentication Verifier (Mode 3)
+# =============================================================================
+#
+# Authorization model: Mode 3 — Enforcing (OPA + Native KMS)
+#
+#   Every KMIP request must pass TWO authorization gates:
+#     Gate 1 — OPA evaluates kms.rego:  role hierarchy, domain scoping, owner override
+#     Gate 2 — Native KMS: object ownership, per-object grants, HSM admin
+#
+# Role hierarchy (defined in test_data/opa/kms.rego):
+#   SuperAdmin    > DomainAdmin > CryptoOfficer > User
+#                              > Auditor
+#
+# Prerequisites:
+#   1. Authentication Verifier running (from authentication/ directory):
+#        cargo run -p auth_verifier -- \
+#          ../test_data/configs/auth_verifier/kms_opa_rbac.toml
+#
+#   2. OPA running with kms.rego:
+#        docker compose up -d opa
+#
+#   3. Provision test users (from the repository root):
+#        REALM_A=acme.com REALM_B=partner.acme.com \
+#          bash test_data/configs/auth_verifier/provision_opa_users.sh
+#      Usernames: kms-opa-officer, kms-opa-super-admin, kms-opa-auditor, …
+#      Password:  change_me  (default)
+#
+#   4. Start the KMS server from the repository root:
+#        cargo run -p cosmian_kms_server --features non-fips -- \
+#          -c test_data/configs/server/rbac/opa.toml
+#
+#   5. Open the KMS Web UI at: https://localhost:9998
+#      The login page offers two authentication methods:
+#        a) Auth Verifier (primary)  — username/password form with realm selector:
+#             realm: acme.com   username: kms-opa-officer   password: change_me
+#        b) Client Certificate (secondary) — click "Client certificate" button:
+#             present owner.client@acme.com.p12 (or equivalent) from the browser.
+#
+# =============================================================================
+
+# Used by the Web UI for redirect URLs and CORS.
+kms_public_url = "https://localhost:9998"
+
+# ---------------------------------------------------------------------------
+# HTTP server — plain HTTP for local development.
+# JWT authentication does not require TLS between client and KMS;
+# TLS is required only for the auth_verifier endpoint (handled separately).
+# ---------------------------------------------------------------------------
+[http]
+hostname = "0.0.0.0"
+port     = 9998
+
+# ---------------------------------------------------------------------------
+# Authentication — Cosmian Authentication Verifier
+#
+# The KMS validates bearer tokens issued by the Authentication Verifier:
+#   - sub    → user identity forwarded to OPA as `input.user`
+#   - roles  → JWT `roles` claim (RFC 9068) forwarded as `input.roles`
+#   - as_rid → realm ID forwarded as `input.user_domain`
+#
+# JWKS endpoint is derived automatically as:
+#   {auth_verifier_url}/.well-known/jwks.json
+#
+# auth_verifier_realm enables the Web UI login form (POST /ui/login_as).
+# ---------------------------------------------------------------------------
+[auth_verifier]
+auth_verifier_url                  = "https://localhost:8443"
+# Multiple realms: the UI shows a realm selector dropdown when more than one is listed.
+# Set to a single string or an array.
+auth_verifier_realm                = ["acme.com", "kms-opa-test"]
+# Accept the self-signed test certificate — remove in production.
+auth_verifier_accept_invalid_certs = true
+
+# ---------------------------------------------------------------------------
+# Native KMS Crypto Officers (no split-key ceremony required)
+#
+# These users are trusted at the KMS level and can bypass OPA Gate 1 in
+# enforcing mode.  In exclusive mode, OPA remains the sole authority.
+#
+# Use case: cert-authenticated service accounts (e.g. mTLS operator certs)
+# that need Create/Import access without an OIDC JWT.
+# ---------------------------------------------------------------------------
+[roles]
+crypto_officer_users = [
+  "owner.client@acme.com",
+  "user.client@acme.com",
+  "co3.client@acme.com",
+]
+crypto_officer_require_ceremony = false
+
+# ---------------------------------------------------------------------------
+# Authorization — Open Policy Agent (Mode 3: enforcing)
+#
+# OPA evaluates test_data/opa/kms.rego on every KMIP operation.
+# In "enforcing" mode OPA is Gate 1; the native KMS grant check is Gate 2.
+# In "exclusive" mode the native KMS check is bypassed entirely.
+#
+# Reference: test_data/opa/kms.rego
+# ---------------------------------------------------------------------------
+[opa]
+opa_url  = "http://localhost:8181"
+opa_mode = "enforcing"
+
+# ---------------------------------------------------------------------------
+# Database
+# ---------------------------------------------------------------------------
+[db]
+database_type  = "sqlite"
+sqlite_path    = "/tmp/kms-opa-rbac"
+clear_database = false
+
+# ---------------------------------------------------------------------------
+# Workspace
+# ---------------------------------------------------------------------------
+[workspace]
+root_data_path = "/tmp/kms-opa-rbac-workspace"
+tmp_path       = "/tmp"
+
+# ---------------------------------------------------------------------------
+# Web UI — serves the pre-built SPA so http://localhost:9998 shows a login page.
+# The login form authenticates against auth_verifier_realm = "kms" above.
+# Build the UI once with: pnpm -C ui build
+# ---------------------------------------------------------------------------
+[ui_config]
+ui_index_html_folder = "ui/dist"
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+[logging]
+rust_log = "info,cosmian_kms_server=info"
+
+[tls]
+tls_cert_file       = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file        = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+# Client CA: enables mTLS authentication and adds "CERT" as a login method in the Web UI.
+# Native KMS CO certs signed by this CA (owner.client@acme.com, etc.) can authenticate
+# directly without a JWT when listed in [roles] crypto_officer_users.
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"

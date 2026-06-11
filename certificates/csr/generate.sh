@@ -44,10 +44,12 @@ openssl req -new -key intermediate.key -out intermediate.csr -subj "/C=FR/ST=IdF
 # ```
 # [ v3_ca ]
 # basicConstraints=CA:TRUE,pathlen:0
-# keyUsage=keyCertSign,digitalSignature
+# keyUsage=keyCertSign,cRLSign,digitalSignature
 # extendedKeyUsage=emailProtection
 # crlDistributionPoints=URI:http://cse.example.com/crl.pem
 # ```
+# `cRLSign` is required by RFC 5280 §4.2.1.3 for any CA that issues CRLs —
+# without it the KMS server rejects CRL generation requests for this issuer.
 # The `crlDistributionPoints` option should be replaced with the URL of a publicly accessible HTTP uniformResourceIdentifier that contains the CRL for the intermediate certificate.
 # This will sign the CSR with the CA's private key and generate an intermediate certificate. The intermediate certificate will be stored in the file `intermediate.crt`.
 openssl x509 -req -in intermediate.csr -CA ca.crt -CAkey ca.key -out intermediate.crt -days 1825 -extensions v3_ca -extfile extensions.ext

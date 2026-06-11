@@ -1,0 +1,38 @@
+name = "OPA Mode 3 (Enforcing): native KMS CO cert user allowed Create (privileged)"
+description = """
+OPA enforcing mode. A client authenticated via mTLS (cert CN = owner.client@acme.com)
+IS listed as a native KMS Crypto Officer in `[roles] crypto_officer_users`.
+Privileged users bypass OPA Gate 1 in enforcing mode — the KMS-native role is
+sufficient — so the Create succeeds even though the client presents no JWT.
+
+Gate 2 (native KMS ownership/grant check) also passes because the user is an
+explicitly trusted CO.
+
+This proves the two-gate enforcing model: privileged native COs can create in
+enforcing mode, but NOT in exclusive mode (where OPA is the sole authority).
+
+Ref: kms.rego enforcing bypass for co_users (FIPS 140-3 §7.4 Crypto Officer role;
+NIST SP 800-57 Part 2 §4.3 Key Management Officer).
+"""
+requires_env = ["KMS_OPA_URL"]
+backends = ["sqlite"]
+
+# mTLS cert client — in crypto_officer_users → KMS bypasses OPA Gate 1.
+[identities.co_cert]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key  = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+identity = "co_cert"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "co_cert"
+allow_failure = true
