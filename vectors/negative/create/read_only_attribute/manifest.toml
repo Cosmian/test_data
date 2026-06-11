@@ -13,4 +13,4 @@ key_id = "UniqueIdentifier"
 operation = "SetAttribute"
 request = "step2_setattribute.json"
 assert_success = false
-assert_error_contains = "State cannot be set"
+assert_error_contains = "server-managed and cannot be set"
