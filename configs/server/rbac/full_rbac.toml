@@ -1,0 +1,92 @@
+# ── Full 4-role RBAC — production reference configuration ───────────────────
+#
+# Role model: Operator + CryptoOfficer + Administrator (ceremony) + Auditor
+#   FIPS 140-3 §7.4 / NIST SP 800-57 Part 2 Rev 1 §4.3–§4.4
+#   ANSI/INCITS 359-2004 §4.2–§4.3 (separation of duty, split knowledge)
+#
+# Role hierarchy and permissions:
+#
+#   ┌──────────────────┬────────────────────────────────────────────────────┐
+#   │ Role             │ Permitted operations                               │
+#   ├──────────────────┼────────────────────────────────────────────────────┤
+#   │ Operator         │ Encrypt, Decrypt, Sign, Verify, MAC, Hash,         │
+#   │                  │ Get/Export (own keys), GetAttributes, Locate       │
+#   ├──────────────────┼────────────────────────────────────────────────────┤
+#   │ CryptoOfficer    │ Operator + Create, Import, Destroy, Revoke,        │
+#   │                  │ Activate, CreateKeyPair, CreateSplitKey,           │
+#   │                  │ JoinSplitKey, Certify, GrantAccess, RevokeAccess   │
+#   ├──────────────────┼────────────────────────────────────────────────────┤
+#   │ Administrator    │ All operations; bypass per-object ownership check; │
+#   │ (ceremony)       │ active only after split-key ceremony completes      │
+#   ├──────────────────┼────────────────────────────────────────────────────┤
+#   │ Auditor          │ Locate, GetAttributes, Validate on ALL objects;    │
+#   │ (config-only)    │ strictly blocked from key material and mutations   │
+#   └──────────────────┴────────────────────────────────────────────────────┘
+#
+# Separation-of-duty constraints (enforced at config load):
+#   • A user may appear in at most ONE role list.
+#   • Administrator candidates cannot also be Auditors, CryptoOfficers, or Operators.
+#
+# Unenrolled users default to Operator (fail-secure minimum privilege).
+#
+# Note: Administrator ceremony uses 2-of-3 threshold Shamir (PolynomialSharingGf28).
+#   Auditor is config-only here; switch `auditor_require_ceremony = true` with
+#   `auditor_threshold`/`auditor_total_parts` for ceremony-gated audit access.
+# ─────────────────────────────────────────────────────────────────────────────
+
+default_username = "admin"
+
+[roles]
+# ── CryptoOfficer role ────────────────────────────────────────────────────────
+# Key-management engineers: create, rotate, revoke keys.
+# Certs: test_data/certificates/client_server/crypto-officer-1/crypto-officer-1.example.com.{key,crt}
+#        test_data/certificates/client_server/crypto-officer-2/crypto-officer-2.example.com.{key,crt}
+crypto_officer_users = [
+  "crypto-officer-1@example.com",
+  "crypto-officer-2@example.com",
+]
+
+# ── Administrator role (ceremony-gated) ───────────────────────────────────────
+# Emergency / break-glass access. Inactive until 2-of-3 custodians join shares.
+# POST /access/administrator/disable revokes the activation.
+# Certs: test_data/certificates/client_server/custodian-1/custodian-1.example.com.{key,crt}
+#        test_data/certificates/client_server/custodian-2/custodian-2.example.com.{key,crt}
+#        test_data/certificates/client_server/custodian-3/custodian-3.example.com.{key,crt}
+administrator_users = [
+  "custodian-1@example.com",
+  "custodian-2@example.com",
+  "custodian-3@example.com",
+]
+administrator_require_ceremony = true
+administrator_threshold        = 2
+administrator_total_parts      = 3
+
+# ── Auditor role (config-only) ────────────────────────────────────────────────
+# Compliance officers: read-only metadata inspection on all objects, no key material.
+# Cert: test_data/certificates/client_server/auditor-1/auditor-1.example.com.{key,crt}
+auditor_users            = ["auditor-1@example.com"]
+auditor_require_ceremony = false
+
+[http]
+port = 9998
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-rbac-full"
+clear_database = false
+
+[workspace]
+root_data_path = "/tmp/kms-rbac-full-workspace"
+tmp_path = "/tmp"
+
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[logging]
+rust_log = "info,cosmian_kms=info"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

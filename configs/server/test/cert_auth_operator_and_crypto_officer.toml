@@ -1,11 +1,12 @@
-# Test KMS server — TLS with mutual client-certificate authentication + Operator role configured.
-# `user.client@acme.com` is an explicit Operator. `owner.client@acme.com` is a CryptoOfficer.
+# Test KMS server — TLS with mutual client-certificate authentication + role enforcement.
+# `user.client@acme.com` is an unenrolled user (defaults to Operator).
+# `owner.client@acme.com` is a CryptoOfficer.
 # Bound to port 9992. Loaded by Operator/CryptoOfficer separation-of-duty test vectors.
 
 default_username = "tech@cosmian.com"
 kms_public_url = "https://localhost:9992/google_cse"
 
-operator_users = ["user.client@acme.com"]
+[roles]
 crypto_officer_users = ["owner.client@acme.com"]
 
 [http]

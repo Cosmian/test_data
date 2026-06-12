@@ -1,0 +1,53 @@
+# ── CryptoOfficer-only RBAC ──────────────────────────────────────────────────
+#
+# Role model: CryptoOfficer
+#   Listed users hold the CryptoOfficer role. Unlisted authenticated users
+#   default to Operator (minimum privilege).
+#
+# CryptoOfficer permissions (superset of Operator):
+#   • All Operator operations
+#   • Key lifecycle: Create, Import, Register, Destroy, Revoke, Activate
+#   • Key pair management: CreateKeyPair, ReKeyKeyPair, Certify
+#   • Split-key management: CreateSplitKey, JoinSplitKey
+#   • Delegation: GrantAccess, RevokeAccess
+#
+# Use-case: key-management engineers who provision and rotate keys. Typical
+# deployment separates CryptoOfficers from application Operators so that
+# compromise of a service account cannot trigger key destruction.
+# ─────────────────────────────────────────────────────────────────────────────
+
+default_username = "admin"
+
+[roles]
+# Users with CryptoOfficer role.
+# Authenticated users not listed here default to Operator.
+# Certs: test_data/certificates/client_server/crypto-officer-1/crypto-officer-1.example.com.{key,crt}
+#        test_data/certificates/client_server/crypto-officer-2/crypto-officer-2.example.com.{key,crt}
+crypto_officer_users = [
+  "crypto-officer-1@example.com",
+  "crypto-officer-2@example.com",
+]
+
+[http]
+port = 9998
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-rbac-crypto-officer"
+clear_database = false
+
+[workspace]
+root_data_path = "/tmp/kms-rbac-crypto-officer-workspace"
+tmp_path = "/tmp"
+
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file  = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[logging]
+rust_log = "info,cosmian_kms=info"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

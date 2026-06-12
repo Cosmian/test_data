@@ -1,0 +1,61 @@
+# ── Auditor role — split-key ceremony mode ───────────────────────────────────
+#
+# Role model: Auditor activated via Shamir split-key ceremony
+#   FIPS 140-3 §7.4.2 / NIST SP 800-57 §4.4.4
+#
+# How the ceremony works:
+#   1. A CryptoOfficer (or key owner) calls CreateSplitKey. Because
+#      `auditor_require_ceremony = true`, every share produced is automatically
+#      tagged with the `x-cosmian-auditor-ceremony` vendor attribute.
+#   2. Shares are granted (GrantAccess) to the Auditor candidate.
+#   3. When the Auditor candidate calls JoinSplitKey with ≥ `auditor_threshold`
+#      shares, the server records the activation in `auditor_activations`.
+#   4. From that point the user holds the Auditor role (read-only metadata bypass)
+#      until POST /access/auditor/disable is called by an active Administrator.
+#
+# The Auditor ceremony uses the same (t, n) Shamir scheme as the Administrator
+# ceremony but with a separate DB table and vendor attribute, so both roles can
+# coexist with independent ceremony lifecycles.
+#
+# Use-case: regulated deployments where even read-only audit access requires
+# dual-control authorisation before it becomes active.
+# ─────────────────────────────────────────────────────────────────────────────
+
+default_username = "admin"
+
+[roles]
+# The Administrator who can create ceremony shares and later disable the Auditor.
+# Cert: test_data/certificates/client_server/administrator/administrator.example.com.{key,crt}
+administrator_users            = ["administrator@example.com"]
+administrator_require_ceremony = false
+
+# Auditor candidate. Role is inactive until the ceremony completes.
+# Cert: test_data/certificates/client_server/auditor-1/auditor-1.example.com.{key,crt}
+auditor_users            = ["auditor-1@example.com"]
+auditor_require_ceremony = true
+auditor_threshold        = 2   # minimum shares needed to activate
+auditor_total_parts      = 3   # total shares produced by CreateSplitKey
+
+[http]
+port = 9998
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-rbac-auditor-ceremony"
+clear_database = false
+
+[workspace]
+root_data_path = "/tmp/kms-rbac-auditor-ceremony-workspace"
+tmp_path = "/tmp"
+
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file  = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[logging]
+rust_log = "info,cosmian_kms=info"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

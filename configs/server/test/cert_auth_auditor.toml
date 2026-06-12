@@ -5,6 +5,7 @@
 default_username = "tech@cosmian.com"
 kms_public_url = "https://localhost:9991/google_cse"
 
+[roles]
 auditor_users = ["user.client@acme.com"]
 auditor_require_ceremony = false
 
