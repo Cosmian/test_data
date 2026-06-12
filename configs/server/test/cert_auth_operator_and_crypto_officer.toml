@@ -1,0 +1,31 @@
+# Test KMS server — TLS with mutual client-certificate authentication + Operator role configured.
+# `user.client@acme.com` is an explicit Operator. `owner.client@acme.com` is a CryptoOfficer.
+# Bound to port 9992. Loaded by Operator/CryptoOfficer separation-of-duty test vectors.
+
+default_username = "tech@cosmian.com"
+kms_public_url = "https://localhost:9992/google_cse"
+
+operator_users = ["user.client@acme.com"]
+crypto_officer_users = ["owner.client@acme.com"]
+
+[http]
+port = 9992
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms_test_cert_auth_operator_crypto_officer"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_cert_auth_operator_crypto_officer"
+tmp_path = "/tmp"
+
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[socket_server]
+socket_server_start = true
+socket_server_port = 10092
