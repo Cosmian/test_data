@@ -1,6 +1,6 @@
-# ── Full 4-role RBAC — production reference configuration ───────────────────
+# ── Full RBAC — production reference configuration ──────────────────────────
 #
-# Role model: Operator + CryptoOfficer + Administrator (ceremony) + Auditor
+# Role model: CryptoOfficer + Administrator (ceremony) + Auditor
 #   FIPS 140-3 §7.4 / NIST SP 800-57 Part 2 Rev 1 §4.3–§4.4
 #   ANSI/INCITS 359-2004 §4.2–§4.3 (separation of duty, split knowledge)
 #
@@ -10,11 +10,11 @@
 #   │ Role             │ Permitted operations                               │
 #   ├──────────────────┼────────────────────────────────────────────────────┤
 #   │ Operator         │ Encrypt, Decrypt, Sign, Verify, MAC, Hash,         │
-#   │                  │ Get/Export (own keys), GetAttributes, Locate       │
+#   │ (default)        │ Get/Export (own keys), GetAttributes, Locate       │
 #   ├──────────────────┼────────────────────────────────────────────────────┤
-#   │ CryptoOfficer    │ Operator + Create, Import, Destroy, Revoke,        │
-#   │                  │ Activate, CreateKeyPair, CreateSplitKey,           │
-#   │                  │ JoinSplitKey, Certify, GrantAccess, RevokeAccess   │
+#   │ CryptoOfficer    │ Create, Import, Destroy, Revoke, Activate,         │
+#   │                  │ CreateKeyPair, CreateSplitKey, JoinSplitKey,       │
+#   │                  │ Certify, GrantAccess, RevokeAccess                 │
 #   ├──────────────────┼────────────────────────────────────────────────────┤
 #   │ Administrator    │ All operations; bypass per-object ownership check; │
 #   │ (ceremony)       │ active only after split-key ceremony completes      │
@@ -25,9 +25,10 @@
 #
 # Separation-of-duty constraints (enforced at config load):
 #   • A user may appear in at most ONE role list.
-#   • Administrator candidates cannot also be Auditors, CryptoOfficers, or Operators.
+#   • Administrator candidates cannot also be Auditors or CryptoOfficers.
 #
 # Unenrolled users default to Operator (fail-secure minimum privilege).
+# There is no `operator_users` config key — it is the implicit default.
 #
 # Note: Administrator ceremony uses 2-of-3 threshold Shamir (PolynomialSharingGf28).
 #   Auditor is config-only here; switch `auditor_require_ceremony = true` with

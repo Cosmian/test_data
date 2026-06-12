@@ -1,18 +1,17 @@
 # ── CryptoOfficer-only RBAC ──────────────────────────────────────────────────
 #
-# Role model: CryptoOfficer
+# Role model: CryptoOfficer + default Operator
 #   Listed users hold the CryptoOfficer role. Unlisted authenticated users
-#   default to Operator (minimum privilege).
+#   default to Operator (minimum privilege — crypto use only).
 #
-# CryptoOfficer permissions (superset of Operator):
-#   • All Operator operations
+# CryptoOfficer permissions:
 #   • Key lifecycle: Create, Import, Register, Destroy, Revoke, Activate
 #   • Key pair management: CreateKeyPair, ReKeyKeyPair, Certify
 #   • Split-key management: CreateSplitKey, JoinSplitKey
 #   • Delegation: GrantAccess, RevokeAccess
 #
 # Use-case: key-management engineers who provision and rotate keys. Typical
-# deployment separates CryptoOfficers from application Operators so that
+# deployment separates CryptoOfficers from application users so that
 # compromise of a service account cannot trigger key destruction.
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -20,7 +19,7 @@ default_username = "admin"
 
 [roles]
 # Users with CryptoOfficer role.
-# Authenticated users not listed here default to Operator.
+# Authenticated users not listed here get default permissions (crypto use only).
 # Certs: test_data/certificates/client_server/crypto-officer-1/crypto-officer-1.example.com.{key,crt}
 #        test_data/certificates/client_server/crypto-officer-2/crypto-officer-2.example.com.{key,crt}
 crypto_officer_users = [

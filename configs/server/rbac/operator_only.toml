@@ -1,23 +1,23 @@
-# ── Minimal RBAC — Operator-default ──────────────────────────────────────────
+# ── Minimal RBAC — all users default ─────────────────────────────────────────
 #
-# When any role list is configured, unauthenticated users and users not listed
-# in any role default to Operator (minimum privilege).
+# When any role list is configured, users not listed in any role receive the
+# default permissions (crypto use only, no lifecycle operations).
 #
-# Operator permissions:
+# Default (Operator) permissions:
 #   • Use key material: Encrypt, Decrypt, Sign, SignatureVerify, MAC, Hash
 #   • Read metadata:    Get, GetAttributes, Locate, Validate, Export (own objects)
 #   • BLOCKED:          Create, Import, Register, Destroy, Revoke, Activate,
 #                       CreateKeyPair, CreateSplitKey, JoinSplitKey, ReKey, etc.
 #
 # This config sets an empty crypto_officer_users list to activate role enforcement
-# while leaving all users at the Operator level (no one can do lifecycle ops unless
+# while leaving all users at the default level (no one can do lifecycle ops unless
 # explicitly granted Create access).
 # ─────────────────────────────────────────────────────────────────────────────
 
 default_username = "admin"
 
 [roles]
-# Empty list: triggers role enforcement. All users default to Operator.
+# Empty list: triggers role enforcement. All users get default permissions.
 crypto_officer_users = []
 
 [http]

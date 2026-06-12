@@ -12,7 +12,7 @@
 #   Use `administrator_require_ceremony = true` (see administrator_ceremony.toml)
 #   in environments where dual-control / split-knowledge is required.
 #
-# Use-case: internal KMS instance where a single trusted operator holds the
+# Use-case: internal KMS instance where a single trusted admin holds the
 # bootstrap role and the deployment is not subject to FIPS 140-3 §7.4.
 # ─────────────────────────────────────────────────────────────────────────────
 
