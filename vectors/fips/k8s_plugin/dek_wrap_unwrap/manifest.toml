@@ -1,0 +1,49 @@
+name = "K8s KMS Plugin: DEK wrap/unwrap via AES-256-GCM KEK"
+description = """
+Simulates the exact sequence performed by cosmian-kms-plugin when kube-apiserver
+calls Encrypt (wrap DEK) and Decrypt (unwrap DEK).
+
+Steps:
+  1. Create   — provision an AES-256-GCM Key Encryption Key (KEK), capture its UID
+  2. Encrypt  — wrap a 32-byte Data Encryption Key (DEK) using the KEK
+  3. Decrypt  — unwrap the wrapped DEK, assert the plaintext matches the original DEK
+  4. Revoke   — revoke the KEK
+  5. Destroy  — destroy the KEK
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create_kek.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_wrap_dek.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce      = "IVCounterNonce"
+auth_tag   = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "Decrypt"
+request = "step3_unwrap_dek.json"
+assert_success = true
+
+[steps.assert_fields]
+# 32-byte DEK: "k8s-plugin-test-dek-0123456789AB" (hex)
+Data = "6B38732D706C7567696E2D746573742D64656B2D303132333435363738394142"
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_kek.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_kek.json"
+assert_success = true
