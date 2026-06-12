@@ -1,0 +1,47 @@
+name = "Access Control: Auditor (config-only) blocked from key material and mutations"
+description = "Auditor (config-only) CANNOT access key material (Get), create objects (Create), or destroy objects (Destroy)."
+server_config = "test_data/configs/server/test/cert_auth_auditor.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step2_auditor_get.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_auditor_encrypt.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"
+
+[[steps]]
+operation = "Create"
+request = "step4_auditor_create.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"
+
+[[steps]]
+operation = "Destroy"
+request = "step5_auditor_destroy.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"

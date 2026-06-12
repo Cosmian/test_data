@@ -1,0 +1,32 @@
+name = "Access Control: Auditor candidate blocked before ceremony completion"
+description = "Auditor candidate CANNOT use Auditor metadata bypass before completing the ceremony."
+server_config = "test_data/configs/server/test/cert_auth_auditor_ceremony_fresh.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step2_user_locate.json"
+identity = "user"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributes"
+request = "step3_user_get_attributes.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Object_Not_Found"

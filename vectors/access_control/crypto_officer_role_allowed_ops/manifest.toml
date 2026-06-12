@@ -1,0 +1,34 @@
+name = "Access Control: CryptoOfficer allowed lifecycle operations"
+description = "CryptoOfficer can perform lifecycle operations: Create, Locate, GetAttributes, Destroy."
+server_config = "test_data/configs/server/test/cert_auth_operator_and_crypto_officer.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step2_locate.json"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

@@ -1,0 +1,20 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {
+      "tag": "CommonAttributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "RSA"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 2048
+        }
+      ]
+    }
+  ]
+}

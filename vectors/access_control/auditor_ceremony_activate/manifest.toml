@@ -1,0 +1,81 @@
+name = "Access Control: Auditor ceremony lifecycle — activate then audit"
+description = "Auditor ceremony lifecycle: admin creates shares, auditor joins to activate, then can Locate all objects."
+server_config = "test_data/configs/server/test/cert_auth_auditor_ceremony.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_ceremony_key.json"
+assert_success = true
+
+[steps.capture]
+ceremony_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "CreateSplitKey"
+request = "step2_create_split_key.json"
+assert_success = true
+
+[steps.assert_count]
+PrivateKeyUniqueIdentifier = 3
+
+[steps.capture]
+share1_id = "PrivateKeyUniqueIdentifier"
+
+[steps.capture_nth.share2_id]
+tag   = "PrivateKeyUniqueIdentifier"
+index = 1
+
+[steps.capture_nth.share3_id]
+tag   = "PrivateKeyUniqueIdentifier"
+index = 2
+
+[[steps]]
+operation = "GrantAccess"
+request = "step3_grant_share1.json"
+assert_success = true
+
+[[steps]]
+operation = "GrantAccess"
+request = "step4_grant_share2.json"
+assert_success = true
+
+[[steps]]
+operation = "JoinSplitKey"
+request = "step5_join_split_key.json"
+identity = "user"
+assert_success = true
+
+[[steps]]
+operation = "Create"
+request = "step6_create_test_key.json"
+assert_success = true
+
+[steps.capture]
+test_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step7_auditor_locate.json"
+identity = "user"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributes"
+request = "step8_auditor_get_attributes.json"
+identity = "user"
+assert_success = true
+
+[[steps]]
+operation = "Get"
+request = "step9_auditor_get_blocked.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"
