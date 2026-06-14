@@ -10,11 +10,11 @@
 #   │ Role             │ Permitted operations                               │
 #   ├──────────────────┼────────────────────────────────────────────────────┤
 #   │ Operator         │ Encrypt, Decrypt, Sign, Verify, MAC, Hash,         │
-#   │ (default)        │ Get/Export (own keys), GetAttributes, Locate       │
+#   │ (default)        │ GetAttributes, Locate, Validate                    │
 #   ├──────────────────┼────────────────────────────────────────────────────┤
 #   │ CryptoOfficer    │ Create, Import, Destroy, Revoke, Activate,         │
-#   │                  │ CreateKeyPair, CreateSplitKey, JoinSplitKey,       │
-#   │                  │ Certify, GrantAccess, RevokeAccess                 │
+#   │                  │ Get, Export, CreateKeyPair, CreateSplitKey,        │
+#   │                  │ JoinSplitKey, Certify, GrantAccess, RevokeAccess   │
 #   ├──────────────────┼────────────────────────────────────────────────────┤
 #   │ Administrator    │ All operations; bypass per-object ownership check; │
 #   │ (ceremony)       │ active only after split-key ceremony completes      │
