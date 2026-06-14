@@ -7,6 +7,7 @@ default_username = "tech@cosmian.com"
 kms_public_url = "https://localhost:9990/google_cse"
 
 [roles]
+ceremony_secret = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
 administrator_users = ["owner.client@acme.com"]
 administrator_require_ceremony = false
 auditor_users = ["user.client@acme.com"]
