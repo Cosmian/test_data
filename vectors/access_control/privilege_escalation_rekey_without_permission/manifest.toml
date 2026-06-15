@@ -38,7 +38,7 @@ operation = "ReKey"
 request = "step4_user_rekey_denied.json"
 identity = "user"
 assert_success = false
-assert_error_contains = "no active symmetric key found"
+assert_error_contains = "does not have permission"
 
 # Step 5: Owner confirms original key still exists and is unmodified
 [[steps]]

@@ -1,7 +1,7 @@
 # Minimal default configuration from quick_start.md
 vendor_identification = "test_vendor"
 
-auto_rotation_check_interval_secs = 10
+auto_rotation_check_interval_secs = 60
 
 [http]
 port = 9998
