@@ -1,13 +1,15 @@
 name = "VAST Data Storage Appliance Key Lifecycle"
 description = """
 Replays the exact KMIP 1.4 operation sequence observed in VAST Data production \
-logs (May 2026): DiscoverVersions → Create AES-256 → AddAttribute (Name) → \
-AddAttribute (ObjectGroup) → Activate → Locate by name → Get (plaintext) → \
-GetAttributes (State + ActivationDate) → ReKey → Locate (find rotated key) → \
-Get (new key material) → GetAttributes (verify Active) → Revoke old → Destroy old → \
-Revoke new → Destroy new. \
+logs (June 2026): DiscoverVersions → Create AES-256 (with OperationPolicyName) → \
+AddAttribute (Name) → AddAttribute (ObjectGroup) → AddAttribute (OperationPolicyName) → \
+Activate → Locate by name → Get (plaintext) → GetAttributes (State + ActivationDate) → \
+ReKey → Locate (find rotated key) → Get (new key material) → \
+GetAttributes (verify Active + OperationPolicyName preserved after rotation) → \
+Revoke old → Destroy old → Revoke new → Destroy new. \
 VAST uses HTTP POST to /kmip with KMIP 1.4 binary TTLV and mTLS authentication. \
-Covers the ReKey bug fix (issue #845): VAST sends ReKey and expects a new UUID returned.
+Covers the ReKey bug fix (issue #845): VAST sends ReKey and expects a new UUID returned. \
+Covers the OperationPolicyName persistence fix: OPN must survive AddAttribute and ReKey.
 """
 wire_format = "json"
 kmip_version = [1, 4]
@@ -18,7 +20,7 @@ operation = "DiscoverVersions"
 request = "step01_discover_versions.json"
 assert_success = true
 
-# Step 2: Create AES-256 symmetric key (with CryptographicUsageMask only)
+# Step 2: Create AES-256 symmetric key (with OperationPolicyName in template — new VAST behavior)
 [[steps]]
 operation = "Create"
 request = "step02_create_key.json"
@@ -38,85 +40,91 @@ operation = "AddAttribute"
 request = "step04_add_object_group.json"
 assert_success = true
 
-# Step 5: Activate — transition to Active state
+# Step 5: AddAttribute — set OperationPolicyName (VAST sends this as 3rd AddAttribute)
 [[steps]]
-operation = "Activate"
-request = "step05_activate.json"
+operation = "AddAttribute"
+request = "step05_add_operation_policy_name.json"
 assert_success = true
 
-# Step 6: Locate — find key by name (health-check / monitoring pattern)
+# Step 6: Activate — transition to Active state
+[[steps]]
+operation = "Activate"
+request = "step06_activate.json"
+assert_success = true
+
+# Step 7: Locate — find key by name (health-check / monitoring pattern)
 [[steps]]
 operation = "Locate"
-request = "step06_locate_by_name.json"
+request = "step07_locate_by_name.json"
 assert_success = true
 [steps.assert_fields]
 UniqueIdentifier = "{{key_id}}"
 
-# Step 7: Get — retrieve plaintext key material
+# Step 8: Get — retrieve plaintext key material
 [[steps]]
 operation = "Get"
-request = "step07_get.json"
+request = "step08_get.json"
 assert_success = true
 
-# Step 8: GetAttributes — verify State=Active and ActivationDate is set
+# Step 9: GetAttributes — verify State=Active and ActivationDate is set
 # In KMIP 1.4, State is wrapped inside Attribute/AttributeValue (not a bare tag)
 [[steps]]
 operation = "GetAttributes"
-request = "step08_get_attributes.json"
+request = "step09_get_attributes.json"
 assert_success = true
 [steps.assert_any_field]
 AttributeValue = "Active"
 
-# Step 9: ReKey — rotate the active key (returns NEW UniqueIdentifier)
+# Step 10: ReKey — rotate the active key (returns NEW UniqueIdentifier)
 [[steps]]
 operation = "ReKey"
-request = "step09_rekey.json"
+request = "step10_rekey.json"
 assert_success = true
 [steps.capture]
 new_key_id = "UniqueIdentifier"
 
-# Step 10: Locate — find rotated key by name (name transferred to new key)
+# Step 11: Locate — find rotated key by name (name transferred to new key)
 [[steps]]
 operation = "Locate"
-request = "step10_locate_by_name.json"
+request = "step11_locate_by_name.json"
 assert_success = true
 [steps.assert_fields]
 UniqueIdentifier = "{{new_key_id}}"
 
-# Step 11: Get — retrieve new key material after rotation
+# Step 12: Get — retrieve new key material after rotation
 [[steps]]
 operation = "Get"
-request = "step11_get_new.json"
+request = "step12_get_new.json"
 assert_success = true
 
-# Step 12: GetAttributes — verify new key is Active
+# Step 13: GetAttributes — verify new key is Active AND OperationPolicyName is preserved after ReKey
 [[steps]]
 operation = "GetAttributes"
-request = "step12_get_attributes_new.json"
+request = "step13_get_attributes_new_with_opn.json"
 assert_success = true
 [steps.assert_any_field]
 AttributeValue = "Active"
 
-# Step 13: Revoke old key (Active → Deactivated) — ReKey does NOT deactivate the existing key per KMIP 2.1 §6.1.46
+# Step 14: Revoke old key (Active → Deactivated) — ReKey does NOT deactivate the existing key per KMIP 2.1 §6.1.46
 [[steps]]
 operation = "Revoke"
-request = "step13_revoke_old.json"
+request = "step14_revoke_old.json"
 assert_success = true
 
-# Step 14: Destroy old key (now Deactivated)
+# Step 15: Destroy old key (now Deactivated)
 [[steps]]
 operation = "Destroy"
-request = "step14_destroy_old.json"
+request = "step15_destroy_old.json"
 assert_success = true
 
-# Step 15: Revoke new key (Active → Deactivated)
+# Step 16: Revoke new key (Active → Deactivated)
 [[steps]]
 operation = "Revoke"
-request = "step15_revoke_new.json"
+request = "step16_revoke_new.json"
 assert_success = true
 
-# Step 16: Destroy new key (cleanup)
+# Step 17: Destroy new key (cleanup)
 [[steps]]
 operation = "Destroy"
-request = "step16_destroy_new.json"
+request = "step17_destroy_new.json"
 assert_success = true
