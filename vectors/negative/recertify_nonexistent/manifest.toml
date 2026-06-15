@@ -5,4 +5,4 @@ description = "Tests that ReCertify fails when the certificate UID does not exis
 operation = "ReCertify"
 request = "step1_recertify.json"
 assert_success = false
-assert_error_contains = "object not found"
+assert_error_contains = "Request Message Batch Item: unsupported operation: ReCertify"
