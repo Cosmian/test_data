@@ -16,12 +16,6 @@ assert_success = true
 key_id = "UniqueIdentifier"
 
 [[steps]]
-operation = "SetAttribute"
-request = "step02_set_rotate_name.json"
-assert_success = true
-
-# Encrypt with original key (gen 0)
-[[steps]]
 operation = "Encrypt"
 request = "step03_encrypt.json"
 assert_success = true

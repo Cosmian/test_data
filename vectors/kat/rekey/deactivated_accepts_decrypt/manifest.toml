@@ -1,0 +1,60 @@
+name = "KAT: ReKey — Deactivated Key Accepts Decrypt (KMIP §4.57 + §3.31)"
+description = """
+Known-Answer Test verifying that a Deactivated key CAN still be used for
+Decrypt (processing-only operation). Per KMIP §3.31, Decrypt accepts keys
+in the Deactivated state to allow access to previously encrypted data.
+  - Plaintext before rotation:  "Hello World" (48656C6C6F20576F726C64)
+  - Ciphertext captured at Encrypt step, nonce/tag captured for Decrypt.
+  - After ReKey the old key is Deactivated; Decrypt MUST succeed and return
+    the original plaintext.
+Reference: KMIP 2.1 §3.31 (Decrypt allowed states), §4.57 state machine.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Encrypt known plaintext with the Active key; capture CT components
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# Rotate — old key is now Deactivated
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# KAT: Decrypt with Deactivated old key MUST succeed
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt_old.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C64"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

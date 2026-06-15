@@ -17,6 +17,11 @@ root_private_key_id = "PrivateKeyUniqueIdentifier"
 root_public_key_id = "PublicKeyUniqueIdentifier"
 
 [[steps]]
+operation = "Activate"
+request = "activate_root_private.json"
+assert_success = true
+
+[[steps]]
 operation = "Certify"
 request = "step2_self_sign_root.json"
 assert_success = true
@@ -40,6 +45,11 @@ assert_success = true
 [steps.capture]
 int_private_key_id = "PrivateKeyUniqueIdentifier"
 int_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "activate_int_private.json"
+assert_success = true
 
 [[steps]]
 operation = "Certify"
@@ -102,6 +112,11 @@ request = "step12_destroy_leaf_public.json"
 assert_success = true
 
 [[steps]]
+operation = "Revoke"
+request = "revoke_int_private.json"
+assert_success = true
+
+[[steps]]
 operation = "Destroy"
 request = "step13_destroy_int_private.json"
 assert_success = true
@@ -109,6 +124,11 @@ assert_success = true
 [[steps]]
 operation = "Destroy"
 request = "step14_destroy_int_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "revoke_root_private.json"
 assert_success = true
 
 [[steps]]

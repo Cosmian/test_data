@@ -1,0 +1,10 @@
+{
+  "tag": "GetAttributes",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{gen2_id}}"
+    }
+  ]
+}

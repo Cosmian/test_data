@@ -1,0 +1,15 @@
+{
+  "tag": "Create",
+  "value": [
+    {"tag": "ObjectType", "type": "Enumeration", "value": "SymmetricKey"},
+    {"tag": "Attributes", "value": [
+      {"tag": "UniqueIdentifier", "type": "TextString", "value": "key-uid-abc"},
+      {"tag": "RotateName", "type": "TextString", "value": "different-keyset-name"},
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES"},
+      {"tag": "CryptographicLength", "type": "Integer", "value": 256},
+      {"tag": "CryptographicUsageMask", "type": "Integer", "value": 12},
+      {"tag": "KeyFormatType", "type": "Enumeration", "value": "TransparentSymmetricKey"},
+      {"tag": "ObjectType", "type": "Enumeration", "value": "SymmetricKey"}
+    ]}
+  ]
+}

@@ -32,7 +32,7 @@ assert_success = true
 [steps.capture]
 key_id = "UniqueIdentifier"
 
-# Assign keyset name — writes CKA_LABEL "hsm-keyset-rk::0::vec_rk::latest"
+# Assign keyset name — writes CKA_LABEL "hsm-keyset-rk::0::vec_rk@latest"
 [[steps]]
 operation = "SetAttribute"
 request = "step2_set_rotate_name.json"

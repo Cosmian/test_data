@@ -1,0 +1,62 @@
+name = "ReKey Old Key Decrypt Succeeds"
+description = """
+After ReKey, the old key is Deactivated. Per KMIP §3.31 the old key \
+can still be used for Decrypt (processing operations accept Deactivated state). \
+This test encrypts before rotation, then decrypts with the OLD key UID after rotation.
+"""
+
+# Create AES-256 key in a keyset
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Encrypt with the original key
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# ReKey
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify old key is Deactivated
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attributes_old.json"
+assert_success = true
+[steps.assert_fields]
+State = "Deactivated"
+
+# Decrypt with the OLD key UID — must succeed even though Deactivated
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_old_key.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new.json"
+assert_success = true

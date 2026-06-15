@@ -1,0 +1,31 @@
+name = "Negative: SetAttribute Rejects RotateGeneration"
+description = """
+x-rotate-generation is a server-managed read-only attribute. \
+Any attempt to set it via SetAttribute must be rejected with Attribute_Read_Only.
+"""
+
+# Create a key
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Attempt to set RotateGeneration — must fail
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_generation.json"
+assert_success = false
+assert_error_contains = "server-managed"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

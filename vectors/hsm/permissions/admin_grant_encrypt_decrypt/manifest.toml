@@ -1,7 +1,7 @@
 name = "HSM Permissions: admin grants Encrypt/Decrypt to user"
 description = """
 HSM admin creates an AES-256 key in the HSM, grants Encrypt and Decrypt
-to user.client@acme.com. User can then encrypt and decrypt. Admin destroys key.
+to <user.client@acme.com>. User can then encrypt and decrypt. Admin destroys key.
 Validates that grantable operations work for non-admin users on HSM keys.
 """
 server_type = "hsm_kek"

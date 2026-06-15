@@ -1,0 +1,36 @@
+name = "Negative: HSM Keyset Name Bare Name Rejected"
+description = """
+For HSM keys, the keyset name (rotate_name) must be the key's full base UID \
+(hsm::<model>::<slot>::<key_id>). A bare name without the hsm:: prefix is rejected \
+because it would be ambiguous across HSM slots.
+"""
+server_type = "hsm"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Pre-cleanup
+[[steps]]
+operation = "Destroy"
+request = "step0_cleanup.json"
+allow_failure = true
+
+# Create HSM key
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Attempt SetAttribute with bare name — must be rejected
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name_bare.json"
+assert_success = false
+assert_error_contains = "must be the key's base UID"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step0_cleanup.json"
+assert_success = true

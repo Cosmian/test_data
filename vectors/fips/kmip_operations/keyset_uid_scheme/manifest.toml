@@ -1,0 +1,66 @@
+name = "Keyset Deterministic UID Scheme"
+description = """
+Verifies the deterministic UID scheme for SQL keysets:
+  - gen-0 UID = keyset name (e.g. 'kst-uid-scheme')
+  - gen-1 UID = 'kst-uid-scheme@1' (after first Re-Key)
+  - gen-2 UID = 'kst-uid-scheme@2' (after second Re-Key)
+The Re-Key response must return the exact deterministic UID.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# First rotation: expect new UID = kst-uid-scheme@1
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey1.json"
+assert_success = true
+[steps.assert_fields]
+UniqueIdentifier = "kst-uid-scheme@1"
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Second rotation: expect new UID = kst-uid-scheme@2
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey2.json"
+assert_success = true
+[steps.assert_fields]
+UniqueIdentifier = "kst-uid-scheme@2"
+[steps.capture]
+gen2_id = "UniqueIdentifier"
+
+# Cleanup all 3 generations
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_gen2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_gen2.json"
+assert_success = true

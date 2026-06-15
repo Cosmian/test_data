@@ -1,0 +1,89 @@
+name = "KAT: ReKeyKeyPair — RotateLatest Flag (KMIP §4.52)"
+description = """
+Known-Answer Test verifying the RotateLatest vendor attribute on private
+and public keys after ReKeyKeyPair:
+  - Old SK: RotateLatest = false (set by clear_rotation_flags)
+  - New SK: RotateLatest = true  (set by set_rotation_metadata_from)
+  - Old PK: RotateLatest = false (set by clear_rotation_flags)
+  - New PK: RotateLatest = true  (set by set_rotation_metadata_from)
+Reference: KMIP 2.1 §4.52 (x-rotate-latest vendor attribute), §6.1.47.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# KAT: old SK RotateLatest MUST be false
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_old_sk.json"
+assert_success = true
+[steps.assert_fields]
+RotateLatest = "false"
+
+# KAT: new SK RotateLatest MUST be true
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_new_sk.json"
+assert_success = true
+[steps.assert_fields]
+RotateLatest = "true"
+
+# KAT: old PK RotateLatest MUST be false
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_old_pk.json"
+assert_success = true
+[steps.assert_fields]
+RotateLatest = "false"
+
+# KAT: new PK RotateLatest MUST be true
+[[steps]]
+operation = "GetAttributes"
+request = "step6_get_new_pk.json"
+assert_success = true
+[steps.assert_fields]
+RotateLatest = "true"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_old_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_new_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_new_pk.json"
+assert_success = true

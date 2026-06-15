@@ -1,0 +1,55 @@
+name = "KAT: ReKey — RotateLatest Flag (KMIP §4.52)"
+description = """
+Known-Answer Test verifying the RotateLatest vendor attribute after ReKey:
+  - Old key: RotateLatest = false (set by clear_rotation_flags — old key is no
+    longer the head of the keyset chain).
+  - New key: RotateLatest = true (set by set_rotation_metadata_from — new key
+    becomes the keyset head).
+Reference: KMIP 2.1 §4.52 (x-rotate-latest vendor attribute).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# KAT: old key RotateLatest MUST be false
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_old.json"
+assert_success = true
+[steps.assert_fields]
+RotateLatest = "false"
+
+# KAT: new key RotateLatest MUST be true
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_new.json"
+assert_success = true
+[steps.assert_fields]
+RotateLatest = "true"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

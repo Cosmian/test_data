@@ -1,0 +1,6 @@
+{
+  "tag": "ReKey",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "test-mac-verify-chain"}
+  ]
+}

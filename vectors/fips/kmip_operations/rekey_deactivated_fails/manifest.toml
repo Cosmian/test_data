@@ -28,4 +28,4 @@ assert_success = true
 operation = "ReKey"
 request = "step4_rekey.json"
 assert_success = false
-assert_error_contains = "no active symmetric key found"
+assert_error_contains = "is in state 'Destroyed'"

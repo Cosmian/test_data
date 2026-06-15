@@ -1,0 +1,6 @@
+{
+  "tag": "Destroy",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "hsm::{{$HSM_SLOT_ID}}::vec_rk_nlat@2"}
+  ]
+}

@@ -26,7 +26,7 @@ State = "PreActive"
 operation = "ReKey"
 request = "step3_rekey_fails.json"
 assert_success = false
-assert_error_contains = "only Active or Deactivated keys can be rotated"
+assert_error_contains = "only Active, Deactivated, or Compromised keys can be rotated"
 
 # Cleanup: Destroy the key (PreActive keys can be destroyed directly)
 [[steps]]

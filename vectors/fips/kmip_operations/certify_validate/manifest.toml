@@ -11,6 +11,11 @@ private_key_id = "PrivateKeyUniqueIdentifier"
 public_key_id = "PublicKeyUniqueIdentifier"
 
 [[steps]]
+operation = "Activate"
+request = "activate_private.json"
+assert_success = true
+
+[[steps]]
 operation = "Certify"
 request = "step2_certify.json"
 assert_success = true
@@ -29,6 +34,11 @@ ValidityIndicator = "Valid"
 [[steps]]
 operation = "Destroy"
 request = "step4_destroy_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "revoke_private.json"
 assert_success = true
 
 [[steps]]

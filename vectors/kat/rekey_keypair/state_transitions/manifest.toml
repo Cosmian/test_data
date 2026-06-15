@@ -1,0 +1,88 @@
+name = "KAT: ReKeyKeyPair — State Transitions (KMIP §4.57 + §6.1.47)"
+description = """
+Known-Answer Test verifying KMIP §4.57 state machine after ReKeyKeyPair:
+  - Old private key:  Active → Deactivated (transition 6, retire_for_replacement).
+  - Old public key:   Active → Deactivated (transition 6, retire_for_replacement).
+  - New private key:  PreActive → Active   (transition 3, ActivationDate = now).
+  - New public key:   PreActive → Active   (transition 3, ActivationDate = now).
+Reference: KMIP 2.1 §4.57, §6.1.47 (Re-Key Key Pair response).
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# KAT: old SK MUST be Deactivated
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_old_sk.json"
+assert_success = true
+[steps.assert_fields]
+State = "Deactivated"
+
+# KAT: old PK MUST be Deactivated
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_old_pk.json"
+assert_success = true
+[steps.assert_fields]
+State = "Deactivated"
+
+# KAT: new SK MUST be Active
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_new_sk.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# KAT: new PK MUST be Active
+[[steps]]
+operation = "GetAttributes"
+request = "step6_get_new_pk.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Cleanup: old keys Deactivated → Destroy directly; new keys Active → Revoke+Destroy
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_old_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_new_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_new_pk.json"
+assert_success = true
