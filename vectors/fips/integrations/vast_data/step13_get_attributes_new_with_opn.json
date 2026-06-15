@@ -15,6 +15,11 @@
       "tag": "AttributeName",
       "type": "TextString",
       "value": "Activation Date"
+    },
+    {
+      "tag": "AttributeName",
+      "type": "TextString",
+      "value": "Operation Policy Name"
     }
   ]
 }

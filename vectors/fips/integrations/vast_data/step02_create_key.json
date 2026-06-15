@@ -53,6 +53,21 @@
               "value": 12
             }
           ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Operation Policy Name"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "TextString",
+              "value": "default"
+            }
+          ]
         }
       ]
     }
