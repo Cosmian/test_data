@@ -26,8 +26,8 @@ assert_success = true
 
 [steps.capture]
 ciphertext = "Data"
-nonce      = "IVCounterNonce"
-auth_tag   = "AuthenticatedEncryptionTag"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
 
 [[steps]]
 operation = "Decrypt"
