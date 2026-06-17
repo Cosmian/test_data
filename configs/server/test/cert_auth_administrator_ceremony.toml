@@ -1,6 +1,6 @@
 # Test KMS server — TLS with mutual client-certificate authentication + Administrator (ceremony mode).
 # `user.client@acme.com` is declared as an Administrator candidate. The role is inactive until a
-# 2-of-3 Shamir split-key ceremony is completed by the declared users.
+# 2-of-2 XOR split-key ceremony is completed by the declared users.
 # Bound to port 9996. Loaded by Administrator ceremony test vectors.
 
 default_username = "tech@cosmian.com"

@@ -30,7 +30,7 @@
 # Unenrolled users default to Operator (fail-secure minimum privilege).
 # There is no `operator_users` config key — it is the implicit default.
 #
-# Note: Administrator ceremony uses 2-of-3 threshold Shamir (PolynomialSharingGf28).
+# Note: Administrator ceremony uses XOR split-knowledge (PolynomialSharingGf28 method maps to XOR).
 #   Auditor is config-only here; switch `auditor_require_ceremony = true` with
 #   `auditor_threshold`/`auditor_total_parts` for ceremony-gated audit access.
 # ─────────────────────────────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 # ── Auditor role — split-key ceremony mode ───────────────────────────────────
 #
-# Role model: Auditor activated via Shamir split-key ceremony
+# Role model: Auditor activated via XOR split-key ceremony
 #   FIPS 140-3 §7.4.2 / NIST SP 800-57 §4.4.4
 #
 # How the ceremony works:
@@ -13,7 +13,7 @@
 #   4. From that point the user holds the Auditor role (read-only metadata bypass)
 #      until POST /access/auditor/disable is called by an active Administrator.
 #
-# The Auditor ceremony uses the same (t, n) Shamir scheme as the Administrator
+# The Auditor ceremony uses the same XOR split-knowledge scheme as the Administrator
 # ceremony but with a separate DB table and vendor attribute, so both roles can
 # coexist with independent ceremony lifecycles.
 #

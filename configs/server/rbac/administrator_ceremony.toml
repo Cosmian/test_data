@@ -1,13 +1,13 @@
 # ── Administrator role — split-key ceremony mode ─────────────────────────────
 #
-# Role model: Administrator activated via Shamir split-key ceremony
+# Role model: Administrator activated via XOR split-key ceremony
 #   NIST SP 800-57 Part 2 Rev 1 §4.3.2 — Dual Control
 #   FIPS 140-3 §7.4 — Roles, Services, and Authentication
 #   ANSI/INCITS 359-2004 §4.3.1 — Split Knowledge
 #
 # How the ceremony works:
 #   1. A CryptoOfficer (or any key owner) calls CreateSplitKey on a symmetric key,
-#      producing `administrator_total_parts` shares with method PolynomialSharingGf28.
+#      producing `administrator_total_parts` shares using XOR split knowledge.
 #   2. Each share is granted (GrantAccess) to one ceremony custodian.
 #   3. When `administrator_threshold` custodians in `administrator_users` each call
 #      JoinSplitKey, the server persists an activation record in `administrator_activations`.

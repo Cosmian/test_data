@@ -1,7 +1,8 @@
-name = "CreateSplitKey + JoinSplitKey: GF(2^8) SSS 2-of-3 round-trip"
+name = "CreateSplitKey + JoinSplitKey: XOR n-of-n round-trip (via PolynomialSharingGf28 method)"
 description = """
-Creates an AES-256 symmetric key, splits it into 3 shares using Shamir's Secret Sharing over
-GF(2^8) with a threshold of 2. Then joins any 2 shares to reconstruct the key and verifies
+Creates an AES-256 symmetric key, splits it into 3 shares using XOR-based split knowledge
+(requested via the PolynomialSharingGf28 KMIP method, which the server maps to XOR).
+Threshold must equal total_parts. Joins all shares to reconstruct the key and verifies
 the reconstructed object is a SymmetricKey.
 """
 
