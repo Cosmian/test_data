@@ -13,7 +13,7 @@ administrator_require_ceremony = false
 auditor_users = ["user.client@acme.com"]
 auditor_require_ceremony = true
 auditor_threshold = 2
-auditor_total_parts = 3
+auditor_total_parts = 2
 
 [http]
 port = 9990

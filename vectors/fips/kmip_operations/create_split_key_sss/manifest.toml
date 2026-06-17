@@ -1,6 +1,6 @@
 name = "CreateSplitKey + JoinSplitKey: XOR n-of-n round-trip (via PolynomialSharingGf28 method)"
 description = """
-Creates an AES-256 symmetric key, splits it into 3 shares using XOR-based split knowledge
+Creates an AES-256 symmetric key, splits it into 2 shares using XOR-based split knowledge
 (requested via the PolynomialSharingGf28 KMIP method, which the server maps to XOR).
 Threshold must equal total_parts. Joins all shares to reconstruct the key and verifies
 the reconstructed object is a SymmetricKey.
@@ -24,7 +24,7 @@ request        = "step2_create_split_key.json"
 assert_success = true
 
 [steps.assert_count]
-PrivateKeyUniqueIdentifier = 3
+PrivateKeyUniqueIdentifier = 2
 
 [steps.capture]
 share1_id = "PrivateKeyUniqueIdentifier"
@@ -32,10 +32,6 @@ share1_id = "PrivateKeyUniqueIdentifier"
 [steps.capture_nth.share2_id]
 tag   = "PrivateKeyUniqueIdentifier"
 index = 1
-
-[steps.capture_nth.share3_id]
-tag   = "PrivateKeyUniqueIdentifier"
-index = 2
 
 # ── Join 2 of the 3 shares to reconstruct the key ───────────────────────────
 

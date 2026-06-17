@@ -9,7 +9,7 @@
     {
       "tag": "SplitKeyParts",
       "type": "Integer",
-      "value": 3
+      "value": 2
     },
     {
       "tag": "SplitKeyThreshold",

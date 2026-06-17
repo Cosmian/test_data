@@ -24,7 +24,7 @@ request = "step2_create_split_key.json"
 assert_success = true
 
 [steps.assert_count]
-PrivateKeyUniqueIdentifier = 3
+PrivateKeyUniqueIdentifier = 2
 
 [steps.capture]
 share1_id = "PrivateKeyUniqueIdentifier"
@@ -32,10 +32,6 @@ share1_id = "PrivateKeyUniqueIdentifier"
 [steps.capture_nth.share2_id]
 tag   = "PrivateKeyUniqueIdentifier"
 index = 1
-
-[steps.capture_nth.share3_id]
-tag   = "PrivateKeyUniqueIdentifier"
-index = 2
 
 [[steps]]
 operation = "GrantAccess"

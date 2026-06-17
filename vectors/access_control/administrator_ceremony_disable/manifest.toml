@@ -1,7 +1,7 @@
 name = "Administrator: ceremony activate → access → disable → access denied"
 description = """
 Full lifecycle of the split-key ceremony Administrator role:
-1. Owner creates a secret AES key and splits it 2-of-3 (the ceremony master key).
+1. Owner creates a secret AES key and splits it 2-of-2 (XOR n-of-n, the ceremony master key).
 2. Owner grants the user access to the two shares they will present.
 3. User joins 2 shares → ceremony activates → user becomes Administrator.
 4. User calls AdministratorStatus and verifies ceremony_activated and is_administrator are true.
@@ -31,7 +31,7 @@ assert_success = true
 [steps.capture]
 ceremony_key_id = "UniqueIdentifier"
 
-# ── Step 2: owner splits the ceremony key 2-of-3 ─────────────────────────────
+# ── Step 2: owner splits the ceremony key 2-of-2 (XOR) ─────────────────────────────
 
 [[steps]]
 operation      = "CreateSplitKey"
@@ -39,7 +39,7 @@ request        = "step2_owner_create_split_key.json"
 assert_success = true
 
 [steps.assert_count]
-PrivateKeyUniqueIdentifier = 3
+PrivateKeyUniqueIdentifier = 2
 
 [steps.capture]
 share1_id = "PrivateKeyUniqueIdentifier"
@@ -47,10 +47,6 @@ share1_id = "PrivateKeyUniqueIdentifier"
 [steps.capture_nth.share2_id]
 tag   = "PrivateKeyUniqueIdentifier"
 index = 1
-
-[steps.capture_nth.share3_id]
-tag   = "PrivateKeyUniqueIdentifier"
-index = 2
 
 # ── Step 3: owner grants the user access (Get) to share1 and share2 ──────────
 

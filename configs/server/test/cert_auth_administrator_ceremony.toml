@@ -11,7 +11,7 @@ ceremony_secret = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abc
 administrator_users = ["user.client@acme.com"]
 administrator_require_ceremony = true
 administrator_threshold = 2
-administrator_total_parts = 3
+administrator_total_parts = 2
 
 [http]
 port = 9996
