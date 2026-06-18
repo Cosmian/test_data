@@ -1,8 +1,7 @@
 # ── Full RBAC — production reference configuration ──────────────────────────
 #
-# Role model: CryptoOfficer + Administrator (ceremony) + Auditor
+# Role model: CryptoOfficer + Operator
 #   FIPS 140-3 §7.4 / NIST SP 800-57 Part 2 Rev 1 §4.3–§4.4
-#   ANSI/INCITS 359-2004 §4.2–§4.3 (separation of duty, split knowledge)
 #
 # Role hierarchy and permissions:
 #
@@ -14,59 +13,25 @@
 #   ├──────────────────┼────────────────────────────────────────────────────┤
 #   │ CryptoOfficer    │ Create, Import, Destroy, Revoke, Activate,         │
 #   │                  │ Get, Export, CreateKeyPair, CreateSplitKey,        │
-#   │                  │ JoinSplitKey, Certify, GrantAccess, RevokeAccess   │
-#   ├──────────────────┼────────────────────────────────────────────────────┤
-#   │ Administrator    │ All operations; bypass per-object ownership check; │
-#   │ (ceremony)       │ active only after split-key ceremony completes      │
-#   ├──────────────────┼────────────────────────────────────────────────────┤
-#   │ Auditor          │ Locate, GetAttributes, Validate on ALL objects;    │
-#   │ (config-only)    │ strictly blocked from key material and mutations   │
+#   │                  │ JoinSplitKey, Certify, GrantAccess, RevokeAccess;  │
+#   │                  │ bypass per-object ownership check                  │
 #   └──────────────────┴────────────────────────────────────────────────────┘
-#
-# Separation-of-duty constraints (enforced at config load):
-#   • A user may appear in at most ONE role list.
-#   • Administrator candidates cannot also be Auditors or CryptoOfficers.
 #
 # Unenrolled users default to Operator (fail-secure minimum privilege).
 # There is no `operator_users` config key — it is the implicit default.
-#
-# Note: Administrator ceremony uses XOR split-knowledge (PolynomialSharingGf28 method maps to XOR).
-#   Auditor is config-only here; switch `auditor_require_ceremony = true` with
-#   `auditor_threshold`/`auditor_total_parts` for ceremony-gated audit access.
 # ─────────────────────────────────────────────────────────────────────────────
 
 default_username = "admin"
 
 [roles]
 # ── CryptoOfficer role ────────────────────────────────────────────────────────
-# Key-management engineers: create, rotate, revoke keys.
+# Key-management engineers: create, rotate, revoke keys. Ownership bypass on all objects.
 # Certs: test_data/certificates/client_server/crypto-officer-1/crypto-officer-1.example.com.{key,crt}
 #        test_data/certificates/client_server/crypto-officer-2/crypto-officer-2.example.com.{key,crt}
 crypto_officer_users = [
   "crypto-officer-1@example.com",
   "crypto-officer-2@example.com",
 ]
-
-# ── Administrator role (ceremony-gated) ───────────────────────────────────────
-# Emergency / break-glass access. Inactive until 2-of-3 custodians join shares.
-# POST /access/administrator/disable revokes the activation.
-# Certs: test_data/certificates/client_server/custodian-1/custodian-1.example.com.{key,crt}
-#        test_data/certificates/client_server/custodian-2/custodian-2.example.com.{key,crt}
-#        test_data/certificates/client_server/custodian-3/custodian-3.example.com.{key,crt}
-administrator_users = [
-  "custodian-1@example.com",
-  "custodian-2@example.com",
-  "custodian-3@example.com",
-]
-administrator_require_ceremony = true
-administrator_threshold        = 2
-administrator_total_parts      = 3
-
-# ── Auditor role (config-only) ────────────────────────────────────────────────
-# Compliance officers: read-only metadata inspection on all objects, no key material.
-# Cert: test_data/certificates/client_server/auditor-1/auditor-1.example.com.{key,crt}
-auditor_users            = ["auditor-1@example.com"]
-auditor_require_ceremony = false
 
 [http]
 port = 9998
