@@ -57,12 +57,9 @@ These identities map directly to the server configs in
 | `operator-2/` | `operator-2@example.com` | Operator |
 | `crypto-officer-1/` | `crypto-officer-1@example.com` | CryptoOfficer |
 | `crypto-officer-2/` | `crypto-officer-2@example.com` | CryptoOfficer |
-| `administrator/` | `administrator@example.com` | Administrator (config-only) |
-| `custodian-1/` | `custodian-1@example.com` | Administrator ceremony custodian |
-| `custodian-2/` | `custodian-2@example.com` | Administrator ceremony custodian |
-| `custodian-3/` | `custodian-3@example.com` | Administrator ceremony custodian |
-| `auditor-1/` | `auditor-1@example.com` | Auditor |
-| `auditor-2/` | `auditor-2@example.com` | Auditor |
+| `custodian-1/` | `custodian-1@example.com` | Ceremony custodian |
+| `custodian-2/` | `custodian-2@example.com` | Ceremony custodian |
+| `custodian-3/` | `custodian-3@example.com` | Ceremony custodian |
 
 Each directory contains `<base>.key`, `<base>.crt`, `<base>.csr`, and `<base>.p12`
 (PKCS#12 password: `password`).
