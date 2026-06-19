@@ -2,7 +2,7 @@
 kms_public_url = "https://cse.example.com"
 
 [idp_auth]
-# Use Google Identity for JWT validation  
+# Use Google Identity for JWT validation
 jwt_auth_provider = ["https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,"]
 
 [google_cse_config]
