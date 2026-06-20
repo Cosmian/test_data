@@ -1,0 +1,15 @@
+{
+  "tag": "SignatureVerify",
+  "value": [
+    { "tag": "UniqueIdentifier", "type": "TextString", "value": "{{new_public_key_id}}" },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        { "tag": "DigitalSignatureAlgorithm", "type": "Enumeration", "value": "RSASSAPSS" },
+        { "tag": "HashingAlgorithm", "type": "Enumeration", "value": "SHA256" }
+      ]
+    },
+    { "tag": "Data", "type": "ByteString", "value": "54686520717569636B2062726F776E20666F78" },
+    { "tag": "SignatureData", "type": "ByteString", "value": "{{signature}}" }
+  ]
+}

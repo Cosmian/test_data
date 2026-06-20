@@ -1,0 +1,84 @@
+name = "ReKey MAC Key With Keyset"
+description = """
+Complex MAC key rotation test:
+1. Create an HMAC-SHA256 key (gen-0) with a rotate_name
+2. Compute a MAC tag with the gen-0 key
+3. ReKey (gen-0 → gen-1)
+4. Verify the old MAC tag using the gen-0 key UID directly (old key still Active)
+5. Compute a new MAC tag using the keyset name (resolves to latest = gen-1)
+6. Verify the new MAC tag using the gen-1 key UID directly
+
+This proves:
+- After rotation, the old HMAC key remains Active and can still verify existing tags
+- The keyset name resolves to the latest generation for new MAC computation
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create_hmac_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Assign a keyset name to the HMAC key
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# Compute MAC with the gen-0 key
+[[steps]]
+operation = "Mac"
+request = "step3_mac_gen0.json"
+assert_success = true
+[steps.capture]
+mac_tag = "MACData"
+
+# ReKey: gen-0 → gen-1
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify the old MAC tag with the gen-0 key UID (old key still Active)
+[[steps]]
+operation = "MACVerify"
+request = "step5_verify_old_mac_gen0.json"
+assert_success = true
+
+# Compute a new MAC tag using the keyset name (resolves to gen-1)
+[[steps]]
+operation = "Mac"
+request = "step6_mac_by_keyset.json"
+assert_success = true
+[steps.capture]
+new_mac_tag = "MACData"
+
+# Verify the new MAC tag with the gen-1 key UID directly
+[[steps]]
+operation = "MACVerify"
+request = "step7_verify_new_mac_gen1.json"
+assert_success = true
+
+# Cleanup: revoke and destroy both keys
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step10_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_new.json"
+assert_success = true
