@@ -1,0 +1,36 @@
+name = "Negative: Encrypt with nonexistent keyset generation"
+description = """
+Creates a symmetric key with a rotate_name, then attempts to encrypt \
+using name@99 which references a nonexistent generation. The operation \
+must fail.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# Encrypt with name@99 — generation doesn't exist
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_invalid_gen.json"
+assert_success = false
+assert_error_contains = "not found"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+assert_success = true

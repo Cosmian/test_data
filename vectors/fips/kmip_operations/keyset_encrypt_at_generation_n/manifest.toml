@@ -1,0 +1,81 @@
+name = "Keyset Encrypt with @N (generation 1)"
+description = """
+Creates a symmetric key, assigns a rotate_name, performs two ReKey \
+operations (gen-0→gen-1→gen-2), then encrypts using name@1. Verifies \
+that @1 resolves to gen-1 by decrypting with the gen-1 key UID.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step01_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step02_set_rotate_name.json"
+assert_success = true
+
+# First rotation: gen-0 → gen-1
+[[steps]]
+operation = "ReKey"
+request = "step03_rekey1.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Second rotation: gen-1 → gen-2
+[[steps]]
+operation = "ReKey"
+request = "step04_rekey2.json"
+assert_success = true
+[steps.capture]
+gen2_id = "UniqueIdentifier"
+
+# Encrypt with name@1 — must resolve to gen-1
+[[steps]]
+operation = "Encrypt"
+request = "step05_encrypt_at_gen1.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# Decrypt with gen-1 UID — proves @1 resolved to gen-1
+[[steps]]
+operation = "Decrypt"
+request = "step06_decrypt_by_gen1.json"
+assert_success = true
+
+# Cleanup all 3 generations
+[[steps]]
+operation = "Revoke"
+request = "step07_revoke_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step08_destroy_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step09_revoke_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_gen2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_gen2.json"
+assert_success = true
