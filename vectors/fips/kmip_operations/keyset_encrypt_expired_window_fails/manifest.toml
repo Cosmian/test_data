@@ -1,0 +1,46 @@
+name = "Keyset Encrypt: fails when latest key has expired process window"
+description = """
+Creates a symmetric key, assigns a rotate_name, then sets ProtectStopDate in the \
+past on the key (the only/latest key in the chain).  An Encrypt with the bare keyset \
+name must fail.
+
+SingleLatest mode resolves the bare name to the latest key, then enforces \
+check_process_window().  With an expired window, the operation must return \
+Wrong_Key_Lifecycle_State.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# Set ProtectStopDate in the past — the only key in the keyset is now expired.
+[[steps]]
+operation = "SetAttribute"
+request = "step3_set_protect_stop_past.json"
+assert_success = true
+
+# Encrypt with bare keyset name must fail.
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_keyset_name.json"
+assert_success = false
+assert_error_reason = "Wrong_Key_Lifecycle_State"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

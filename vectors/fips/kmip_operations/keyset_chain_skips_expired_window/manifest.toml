@@ -1,0 +1,75 @@
+name = "Keyset chain skips key with expired process window"
+description = """
+Creates a symmetric key (gen-0), sets a rotate_name, encrypts with the gen-0 UID, \
+then performs a ReKey to create gen-1.  Sets ProtectStopDate in the past on gen-1 \
+(the newest key in the chain).  Decrypts with the bare keyset name.
+
+The try-each traversal must skip gen-1 (process window expired) and succeed with \
+gen-0 (no window restriction), verifying that expired-window keys are treated \
+the same as other ineligible keys in the chain walk.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# Encrypt with gen-0 UID (captures ciphertext for the decrypt step).
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# ReKey: gen-0 → gen-1
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Set ProtectStopDate in the past on gen-1 (latest key is now outside its window).
+[[steps]]
+operation = "SetAttribute"
+request = "step5_set_protect_stop_past_gen1.json"
+assert_success = true
+
+# Decrypt with bare keyset name:
+# try-each skips gen-1 (expired window) → uses gen-0 (open window) → SUCCESS
+[[steps]]
+operation = "Decrypt"
+request = "step6_decrypt_bare_name.json"
+assert_success = true
+
+# Cleanup gen-1
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_gen1.json"
+assert_success = true
+
+# Cleanup gen-0
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_gen0.json"
+assert_success = true
