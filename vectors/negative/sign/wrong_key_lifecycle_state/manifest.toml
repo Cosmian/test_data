@@ -13,4 +13,4 @@ key_id = "UniqueIdentifier"
 operation = "Sign"
 request = "step2_sign.json"
 assert_success = false
-assert_error_contains = "no valid key"
+assert_error_contains = "is in state"

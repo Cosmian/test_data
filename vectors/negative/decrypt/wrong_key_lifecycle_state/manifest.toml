@@ -13,4 +13,4 @@ key_id = "UniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt.json"
 assert_success = false
-assert_error_contains = "failed to retrieve the key"
+assert_error_contains = "is in state"

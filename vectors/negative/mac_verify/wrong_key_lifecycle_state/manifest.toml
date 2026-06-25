@@ -13,4 +13,4 @@ key_id = "UniqueIdentifier"
 operation = "MACVerify"
 request = "step2_macverify.json"
 assert_success = false
-assert_error_contains = "no valid key"
+assert_error_contains = "is in state"
