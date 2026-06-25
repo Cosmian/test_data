@@ -1,6 +1,0 @@
-{
-  "tag": "Destroy",
-  "value": [
-    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{new_pk_1}}"}
-  ]
-}

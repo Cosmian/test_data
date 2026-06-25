@@ -1,6 +1,6 @@
 {
   "tag": "ReKeyKeyPair",
   "value": [
-    {"tag": "PrivateKeyUniqueIdentifier", "type": "TextString", "value": "{{private_key_id}}"}
+    {"tag": "PrivateKeyUniqueIdentifier", "type": "TextString", "value": "neg-test-nlat-kp@0"}
   ]
 }

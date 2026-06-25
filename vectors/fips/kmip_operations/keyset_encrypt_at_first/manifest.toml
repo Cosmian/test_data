@@ -1,8 +1,9 @@
-name = "Keyset Encrypt with @first"
+name = "Keyset Encrypt with @first (before rotation)"
 description = """
-Creates a symmetric key, assigns a rotate_name, performs a ReKey, \
-then encrypts data using the keyset name@first syntax. Verifies \
-that @first resolves to gen-0 by decrypting with the original key UID.
+Creates a symmetric key with a rotate_name, encrypts using name@first \
+while gen-0 is Active, then performs ReKey (gen-0 → Deactivated per §4.57). \
+Verifies @first resolved to gen-0 by decrypting with the original key UID \
+after rotation (Decrypt accepts Deactivated keys per KMIP §3.31).
 """
 
 [[steps]]
@@ -12,20 +13,7 @@ assert_success = true
 [steps.capture]
 key_id = "UniqueIdentifier"
 
-[[steps]]
-operation = "SetAttribute"
-request = "step2_set_rotate_name.json"
-assert_success = true
-
-# ReKey: gen-0 → gen-1
-[[steps]]
-operation = "ReKey"
-request = "step3_rekey.json"
-assert_success = true
-[steps.capture]
-gen1_id = "UniqueIdentifier"
-
-# Encrypt with name@first — must resolve to gen-0
+# Encrypt with name@first while gen-0 is still Active
 [[steps]]
 operation = "Encrypt"
 request = "step4_encrypt_at_first.json"
@@ -35,7 +23,15 @@ ciphertext = "Data"
 nonce = "IVCounterNonce"
 auth_tag = "AuthenticatedEncryptionTag"
 
-# Decrypt with gen-0 UID — proves @first resolved to gen-0
+# ReKey → gen-0 becomes Deactivated (KMIP §4.57)
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Decrypt with gen-0 UID — Deactivated keys are valid for Decrypt (KMIP §3.31)
 [[steps]]
 operation = "Decrypt"
 request = "step5_decrypt_by_gen0.json"

@@ -18,12 +18,6 @@ key_id = "UniqueIdentifier"
 
 [[steps]]
 operation = "SetAttribute"
-request = "step2_set_rotate_name.json"
-assert_success = true
-
-# Set ProtectStopDate in the past — the only key in the keyset is now expired.
-[[steps]]
-operation = "SetAttribute"
 request = "step3_set_protect_stop_past.json"
 assert_success = true
 

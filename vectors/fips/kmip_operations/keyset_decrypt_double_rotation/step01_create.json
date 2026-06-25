@@ -1,18 +1,70 @@
 {
   "tag": "Create",
   "value": [
-    {"tag": "ObjectType", "type": "Enumeration", "value": "SymmetricKey"},
-    {"tag": "Attributes", "value": [
-      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES"},
-      {"tag": "CryptographicLength", "type": "Integer", "value": 256},
-      {"tag": "CryptographicUsageMask", "type": "Integer", "value": 12},
-      {"tag": "KeyFormatType", "type": "Enumeration", "value": "TransparentSymmetricKey"},
-      {"tag": "ObjectType", "type": "Enumeration", "value": "SymmetricKey"},
-      {"tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z"},
-      {"tag": "Name", "value": [
-        {"tag": "NameValue", "type": "TextString", "value": "keyset-double-rot"},
-        {"tag": "NameType", "type": "Enumeration", "value": "UninterpretedTextString"}
-      ]}
-    ]}
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "UniqueIdentifier",
+          "type": "TextString",
+          "value": "test-keyset-double-rot"
+        },
+        {
+          "tag": "RotateName",
+          "type": "TextString",
+          "value": "test-keyset-double-rot"
+        },
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 256
+        },
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 12
+        },
+        {
+          "tag": "KeyFormatType",
+          "type": "Enumeration",
+          "value": "TransparentSymmetricKey"
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SymmetricKey"
+        },
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
+        },
+        {
+          "tag": "Name",
+          "value": [
+            {
+              "tag": "NameValue",
+              "type": "TextString",
+              "value": "keyset-double-rot"
+            },
+            {
+              "tag": "NameType",
+              "type": "Enumeration",
+              "value": "UninterpretedTextString"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

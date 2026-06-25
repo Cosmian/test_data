@@ -1,7 +1,7 @@
 default_username = "admin"
 hsm_model = "softhsm2"
 hsm_admin = ["admin", "owner.client@acme.com"]
-hsm_slot = [473094471]
+hsm_slot = [1667223158]
 hsm_password = ["12345678"]
 
 # key_encryption_key = "hsm::2045571331::owner"
@@ -9,16 +9,16 @@ hsm_password = ["12345678"]
 [http]
 port = 9998
 hostname = "0.0.0.0"
-cors_allowed_origins = ["https://localhost:9998"]
+cors_allowed_origins = ["http://localhost:9998"]
 
 [db]
 database_type = "sqlite"
 clear_database = false
 
-[tls]
-tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
-tls_p12_password = "password"
-clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+# [tls]
+# tls_p12_file = "test_data/certificates/client_server/server/kmserver.acme.com.p12"
+# tls_p12_password = "password"
+# clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
 
 [ui_config]
 ui_index_html_folder = "ui/dist"

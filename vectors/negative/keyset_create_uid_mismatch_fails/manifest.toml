@@ -1,0 +1,12 @@
+name = "Negative: Create with rotate_name ≠ key UID is rejected"
+description = """
+Verifies that a Create request where rotate_name does not equal the \
+supplied UniqueIdentifier is rejected. The invariant is: gen-0 UID must \
+equal the keyset name.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create_mismatch.json"
+assert_success = false
+assert_error_contains = "set the key ID to the keyset name"

@@ -13,12 +13,6 @@ assert_success = true
 key_id = "UniqueIdentifier"
 
 [[steps]]
-operation = "SetAttribute"
-request = "step2_set_rotate_name.json"
-assert_success = true
-
-# ReKey to create gen 1
-[[steps]]
 operation = "ReKey"
 request = "step3_rekey.json"
 assert_success = true

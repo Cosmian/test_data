@@ -1,8 +1,9 @@
 name = "Keyset Encrypt with @N (generation 1)"
 description = """
 Creates a symmetric key, assigns a rotate_name, performs two ReKey \
-operations (gen-0→gen-1→gen-2), then encrypts using name@1. Verifies \
-that @1 resolves to gen-1 by decrypting with the gen-1 key UID.
+operations (gen-0→gen-1→gen-2). Encrypts with name@1 while gen-1 is \
+still Active (between rotations), then verifies by decrypting with the \
+gen-1 UID after the second rotation (Decrypt accepts Deactivated keys).
 """
 
 [[steps]]
@@ -12,12 +13,7 @@ assert_success = true
 [steps.capture]
 key_id = "UniqueIdentifier"
 
-[[steps]]
-operation = "SetAttribute"
-request = "step02_set_rotate_name.json"
-assert_success = true
-
-# First rotation: gen-0 → gen-1
+# First rotation: gen-0 → gen-1 (gen-0 Deactivated)
 [[steps]]
 operation = "ReKey"
 request = "step03_rekey1.json"
@@ -25,15 +21,7 @@ assert_success = true
 [steps.capture]
 gen1_id = "UniqueIdentifier"
 
-# Second rotation: gen-1 → gen-2
-[[steps]]
-operation = "ReKey"
-request = "step04_rekey2.json"
-assert_success = true
-[steps.capture]
-gen2_id = "UniqueIdentifier"
-
-# Encrypt with name@1 — must resolve to gen-1
+# Encrypt with name@1 while gen-1 is still Active
 [[steps]]
 operation = "Encrypt"
 request = "step05_encrypt_at_gen1.json"
@@ -43,7 +31,15 @@ ciphertext = "Data"
 nonce = "IVCounterNonce"
 auth_tag = "AuthenticatedEncryptionTag"
 
-# Decrypt with gen-1 UID — proves @1 resolved to gen-1
+# Second rotation: gen-1 → gen-2 (gen-1 Deactivated per §4.57)
+[[steps]]
+operation = "ReKey"
+request = "step04_rekey2.json"
+assert_success = true
+[steps.capture]
+gen2_id = "UniqueIdentifier"
+
+# Decrypt with gen-1 UID — Deactivated keys accepted for Decrypt (KMIP §3.31)
 [[steps]]
 operation = "Decrypt"
 request = "step06_decrypt_by_gen1.json"

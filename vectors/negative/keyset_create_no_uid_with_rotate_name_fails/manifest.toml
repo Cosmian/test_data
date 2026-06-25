@@ -1,0 +1,12 @@
+name = "Negative: Create with rotate_name but no UniqueIdentifier is rejected"
+description = """
+Verifies that a Create request that specifies rotate_name but omits \
+UniqueIdentifier is rejected. Without an explicit UID equal to the keyset \
+name, the server would assign a random UUID, violating the gen-0 UID invariant.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create_no_uid.json"
+assert_success = false
+assert_error_contains = "set the key ID to the keyset name"

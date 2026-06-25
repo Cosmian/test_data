@@ -22,12 +22,6 @@ key_id = "UniqueIdentifier"
 
 # Assign a keyset name to the HMAC key
 [[steps]]
-operation = "SetAttribute"
-request = "step2_set_rotate_name.json"
-assert_success = true
-
-# Compute MAC with the gen-0 key
-[[steps]]
 operation = "Mac"
 request = "step3_mac_gen0.json"
 assert_success = true

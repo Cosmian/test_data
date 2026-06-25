@@ -1,0 +1,30 @@
+name = "Negative: SetAttribute RotateName ≠ key UID is rejected"
+description = """
+Verifies that setting rotate_name via SetAttribute is rejected when the \
+attribute value does not equal the key's UID. SQL keys require gen-0 UID \
+to equal the keyset name — this invariant must be enforced at SetAttribute time.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name_mismatch.json"
+assert_success = false
+assert_error_contains = "rotate_name"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

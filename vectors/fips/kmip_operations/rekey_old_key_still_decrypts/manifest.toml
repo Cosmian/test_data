@@ -1,7 +1,7 @@
-name = "ReKey Old Key Still Decrypts"
+name = "ReKey Old Key Deactivated After Rotation"
 description = """
-Verifies that after ReKey, the old key remains Active and can still \
-be used for encryption (proving it is not deactivated by ReKey).
+Verifies that after ReKey, the old key is Deactivated (KMIP §4.57 transition 6) \
+and can no longer be used for encryption.
 """
 
 [[steps]]
@@ -18,11 +18,12 @@ assert_success = true
 [steps.capture]
 new_key_id = "UniqueIdentifier"
 
-# Old key should still encrypt (proving it remains Active)
+# Old key is Deactivated after ReKey (KMIP §4.57) — Encrypt must fail
 [[steps]]
 operation = "Encrypt"
 request = "step2_encrypt.json"
-assert_success = true
+assert_success = false
+assert_error_contains = "not found"
 
 # Cleanup
 [[steps]]

@@ -1,0 +1,30 @@
+name = "Negative: AddAttribute RotateName ≠ key UID is rejected"
+description = """
+Verifies that adding rotate_name via AddAttribute is rejected when the \
+attribute value does not equal the key's UID. Mirrors the SetAttribute \
+enforcement for the same keyset-name invariant.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "AddAttribute"
+request = "step2_add_rotate_name_mismatch.json"
+assert_success = false
+assert_error_contains = "rotate_name"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step3_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true

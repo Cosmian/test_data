@@ -23,11 +23,12 @@ assert_success = true
 [steps.capture]
 new_key_id = "UniqueIdentifier"
 
-# Verify old key still works (remains Active per spec)
+# Old key is Deactivated after ReKey (KMIP §4.57) — Encrypt must fail
 [[steps]]
 operation = "Encrypt"
 request = "step3_encrypt.json"
-assert_success = true
+assert_success = false
+assert_error_contains = "not found"
 
 # Cleanup
 [[steps]]
