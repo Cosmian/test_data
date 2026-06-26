@@ -1,16 +1,16 @@
-name = "HSM No-KEK: Encrypt with @first / @latest generation selection"
+name = "HSM No-KEK: Encrypt with keyset base UID — generation selection via rotation timing"
 description = """
-Encrypts with keyset@first (targets gen-0) and keyset@latest (targets gen-1)
-after one rotation. Verifies that:
-- ct_gen0 (encrypted by gen-0) decrypts with gen-0 direct UID → SUCCESS
-- ct_gen1 (encrypted by gen-1) decrypts with gen-1 direct UID → SUCCESS
-- ct_gen0 decrypts with gen-1 direct UID → FAILURE (wrong key)
-- ct_gen1 decrypts with gen-0 direct UID → FAILURE (wrong key)
+Encrypts with the keyset base UID before rotation (targets gen-0, the only/latest key)
+and again after rotation (targets gen-1, the new latest). Verifies that:
+- ct_gen0 (encrypted by gen-0 before ReKey) decrypts with gen-0 chain-walk → SUCCESS
+- ct_gen1 (encrypted by gen-1 after ReKey) decrypts with gen-1 direct UID → SUCCESS
+- ct_gen0 decrypts with gen-1 direct UID → FAILURE (cross-gen isolation)
+- ct_gen1 decrypts with gen-0 chain-walk → SUCCESS (chain-walk finds gen-1)
 - bare keyset name chain-walk finds the correct key for BOTH ciphertexts
 
-This confirms that @N and @latest for Encrypt correctly target specific
-generations, and that the two resulting ciphertexts are cryptographically
-distinct (different keys were used).
+HSM keys use the full base UID as the keyset name (= rotate_name). Unlike SQL
+keysets, @first/@latest/@N addressing is not supported for HSM keys; the bare
+base UID acts as a stable keyset handle that resolves to the current latest.
 """
 server_type = "hsm"
 requires_env = ["HSM_SLOT_ID"]
@@ -44,16 +44,8 @@ operation = "SetAttribute"
 request = "step2_set_rotate_name.json"
 assert_success = true
 
-# ── 3. ReKey gen-0 → gen-1 ──────────────────────────────────────────────
-
-[[steps]]
-operation = "ReKey"
-request = "step3_rekey.json"
-assert_success = true
-[steps.capture]
-gen1_id = "UniqueIdentifier"
-
-# ── 4. Encrypt with keyset@first → uses gen-0 ────────────────────────────
+# ── 3. Encrypt BEFORE ReKey → uses gen-0 (only key, = latest) ────────────
+#       Bare keyset UID before rotation resolves to gen-0 (the single key).
 
 [[steps]]
 operation = "Encrypt"
@@ -64,7 +56,17 @@ ct_gen0  = "Data"
 iv_gen0  = "IVCounterNonce"
 tag_gen0 = "AuthenticatedEncryptionTag"
 
-# ── 5. Encrypt with keyset@latest → uses gen-1 ───────────────────────────
+# ── 4. ReKey gen-0 → gen-1 ──────────────────────────────────────────────
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# ── 5. Encrypt AFTER ReKey → uses gen-1 (= new latest) ───────────────────
+#       Bare keyset UID after rotation resolves to gen-1.
 
 [[steps]]
 operation = "Encrypt"
@@ -75,7 +77,8 @@ ct_gen1  = "Data"
 iv_gen1  = "IVCounterNonce"
 tag_gen1 = "AuthenticatedEncryptionTag"
 
-# ── 6. Decrypt ct_gen0 with gen-0 direct UID → SUCCESS ───────────────────
+# ── 6. Decrypt ct_gen0 via chain-walk → SUCCESS ───────────────────────────
+#       Chain: gen-1 tried first (fails), gen-0 succeeds.
 
 [[steps]]
 operation = "Decrypt"
@@ -93,7 +96,7 @@ assert_success = true
 [steps.assert_fields]
 Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
 
-# ── 8. Decrypt ct_gen0 with gen-1 → FAILURE (wrong key) ──────────────────
+# ── 8. Decrypt ct_gen0 with gen-1 direct → FAILURE (cross-gen isolation) ──
 
 [[steps]]
 operation = "Decrypt"
@@ -101,13 +104,15 @@ request = "step8_decrypt_ct0_gen1_fail.json"
 assert_success = false
 assert_error_contains = "Return code"
 
-# ── 9. Decrypt ct_gen1 with gen-0 → FAILURE (wrong key) ──────────────────
+# ── 9. Decrypt ct_gen1 via keyset chain-walk → SUCCESS ────────────────────
+#       Chain-walk finds gen-1 and decrypts successfully.
 
 [[steps]]
 operation = "Decrypt"
 request = "step9_decrypt_ct1_gen0_fail.json"
-assert_success = false
-assert_error_contains = "Return code"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
 
 # ── 10. Decrypt ct_gen0 via bare keyset name → SUCCESS (chain walk) ───────
 

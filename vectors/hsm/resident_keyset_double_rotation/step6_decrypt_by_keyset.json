@@ -1,7 +1,7 @@
 {
   "tag": "Decrypt",
   "value": [
-    {"tag": "UniqueIdentifier", "type": "TextString", "value": "hsm-keyset-double-rot"},
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{key_id}}"},
     {"tag": "CryptographicParameters", "value": [
       {"tag": "BlockCipherMode", "type": "Enumeration", "value": "GCM"},
       {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES"}

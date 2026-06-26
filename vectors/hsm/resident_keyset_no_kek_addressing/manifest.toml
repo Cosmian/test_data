@@ -97,7 +97,7 @@ assert_success = true
 [steps.assert_fields]
 Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
 
-# ── 8. Decrypt via keyset@first → SUCCESS (versioned → single = gen-0) ───
+# ── 8. Decrypt via keyset base UID → SUCCESS (chain walk finds gen-0) ────
 
 [[steps]]
 operation = "Decrypt"
@@ -106,7 +106,7 @@ assert_success = true
 [steps.assert_fields]
 Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
 
-# ── 9. Decrypt via keyset@0 → SUCCESS (same as @first) ───────────────────
+# ── 9. Same: keyset base UID → SUCCESS (chain walk finds gen-0) ───────────
 
 [[steps]]
 operation = "Decrypt"
@@ -115,22 +115,22 @@ assert_success = true
 [steps.assert_fields]
 Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
 
-# ── 10. Decrypt via keyset@latest → FAILURE (versioned → single gen-1, no chain)
-#        Key material is exported from HSM; OpenSSL GCM auth tag mismatch.
+# ── 10. Decrypt gen-0 CT via gen-1 direct UID → FAILURE (wrong key) ───────
+#        gen-1 explicit UID — no chain walk, HSM PKCS#11 return code error.
 
 [[steps]]
 operation = "Decrypt"
 request = "step10_decrypt_at_latest_fail.json"
 assert_success = false
-assert_error_contains = "OpenSSL"
+assert_error_contains = "Return code"
 
-# ── 11. Decrypt via keyset@1 → FAILURE (versioned → single gen-1, no chain) ─
+# ── 11. Same: gen-1 direct UID → FAILURE (wrong key) ─────────────────────
 
 [[steps]]
 operation = "Decrypt"
 request = "step11_decrypt_at_1_fail.json"
 assert_success = false
-assert_error_contains = "OpenSSL"
+assert_error_contains = "Return code"
 
 # ── Cleanup ──────────────────────────────────────────────────────────────
 

@@ -64,8 +64,8 @@ operation = "ReKey"
 request = "step4_rekey_gen0_again.json"
 assert_success = true
 
-# ── 5. ReKey retired gen-1 → REDIRECT to gen-2 → creates gen-3 ──────────
-#       gen-1 is now retired (gen-2 is latest); server redirects to gen-2.
+# ── 5. ReKey via stable handle → resolves to gen-2 (latest) → creates gen-3 ─
+#       The bare keyset UID always resolves to the current latest generation.
 
 [[steps]]
 operation = "ReKey"

@@ -122,14 +122,14 @@ assert_success = true
 [steps.assert_fields]
 Data = "48656C6C6F20576F726C642066726F6D20484D532074657374203221"
 
-# ── 11. Decrypt ct0 via keyset@2 (versioned, single gen-2) → FAILURE ─────
-#        Key material exported from HSM; OpenSSL GCM auth tag mismatch.
+# ── 11. Decrypt ct0 via gen-2 direct UID → FAILURE ─────────────────────
+#        Wrong key material; HSM PKCS#11 decrypt returns an error code.
 
 [[steps]]
 operation = "Decrypt"
 request = "step11_decrypt_ct0_at2_fail.json"
 assert_success = false
-assert_error_contains = "OpenSSL"
+assert_error_contains = "Return code"
 
 # ── Cleanup ──────────────────────────────────────────────────────────────
 
