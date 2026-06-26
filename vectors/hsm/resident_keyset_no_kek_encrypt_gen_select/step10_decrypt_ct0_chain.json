@@ -1,0 +1,13 @@
+{
+  "tag": "Decrypt",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "ks-enc-gen"},
+    {"tag": "CryptographicParameters", "value": [
+      {"tag": "BlockCipherMode", "type": "Enumeration", "value": "GCM"},
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES"}
+    ]},
+    {"tag": "Data", "type": "ByteString", "value": "{{ct_gen0}}"},
+    {"tag": "IVCounterNonce", "type": "ByteString", "value": "{{iv_gen0}}"},
+    {"tag": "AuthenticatedEncryptionTag", "type": "ByteString", "value": "{{tag_gen0}}"}
+  ]
+}

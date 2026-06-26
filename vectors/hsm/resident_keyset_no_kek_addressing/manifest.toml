@@ -1,0 +1,145 @@
+name = "HSM No-KEK: All keyset addressing modes after rekey"
+description = """
+Creates an HSM-resident key, assigns a keyset name (rotate_name = \"ks-addr\"),
+encrypts with the gen-0 key, then rekeys to gen-1. Tests every addressing mode:
+
+Decrypt success:
+  - gen-0 direct UID (correct key, no chain walk)
+  - bare keyset name  (chain walk: gen-1 fails → gen-0 succeeds)
+  - keyset@first      (versioned → single key gen-0, no chain walk)
+  - keyset@0          (same as @first)
+
+Decrypt failure:
+  - gen-1 direct UID  (wrong key material, no fallback)
+  - keyset@latest     (versioned → single key gen-1, NO chain walk)
+  - keyset@1          (versioned → single key gen-1, NO chain walk)
+
+This test establishes that versioned keyset refs (@N, @first, @latest) resolve
+to a SINGLE key without fallback, while bare keyset names activate chain-walk.
+"""
+server_type = "hsm"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# ── Pre-cleanup ──────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+# ── 1. Create AES-256 key on HSM ────────────────────────────────────────
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── 2. Assign keyset name ────────────────────────────────────────────────
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ── 3. Encrypt with gen-0 direct UID ────────────────────────────────────
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_gen0.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce      = "IVCounterNonce"
+tag        = "AuthenticatedEncryptionTag"
+
+# ── 4. ReKey: gen-0 → gen-1 ─────────────────────────────────────────────
+
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# ── 5. Decrypt gen-0 ciphertext via gen-0 direct UID → SUCCESS ──────────
+
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_direct_gen0.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 6. Decrypt gen-0 ciphertext via gen-1 direct UID → FAILURE ──────────
+#       Wrong key material; direct UID bypasses chain walk.
+
+[[steps]]
+operation = "Decrypt"
+request = "step6_decrypt_direct_gen1_fail.json"
+assert_success = false
+assert_error_contains = "Return code"
+
+# ── 7. Decrypt gen-0 ciphertext via bare keyset name → SUCCESS ───────────
+#       Chain walk: gen-1 tried first (fails), gen-0 succeeds.
+
+[[steps]]
+operation = "Decrypt"
+request = "step7_decrypt_bare_name.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 8. Decrypt via keyset@first → SUCCESS (versioned → single = gen-0) ───
+
+[[steps]]
+operation = "Decrypt"
+request = "step8_decrypt_at_first.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 9. Decrypt via keyset@0 → SUCCESS (same as @first) ───────────────────
+
+[[steps]]
+operation = "Decrypt"
+request = "step9_decrypt_at_0.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 10. Decrypt via keyset@latest → FAILURE (versioned → single gen-1, no chain)
+#        Key material is exported from HSM; OpenSSL GCM auth tag mismatch.
+
+[[steps]]
+operation = "Decrypt"
+request = "step10_decrypt_at_latest_fail.json"
+assert_success = false
+assert_error_contains = "OpenSSL"
+
+# ── 11. Decrypt via keyset@1 → FAILURE (versioned → single gen-1, no chain) ─
+
+[[steps]]
+operation = "Decrypt"
+request = "step11_decrypt_at_1_fail.json"
+assert_success = false
+assert_error_contains = "OpenSSL"
+
+# ── Cleanup ──────────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+assert_success = true

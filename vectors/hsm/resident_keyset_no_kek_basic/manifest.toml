@@ -1,0 +1,82 @@
+name = "HSM No-KEK: Basic rekey without keyset name"
+description = """
+Creates an HSM-resident AES-256 key without a keyset (no rotate_name), encrypts
+plaintext, then rekeys. Verifies that:
+- gen-0 direct UID decrypts the ciphertext (correct key)
+- gen-1 direct UID fails to decrypt (wrong key material, no fallback)
+
+This tests the raw direct-UID addressing semantics without any keyset resolution.
+"""
+server_type = "hsm"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# ── Pre-cleanup ──────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+# ── 1. Create AES-256 key on HSM (no rotate_name) ───────────────────────
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── 2. Encrypt with gen-0 direct UID ────────────────────────────────────
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce      = "IVCounterNonce"
+tag        = "AuthenticatedEncryptionTag"
+
+# ── 3. ReKey: gen-0 → gen-1 ─────────────────────────────────────────────
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# ── 4. Decrypt with gen-0 direct UID → SUCCESS ──────────────────────────
+
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt_gen0.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 5. Decrypt with gen-1 direct UID → FAILURE (wrong key material) ─────
+
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_gen1_fail.json"
+assert_success = false
+assert_error_contains = "Return code"
+
+# ── Cleanup ──────────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+assert_success = true

@@ -1,0 +1,11 @@
+{
+  "tag": "Encrypt",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "ks-enc-gen@latest"},
+    {"tag": "CryptographicParameters", "value": [
+      {"tag": "BlockCipherMode", "type": "Enumeration", "value": "GCM"},
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES"}
+    ]},
+    {"tag": "Data", "type": "ByteString", "value": "48656C6C6F20576F726C642066726F6D20484D53207465737421"}
+  ]
+}

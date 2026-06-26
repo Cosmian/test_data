@@ -1,0 +1,1 @@
+{"tag":"ReKey","value":[{"tag":"UniqueIdentifier","type":"TextString","value":"hsm::{{$HSM_SLOT_ID}}::vec_ks_huid"}]}

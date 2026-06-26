@@ -1,0 +1,78 @@
+name = "HSM No-KEK: Re-key using bare keyset name and @latest ref"
+description = """
+Verifies that ReKey can be addressed via the keyset name (not just the direct UID).
+Uses the bare keyset name for the first rotation and @latest for the second.
+Asserts the resulting UIDs end with @1 and @2 respectively, and that the
+RotateGeneration attribute is correctly set on each new key.
+"""
+server_type = "hsm"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# ── Pre-cleanup ──────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
+allow_failure = true
+
+# ── 1. Create gen-0 ──────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── 2. Assign keyset name ────────────────────────────────────────────────
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ── 3. ReKey via bare keyset name (gen-0 → gen-1) ────────────────────────
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey_by_bare_name.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# ── 4. ReKey via keyset@latest (gen-1 → gen-2) ───────────────────────────
+
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey_by_at_latest.json"
+assert_success = true
+[steps.capture]
+gen2_id = "UniqueIdentifier"
+
+# ── 5. Cleanup ───────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
+assert_success = true

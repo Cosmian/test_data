@@ -1,0 +1,140 @@
+name = "HSM No-KEK: Encrypt with @first / @latest generation selection"
+description = """
+Encrypts with keyset@first (targets gen-0) and keyset@latest (targets gen-1)
+after one rotation. Verifies that:
+- ct_gen0 (encrypted by gen-0) decrypts with gen-0 direct UID → SUCCESS
+- ct_gen1 (encrypted by gen-1) decrypts with gen-1 direct UID → SUCCESS
+- ct_gen0 decrypts with gen-1 direct UID → FAILURE (wrong key)
+- ct_gen1 decrypts with gen-0 direct UID → FAILURE (wrong key)
+- bare keyset name chain-walk finds the correct key for BOTH ciphertexts
+
+This confirms that @N and @latest for Encrypt correctly target specific
+generations, and that the two resulting ciphertexts are cryptographically
+distinct (different keys were used).
+"""
+server_type = "hsm"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# ── Pre-cleanup ──────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+# ── 1. Create gen-0 ──────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── 2. Assign keyset name ────────────────────────────────────────────────
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ── 3. ReKey gen-0 → gen-1 ──────────────────────────────────────────────
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# ── 4. Encrypt with keyset@first → uses gen-0 ────────────────────────────
+
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_at_first.json"
+assert_success = true
+[steps.capture]
+ct_gen0  = "Data"
+iv_gen0  = "IVCounterNonce"
+tag_gen0 = "AuthenticatedEncryptionTag"
+
+# ── 5. Encrypt with keyset@latest → uses gen-1 ───────────────────────────
+
+[[steps]]
+operation = "Encrypt"
+request = "step5_encrypt_at_latest.json"
+assert_success = true
+[steps.capture]
+ct_gen1  = "Data"
+iv_gen1  = "IVCounterNonce"
+tag_gen1 = "AuthenticatedEncryptionTag"
+
+# ── 6. Decrypt ct_gen0 with gen-0 direct UID → SUCCESS ───────────────────
+
+[[steps]]
+operation = "Decrypt"
+request = "step6_decrypt_ct0_gen0.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 7. Decrypt ct_gen1 with gen-1 direct UID → SUCCESS ───────────────────
+
+[[steps]]
+operation = "Decrypt"
+request = "step7_decrypt_ct1_gen1.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 8. Decrypt ct_gen0 with gen-1 → FAILURE (wrong key) ──────────────────
+
+[[steps]]
+operation = "Decrypt"
+request = "step8_decrypt_ct0_gen1_fail.json"
+assert_success = false
+assert_error_contains = "Return code"
+
+# ── 9. Decrypt ct_gen1 with gen-0 → FAILURE (wrong key) ──────────────────
+
+[[steps]]
+operation = "Decrypt"
+request = "step9_decrypt_ct1_gen0_fail.json"
+assert_success = false
+assert_error_contains = "Return code"
+
+# ── 10. Decrypt ct_gen0 via bare keyset name → SUCCESS (chain walk) ───────
+
+[[steps]]
+operation = "Decrypt"
+request = "step10_decrypt_ct0_chain.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 11. Decrypt ct_gen1 via bare keyset name → SUCCESS (chain walk) ───────
+
+[[steps]]
+operation = "Decrypt"
+request = "step11_decrypt_ct1_chain.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── Cleanup ──────────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+assert_success = true
