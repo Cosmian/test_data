@@ -1,0 +1,35 @@
+name = "Negative: HSM Keyset Name Generation Suffix Rejected"
+description = """
+For HSM keys, the keyset name must be the base UID without any @N generation \
+suffix. Setting rotate_name to 'hsm::slot::key@1' must be rejected.
+"""
+server_type = "hsm"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# Pre-cleanup
+[[steps]]
+operation = "Destroy"
+request = "step0_cleanup.json"
+allow_failure = true
+
+# Create HSM key
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Attempt SetAttribute with @1 suffix — must be rejected
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name_gen.json"
+assert_success = false
+assert_error_contains = "base UID"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step0_cleanup.json"
+assert_success = true

@@ -1,0 +1,76 @@
+name = "Keyset EC Sign Then Verify After ReKeyKeyPair"
+description = """
+Tests keyset-based Sign resolution with EC key pairs:
+1. Create EC P-256 key pair with rotate_name on the private key
+2. Sign data using the keyset name (resolves to latest = gen-0)
+3. ReKeyKeyPair (gen-0 → gen-1)
+4. Sign using the keyset name again (resolves to latest = gen-1)
+5. Verify BOTH signatures using their respective public keys
+"""
+
+# Create EC P-256 key pair with rotate_name
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+# Sign using keyset name (resolves to latest private key = gen-0)
+[[steps]]
+operation = "Sign"
+request = "step2_sign_by_keyset.json"
+assert_success = true
+[steps.capture]
+signature_gen0 = "SignatureData"
+
+# ReKeyKeyPair: gen-0 → gen-1
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# Sign using keyset name again — should use gen-1 now
+[[steps]]
+operation = "Sign"
+request = "step4_sign_by_keyset_gen1.json"
+assert_success = true
+[steps.capture]
+signature_gen1 = "SignatureData"
+
+# Verify gen-0 signature with OLD public key
+[[steps]]
+operation = "SignatureVerify"
+request = "step5_verify_gen0.json"
+assert_success = true
+
+# Verify gen-1 signature with NEW public key
+[[steps]]
+operation = "SignatureVerify"
+request = "step6_verify_gen1.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new.json"
+assert_success = true

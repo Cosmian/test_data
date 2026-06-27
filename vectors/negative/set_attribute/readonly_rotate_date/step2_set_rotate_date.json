@@ -1,0 +1,9 @@
+{
+  "tag": "SetAttribute",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{key_id}}"},
+    {"tag": "NewAttribute", "value": [
+      {"tag": "RotateDate", "type": "DateTime", "value": "2024-06-15T00:00:00Z"}
+    ]}
+  ]
+}

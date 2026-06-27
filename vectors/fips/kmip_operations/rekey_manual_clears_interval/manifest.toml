@@ -1,0 +1,60 @@
+name = "ReKey Manual Clears Interval"
+description = """
+After a manual ReKey, x-rotate-interval must be set to 0 on the new key. \
+This forces the operator to re-arm the rotation policy explicitly, \
+preventing accidental automatic rotation of the new key.
+"""
+
+# Create a keyset key with interval=3600
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Set rotation policy: interval=3600, name=keyset
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_interval.json"
+assert_success = true
+
+# Verify interval is set
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+assert_success = true
+[steps.assert_fields]
+RotateInterval = "0x0000000000000E10"
+
+# Manual ReKey
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify new key has interval=0 (cleared on manual rekey)
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attributes_new.json"
+assert_success = true
+[steps.assert_fields]
+RotateInterval = "0x0000000000000000"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new.json"
+assert_success = true

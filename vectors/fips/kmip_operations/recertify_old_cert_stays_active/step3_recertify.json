@@ -1,0 +1,6 @@
+{
+  "tag": "ReCertify",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{old_cert_id}}"}
+  ]
+}

@@ -1,0 +1,58 @@
+name = "ReKey Manual Clears Offset"
+description = """
+After a manual ReKey, x-rotate-offset must NOT be inherited by the new key. \
+The spec states the value is 'None (not inherited for manual rekey)'.
+"""
+
+# Create a keyset key
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Set offset=600 on the key
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_offset.json"
+assert_success = true
+
+# Verify offset is set
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+assert_success = true
+[steps.assert_fields]
+RotateOffset = "0x0000000000000258"
+
+# Manual ReKey
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify new key has no offset (absent from response)
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attributes_new.json"
+assert_success = true
+assert_fields_absent = ["RotateOffset"]
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new.json"
+assert_success = true

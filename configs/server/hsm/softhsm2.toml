@@ -3,8 +3,7 @@ hsm_model = "softhsm2"
 hsm_admin = ["admin", "owner.client@acme.com"]
 hsm_slot = [1667223158]
 hsm_password = ["12345678"]
-
-# key_encryption_key = "hsm::2045571331::owner"
+key_encryption_key = "hsm::1667223158::owner"
 
 [http]
 port = 9998

@@ -1,0 +1,47 @@
+name = "Negative: ReKey Offset PreActive Cannot Encrypt"
+description = """
+When ReKey uses Offset=86400, the new key enters PreActive state. \
+A PreActive key must not be usable for Encrypt operations.
+"""
+
+# Create a key
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ReKey with large offset → new key should be PreActive
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey_offset.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify new key is PreActive
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+assert_success = true
+[steps.assert_fields]
+State = "PreActive"
+
+# Encrypt with the PreActive key — must fail
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_fails.json"
+assert_success = false
+assert_error_contains = "is in state"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_new.json"
+assert_success = true

@@ -1,0 +1,30 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {
+      "tag": "CommonAttributes",
+      "value": [
+        {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "ECDSA"},
+        {"tag": "CryptographicDomainParameters", "value": [
+          {"tag": "RecommendedCurve", "type": "Enumeration", "value": "P256"}
+        ]},
+        {"tag": "KeyFormatType", "type": "Enumeration", "value": "ECPrivateKey"},
+        {"tag": "ActivationDate", "type": "DateTime", "value": "2024-01-01T00:00:00Z"}
+      ]
+    },
+    {
+      "tag": "PrivateKeyAttributes",
+      "value": [
+        {"tag": "UniqueIdentifier", "type": "TextString", "value": "test-ec-sign-verify-chain"},
+        {"tag": "RotateName", "type": "TextString", "value": "test-ec-sign-verify-chain"},
+        {"tag": "CryptographicUsageMask", "type": "Integer", "value": 1063425}
+      ]
+    },
+    {
+      "tag": "PublicKeyAttributes",
+      "value": [
+        {"tag": "CryptographicUsageMask", "type": "Integer", "value": 1051138}
+      ]
+    }
+  ]
+}

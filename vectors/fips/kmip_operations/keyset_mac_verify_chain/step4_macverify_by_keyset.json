@@ -1,0 +1,8 @@
+{
+  "tag": "MACVerify",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "test-mac-verify-chain"},
+    {"tag": "Data", "type": "ByteString", "value": "48656C6C6F20576F726C64"},
+    {"tag": "MACData", "type": "ByteString", "value": "{{mac_tag}}"}
+  ]
+}

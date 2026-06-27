@@ -1,0 +1,57 @@
+name = "Keyset MACVerify Chain Walk"
+description = """
+Tests the TryEach chain-walk for MACVerify via keyset name:
+1. Create HMAC-SHA256 key with rotate_name
+2. Mac using keyset name → tag_gen0
+3. ReKey (gen-0 → gen-1)
+4. MACVerify the OLD tag using the keyset name — server walks gen-1 → gen-0
+
+The existing rekey_mac_keyset test only verifies via direct UID. \
+This test proves the chain-walk works when addressed by keyset name.
+"""
+
+# Create HMAC-SHA256 key in keyset
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Mac using keyset name
+[[steps]]
+operation = "Mac"
+request = "step2_mac_by_keyset.json"
+assert_success = true
+[steps.capture]
+mac_tag = "MACData"
+
+# ReKey
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# MACVerify OLD tag using keyset name — chain walks gen-1 → gen-0
+[[steps]]
+operation = "MACVerify"
+request = "step4_macverify_by_keyset.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

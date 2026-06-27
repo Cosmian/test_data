@@ -1,0 +1,61 @@
+name = "ReKeyKeyPair RSA Old Key Still Decrypts"
+description = """
+After ReKeyKeyPair, the old private key is Deactivated but can still decrypt \
+ciphertext encrypted with the old public key. Processing operations (Decrypt) \
+accept Deactivated state per KMIP §3.31.
+"""
+
+# Create RSA-2048 key pair
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+# Encrypt with old public key
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_old_pk.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+
+# ReKeyKeyPair
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+
+# Verify old private key is Deactivated
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attributes_old_sk.json"
+assert_success = true
+[steps.assert_fields]
+State = "Deactivated"
+
+# Decrypt with OLD private key — must succeed despite Deactivated state
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_old_sk.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_sk.json"
+assert_success = true

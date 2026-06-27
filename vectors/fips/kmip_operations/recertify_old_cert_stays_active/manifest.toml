@@ -1,0 +1,84 @@
+name = "ReCertify Old Certificate Deactivated"
+description = """
+After ReCertify, the old certificate transitions to Deactivated state \
+per KMIP §4.57 transition 6 (same path as ReKey). The new certificate \
+is Active.
+"""
+
+# Create key pair
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+# Self-sign certificate
+[[steps]]
+operation = "Certify"
+request = "step2_certify.json"
+assert_success = true
+[steps.capture]
+old_cert_id = "UniqueIdentifier"
+
+# ReCertify
+[[steps]]
+operation = "ReCertify"
+request = "step3_recertify.json"
+assert_success = true
+[steps.capture]
+new_cert_id = "UniqueIdentifier"
+
+# Verify OLD cert is Deactivated (§4.57 transition 6)
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_attributes_old.json"
+assert_success = true
+[steps.assert_fields]
+State = "Deactivated"
+
+# Verify NEW cert is Active
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attributes_new.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_old_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_new_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_new_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_private.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_public.json"
+assert_success = true
+allow_failure = true
