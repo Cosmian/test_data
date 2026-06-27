@@ -1,0 +1,97 @@
+name = "HSM KEK: ReKey a KEK and verify dependent wrapped keys are re-wrapped"
+description = """
+Creates a dedicated HSM KEK ('hsm::<slot>::vec_kek_rekey') and a DB AES DEK that \
+is explicitly wrapped at rest by that KEK. \
+Re-keys the KEK itself — the HSM rotation generates new key material and a new UID, \
+then automatically re-wraps all dependent DB keys (rewrap_dependants). \
+Verifies via GetAttributes that the DEK's WrappingKeyLink now points to the new KEK \
+UID, and confirms encrypt still works after the rotation. \
+Fully cleans up (DEK + both KEK generations) for idempotent reruns.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# ── Pre-cleanup (allow_failure — keys may not exist on first run) ────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_kek_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_kek_gen1.json"
+allow_failure = true
+
+# ── Step 1: Create dedicated HSM KEK ─────────────────────────────────────────
+
+[[steps]]
+operation = "Create"
+request = "step1_create_kek.json"
+assert_success = true
+
+# ── Step 2: Create DB DEK wrapped by the dedicated KEK ───────────────────────
+
+[[steps]]
+operation = "Create"
+request = "step2_create_dek.json"
+assert_success = true
+[steps.capture]
+dek_id = "UniqueIdentifier"
+
+# ── Step 3: Encrypt with DEK before KEK rotation — verify it works ───────────
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_pre.json"
+assert_success = true
+
+# ── Step 4: ReKey the KEK → creates hsm::<slot>::vec_kek_rekey@1 ─────────────
+
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey_kek.json"
+assert_success = true
+[steps.capture]
+new_kek_id = "UniqueIdentifier"
+
+# ── Step 5: GetAttributes on DEK — WrappingKeyLink must now be new_kek_id ────
+
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attrs_dek.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{new_kek_id}}"
+
+# ── Step 6: Encrypt with DEK after KEK rotation — DEK re-wrapped, still works ─
+
+[[steps]]
+operation = "Encrypt"
+request = "step6_encrypt_post.json"
+assert_success = true
+
+# ── Cleanup: DEK ─────────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_dek.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_dek.json"
+assert_success = true
+
+# ── Cleanup: both KEK generations ────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_kek_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_kek_new.json"
+assert_success = true
