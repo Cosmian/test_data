@@ -1,0 +1,71 @@
+name = "KAT: ReKeyKeyPair — Deactivated PK Accepts Verify (KMIP §4.57 + §3.31)"
+description = """
+Known-Answer Test verifying that a Deactivated public key CAN still be used
+for SignatureVerify. Per KMIP §3.31, SignatureVerify (a processing operation)
+accepts keys in the Deactivated state to allow verification of previously
+created signatures.
+  - New SK signs a known message (010203040506).
+  - Old PK (Deactivated) verifies the signature: MUST succeed.
+Reference: KMIP 2.1 §3.31 (SignatureVerify allowed states), §4.57 state machine.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# Sign with the NEW private key to capture a signature
+[[steps]]
+operation = "Sign"
+request = "step3_sign_new.json"
+assert_success = true
+[steps.capture]
+signature = "SignatureData"
+
+# KAT: Verify with Deactivated OLD public key MUST succeed
+[[steps]]
+operation = "SignatureVerify"
+request = "step4_verify_old_pk.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new_pk.json"
+assert_success = true

@@ -1,0 +1,83 @@
+name = "KAT: ReCertify — State Transitions (KMIP §4.57 + §6.1.45)"
+description = """
+Known-Answer Test verifying KMIP §4.57 state machine after ReCertify:
+  - Old certificate: Active → Deactivated (transition 6, retire_for_replacement
+    sets deactivation_date = now, which triggers §4.57 transition 6).
+  - New certificate: issues Active (ActivationDate = now).
+Reference: KMIP 2.1 §4.57, §6.1.45 (Re-Certify response).
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step2_certify.json"
+assert_success = true
+[steps.capture]
+old_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReCertify"
+request = "step3_recertify.json"
+assert_success = true
+[steps.capture]
+new_cert_id = "UniqueIdentifier"
+
+# KAT: old cert MUST be Deactivated (§4.57 transition 6)
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_old_cert.json"
+assert_success = true
+[steps.assert_fields]
+State = "Deactivated"
+
+# KAT: new cert MUST be Active (§4.57 transition 3)
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_new_cert.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_private.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Revoke"
+request = "step10_revoke_public.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_public.json"
+assert_success = true
+allow_failure = true

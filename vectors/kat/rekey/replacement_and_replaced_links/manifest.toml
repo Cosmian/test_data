@@ -1,0 +1,54 @@
+name = "KAT: ReKey — Replacement and Replaced Object Links (KMIP §4.21)"
+description = """
+Known-Answer Test verifying the bidirectional link chain after ReKey:
+  - Old key MUST carry ReplacementObjectLink → new key UID (set by retire_for_replacement).
+  - New key MUST carry ReplacedObjectLink    → old key UID (set by set_rotation_metadata_from).
+Both link values are verified against the captured UIDs.
+Reference: KMIP 2.1 §4.21 (Link attribute), §6.1.46 (Re-Key response).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# KAT: old key ReplacementObjectLink MUST point to new key
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_old.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{new_key_id}}"
+
+# KAT: new key ReplacedObjectLink MUST point to old key
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_new.json"
+assert_success = true
+[steps.assert_fields]
+LinkedObjectIdentifier = "{{key_id}}"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

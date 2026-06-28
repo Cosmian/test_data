@@ -1,0 +1,62 @@
+name = "KAT: ReKey — RotateInterval Cleared After Manual ReKey (KMIP §4.49)"
+description = """
+Known-Answer Test verifying that a manual Re-Key clears the rotation policy
+on the new key (x-rotate-interval = 0). This prevents accidental automatic
+re-rotation of the new key — the operator must explicitly re-arm the policy.
+  - Before ReKey: RotateInterval = 0x0000000000000E10 (3600 seconds)
+  - After ReKey:  new key RotateInterval = 0x0000000000000000 (cleared)
+Reference: KMIP 2.1 §4.49 (x-rotate-interval vendor attribute).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Arm rotation policy: interval = 3600 s
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_interval.json"
+assert_success = true
+
+# KAT: interval is exactly 0x0E10 = 3600
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_interval_before.json"
+assert_success = true
+[steps.assert_fields]
+RotateInterval = "0x0000000000000E10"
+
+# Manual ReKey — clears the interval on the new key
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# KAT: new key RotateInterval MUST be 0 (cleared)
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_interval_after.json"
+assert_success = true
+[steps.assert_fields]
+RotateInterval = "0x0000000000000000"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new.json"
+assert_success = true

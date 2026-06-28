@@ -1,0 +1,10 @@
+{
+  "tag": "GetAttributes",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{new_private_key_id}}"
+    }
+  ]
+}

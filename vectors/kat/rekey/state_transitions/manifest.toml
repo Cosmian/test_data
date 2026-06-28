@@ -1,0 +1,54 @@
+name = "KAT: ReKey — State Transitions (KMIP §4.57)"
+description = """
+Known-Answer Test verifying KMIP §4.57 state machine after ReKey:
+  - Old key transitions from Active → Deactivated (transition 6 via §4.33
+    implicit Deactivation Date set by Re-Key).
+  - New key is Active (transition 3 via §4.33 implicit Activation Date).
+Reference: KMIP 2.1 §4.57, §6.1.46.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# KAT: old key MUST be Deactivated (KMIP §4.57 transition 6)
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_old.json"
+assert_success = true
+[steps.assert_fields]
+State = "Deactivated"
+
+# KAT: new key MUST be Active (KMIP §4.57 transition 3)
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_new.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Cleanup: old key is Deactivated → Destroy directly (§4.57 transition 8)
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

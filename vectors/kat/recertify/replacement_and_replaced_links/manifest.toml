@@ -1,0 +1,83 @@
+name = "KAT: ReCertify — Replacement and Replaced Object Links (KMIP §4.21)"
+description = """
+Known-Answer Test verifying the bidirectional link chain after ReCertify:
+  - Old certificate: ReplacementObjectLink → new cert UID (retire_for_replacement).
+  - New certificate: ReplacedObjectLink    → old cert UID (prepare_attributes).
+Both link values are verified against captured UIDs.
+Reference: KMIP 2.1 §4.21 (Link attribute), §6.1.45 (Re-Certify response).
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step2_certify.json"
+assert_success = true
+[steps.capture]
+old_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReCertify"
+request = "step3_recertify.json"
+assert_success = true
+[steps.capture]
+new_cert_id = "UniqueIdentifier"
+
+# KAT: old cert ReplacementObjectLink MUST point to new cert
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_old_cert.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{new_cert_id}}"
+
+# KAT: new cert ReplacedObjectLink MUST point to old cert
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_new_cert.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{old_cert_id}}"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_private.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Revoke"
+request = "step10_revoke_public.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_public.json"
+assert_success = true
+allow_failure = true

@@ -1,0 +1,82 @@
+name = "KAT: ReCertify — RotateLatest Flag (KMIP §4.52)"
+description = """
+Known-Answer Test verifying the RotateLatest vendor attribute after ReCertify:
+  - Old certificate: RotateLatest is absent (retire_for_replacement does not
+    set rotate_latest; the initial cert did not have it either).
+  - New certificate: RotateLatest = true (set by set_rotation_metadata_from).
+Reference: KMIP 2.1 §4.52 (x-rotate-latest vendor attribute), §6.1.45.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Certify"
+request = "step2_certify.json"
+assert_success = true
+[steps.capture]
+old_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReCertify"
+request = "step3_recertify.json"
+assert_success = true
+[steps.capture]
+new_cert_id = "UniqueIdentifier"
+
+# KAT: old cert RotateLatest MUST be absent (retire_for_replacement does not set it)
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_old_cert.json"
+assert_success = true
+assert_fields_absent = ["RotateLatest"]
+
+# KAT: new cert RotateLatest MUST be true
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_new_cert.json"
+assert_success = true
+[steps.assert_fields]
+RotateLatest = "true"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_cert.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_private.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Revoke"
+request = "step10_revoke_public.json"
+assert_success = true
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step11_destroy_public.json"
+assert_success = true
+allow_failure = true

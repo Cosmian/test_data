@@ -1,0 +1,58 @@
+name = "KAT: ReKey — Deterministic Keyset UID Scheme (KMIP §4.53)"
+description = """
+Known-Answer Test verifying the deterministic keyset UID scheme for named
+keysets in SQL backends:
+  - gen-0 UID = rotate-name (e.g. "kat-rekey-ku")
+  - gen-1 UID = "kat-rekey-ku@1" (after first ReKey)
+  - gen-2 UID = "kat-rekey-ku@2" (after second ReKey)
+The ReKey response UniqueIdentifier MUST match these exact values.
+Reference: KMIP 2.1 §4.53 (x-rotate-name keyset naming), KMIP §6.1.46.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+gen0_id = "UniqueIdentifier"
+
+# KAT: first ReKey MUST return UID = "kat-rekey-ku@1"
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey1.json"
+assert_success = true
+[steps.assert_fields]
+UniqueIdentifier = "kat-rekey-ku@1"
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# KAT: second ReKey MUST return UID = "kat-rekey-ku@2"
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey2.json"
+assert_success = true
+[steps.assert_fields]
+UniqueIdentifier = "kat-rekey-ku@2"
+[steps.capture]
+gen2_id = "UniqueIdentifier"
+
+# Cleanup all three generations
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_gen2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_gen2.json"
+assert_success = true
