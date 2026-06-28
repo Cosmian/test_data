@@ -17,13 +17,13 @@
       "value": [
         {"tag": "UniqueIdentifier", "type": "TextString", "value": "test-ec-sign-verify-chain"},
         {"tag": "RotateName", "type": "TextString", "value": "test-ec-sign-verify-chain"},
-        {"tag": "CryptographicUsageMask", "type": "Integer", "value": 1063425}
+        {"tag": "CryptographicUsageMask", "type": "Integer", "value": 1060865}
       ]
     },
     {
       "tag": "PublicKeyAttributes",
       "value": [
-        {"tag": "CryptographicUsageMask", "type": "Integer", "value": 1051138}
+        {"tag": "CryptographicUsageMask", "type": "Integer", "value": 1048578}
       ]
     }
   ]
