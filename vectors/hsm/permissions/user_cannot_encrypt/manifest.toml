@@ -1,6 +1,6 @@
 name = "HSM Permissions: non-admin user cannot encrypt without grant"
 description = """
-HSM admin creates an AES key in the HSM. Non-admin user (user.client@acme.com)
+HSM admin creates an AES key in the HSM. Non-admin user (<user.client@acme.com>)
 attempts to encrypt without having been granted Encrypt access.
 This must be denied — each operation must be explicitly granted for HSM keys.
 """

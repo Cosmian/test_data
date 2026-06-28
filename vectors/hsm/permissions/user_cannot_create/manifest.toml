@@ -1,6 +1,6 @@
 name = "HSM Permissions: non-admin user cannot create HSM key"
 description = """
-Non-admin user (user.client@acme.com) attempts to create an AES key directly
+Non-admin user (<user.client@acme.com>) attempts to create an AES key directly
 in the HSM. This must be denied — only HSM admins can create HSM objects.
 """
 server_type = "hsm_kek"

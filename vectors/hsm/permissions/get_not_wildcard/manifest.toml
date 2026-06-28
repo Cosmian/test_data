@@ -1,7 +1,7 @@
 name = "HSM Permissions: Get is not wildcard — user with Get cannot Encrypt"
 description = """
 HSM admin creates an AES-256 key in the HSM, grants only Get to
-user.client@acme.com. Unlike regular KMS keys, Get does NOT act as a
+<user.client@acme.com>. Unlike regular KMS keys, Get does NOT act as a
 wildcard for HSM keys — user can Get the key metadata but cannot Encrypt.
 Validates the stricter HSM permission model where each operation must be
 individually granted.

@@ -1,6 +1,6 @@
 name = "HSM Permissions: admin creates AES key, encrypts, decrypts, destroys"
 description = """
-HSM admin (owner.client@acme.com) creates an AES-256 key directly in the HSM,
+HSM admin (<owner.client@acme.com>) creates an AES-256 key directly in the HSM,
 encrypts data, decrypts it back, then destroys the key.
 Validates that HSM admins have full Create/Encrypt/Decrypt/Destroy permissions
 on HSM-resident keys.

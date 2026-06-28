@@ -1,6 +1,6 @@
 name = "HSM Permissions: non-admin user cannot grant access on HSM key"
 description = """
-HSM admin creates an AES key in the HSM. Non-admin user (user.client@acme.com)
+HSM admin creates an AES key in the HSM. Non-admin user (<user.client@acme.com>)
 attempts to grant Encrypt access to themselves on the HSM key.
 Only HSM admins (who own all HSM keys) can grant/revoke permissions.
 """

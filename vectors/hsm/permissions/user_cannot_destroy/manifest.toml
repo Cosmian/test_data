@@ -1,6 +1,6 @@
 name = "HSM Permissions: non-admin user cannot destroy HSM key"
 description = """
-HSM admin creates an AES key, then non-admin user (user.client@acme.com)
+HSM admin creates an AES key, then non-admin user (<user.client@acme.com>)
 attempts to destroy it. Destroy cannot be delegated to non-admin users.
 Admin cleans up afterward.
 """
