@@ -10,7 +10,7 @@
 #                           and all role-based rules deny (fail-closed).
 #   input.operation       — KMIP operation name in lowercase snake_case, e.g. "create", "get_attributes"
 #   input.object_uid      — UID of the target KMIP object ("*" for object-less ops)
-#   input.object_domain   — domain the target object belongs to ("" for object-less ops)
+#   input.object_domain   — domain the target object belongs to; equals user_domain for object-less ops
 #   input.is_owner        — boolean: true when the caller owns the object
 #
 # Role names (defined in the auth server's realm configuration, carried in JWT):
