@@ -5,6 +5,26 @@
       "tag": "UniqueIdentifier",
       "type": "TextString",
       "value": "{{old_leaf_cert_id}}"
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "Link",
+          "value": [
+            {
+              "tag": "LinkType",
+              "type": "Enumeration",
+              "value": "CertificateLink"
+            },
+            {
+              "tag": "LinkedObjectIdentifier",
+              "type": "TextString",
+              "value": "{{root_cert_id}}"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

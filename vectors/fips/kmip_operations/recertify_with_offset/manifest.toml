@@ -15,6 +15,11 @@ sk_id_1 = "PrivateKeyUniqueIdentifier"
 pk_id_1 = "PublicKeyUniqueIdentifier"
 
 [[steps]]
+operation = "Activate"
+request = "activate_sk_1.json"
+assert_success = true
+
+[[steps]]
 operation = "Certify"
 request = "step02_certify.json"
 assert_success = true
@@ -44,6 +49,11 @@ assert_success = true
 [steps.capture]
 sk_id_2 = "PrivateKeyUniqueIdentifier"
 pk_id_2 = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "activate_sk_2.json"
+assert_success = true
 
 [[steps]]
 operation = "Certify"

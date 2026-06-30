@@ -14,6 +14,11 @@ root_private_key_id = "PrivateKeyUniqueIdentifier"
 root_public_key_id = "PublicKeyUniqueIdentifier"
 
 [[steps]]
+operation = "Activate"
+request = "activate_root_private.json"
+assert_success = true
+
+[[steps]]
 operation = "Certify"
 request = "step02_self_sign_root.json"
 assert_success = true
