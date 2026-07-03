@@ -1,0 +1,71 @@
+name = "KAT: ReKeyKeyPair — Deactivated SK Rejects Sign (NIST SP 800-57 §5.3.4)"
+description = """
+Known-Answer Test verifying that a Deactivated private key MUST NOT be used
+for signing. After ReKeyKeyPair the old private key is Deactivated; a Sign
+request referencing it MUST be rejected by the server.
+  - Sign with Active old SK before ReKeyKeyPair: MUST succeed.
+  - Sign with Deactivated old SK after ReKeyKeyPair: MUST fail.
+Reference: NIST SP 800-57 Part 1 §5.3.4 (usage of Deactivated keys),
+           KMIP 2.1 §4.57 state machine.
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+# KAT: Sign with Active old SK MUST succeed
+[[steps]]
+operation = "Sign"
+request = "step2_sign_before.json"
+assert_success = true
+
+# Rotate — old SK is now Deactivated
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step3_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# KAT: Sign with Deactivated old SK MUST fail
+[[steps]]
+operation = "Sign"
+request = "step4_sign_after.json"
+assert_success = false
+assert_error_contains = "is in state"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new_pk.json"
+assert_success = true

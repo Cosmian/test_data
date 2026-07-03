@@ -1,0 +1,6 @@
+{
+  "tag": "Destroy",
+  "value": [
+    { "tag": "UniqueIdentifier", "type": "TextString", "value": "{{new_public_key_id}}" }
+  ]
+}

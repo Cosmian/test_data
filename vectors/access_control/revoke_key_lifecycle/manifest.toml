@@ -18,4 +18,4 @@ assert_success = true
 operation = "Encrypt"
 request = "step3_encrypt_after_revoke.json"
 assert_success = false
-assert_error_contains = "not found"
+assert_error_contains = "is in state"

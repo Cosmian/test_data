@@ -1,9 +1,9 @@
 # Auto-rotation test server — plain HTTP, no authentication.
-# Fast cron cycle (2 s) so rotation tests complete quickly.
+# Minimum allowed interval (60 s) — rotation tests must account for this delay.
 
 default_username = "rotation_test_user@example.com"
 
-auto_rotation_check_interval_secs = 2
+auto_rotation_check_interval_secs = 60
 
 [http]
 port = 10200

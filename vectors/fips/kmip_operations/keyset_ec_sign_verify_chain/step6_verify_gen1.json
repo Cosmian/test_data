@@ -1,0 +1,8 @@
+{
+  "tag": "SignatureVerify",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{new_public_key_id}}"},
+    {"tag": "Data", "type": "ByteString", "value": "48656C6C6F20576F726C64"},
+    {"tag": "SignatureData", "type": "ByteString", "value": "{{signature_gen1}}"}
+  ]
+}

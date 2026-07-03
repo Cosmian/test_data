@@ -1,0 +1,12 @@
+{
+  "tag": "Create",
+  "value": [
+    {"tag": "ObjectType", "type": "Enumeration", "value": "SymmetricKey"},
+    {"tag": "Attributes", "value": [
+      {"tag": "CryptographicAlgorithm", "type": "Enumeration", "value": "AES"},
+      {"tag": "CryptographicLength", "type": "Integer", "value": 256},
+      {"tag": "CryptographicUsageMask", "type": "Integer", "value": 12},
+      {"tag": "UniqueIdentifier", "type": "TextString", "value": "hsm::{{$HSM_SLOT_ID}}::vec_rk_gen_rej"}
+    ]}
+  ]
+}

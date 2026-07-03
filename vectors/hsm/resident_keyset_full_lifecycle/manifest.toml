@@ -1,0 +1,120 @@
+name = "HSM Resident Keyset: Full lifecycle (encrypt, rotate, decrypt with all addressing modes)"
+description = """
+Full HSM keyset lifecycle test covering all three decrypt-addressing variants:
+1. Create AES-256 HSM-resident key (gen 0) and assign a keyset name
+2. Encrypt plaintext1 with the gen-0 key (direct UID)
+3. ReKey: creates gen-1 key on HSM, updates CKA_LABEL on both keys
+4. Encrypt plaintext2 using the bare keyset name (resolves to gen-1 / latest)
+5. Decrypt plaintext1 using the bare keyset name       → SUCCESS (chain walk: gen-1 fails → gen-0 succeeds)
+6. Decrypt plaintext1 using the direct gen-0 UID       → SUCCESS (correct key, no chain walk needed)
+7. Decrypt plaintext1 using the direct gen-1 UID       → FAILURE (wrong key material; direct UID bypasses chain)
+
+This test validates that:
+  - Keyset-name addressing walks the full chain and finds the right generation
+  - Direct UID addressing uses only that specific key (no chain walk)
+  - A ciphertext from gen-0 cannot be decrypted by gen-1 when addressed directly
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# ── Pre-cleanup (allow failure — keys may not exist from prior runs) ──────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+# ── 1. Create AES-256 key on HSM (gen 0) ────────────────────────────────
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── 2. Assign keyset name — writes CKA_LABEL "hsm-keyset-fl::0::vec_rk_fl@latest" ─
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ── 3. Encrypt with gen-0 key (direct UID) ──────────────────────────────
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt_gen0.json"
+assert_success = true
+[steps.capture]
+ciphertext1 = "Data"
+nonce1      = "IVCounterNonce"
+tag1        = "AuthenticatedEncryptionTag"
+
+# ── 4. ReKey: creates gen-1, removes @latest from gen-0 label ───────────
+
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# ── 5. Encrypt with bare keyset name (resolves to gen-1 / latest) ────────
+
+[[steps]]
+operation = "Encrypt"
+request = "step5_encrypt_latest.json"
+assert_success = true
+[steps.capture]
+ciphertext2 = "Data"
+nonce2      = "IVCounterNonce"
+tag2        = "AuthenticatedEncryptionTag"
+
+# ── 6a. Decrypt ciphertext1 via bare keyset name (chain walk) ────────────
+#        gen-1 is tried first but fails; gen-0 succeeds.
+
+[[steps]]
+operation = "Decrypt"
+request = "step6_decrypt_keyset_name.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 6b. Decrypt ciphertext1 via direct gen-0 UID ─────────────────────────
+#        Direct UID bypass — no chain walk; exact key used.
+
+[[steps]]
+operation = "Decrypt"
+request = "step7_decrypt_first_key_id.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+
+# ── 6c. Decrypt ciphertext1 via direct gen-1 UID — MUST FAIL ─────────────
+#        The ciphertext was produced by gen-0; gen-1 has different key material.
+#        Direct UID bypasses keyset chain walk, so no fallback occurs.
+
+[[steps]]
+operation = "Decrypt"
+request = "step8_decrypt_wrong_key.json"
+assert_success = false
+assert_error_contains = "Return code"
+
+# ── Cleanup both generations ─────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+assert_success = true

@@ -1,0 +1,9 @@
+{
+  "tag": "Revoke",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "{{key_id}}"},
+    {"tag": "RevocationReason", "value": [
+      {"tag": "RevocationReasonCode", "type": "Enumeration", "value": "Unspecified"}
+    ]}
+  ]
+}

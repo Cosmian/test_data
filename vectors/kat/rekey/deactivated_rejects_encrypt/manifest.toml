@@ -1,0 +1,54 @@
+name = "KAT: ReKey — Deactivated Key Rejects Encrypt (NIST SP 800-57 §5.3.4)"
+description = """
+Known-Answer Test verifying that a Deactivated key MUST NOT be used for
+encryption. After ReKey the old key is Deactivated; an Encrypt request
+referencing it MUST be rejected by the server.
+  - Encrypt with Active key before ReKey:   MUST succeed.
+  - Encrypt with Deactivated key after ReKey: MUST fail.
+Reference: NIST SP 800-57 Part 1 §5.3.4 (usage of Deactivated keys),
+           KMIP 2.1 §4.57 (state machine), §3.31 (Encrypt allowed states).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# KAT: Encrypt with Active key MUST succeed
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_before.json"
+assert_success = true
+
+# Rotate — old key is now Deactivated
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# KAT: Encrypt with Deactivated old key MUST fail
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_after.json"
+assert_success = false
+assert_error_contains = "is in state"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

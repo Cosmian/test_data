@@ -1,0 +1,88 @@
+name = "KAT: ReKeyKeyPair — Replacement and Replaced Object Links (KMIP §4.21)"
+description = """
+Known-Answer Test verifying the bidirectional link chains on both key pairs:
+  - Old SK: ReplacementObjectLink → new SK UID
+  - Old PK: ReplacementObjectLink → new PK UID
+  - New SK: ReplacedObjectLink    → old SK UID
+  - New PK: ReplacedObjectLink    → old PK UID
+Reference: KMIP 2.1 §4.21 (Link attribute), §6.1.47 (Re-Key Key Pair).
+"""
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "ReKeyKeyPair"
+request = "step2_rekey_keypair.json"
+assert_success = true
+[steps.capture]
+new_private_key_id = "PrivateKeyUniqueIdentifier"
+new_public_key_id = "PublicKeyUniqueIdentifier"
+
+# KAT: old SK ReplacementObjectLink → new SK
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_old_sk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{new_private_key_id}}"
+
+# KAT: old PK ReplacementObjectLink → new PK
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_old_pk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{new_public_key_id}}"
+
+# KAT: new SK ReplacedObjectLink → old SK
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_new_sk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{private_key_id}}"
+
+# KAT: new PK ReplacedObjectLink → old PK
+[[steps]]
+operation = "GetAttributes"
+request = "step6_get_new_pk.json"
+assert_success = true
+[steps.assert_any_field]
+LinkedObjectIdentifier = "{{public_key_id}}"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_old_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_old_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_new_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step11_revoke_new_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step12_destroy_new_pk.json"
+assert_success = true

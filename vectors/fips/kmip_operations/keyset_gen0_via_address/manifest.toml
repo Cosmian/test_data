@@ -1,0 +1,64 @@
+name = "Keyset Gen-0 Accessible via @0 and @first"
+description = """
+After creating a keyset and rotating it once, verifies that the gen-0 key
+is still accessible via the addressing forms 'kst-gen0@0' and 'kst-gen0@first'.
+Encrypts with gen-0 UID, rotates to gen-1, then decrypts with @0 and @first.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Encrypt using gen-0 key directly
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt_gen0.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# Rotate to gen-1
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Decrypt via @0 — must resolve gen-0
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt_at_0.json"
+assert_success = true
+
+# Decrypt via @first — must also resolve gen-0
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_at_first.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_gen1.json"
+assert_success = true

@@ -1,0 +1,54 @@
+name = "Keyset GetAttributes Resolution"
+description = """
+Verifies that after ReKey, RotateGeneration is correctly set:
+- gen-0 key has RotateGeneration = 0
+- gen-1 key has RotateGeneration = 1
+"""
+
+# Create keyset key
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ReKey → gen-1
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# GetAttributes on old key → RotateGeneration=0
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_old.json"
+assert_success = true
+[steps.assert_fields]
+RotateGeneration = "0"
+
+# GetAttributes on new key → RotateGeneration=1
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_new.json"
+assert_success = true
+[steps.assert_fields]
+RotateGeneration = "1"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_new.json"
+assert_success = true

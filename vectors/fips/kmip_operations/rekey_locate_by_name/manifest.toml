@@ -34,15 +34,15 @@ assert_success = true
 [steps.assert_fields]
 UniqueIdentifier = "{{new_key_id}}"
 
-# Verify the old key's State is still Active — ReKey does NOT deactivate the existing key
+# Verify the old key is Deactivated — Re-Key transitions it per KMIP §4.57
 [[steps]]
 operation = "GetAttributes"
 request = "step5_get_attributes_old.json"
 assert_success = true
 [steps.assert_fields]
-State = "Active"
+State = "Deactivated"
 
-# Cleanup: revoke old key (Active → Deactivated), then destroy
+# Cleanup: old key already Deactivated; Revoke is a no-op, then destroy
 [[steps]]
 operation = "Revoke"
 request = "step6_revoke_old.json"

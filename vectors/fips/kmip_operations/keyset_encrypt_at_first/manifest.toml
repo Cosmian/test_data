@@ -1,0 +1,59 @@
+name = "Keyset Encrypt with @first (before rotation)"
+description = """
+Creates a symmetric key with a rotate_name, encrypts using name@first \
+while gen-0 is Active, then performs ReKey (gen-0 → Deactivated per §4.57). \
+Verifies @first resolved to gen-0 by decrypting with the original key UID \
+after rotation (Decrypt accepts Deactivated keys per KMIP §3.31).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Encrypt with name@first while gen-0 is still Active
+[[steps]]
+operation = "Encrypt"
+request = "step4_encrypt_at_first.json"
+assert_success = true
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+auth_tag = "AuthenticatedEncryptionTag"
+
+# ReKey → gen-0 becomes Deactivated (KMIP §4.57)
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Decrypt with gen-0 UID — Deactivated keys are valid for Decrypt (KMIP §3.31)
+[[steps]]
+operation = "Decrypt"
+request = "step5_decrypt_by_gen0.json"
+assert_success = true
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_gen1.json"
+assert_success = true

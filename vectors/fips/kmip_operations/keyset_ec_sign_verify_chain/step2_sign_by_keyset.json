@@ -1,0 +1,7 @@
+{
+  "tag": "Sign",
+  "value": [
+    {"tag": "UniqueIdentifier", "type": "TextString", "value": "test-ec-sign-verify-chain"},
+    {"tag": "Data", "type": "ByteString", "value": "48656C6C6F20576F726C64"}
+  ]
+}

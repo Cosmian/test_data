@@ -1,0 +1,76 @@
+name = "KAT: ReKey — RotateGeneration Counter (KMIP §4.51)"
+description = """
+Known-Answer Test verifying exact RotateGeneration values across two rotations:
+  - gen-0 key: RotateGeneration = 0 (set by clear_rotation_flags on first rekey)
+  - gen-1 key: RotateGeneration = 1 (set by set_rotation_metadata_from)
+  - gen-2 key: RotateGeneration = 2 (set by set_rotation_metadata_from)
+Reference: KMIP 2.1 §4.51 (x-rotate-generation vendor attribute).
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# First rotation: gen-0 → gen-1
+[[steps]]
+operation = "ReKey"
+request = "step2_rekey1.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# Second rotation: gen-1 → gen-2
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey2.json"
+assert_success = true
+[steps.capture]
+gen2_id = "UniqueIdentifier"
+
+# KAT: gen-0 RotateGeneration MUST be 0
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_gen0.json"
+assert_success = true
+[steps.assert_fields]
+RotateGeneration = "0"
+
+# KAT: gen-1 RotateGeneration MUST be 1
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_gen1.json"
+assert_success = true
+[steps.assert_fields]
+RotateGeneration = "1"
+
+# KAT: gen-2 RotateGeneration MUST be 2
+[[steps]]
+operation = "GetAttributes"
+request = "step6_get_gen2.json"
+assert_success = true
+[steps.assert_fields]
+RotateGeneration = "2"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step9_revoke_gen2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step10_destroy_gen2.json"
+assert_success = true

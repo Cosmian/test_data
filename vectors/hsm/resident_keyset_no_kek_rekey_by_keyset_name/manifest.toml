@@ -1,0 +1,104 @@
+name = "HSM No-KEK: 3 consecutive re-keys via HSM base UID as keyset name"
+description = """
+Verifies that an HSM-resident keyset can be rotated 3 consecutive times using the
+full base UID (e.g. "hsm::<slot>::vec_ks_kname") as both the rotate_name and the
+ReKey target.
+
+For HSM keys, rotate_name MUST be the key's full base UID (hsm::<slot>::<key_id>),
+which embeds the slot ID and is therefore unique across HSM slots.  This prevents
+keyset name collisions when multiple slots host keys with the same local name.
+
+The base UID is the stable keyset handle: `re-key --key-id hsm::slot::uuid` always
+rotates the current latest generation via the selective-redirect path in
+`rekey_hsm_symmetric` (no @N suffix → redirect; @N suffix → fail if not latest).
+"""
+server_type = "hsm"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+# ── Pre-cleanup (idempotent) ─────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0d_cleanup_gen3.json"
+allow_failure = true
+
+# ── 1. Create gen-0 key ──────────────────────────────────────────────────
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# ── 2. Assign keyset name ────────────────────────────────────────────────
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+# ── 3. First ReKey via bare keyset name → gen-0 is latest → creates @1 ──
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey_by_name.json"
+assert_success = true
+[steps.capture]
+gen1_id = "UniqueIdentifier"
+
+# ── 4. Second ReKey via bare keyset name → resolves to @1 → creates @2 ──
+
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey_by_name.json"
+assert_success = true
+[steps.capture]
+gen2_id = "UniqueIdentifier"
+
+# ── 5. Third ReKey via bare keyset name → resolves to @2 → creates @3 ───
+
+[[steps]]
+operation = "ReKey"
+request = "step5_rekey_by_name.json"
+assert_success = true
+[steps.capture]
+gen3_id = "UniqueIdentifier"
+
+# ── Post-cleanup ─────────────────────────────────────────────────────────
+
+[[steps]]
+operation = "Destroy"
+request = "step6_post_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_post_cleanup_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_post_cleanup_gen2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_post_cleanup_gen3.json"
+assert_success = true

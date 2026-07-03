@@ -1,0 +1,40 @@
+name = "Process Window: Encrypt rejected before ProcessStartDate"
+description = """
+Creates an Active symmetric key, then sets its ProcessStartDate to a date far in the \
+future via SetAttribute.  An Encrypt attempt must be rejected with \
+Wrong_Key_Lifecycle_State even though the key state is still Active.
+
+This verifies that the server enforces the ProcessStartDate constraint from the KMIP \
+process-window check independently of the key state.
+"""
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Set ProcessStartDate to a fixed date well in the future (2100-01-01).
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_process_start_future.json"
+assert_success = true
+
+# Encrypt must fail: key is Active but the process window has not opened yet.
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = false
+assert_error_reason = "Wrong_Key_Lifecycle_State"
+
+# Cleanup
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy.json"
+assert_success = true

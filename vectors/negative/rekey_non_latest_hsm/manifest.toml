@@ -1,8 +1,8 @@
-name = "Negative: HSM Re-Key on non-latest keyset member"
+name = "HSM Re-Key on retired generation redirects to latest"
 description = """
-Tests that Re-Key on a retired (non-latest) HSM key is rejected.
-Creates gen-0, assigns keyset, rotates to gen-1, then attempts to
-Re-Key gen-0 again — must fail because gen-0 is no longer the latest.
+Tests that Re-Key on a retired (non-latest) HSM key is transparently redirected
+to the latest generation. Creates gen-0, assigns keyset, rotates to gen-1, then
+attempts to Re-Key gen-0 again — the server redirects to gen-1 and creates gen-2.
 """
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
@@ -17,6 +17,11 @@ allow_failure = true
 [[steps]]
 operation = "Destroy"
 request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
 allow_failure = true
 
 # Create gen-0
@@ -41,12 +46,11 @@ assert_success = true
 [steps.capture]
 gen1_id = "UniqueIdentifier"
 
-# Attempt to ReKey gen-0 AGAIN — must be rejected (gen-0 is no longer latest)
+# ReKey retired gen-0 → REDIRECT to gen-1 → creates gen-2
 [[steps]]
 operation = "ReKey"
 request = "step4_rekey_gen0_again.json"
-assert_success = false
-assert_error_contains = "not the latest"
+assert_success = true
 
 # Cleanup
 [[steps]]
@@ -57,4 +61,9 @@ assert_success = true
 [[steps]]
 operation = "Destroy"
 request = "step0b_cleanup_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
 assert_success = true

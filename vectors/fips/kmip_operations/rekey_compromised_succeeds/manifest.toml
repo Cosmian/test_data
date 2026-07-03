@@ -1,0 +1,60 @@
+name = "ReKey Compromised Key Succeeds"
+description = """
+Verifies that ReKey on a Compromised key succeeds. \
+Per the spec, Active, Deactivated, and Compromised keys can be rotated. \
+Only PreActive and Destroyed states are rejected.
+"""
+
+# Create a symmetric key (Active)
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Revoke with CompromiseOccurred → Compromised state
+[[steps]]
+operation = "Revoke"
+request = "step2_revoke_compromise.json"
+assert_success = true
+
+# Verify key is in Compromised state
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+assert_success = true
+[steps.assert_fields]
+State = "Compromised"
+
+# ReKey the compromised key — must succeed
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey.json"
+assert_success = true
+[steps.capture]
+new_key_id = "UniqueIdentifier"
+
+# Verify new key is Active
+[[steps]]
+operation = "GetAttributes"
+request = "step5_get_attributes_new.json"
+assert_success = true
+[steps.assert_fields]
+State = "Active"
+
+# Cleanup
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_old.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step7_revoke_new.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_new.json"
+assert_success = true

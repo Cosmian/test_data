@@ -10,7 +10,7 @@
 default_username = "admin"
 
 # Fire rotation checks every 2 seconds during tests
-auto_rotation_check_interval_secs = 10
+auto_rotation_check_interval_secs = 60
 
 [[hsm_instances]]
 hsm_model = "softhsm2"

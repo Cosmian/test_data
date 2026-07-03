@@ -18,7 +18,7 @@ hsm_slot = [0]
 hsm_password = ["12345678"]
 
 # Fire rotation checks every 10 seconds during tests
-auto_rotation_check_interval_secs = 10
+auto_rotation_check_interval_secs = 60
 
 # New multi-HSM instances (slots 2 and 3)
 [[hsm_instances]]

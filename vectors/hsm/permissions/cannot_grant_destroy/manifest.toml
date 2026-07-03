@@ -1,7 +1,7 @@
 name = "HSM Permissions: cannot grant Destroy on HSM key"
 description = """
 HSM admin creates an AES key in the HSM, then attempts to grant Destroy to
-user.client@acme.com. Destroy cannot be delegated to non-admin users on HSM
+<user.client@acme.com>. Destroy cannot be delegated to non-admin users on HSM
 keys — it is reserved for HSM admins only.
 """
 server_type = "hsm_kek"

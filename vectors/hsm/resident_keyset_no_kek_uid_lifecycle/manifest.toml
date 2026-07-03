@@ -1,0 +1,117 @@
+name = "HSM No-KEK: Direct-UID rekey lifecycle across 4 generations"
+description = """
+Creates a resident AES-256 HSM key, assigns a rotate_name, rekeys the latest
+direct UID three times (gen-0 -> gen-1 -> gen-2 -> gen-3), encrypts with the
+latest concrete UID, rekeys once more (gen-3 -> gen-4), then verifies that
+decrypting via the bare rotate_name chain-walks from gen-4 back to gen-3 and
+recovers the ciphertext.
+"""
+server_type = "hsm"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0d_cleanup_gen3.json"
+allow_failure = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0e_cleanup_gen4.json"
+allow_failure = true
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step2_set_rotate_name.json"
+assert_success = true
+
+[[steps]]
+operation = "ReKey"
+request = "step3_rekey_gen0.json"
+assert_success = true
+[steps.capture]
+key_id_1 = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step4_rekey_gen1.json"
+assert_success = true
+[steps.capture]
+key_id_2 = "UniqueIdentifier"
+
+[[steps]]
+operation = "ReKey"
+request = "step5_rekey_gen2.json"
+assert_success = true
+[steps.capture]
+key_id_3 = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step6_encrypt_gen3.json"
+assert_success = true
+[steps.capture]
+ct = "Data"
+iv = "IVCounterNonce"
+tag = "AuthenticatedEncryptionTag"
+
+[[steps]]
+operation = "ReKey"
+request = "step7_rekey_gen3.json"
+assert_success = true
+[steps.capture]
+key_id_4 = "UniqueIdentifier"
+
+[[steps]]
+operation = "Decrypt"
+request = "step8_decrypt_ct_chain.json"
+assert_success = true
+[steps.assert_fields]
+Data = "48656C6C6F20576F726C642066726F6D2048534D20756964206C6966656379636C6521"
+
+[[steps]]
+operation = "Destroy"
+request = "step0a_cleanup_gen0.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0b_cleanup_gen1.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0c_cleanup_gen2.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0d_cleanup_gen3.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step0e_cleanup_gen4.json"
+assert_success = true

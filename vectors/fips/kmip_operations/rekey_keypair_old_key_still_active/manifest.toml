@@ -1,6 +1,7 @@
-name = "ReKeyKeyPair Old Key Still Active"
+name = "ReKeyKeyPair Old Key Deactivated After Rotation"
 description = """
-Verifies that after ReKeyKeyPair, the old private key remains in Active state.
+Verifies that after ReKeyKeyPair, the old private key transitions to Deactivated
+state per KMIP §4.57 (Re-Key lifecycle transition 6).
 """
 
 [[steps]]
@@ -19,13 +20,13 @@ assert_success = true
 new_private_key_id = "PrivateKeyUniqueIdentifier"
 new_public_key_id = "PublicKeyUniqueIdentifier"
 
-# Old key should still be Active
+# Old key must be Deactivated per KMIP §4.57 after Re-Key
 [[steps]]
 operation = "GetAttributes"
 request = "step3_get_attrs_old.json"
 assert_success = true
 [steps.assert_fields]
-State = "Active"
+State = "Deactivated"
 
 # Cleanup
 [[steps]]
