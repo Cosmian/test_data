@@ -1,0 +1,16 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/decrypt: RSA-OAEP protected header but encrypted_key is empty — violates RFC 7516 §5.2 → 400 bad_request",
+  "endpoint": "/v1/crypto/decrypt",
+  "setup_key": {"kty": "RSA", "bits": 2048},
+  "protected_json": {"alg": "RSA-OAEP", "enc": "A256GCM", "kid": "$KID"},
+  "body": {
+    "protected":     "$PROTECTED",
+    "encrypted_key": "",
+    "iv":            "AAAAAAAAAAAAAAAA",
+    "ciphertext":    "AAAA",
+    "tag":           "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

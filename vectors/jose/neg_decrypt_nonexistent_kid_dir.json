@@ -1,0 +1,14 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/decrypt: protected header kid references a non-existent key → 404",
+  "endpoint": "/v1/crypto/decrypt",
+  "protected_json": {"alg": "dir", "enc": "A256GCM", "kid": "00000000-0000-0000-0000-000000000004"},
+  "body": {
+    "protected":  "$PROTECTED",
+    "iv":         "AAAAAAAAAAAAAAAA",
+    "ciphertext": "AAAA",
+    "tag":        "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

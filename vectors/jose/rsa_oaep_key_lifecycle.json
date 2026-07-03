@@ -1,0 +1,15 @@
+{
+  "type": "key_lifecycle",
+  "description": "Create RSA key pair → encrypt+decrypt with RSA-OAEP → delete → verify key is gone",
+  "key": {
+    "kty": "RSA",
+    "alg": "RSA-OAEP",
+    "bits": 2048
+  },
+  "algorithm": "RSA-OAEP",
+  "enc": "A256GCM",
+  "operation": "encrypt",
+  "request": {
+    "data_plaintext": "key lifecycle test payload"
+  }
+}

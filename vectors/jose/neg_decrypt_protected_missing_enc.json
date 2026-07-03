@@ -1,0 +1,14 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/decrypt: protected header JSON is missing the required 'enc' field → 400 bad_request",
+  "endpoint": "/v1/crypto/decrypt",
+  "protected_json": {"alg": "dir", "kid": "fake-kid"},
+  "body": {
+    "protected":  "$PROTECTED",
+    "iv":         "AAAAAAAAAAAAAAAA",
+    "ciphertext": "AAAA",
+    "tag":        "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

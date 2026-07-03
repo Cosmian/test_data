@@ -1,0 +1,12 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/keys/unwrap: protected header alg=RS256 is a signing algorithm, not a key-wrapping algorithm → 422 unsupported_algorithm",
+  "endpoint": "/v1/crypto/keys/unwrap",
+  "protected_json": {"alg": "RS256", "enc": "A256GCM", "kid": "fake-kid"},
+  "body": {
+    "protected":     "$PROTECTED",
+    "encrypted_key": "dGVzdA"
+  },
+  "expected_status": 422,
+  "expected_error": "unsupported_algorithm"
+}

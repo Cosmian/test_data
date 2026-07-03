@@ -1,0 +1,13 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/decrypt: 'protected' contains characters that are not valid base64url (RFC 4648 §5) → 400 bad_request",
+  "endpoint": "/v1/crypto/decrypt",
+  "body": {
+    "protected":  "!!!not-valid-base64url!!!",
+    "iv":         "AAAAAAAAAAAAAAAA",
+    "ciphertext": "AAAA",
+    "tag":        "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

@@ -1,0 +1,14 @@
+{
+  "type": "encrypt_decrypt_round_trip",
+  "description": "RSA-OAEP-256 (SHA-256/MGF1-SHA-256) key wrapping + AES-128-GCM content encryption",
+  "key": {
+    "kty": "RSA",
+    "alg": "RSA-OAEP-256",
+    "bits": 2048
+  },
+  "algorithm": "RSA-OAEP-256",
+  "enc": "A128GCM",
+  "request": {
+    "data_plaintext": "Live long and prosper."
+  }
+}

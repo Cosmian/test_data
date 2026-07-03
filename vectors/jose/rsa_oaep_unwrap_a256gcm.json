@@ -1,0 +1,14 @@
+{
+  "type": "unwrap_key_round_trip",
+  "description": "RSA-OAEP wraps a 256-bit CEK; /keys/unwrap imports it; the imported key can encrypt+decrypt",
+  "key": {
+    "kty": "RSA",
+    "alg": "RSA-OAEP",
+    "bits": 2048
+  },
+  "algorithm": "RSA-OAEP",
+  "enc": "A256GCM",
+  "request": {
+    "data_plaintext": "Hello from the unwrap round-trip!"
+  }
+}

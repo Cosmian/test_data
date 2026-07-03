@@ -1,0 +1,11 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/decrypt: missing required 'tag' field → serde deserialization error → 400",
+  "endpoint": "/v1/crypto/decrypt",
+  "body": {
+    "protected": "AAAA",
+    "iv": "AAAAAAAAAAAAAAAA",
+    "ciphertext": "AAAA"
+  },
+  "expected_status": 400
+}

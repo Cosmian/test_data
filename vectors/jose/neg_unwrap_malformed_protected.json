@@ -1,0 +1,11 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/keys/unwrap: protected header JSON is malformed base64url → 400 bad_request",
+  "endpoint": "/v1/crypto/keys/unwrap",
+  "body": {
+    "protected":     "!!!invalid!!!",
+    "encrypted_key": "dGVzdA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}
