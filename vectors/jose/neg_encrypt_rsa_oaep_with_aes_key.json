@@ -1,0 +1,14 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/encrypt: alg=RSA-OAEP but kid points to a symmetric AES key (not an RSA key) → 422 crypto_failure",
+  "endpoint": "/v1/crypto/encrypt",
+  "setup_key": {"kty": "oct", "alg": "A256GCM"},
+  "body": {
+    "kid": "$KID",
+    "alg": "RSA-OAEP",
+    "enc": "A256GCM",
+    "data": "dGVzdA"
+  },
+  "expected_status": 422,
+  "expected_error": "crypto_failure"
+}

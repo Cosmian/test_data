@@ -1,0 +1,12 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/encrypt: missing required 'data' field → serde deserialization error → 400",
+  "endpoint": "/v1/crypto/encrypt",
+  "setup_key": {"kty": "oct", "alg": "A256GCM"},
+  "body": {
+    "kid": "$KID",
+    "alg": "dir",
+    "enc": "A256GCM"
+  },
+  "expected_status": 400
+}

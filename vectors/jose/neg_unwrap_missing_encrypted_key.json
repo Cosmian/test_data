@@ -1,0 +1,9 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/keys/unwrap: missing required 'encrypted_key' field in request body → serde deserialization error → 400",
+  "endpoint": "/v1/crypto/keys/unwrap",
+  "body": {
+    "protected": "AAAA"
+  },
+  "expected_status": 400
+}

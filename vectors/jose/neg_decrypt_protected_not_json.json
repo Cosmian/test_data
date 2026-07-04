@@ -1,0 +1,13 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/decrypt: 'protected' is valid base64url but decodes to non-JSON content — \"dGVzdA\" = \"test\" → 400 bad_request",
+  "endpoint": "/v1/crypto/decrypt",
+  "body": {
+    "protected":  "dGVzdA",
+    "iv":         "AAAAAAAAAAAAAAAA",
+    "ciphertext": "AAAA",
+    "tag":        "AAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

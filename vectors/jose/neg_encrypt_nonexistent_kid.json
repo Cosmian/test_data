@@ -1,0 +1,13 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/encrypt: kid references a key that does not exist in the KMS → 404",
+  "endpoint": "/v1/crypto/encrypt",
+  "body": {
+    "kid": "00000000-0000-0000-0000-000000000001",
+    "alg": "dir",
+    "enc": "A256GCM",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

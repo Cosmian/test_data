@@ -1,0 +1,17 @@
+{
+  "type": "encrypt_decrypt_tamper_reject",
+  "description": "Flipping one bit of the AES-GCM authentication tag must cause decryption failure",
+  "key": {
+    "kty": "RSA",
+    "alg": "RSA-OAEP",
+    "bits": 2048
+  },
+  "algorithm": "RSA-OAEP",
+  "enc": "A256GCM",
+  "request": {
+    "data_plaintext": "tamper test — authentication tag"
+  },
+  "tamper": {
+    "field": "tag"
+  }
+}

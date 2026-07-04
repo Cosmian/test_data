@@ -1,0 +1,12 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/keys/unwrap: encrypted_key is the empty string — handler rejects before key lookup → 400 bad_request",
+  "endpoint": "/v1/crypto/keys/unwrap",
+  "protected_json": {"alg": "RSA-OAEP", "enc": "A256GCM", "kid": "fake-kid"},
+  "body": {
+    "protected":     "$PROTECTED",
+    "encrypted_key": ""
+  },
+  "expected_status": 400,
+  "expected_error": "bad_request"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/mac: kid references a key that does not exist in the KMS → 404",
+  "endpoint": "/v1/crypto/mac",
+  "body": {
+    "kid": "00000000-0000-0000-0000-000000000003",
+    "alg": "HS256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}

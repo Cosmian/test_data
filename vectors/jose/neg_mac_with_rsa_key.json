@@ -1,0 +1,13 @@
+{
+  "type": "expect_error",
+  "description": "POST /v1/crypto/mac: alg=HS256 but kid points to an RSA private key — RSA keys lack the MAC usage mask, so the KMIP authorization layer returns 404 (not_found)",
+  "endpoint": "/v1/crypto/mac",
+  "setup_key": {"kty": "RSA", "bits": 2048},
+  "body": {
+    "kid": "$KID",
+    "alg": "HS256",
+    "data": "dGVzdA"
+  },
+  "expected_status": 404,
+  "expected_error": "not_found"
+}
