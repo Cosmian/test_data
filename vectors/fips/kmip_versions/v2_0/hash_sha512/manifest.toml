@@ -1,0 +1,8 @@
+name = "KMIP 2.0 Hash SHA512"
+description = "Hash with SHA512 using KMIP 2.0"
+kmip_version = [2, 0]
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = true

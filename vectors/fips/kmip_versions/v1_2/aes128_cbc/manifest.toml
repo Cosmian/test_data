@@ -1,0 +1,44 @@
+name = "KMIP 1.2 AES-128 CBC Lifecycle"
+description = "Symmetric key lifecycle with AES-128-CBC using KMIP 1.2"
+wire_format = "binary"
+kmip_version = [1, 2]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+nonce = "IVCounterNonce"
+
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "48656C6C6F2C20576F726C642120546869732069732061207465737420666F72204B4D49502E"
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

@@ -1,0 +1,43 @@
+name = "KMIP 1.3 AES-256 ECB Lifecycle"
+description = "Symmetric key lifecycle with AES-256-ECB using KMIP 1.3"
+wire_format = "binary"
+kmip_version = [1, 3]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_encrypt.json"
+assert_success = true
+
+[steps.capture]
+ciphertext = "Data"
+
+[[steps]]
+operation = "Decrypt"
+request = "step4_decrypt.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "48656C6C6F2C20576F726C64214B4D21"
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

@@ -1,0 +1,40 @@
+name = "KMIP 1.2 MAC HMACSHA256"
+description = "MAC lifecycle with HMACSHA256 using KMIP 1.2"
+wire_format = "binary"
+kmip_version = [1, 2]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate.json"
+assert_success = true
+
+[[steps]]
+operation = "MAC"
+request = "step3_mac.json"
+assert_success = true
+
+[steps.capture]
+mac_data = "MACData"
+
+[[steps]]
+operation = "MACVerify"
+request = "step4_mac_verify.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true

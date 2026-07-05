@@ -1,0 +1,8 @@
+name = "KMIP 2.0 Query"
+description = "Query server capabilities using KMIP 2.0"
+kmip_version = [2, 0]
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+assert_success = true

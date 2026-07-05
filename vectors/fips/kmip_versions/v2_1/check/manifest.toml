@@ -1,0 +1,20 @@
+name = "KMIP 2.1 Check"
+description = "Check key state using KMIP 2.1"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Check"
+request = "step2_check.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true

@@ -1,0 +1,43 @@
+name = "KMIP 1.1 DeriveKey PBKDF2"
+description = "Derive key with PBKDF2 using KMIP 1.1"
+wire_format = "binary"
+kmip_version = [1, 1]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "DeriveKey"
+request = "step2_derive.json"
+assert_success = true
+
+[steps.capture]
+derived_key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step3_get.json"
+assert_success = true
+
+[steps.assert_fields]
+ObjectType = "SymmetricKey"
+
+[[steps]]
+operation = "Revoke"
+request = "step4_revoke_derived.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_derived.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_base.json"
+assert_success = true

@@ -1,0 +1,9 @@
+name = "KMIP 1.2 DiscoverVersions"
+description = "Discover supported versions using KMIP 1.2"
+wire_format = "binary"
+kmip_version = [1, 2]
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step1_discover.json"
+assert_success = true

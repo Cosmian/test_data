@@ -1,0 +1,9 @@
+name = "KMIP 1.3 RNGRetrieve"
+description = "Retrieve random bytes using KMIP 1.3"
+wire_format = "binary"
+kmip_version = [1, 3]
+
+[[steps]]
+operation = "RNGRetrieve"
+request = "step1_rng.json"
+assert_success = true

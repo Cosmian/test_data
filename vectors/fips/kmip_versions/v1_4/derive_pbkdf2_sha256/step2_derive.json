@@ -1,0 +1,95 @@
+{
+  "tag": "DeriveKey",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "DerivationMethod",
+      "type": "Enumeration",
+      "value": "PBKDF2"
+    },
+    {
+      "tag": "DerivationParameters",
+      "value": [
+        {
+          "tag": "CryptographicParameters",
+          "value": [
+            {
+              "tag": "HashingAlgorithm",
+              "type": "Enumeration",
+              "value": "SHA256"
+            }
+          ]
+        },
+        {
+          "tag": "Salt",
+          "type": "ByteString",
+          "value": "746573742073616C74"
+        },
+        {
+          "tag": "IterationCount",
+          "type": "Integer",
+          "value": 10000
+        }
+      ]
+    },
+    {
+      "tag": "TemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Algorithm"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Enumeration",
+              "value": "AES"
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Length"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 128
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Usage Mask"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 12
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

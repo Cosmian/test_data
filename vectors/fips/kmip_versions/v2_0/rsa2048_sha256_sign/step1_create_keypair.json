@@ -1,0 +1,55 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {
+      "tag": "CommonAttributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "RSA"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 2048
+        },
+        {
+          "tag": "Name",
+          "value": [
+            {
+              "tag": "NameValue",
+              "type": "TextString",
+              "value": "kmip_2_0_rsa2048_sha256_sign"
+            },
+            {
+              "tag": "NameType",
+              "type": "Enumeration",
+              "value": "UninterpretedTextString"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "tag": "PublicKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 2
+        }
+      ]
+    }
+  ]
+}

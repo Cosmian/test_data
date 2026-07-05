@@ -1,0 +1,54 @@
+name = "KMIP 2.1 EC-P256 Sign/Verify"
+description = "Asymmetric sign lifecycle using KMIP 2.1"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_keypair.json"
+assert_success = true
+
+[steps.capture]
+private_key_id = "PrivateKeyUniqueIdentifier"
+public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step2_activate_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Activate"
+request = "step3_activate_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Sign"
+request = "step4_sign.json"
+assert_success = true
+
+[steps.capture]
+signature = "SignatureData"
+
+[[steps]]
+operation = "SignatureVerify"
+request = "step5_verify.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step6_revoke_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_sk.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8_revoke_pk.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_pk.json"
+assert_success = true

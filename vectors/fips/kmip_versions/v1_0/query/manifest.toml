@@ -1,0 +1,9 @@
+name = "KMIP 1.0 Query"
+description = "Query server capabilities using KMIP 1.0"
+wire_format = "binary"
+kmip_version = [1, 0]
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+assert_success = true

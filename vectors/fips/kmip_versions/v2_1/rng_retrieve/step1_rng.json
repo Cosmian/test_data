@@ -1,0 +1,10 @@
+{
+  "tag": "RNGRetrieve",
+  "value": [
+    {
+      "tag": "DataLength",
+      "type": "Integer",
+      "value": 32
+    }
+  ]
+}

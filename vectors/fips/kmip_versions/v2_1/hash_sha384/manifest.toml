@@ -1,0 +1,7 @@
+name = "KMIP 2.1 Hash SHA384"
+description = "Hash with SHA384 using KMIP 2.1"
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = true

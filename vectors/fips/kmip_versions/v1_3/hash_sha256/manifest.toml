@@ -1,0 +1,9 @@
+name = "KMIP 1.3 Hash SHA256"
+description = "Hash with SHA256 using KMIP 1.3"
+wire_format = "binary"
+kmip_version = [1, 3]
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = true

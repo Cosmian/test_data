@@ -1,0 +1,40 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {
+      "tag": "CommonAttributes",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "RSA"
+        },
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 4096
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "tag": "PublicKeyAttributes",
+      "value": [
+        {
+          "tag": "CryptographicUsageMask",
+          "type": "Integer",
+          "value": 4
+        }
+      ]
+    }
+  ]
+}

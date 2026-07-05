@@ -1,0 +1,125 @@
+{
+  "tag": "CreateKeyPair",
+  "value": [
+    {
+      "tag": "CommonTemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Algorithm"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Enumeration",
+              "value": "EC"
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Domain Parameters"
+            },
+            {
+              "tag": "AttributeValue",
+              "value": [
+                {
+                  "tag": "RecommendedCurve",
+                  "type": "Enumeration",
+                  "value": "P384"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Name"
+            },
+            {
+              "tag": "AttributeValue",
+              "value": [
+                {
+                  "tag": "NameValue",
+                  "type": "TextString",
+                  "value": "kmip_1_2_ec_p384_ecdsa_sign"
+                },
+                {
+                  "tag": "NameType",
+                  "type": "Enumeration",
+                  "value": "UninterpretedTextString"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Usage Mask"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "PrivateKeyTemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Usage Mask"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "PublicKeyTemplateAttribute",
+      "value": [
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Cryptographic Usage Mask"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "Integer",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

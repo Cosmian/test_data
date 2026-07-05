@@ -1,0 +1,25 @@
+name = "KMIP 1.4 Locate by Name"
+description = "Locate key by name using KMIP 1.4"
+wire_format = "binary"
+kmip_version = [1, 4]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Locate"
+request = "step2_locate.json"
+assert_success = true
+
+[steps.assert_any_field]
+UniqueIdentifier = "{{key_id}}"
+
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+assert_success = true

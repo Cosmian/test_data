@@ -1,0 +1,7 @@
+name = "KMIP 2.1 Query"
+description = "Query server capabilities using KMIP 2.1"
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+assert_success = true

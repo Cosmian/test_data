@@ -1,0 +1,30 @@
+{
+  "tag": "Sign",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{private_key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "DigitalSignatureAlgorithm",
+          "type": "Enumeration",
+          "value": "RSASSAPSS"
+        },
+        {
+          "tag": "HashingAlgorithm",
+          "type": "Enumeration",
+          "value": "SHA256"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "48656C6C6F2C20576F726C642120546869732069732061207465737420666F72204B4D49502E"
+    }
+  ]
+}

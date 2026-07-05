@@ -1,0 +1,26 @@
+name = "KMIP 2.0 GetAttributes"
+description = "Get object attributes using KMIP 2.0"
+kmip_version = [2, 0]
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step2_get_attributes.json"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributeList"
+request = "step3_get_attribute_list.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+assert_success = true
