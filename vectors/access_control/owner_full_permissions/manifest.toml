@@ -1,6 +1,6 @@
 name = "Access Control: owner full permissions"
 description = "Owner performs Get/Encrypt/Decrypt/Revoke/Destroy without grants"
-server_config = "test_data/configs/server/test/cert_auth.toml"
+server_config = "test_data/configs/server/cert_auth.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"

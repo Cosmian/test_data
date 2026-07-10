@@ -1,6 +1,6 @@
 name = "Access Control: non-owner cannot Activate without explicit grant"
 description = "Owner creates a PreActive AES key, grants user only Encrypt. User's Activate attempt is denied because Encrypt grant does not imply Activate permission."
-server_config = "test_data/configs/server/test/cert_auth.toml"
+server_config = "test_data/configs/server/cert_auth.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"

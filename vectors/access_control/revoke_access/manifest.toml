@@ -1,6 +1,6 @@
 name = "Access Control: revoke granted access"
 description = "Owner grants user Get, revokes it, user can no longer Get"
-server_config = "test_data/configs/server/test/cert_auth.toml"
+server_config = "test_data/configs/server/cert_auth.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"

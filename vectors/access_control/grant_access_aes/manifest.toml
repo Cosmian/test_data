@@ -1,6 +1,6 @@
 name = "Access Control: grant Get/Encrypt/Decrypt to user"
 description = "Owner creates AES key, grants user access, user can Get/Encrypt/Decrypt, owner destroys key"
-server_config = "test_data/configs/server/test/cert_auth.toml"
+server_config = "test_data/configs/server/cert_auth.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
