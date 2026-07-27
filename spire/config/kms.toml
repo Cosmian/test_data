@@ -1,0 +1,37 @@
+# Cosmian KMS configuration for SPIRE integration tests.
+#
+# Used by the `mise run test:spire` task when starting the KMS via
+# `cargo run`. Paths are relative to the kms_alt5 repository root.
+
+default_username = "admin"
+
+# ── Database ──────────────────────────────────────────────────────────────────
+[db]
+database_type = "sqlite"
+sqlite_path   = "/tmp/kms-spire-test"
+clear_database = true
+
+# ── HTTP binding ──────────────────────────────────────────────────────────────
+[http]
+hostname = "127.0.0.1"
+port     = 9998
+
+# ── TLS ───────────────────────────────────────────────────────────────────────
+# Server presents this cert to the nginx proxy and to ckms CLI.
+# SANs include localhost and host.docker.internal (see generate-test-certs.sh).
+[tls]
+tls_cert_file = "test_data/spire/certs/kms.crt"
+tls_key_file  = "test_data/spire/certs/kms.key"
+
+# ── Vault-compatible API ──────────────────────────────────────────────────────
+vault_api_enabled         = true
+vault_auth_verifier_url   = "https://localhost:8443"
+vault_transit_mount       = "transit"
+vault_pki_mount           = "pki"
+vault_pki_ca_key_label    = "vault_pki_ca"
+vault_token_cache_ttl_secs = 30
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+[logging]
+rust_log = "info,cosmian_kms_server=debug"
+ansi_colors = false

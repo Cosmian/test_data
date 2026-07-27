@@ -1,0 +1,21 @@
+# Cosmian auth-verifier configuration for SPIRE integration tests.
+#
+# Used by the `mise run test:spire` task when starting the auth-verifier via
+# `cargo run`. Paths are relative to the kms_alt5 repository root.
+
+# ── Network binding ────────────────────────────────────────────────────────────
+host_name = "127.0.0.1"
+host_port = 8443
+
+roles = ["SuperAdmin", "DomainAdmin", "CryptoOfficer", "Auditor", "User"]
+
+# ── TLS ────────────────────────────────────────────────────────────────────────
+[tls_params]
+server_private_key = "test_data/spire/certs/auth.key"
+server_certificate = "test_data/spire/certs/auth.crt"
+server_ca_chain    = "test_data/spire/certs/ca.crt"
+
+# ── Primary database ───────────────────────────────────────────────────────────
+[database_params]
+backend        = "sqlite"
+connection_url = "sqlite:///tmp/auth-verifier-spire-test.db"

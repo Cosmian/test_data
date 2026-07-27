@@ -1,0 +1,4 @@
+pyspiffe>=0.3.0
+grpcio>=1.60.0
+cryptography>=42.0.0
+requests>=2.31.0
