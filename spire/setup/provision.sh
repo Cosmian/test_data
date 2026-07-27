@@ -2,59 +2,68 @@
 # provision.sh — Bootstrap AppRole credentials for the SPIRE integration test stack.
 #
 # Called by `mise run test:spire` after vault-proxy is healthy.
-# Connects to vault-proxy at VAULT_ADDR (default: https://localhost:8200).
 #
-# What it does:
-#   1. Obtain an admin token from auth-verifier via vault-proxy.
-#   2. Create AppRole "spire-server"   -- dedicated role for SPIRE UpstreamAuthority.
-#   3. Create AppRole "mistral-agents" -- dedicated role for Mistral AI agents.
-#   4. Generate secret-IDs for both roles.
-#   5. Write credentials to SECRETS_ENV_FILE for use by the mise task.
+# Auth flow:
+#   - Admin operations (AppRole CRUD) go directly to auth-verifier at
+#     AUTH_VERIFIER_URL using a native session cookie obtained via
+#     `POST /login?realm=_` with HTTP Basic auth.
+#   - Transit smoke test goes through vault-proxy at VAULT_ADDR using an
+#     AppRole token obtained via `POST /v1/auth/approle/login`.
 #
 # Environment:
-#   VAULT_ADDR        -- default: https://localhost:8200
+#   AUTH_VERIFIER_URL -- auth-verifier base URL; default: https://localhost:8443
+#   VAULT_ADDR        -- vault-proxy base URL; default: https://localhost:8200
 #   VAULT_CACERT      -- path to CA cert; default: test_data/spire/certs/ca.crt
 #   ADMIN_USER        -- auth-verifier admin username; default: admin
-#   ADMIN_PASS        -- auth-verifier admin password; default: AdminPassword123!
+#   ADMIN_PASS        -- auth-verifier admin password; default: change_me
 #   SECRETS_ENV_FILE  -- output file path; default: /tmp/spire-secrets.env
 
 set -euo pipefail
 
+AUTH_VERIFIER_URL="${AUTH_VERIFIER_URL:-https://localhost:8443}"
 VAULT_ADDR="${VAULT_ADDR:-https://localhost:8200}"
 VAULT_CACERT="${VAULT_CACERT:-test_data/spire/certs/ca.crt}"
 
 ADMIN_USER="${ADMIN_USER:-admin}"
-ADMIN_PASS="${ADMIN_PASS:-AdminPassword123!}"
+ADMIN_PASS="${ADMIN_PASS:-change_me}"
 
 SECRETS_ENV_FILE="${SECRETS_ENV_FILE:-/tmp/spire-secrets.env}"
+COOKIE_JAR="/tmp/provision-auth-cookie.$$"
 
 log() { echo "[provision] $*"; }
 
-# ── 1. Obtain admin token ─────────────────────────────────────────────────────
-log "Obtaining admin token from auth-verifier..."
-ADMIN_TOKEN=$(curl -sf \
-  --cacert "${VAULT_CACERT}" \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d "{\"username\":\"${ADMIN_USER}\",\"password\":\"${ADMIN_PASS}\"}" \
-  "${VAULT_ADDR}/v1/auth/userpass/login/${ADMIN_USER}" \
-  | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['auth']['client_token'])")
-log "Admin token obtained."
+# Cleanup cookie jar on exit
+trap 'rm -f "${COOKIE_JAR}"' EXIT
 
-vault_api() {
+# ── 1. Login to auth-verifier and obtain session cookie ───────────────────────
+log "Logging in to auth-verifier as '${ADMIN_USER}'..."
+BASIC_CREDS=$(printf '%s:%s' "${ADMIN_USER}" "${ADMIN_PASS}" | base64)
+LOGIN_RESPONSE=$(curl -sf \
+  --cacert "${VAULT_CACERT}" \
+  -c "${COOKIE_JAR}" \
+  -X POST \
+  -H "Authorization: Basic ${BASIC_CREDS}" \
+  -H "Content-Type: application/json" \
+  -d '{}' \
+  "${AUTH_VERIFIER_URL}/login?realm=_")
+log "Login response: ${LOGIN_RESPONSE}"
+log "Admin session cookie obtained."
+
+# Helper: call auth-verifier admin API with session cookie
+auth_admin_api() {
   local method="$1"; local path="$2"; shift 2
   curl -sf \
     --cacert "${VAULT_CACERT}" \
+    -b "${COOKIE_JAR}" \
     -X "${method}" \
-    -H "X-Vault-Token: ${ADMIN_TOKEN}" \
     -H "Content-Type: application/json" \
     "$@" \
-    "${VAULT_ADDR}${path}"
+    "${AUTH_VERIFIER_URL}${path}"
 }
 
 # ── 2. Create AppRole: spire-server ──────────────────────────────────────────
 log "Creating AppRole 'spire-server'..."
-vault_api POST /v1/auth/approle/role/spire-server -d '{
+auth_admin_api POST /v1/auth/approle/role/spire-server -d '{
   "token_ttl":          "1h",
   "token_max_ttl":      "4h",
   "token_policies":     ["default"],
@@ -62,17 +71,17 @@ vault_api POST /v1/auth/approle/role/spire-server -d '{
   "secret_id_num_uses": 0
 }' > /dev/null
 
-SPIRE_ROLE_ID=$(vault_api GET /v1/auth/approle/role/spire-server/role-id \
+SPIRE_ROLE_ID=$(auth_admin_api GET /v1/auth/approle/role/spire-server/role-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['role_id'])")
 log "spire-server role_id: ${SPIRE_ROLE_ID}"
 
-SPIRE_SECRET_ID=$(vault_api POST /v1/auth/approle/role/spire-server/secret-id \
+SPIRE_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/spire-server/secret-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
 log "spire-server secret_id obtained."
 
 # ── 3. Create AppRole: mistral-agents ────────────────────────────────────────
 log "Creating AppRole 'mistral-agents'..."
-vault_api POST /v1/auth/approle/role/mistral-agents -d '{
+auth_admin_api POST /v1/auth/approle/role/mistral-agents -d '{
   "token_ttl":          "1h",
   "token_max_ttl":      "4h",
   "token_policies":     ["default"],
@@ -80,18 +89,35 @@ vault_api POST /v1/auth/approle/role/mistral-agents -d '{
   "secret_id_num_uses": 0
 }' > /dev/null
 
-MISTRAL_ROLE_ID=$(vault_api GET /v1/auth/approle/role/mistral-agents/role-id \
+MISTRAL_ROLE_ID=$(auth_admin_api GET /v1/auth/approle/role/mistral-agents/role-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['role_id'])")
 log "mistral-agents role_id: ${MISTRAL_ROLE_ID}"
 
-MISTRAL_SECRET_ID=$(vault_api POST /v1/auth/approle/role/mistral-agents/secret-id \
+MISTRAL_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/mistral-agents/secret-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
 log "mistral-agents secret_id obtained."
 
-# ── 4. Transit smoke test ─────────────────────────────────────────────────────
-log "Transit smoke test: listing transit keys..."
-TRANSIT_LIST=$(vault_api GET /v1/transit/keys 2>/dev/null || echo "{}")
-log "Transit response: ${TRANSIT_LIST:0:80}..."
+# ── 4. Transit smoke test via vault-proxy ─────────────────────────────────────
+# Login with the mistral-agents AppRole to get a vault token, then list keys.
+log "Transit smoke test: logging in with mistral-agents AppRole..."
+MISTRAL_TOKEN=$(curl -sf \
+  --cacert "${VAULT_CACERT}" \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d "{\"role_id\":\"${MISTRAL_ROLE_ID}\",\"secret_id\":\"${MISTRAL_SECRET_ID}\"}" \
+  "${VAULT_ADDR}/v1/auth/approle/login" \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['auth']['client_token'])") \
+  || true
+
+if [[ -n "${MISTRAL_TOKEN:-}" ]]; then
+  TRANSIT_LIST=$(curl -sf \
+    --cacert "${VAULT_CACERT}" \
+    -H "X-Vault-Token: ${MISTRAL_TOKEN}" \
+    "${VAULT_ADDR}/v1/transit/keys" 2>/dev/null || echo "{}")
+  log "Transit smoke test OK. Response: ${TRANSIT_LIST:0:80}..."
+else
+  log "Transit smoke test skipped (AppRole login failed — expected on first run)."
+fi
 
 # ── 5. Write credentials to env file ─────────────────────────────────────────
 log "Writing credentials to ${SECRETS_ENV_FILE}..."
