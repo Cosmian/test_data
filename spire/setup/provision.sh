@@ -1,34 +1,32 @@
 #!/usr/bin/env bash
-# provision.sh — Bootstrap AppRole credentials and PKI CA key for the SPIRE test stack.
+# provision.sh — Bootstrap AppRole credentials for the SPIRE integration test stack.
 #
-# Run ONCE after `docker compose up -d` brings all services healthy:
-#
-#   docker compose -f tests/spire/docker-compose.yml exec cosmian-auth bash /setup/provision.sh
-#
-# OR from the host (set VAULT_ADDR to the nginx proxy address):
-#
-#   VAULT_ADDR=https://localhost:8200 VAULT_CACERT=tests/spire/certs/ca.crt \
-#     bash tests/spire/setup/provision.sh
+# Called by `mise run test:spire` after vault-proxy is healthy.
+# Connects to vault-proxy at VAULT_ADDR (default: https://localhost:8200).
 #
 # What it does:
-#   1. Obtain an admin token from auth-verifier (using the built-in admin credentials).
-#   2. Create AppRole "spire-server"    (G5: dedicated role for SPIRE).
-#   3. Create AppRole "mistral-agents"  (G5: dedicated role for Mistral AI agents).
-#   4. Generate secret-IDs for both roles and write them to /run/secrets/.
-#   5. Via ckms CLI: create an EC P-384 CA key pair tagged vault_pki_ca in KMS.
+#   1. Obtain an admin token from auth-verifier via vault-proxy.
+#   2. Create AppRole "spire-server"   -- dedicated role for SPIRE UpstreamAuthority.
+#   3. Create AppRole "mistral-agents" -- dedicated role for Mistral AI agents.
+#   4. Generate secret-IDs for both roles.
+#   5. Write credentials to SECRETS_ENV_FILE for use by the mise task.
+#
+# Environment:
+#   VAULT_ADDR        -- default: https://localhost:8200
+#   VAULT_CACERT      -- path to CA cert; default: test_data/spire/certs/ca.crt
+#   ADMIN_USER        -- auth-verifier admin username; default: admin
+#   ADMIN_PASS        -- auth-verifier admin password; default: AdminPassword123!
+#   SECRETS_ENV_FILE  -- output file path; default: /tmp/spire-secrets.env
 
 set -euo pipefail
 
-VAULT_ADDR="${VAULT_ADDR:-https://vault-proxy:8200}"
-VAULT_CACERT="${VAULT_CACERT:-/etc/auth_verifier/ca.crt}"
-KMS_URL="${KMS_URL:-https://cosmian-kms:9998}"
+VAULT_ADDR="${VAULT_ADDR:-https://localhost:8200}"
+VAULT_CACERT="${VAULT_CACERT:-test_data/spire/certs/ca.crt}"
 
-# Admin credentials for the auth-verifier (set via env or use defaults for test).
 ADMIN_USER="${ADMIN_USER:-admin}"
 ADMIN_PASS="${ADMIN_PASS:-AdminPassword123!}"
 
-SECRETS_DIR="${SECRETS_DIR:-/run/secrets}"
-mkdir -p "${SECRETS_DIR}"
+SECRETS_ENV_FILE="${SECRETS_ENV_FILE:-/tmp/spire-secrets.env}"
 
 log() { echo "[provision] $*"; }
 
@@ -54,13 +52,13 @@ vault_api() {
     "${VAULT_ADDR}${path}"
 }
 
-# ── 2. Create AppRole: spire-server (G5) ──────────────────────────────────────
+# ── 2. Create AppRole: spire-server ──────────────────────────────────────────
 log "Creating AppRole 'spire-server'..."
 vault_api POST /v1/auth/approle/role/spire-server -d '{
-  "token_ttl":       "1h",
-  "token_max_ttl":   "4h",
-  "token_policies":  ["default"],
-  "secret_id_ttl":   "0",
+  "token_ttl":          "1h",
+  "token_max_ttl":      "4h",
+  "token_policies":     ["default"],
+  "secret_id_ttl":      "0",
   "secret_id_num_uses": 0
 }' > /dev/null
 
@@ -70,19 +68,15 @@ log "spire-server role_id: ${SPIRE_ROLE_ID}"
 
 SPIRE_SECRET_ID=$(vault_api POST /v1/auth/approle/role/spire-server/secret-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
-log "spire-server secret_id obtained (redacted)."
+log "spire-server secret_id obtained."
 
-echo "${SPIRE_ROLE_ID}"   > "${SECRETS_DIR}/spire-role-id"
-echo "${SPIRE_SECRET_ID}" > "${SECRETS_DIR}/spire-secret-id"
-chmod 600 "${SECRETS_DIR}/spire-role-id" "${SECRETS_DIR}/spire-secret-id"
-
-# ── 3. Create AppRole: mistral-agents (G5) ────────────────────────────────────
+# ── 3. Create AppRole: mistral-agents ────────────────────────────────────────
 log "Creating AppRole 'mistral-agents'..."
 vault_api POST /v1/auth/approle/role/mistral-agents -d '{
-  "token_ttl":       "1h",
-  "token_max_ttl":   "4h",
-  "token_policies":  ["default"],
-  "secret_id_ttl":   "0",
+  "token_ttl":          "1h",
+  "token_max_ttl":      "4h",
+  "token_policies":     ["default"],
+  "secret_id_ttl":      "0",
   "secret_id_num_uses": 0
 }' > /dev/null
 
@@ -92,53 +86,28 @@ log "mistral-agents role_id: ${MISTRAL_ROLE_ID}"
 
 MISTRAL_SECRET_ID=$(vault_api POST /v1/auth/approle/role/mistral-agents/secret-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
-log "mistral-agents secret_id obtained (redacted)."
+log "mistral-agents secret_id obtained."
 
-echo "${MISTRAL_ROLE_ID}"   > "${SECRETS_DIR}/mistral-role-id"
-echo "${MISTRAL_SECRET_ID}" > "${SECRETS_DIR}/mistral-secret-id"
-chmod 600 "${SECRETS_DIR}/mistral-role-id" "${SECRETS_DIR}/mistral-secret-id"
+# ── 4. Transit smoke test ─────────────────────────────────────────────────────
+log "Transit smoke test: listing transit keys..."
+TRANSIT_LIST=$(vault_api GET /v1/transit/keys 2>/dev/null || echo "{}")
+log "Transit response: ${TRANSIT_LIST:0:80}..."
 
-# ── 4. Create SPIRE join token ────────────────────────────────────────────────
-log "Creating SPIRE join token..."
-# Token must match the one in spire-agent.conf (cosmian-test-join-token-12345).
-# In a production setup, create a fresh token per deployment:
-#   /opt/spire/bin/spire-server token generate -spiffeID spiffe://trust-domain/agent
-log "Join token is hardcoded in spire-agent.conf for local testing: cosmian-test-join-token-12345"
-log "For production, replace with: spire-server token generate -spiffeID spiffe://cosmian-test.local/agent/local"
-
-# ── 5. Register SPIRE workload entries ────────────────────────────────────────
-log "Registering SPIRE workload entries for mistral agents..."
-# These allow any process with unix uid=1000 to obtain a SPIFFE identity.
-# In production, use more specific selectors (process path, container image, etc.)
-#
-# Run from inside the spire-server container:
-#   /opt/spire/bin/spire-server entry create \
-#     -spiffeID spiffe://cosmian-test.local/mistral-agent \
-#     -parentID  spiffe://cosmian-test.local/agent/local \
-#     -selector  unix:uid:1000
-log "To register workload entries, run from the spire-server container:"
-log "  /opt/spire/bin/spire-server entry create \\"
-log "    -spiffeID spiffe://cosmian-test.local/mistral-agent \\"
-log "    -parentID  spiffe://cosmian-test.local/agent/local \\"
-log "    -selector  unix:uid:1000"
-
-# ── 6. Create PKI CA key in KMS ────────────────────────────────────────────────
-log "Creating PKI CA key in KMS (EC P-384, tagged vault_pki_ca)..."
-# Use ckms CLI if available, otherwise use the KMS REST API directly.
-if command -v ckms &> /dev/null; then
-  ckms --url "${KMS_URL}" \
-    ec keys create \
-    --curve p384 \
-    --algorithm ec \
-    --tag vault_pki_ca
-  log "PKI CA key created via ckms."
-else
-  log "ckms not found. Create the PKI CA key manually:"
-  log "  ckms --url ${KMS_URL} ec keys create --curve p384 --tag vault_pki_ca"
-fi
+# ── 5. Write credentials to env file ─────────────────────────────────────────
+log "Writing credentials to ${SECRETS_ENV_FILE}..."
+cat > "${SECRETS_ENV_FILE}" <<EOF
+# Generated by provision.sh -- source this file to inject AppRole credentials.
+# DO NOT COMMIT -- contains test secrets.
+export APPROLE_ROLE_ID="${SPIRE_ROLE_ID}"
+export APPROLE_SECRET_ID="${SPIRE_SECRET_ID}"
+export MISTRAL_ROLE_ID="${MISTRAL_ROLE_ID}"
+export MISTRAL_SECRET_ID="${MISTRAL_SECRET_ID}"
+EOF
+chmod 600 "${SECRETS_ENV_FILE}"
 
 log ""
 log "=== Provisioning complete ==="
-log "  SPIRE AppRole credentials: ${SECRETS_DIR}/spire-role-id, spire-secret-id"
-log "  Mistral AppRole credentials: ${SECRETS_DIR}/mistral-role-id, mistral-secret-id"
-log "  PKI CA key tagged: vault_pki_ca (in KMS)"
+log "  SPIRE AppRole role_id:   ${SPIRE_ROLE_ID}"
+log "  Mistral AppRole role_id: ${MISTRAL_ROLE_ID}"
+log "  Credentials written to:  ${SECRETS_ENV_FILE}"
+log "  PKI CA key must already exist in KMS with tag: vault_pki_ca"
