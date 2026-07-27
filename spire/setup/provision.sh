@@ -73,7 +73,7 @@ SPIRE_ROLE_ID=$(auth_admin_api GET /v1/auth/approle/role/spire-server/role-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['role_id'])")
 log "spire-server role_id: ${SPIRE_ROLE_ID}"
 
-SPIRE_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/spire-server/secret-id \
+SPIRE_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/spire-server/secret-id -d '{}' \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
 log "spire-server secret_id obtained."
 
@@ -89,7 +89,7 @@ MISTRAL_ROLE_ID=$(auth_admin_api GET /v1/auth/approle/role/mistral-agents/role-i
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['role_id'])")
 log "mistral-agents role_id: ${MISTRAL_ROLE_ID}"
 
-MISTRAL_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/mistral-agents/secret-id \
+MISTRAL_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/mistral-agents/secret-id -d '{}' \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
 log "mistral-agents secret_id obtained."
 
