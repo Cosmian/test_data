@@ -64,11 +64,9 @@ auth_admin_api() {
 # ── 2. Create AppRole: spire-server ──────────────────────────────────────────
 log "Creating AppRole 'spire-server'..."
 auth_admin_api POST /v1/auth/approle/role/spire-server -d '{
-  "token_ttl":          "1h",
-  "token_max_ttl":      "4h",
-  "token_policies":     ["default"],
-  "secret_id_ttl":      "0",
-  "secret_id_num_uses": 0
+  "token_ttl":      3600,
+  "token_policies": ["default"],
+  "secret_id_ttl":  0
 }' > /dev/null
 
 SPIRE_ROLE_ID=$(auth_admin_api GET /v1/auth/approle/role/spire-server/role-id \
@@ -82,11 +80,9 @@ log "spire-server secret_id obtained."
 # ── 3. Create AppRole: mistral-agents ────────────────────────────────────────
 log "Creating AppRole 'mistral-agents'..."
 auth_admin_api POST /v1/auth/approle/role/mistral-agents -d '{
-  "token_ttl":          "1h",
-  "token_max_ttl":      "4h",
-  "token_policies":     ["default"],
-  "secret_id_ttl":      "0",
-  "secret_id_num_uses": 0
+  "token_ttl":      3600,
+  "token_policies": ["default"],
+  "secret_id_ttl":  0
 }' > /dev/null
 
 MISTRAL_ROLE_ID=$(auth_admin_api GET /v1/auth/approle/role/mistral-agents/role-id \
