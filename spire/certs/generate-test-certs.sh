@@ -64,9 +64,17 @@ issue_cert "kms" "cosmian-kms" "localhost" "host.docker.internal" "127.0.0.1"
 # nginx vault-proxy: SANs for the proxy itself (SPIRE connects to vault-proxy:8200)
 issue_cert "vault-proxy" "vault-proxy" "localhost" "127.0.0.1"
 
+# P-256 JWT signing key pair for auth-verifier session tokens.
+# The auth-verifier TLS key uses P-384 (above); the JWKS builder requires P-256,
+# so a dedicated key pair is needed for JWT operations.
+openssl ecparam -name prime256v1 -genkey -noout -out "${DIR}/jwt.key.pem"
+openssl ec -in "${DIR}/jwt.key.pem" -pubout -out "${DIR}/jwt.pub.pem" 2>/dev/null
+echo "issued: jwt.key.pem / jwt.pub.pem (P-256 for JWT signing)"
+
 echo ""
 echo "Certificates generated in: ${DIR}"
-echo "  ca.crt            — root CA (import into containers)"
-echo "  auth.crt/key      — auth-verifier TLS (SANs: auth-verifier, localhost, host.docker.internal)"
-echo "  kms.crt/key       — KMS TLS (SANs: cosmian-kms, localhost, host.docker.internal)"
+echo "  ca.crt              — root CA (import into containers)"
+echo "  auth.crt/key        — auth-verifier TLS (SANs: auth-verifier, localhost, host.docker.internal)"
+echo "  kms.crt/key         — KMS TLS (SANs: cosmian-kms, localhost, host.docker.internal)"
 echo "  vault-proxy.crt/key — nginx proxy TLS (SANs: vault-proxy, localhost)"
+echo "  jwt.key.pem/jwt.pub.pem — P-256 JWT signing key for auth-verifier"
