@@ -27,7 +27,11 @@ tls_key_file  = "test_data/spire/certs/kms.key"
 # The [vault] section maps to VaultConfig (flattened into ClapConfig).
 [vault]
 vault_api_enabled          = true
-vault_auth_verifier_url    = "https://localhost:8443"
+vault_auth_verifier_url    = "https://127.0.0.1:8443"
+vault_auth_verifier_ca_cert = "test_data/spire/certs/ca.crt"
+# Accept the self-signed test CA cert without system store verification.
+# Production deployments should use vault_auth_verifier_ca_cert instead.
+vault_auth_verifier_accept_invalid_certs = true
 vault_transit_mount        = "transit"
 vault_pki_mount            = "pki"
 vault_pki_ca_key_label     = "vault_pki_ca"

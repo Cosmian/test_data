@@ -22,10 +22,10 @@ Exit codes:
 
 from __future__ import annotations
 
+import datetime
 import os
 import sys
 import time
-import datetime
 
 AGENT_ID = os.environ.get("AGENT_ID", "mistral-agent")
 SOCKET = os.environ.get("SPIFFE_ENDPOINT_SOCKET", "unix:///tmp/spire-agent/public/api.sock")
@@ -41,18 +41,18 @@ def log(msg: str) -> None:
     print(f"[{ts}] [{AGENT_ID}] {msg}", flush=True)
 
 
-def wait_for_svid() -> "pyspiffe.svid.jwt_svid.JwtSvid | None":
+def wait_for_svid() -> "spiffe.svid.jwt_svid.JwtSvid | None":
     """Poll the Workload API until an SVID is available or retry count is exhausted."""
     try:
-        from pyspiffe.workloadapi.workload_api_client import WorkloadApiClient
+        from spiffe.workloadapi.workload_api_client import WorkloadApiClient
     except ImportError as e:
-        log(f"ERROR: pyspiffe not installed — {e}")
+        log(f"ERROR: spiffe not installed — {e}")
         return None
 
     for attempt in range(1, RETRY_COUNT + 1):
         try:
             log(f"Connecting to SPIRE Workload API at {SOCKET} (attempt {attempt}/{RETRY_COUNT})...")
-            with WorkloadApiClient(spiffe_socket=SOCKET) as client:
+            with WorkloadApiClient(socket_path=SOCKET) as client:
                 svid_context = client.fetch_jwt_svids(
                     audience=["cosmian-kms"],
                     subject=None,
@@ -65,12 +65,11 @@ def wait_for_svid() -> "pyspiffe.svid.jwt_svid.JwtSvid | None":
     return None
 
 
-def validate_jwt_svid(jwt_svid: "pyspiffe.svid.jwt_svid.JwtSvid") -> bool:
+def validate_jwt_svid(jwt_svid: "spiffe.svid.jwt_svid.JwtSvid") -> bool:
     """Assert the JWT-SVID is well-formed and belongs to the expected trust domain."""
     spiffe_id = str(jwt_svid.spiffe_id)
     log(f"SPIFFE ID: {spiffe_id}")
     log(f"Token expiry: {jwt_svid.expiry}")
-    log(f"Claims: {jwt_svid.claims}")
 
     # Must belong to our trust domain
     if not spiffe_id.startswith(f"spiffe://{EXPECTED_TRUST_DOMAIN}/"):
@@ -99,6 +98,7 @@ def test_mtls_request(x509_svid: object, url: str) -> bool:
 
     import ssl
     import tempfile
+
     import requests  # type: ignore
 
     try:

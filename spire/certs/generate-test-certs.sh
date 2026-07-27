@@ -24,7 +24,8 @@ openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-384 \
 
 # ── Helper: issue a leaf cert ─────────────────────────────────────────────────
 issue_cert() {
-  local name="$1"; shift
+  local name="$1"
+  shift
   local san_hosts=("$@")
 
   # Build SAN extension string (DNS + IP SANs)
@@ -38,7 +39,10 @@ issue_cert() {
     fi
   done
   local san_string
-  san_string=$(IFS=,; echo "${san_parts[*]}")
+  san_string=$(
+    IFS=,
+    echo "${san_parts[*]}"
+  )
 
   openssl req -newkey ec -pkeyopt ec_paramgen_curve:P-384 \
     -keyout "${DIR}/${name}.key" -out "${DIR}/${name}.csr" \
@@ -67,9 +71,12 @@ issue_cert "vault-proxy" "vault-proxy" "localhost" "127.0.0.1"
 # P-256 JWT signing key pair for auth-verifier session tokens.
 # The auth-verifier TLS key uses P-384 (above); the JWKS builder requires P-256,
 # so a dedicated key pair is needed for JWT operations.
-openssl ecparam -name prime256v1 -genkey -noout -out "${DIR}/jwt.key.pem"
-openssl ec -in "${DIR}/jwt.key.pem" -pubout -out "${DIR}/jwt.pub.pem" 2>/dev/null
-echo "issued: jwt.key.pem / jwt.pub.pem (P-256 for JWT signing)"
+# Uses PKCS#8 format (BEGIN PRIVATE KEY) as required by auth-verifier.
+openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256 \
+  -out "${DIR}/jwt.key.pem"
+openssl pkey -in "${DIR}/jwt.key.pem" -pubout \
+  -out "${DIR}/jwt.pub.pem"
+echo "issued: jwt.key.pem / jwt.pub.pem (P-256 PKCS#8 for JWT signing)"
 
 echo ""
 echo "Certificates generated in: ${DIR}"
