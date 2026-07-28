@@ -95,15 +95,30 @@ log "mistral-agents secret_id obtained."
 
 # ── 4. Transit smoke test via vault-proxy ─────────────────────────────────────
 # Login with the mistral-agents AppRole to get a vault token, then list keys.
+#
+# vault-proxy (nginx) proxies /v1/auth/* to the host-run auth-verifier via
+# host.docker.internal. Right after the container starts, the host-gateway
+# route can take a moment to become active (observed on GitHub Actions Linux
+# runners), so the very first request(s) through nginx may fail with a 502.
+# Retry with backoff here so this call also acts as a warm-up of that network
+# path before SPIRE server (which does NOT retry its own AppRole login) starts.
 log "Transit smoke test: logging in with mistral-agents AppRole..."
-MISTRAL_TOKEN=$(curl -sf \
-  --cacert "${VAULT_CACERT}" \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d "{\"role_id\":\"${MISTRAL_ROLE_ID}\",\"secret_id\":\"${MISTRAL_SECRET_ID}\"}" \
-  "${VAULT_ADDR}/v1/auth/approle/login" \
-  | python3 -c "import sys,json; print(json.load(sys.stdin)['auth']['client_token'])") \
-  || true
+MISTRAL_TOKEN=""
+for attempt in 1 2 3 4 5 6 7 8 9 10; do
+  MISTRAL_TOKEN=$(curl -sf \
+    --cacert "${VAULT_CACERT}" \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d "{\"role_id\":\"${MISTRAL_ROLE_ID}\",\"secret_id\":\"${MISTRAL_SECRET_ID}\"}" \
+    "${VAULT_ADDR}/v1/auth/approle/login" \
+    2>/dev/null | python3 -c "import sys,json; print(json.load(sys.stdin)['auth']['client_token'])" 2>/dev/null) \
+    || true
+  if [[ -n "${MISTRAL_TOKEN:-}" ]]; then
+    break
+  fi
+  log "AppRole login via vault-proxy not ready yet (attempt ${attempt}/10), retrying in 3s..."
+  sleep 3
+done
 
 if [[ -n "${MISTRAL_TOKEN:-}" ]]; then
   TRANSIT_LIST=$(curl -sf \
@@ -112,7 +127,8 @@ if [[ -n "${MISTRAL_TOKEN:-}" ]]; then
     "${VAULT_ADDR}/v1/transit/keys" 2>/dev/null || echo "{}")
   log "Transit smoke test OK. Response: ${TRANSIT_LIST:0:80}..."
 else
-  log "Transit smoke test skipped (AppRole login failed — expected on first run)."
+  echo "[provision] ERROR: vault-proxy could not reach auth-verifier via host.docker.internal after 10 attempts." >&2
+  exit 1
 fi
 
 # ── 5. Write credentials to env file ─────────────────────────────────────────
