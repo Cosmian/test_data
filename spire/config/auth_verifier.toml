@@ -4,7 +4,14 @@
 # `cargo run`. Paths are relative to the kms_alt5 repository root.
 
 # ── Network binding ────────────────────────────────────────────────────────────
-host_name = "127.0.0.1"
+# Bind to all interfaces (not just loopback): the SPIRE server and the
+# provision.sh smoke test reach this process from inside Docker containers via
+# host.docker.internal, which (on Linux) routes through a real host interface,
+# not the loopback interface -- a 127.0.0.1-only bind is unreachable from
+# containers there (this is not an issue on macOS Docker Desktop, whose
+# host.docker.internal implementation proxies regardless of bind address,
+# which is why this only surfaces in CI).
+host_name = "0.0.0.0"
 host_port = 8443
 
 roles = ["SuperAdmin", "DomainAdmin", "CryptoOfficer", "Auditor", "User"]
