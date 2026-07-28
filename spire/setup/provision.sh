@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 # provision.sh — Bootstrap AppRole credentials for the SPIRE integration test stack.
 #
-# Called by `mise run test:spire` after vault-proxy is healthy.
+# Called by `mise run test:spire` after KMS and auth-verifier are healthy.
 #
 # Auth flow:
 #   - Admin operations (AppRole CRUD) go directly to auth-verifier at
 #     AUTH_VERIFIER_URL using a native session cookie obtained via
-#     `POST /v1/login?realm=_` with HTTP Basic auth.
-#   - Transit smoke test goes through vault-proxy at VAULT_ADDR using an
-#     AppRole token obtained via `POST /v1/auth/approle/login`.
+#     `POST /login?realm=_` with HTTP Basic auth.
+#   - Transit smoke test goes through KMS at VAULT_ADDR using an
+#     AppRole token obtained via `POST /v1/auth/approle/login` (KMS proxies
+#     /v1/auth/* to auth-verifier /auth/*).
 #
 # Environment:
 #   AUTH_VERIFIER_URL -- auth-verifier base URL; default: https://localhost:8443
-#   VAULT_ADDR        -- vault-proxy base URL; default: https://localhost:8200
+#   VAULT_ADDR        -- KMS base URL; default: https://localhost:9998
 #   VAULT_CACERT      -- path to CA cert; default: test_data/spire/certs/ca.crt
 #   ADMIN_USER        -- auth-verifier admin username; default: admin
 #   ADMIN_PASS        -- auth-verifier admin password; default: change_me
@@ -45,7 +46,7 @@ LOGIN_RESPONSE=$(curl -sf \
   -H "Authorization: Basic ${BASIC_CREDS}" \
   -H "Content-Type: application/json" \
   -d '{}' \
-  "${AUTH_VERIFIER_URL}/v1/login?realm=_")
+  "${AUTH_VERIFIER_URL}/login?realm=_")
 log "Login response: ${LOGIN_RESPONSE}"
 log "Admin session cookie obtained."
 
@@ -63,33 +64,33 @@ auth_admin_api() {
 
 # ── 2. Create AppRole: spire-server ──────────────────────────────────────────
 log "Creating AppRole 'spire-server'..."
-auth_admin_api POST /v1/auth/approle/role/spire-server -d '{
+auth_admin_api POST /auth/approle/role/spire-server -d '{
   "token_ttl":      3600,
   "token_policies": ["default"],
   "secret_id_ttl":  0
 }' > /dev/null
 
-SPIRE_ROLE_ID=$(auth_admin_api GET /v1/auth/approle/role/spire-server/role-id \
+SPIRE_ROLE_ID=$(auth_admin_api GET /auth/approle/role/spire-server/role-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['role_id'])")
 log "spire-server role_id: ${SPIRE_ROLE_ID}"
 
-SPIRE_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/spire-server/secret-id -d '{}' \
+SPIRE_SECRET_ID=$(auth_admin_api POST /auth/approle/role/spire-server/secret-id -d '{}' \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
 log "spire-server secret_id obtained."
 
 # ── 3. Create AppRole: mistral-agents ────────────────────────────────────────
 log "Creating AppRole 'mistral-agents'..."
-auth_admin_api POST /v1/auth/approle/role/mistral-agents -d '{
+auth_admin_api POST /auth/approle/role/mistral-agents -d '{
   "token_ttl":      3600,
   "token_policies": ["default"],
   "secret_id_ttl":  0
 }' > /dev/null
 
-MISTRAL_ROLE_ID=$(auth_admin_api GET /v1/auth/approle/role/mistral-agents/role-id \
+MISTRAL_ROLE_ID=$(auth_admin_api GET /auth/approle/role/mistral-agents/role-id \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['role_id'])")
 log "mistral-agents role_id: ${MISTRAL_ROLE_ID}"
 
-MISTRAL_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/mistral-agents/secret-id -d '{}' \
+MISTRAL_SECRET_ID=$(auth_admin_api POST /auth/approle/role/mistral-agents/secret-id -d '{}' \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
 log "mistral-agents secret_id obtained."
 
