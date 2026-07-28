@@ -6,7 +6,7 @@
 # Auth flow:
 #   - Admin operations (AppRole CRUD) go directly to auth-verifier at
 #     AUTH_VERIFIER_URL using a native session cookie obtained via
-#     `POST /login?realm=_` with HTTP Basic auth.
+#     `POST /v1/login?realm=_` with HTTP Basic auth.
 #   - Transit smoke test goes through vault-proxy at VAULT_ADDR using an
 #     AppRole token obtained via `POST /v1/auth/approle/login`.
 #
@@ -21,7 +21,7 @@
 set -euo pipefail
 
 AUTH_VERIFIER_URL="${AUTH_VERIFIER_URL:-https://localhost:8443}"
-VAULT_ADDR="${VAULT_ADDR:-https://localhost:8200}"
+VAULT_ADDR="${VAULT_ADDR:-https://localhost:9998}"
 VAULT_CACERT="${VAULT_CACERT:-test_data/spire/certs/ca.crt}"
 
 ADMIN_USER="${ADMIN_USER:-admin}"
@@ -45,7 +45,7 @@ LOGIN_RESPONSE=$(curl -sf \
   -H "Authorization: Basic ${BASIC_CREDS}" \
   -H "Content-Type: application/json" \
   -d '{}' \
-  "${AUTH_VERIFIER_URL}/login?realm=_")
+  "${AUTH_VERIFIER_URL}/v1/login?realm=_")
 log "Login response: ${LOGIN_RESPONSE}"
 log "Admin session cookie obtained."
 
@@ -93,15 +93,10 @@ MISTRAL_SECRET_ID=$(auth_admin_api POST /v1/auth/approle/role/mistral-agents/sec
   | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['secret_id'])")
 log "mistral-agents secret_id obtained."
 
-# ── 4. Transit smoke test via vault-proxy ─────────────────────────────────────
-# Login with the mistral-agents AppRole to get a vault token, then list keys.
-#
-# vault-proxy (nginx) proxies /v1/auth/* to the host-run auth-verifier via
-# host.docker.internal. Right after the container starts, the host-gateway
-# route can take a moment to become active (observed on GitHub Actions Linux
-# runners), so the very first request(s) through nginx may fail with a 502.
-# Retry with backoff here so this call also acts as a warm-up of that network
-# path before SPIRE server (which does NOT retry its own AppRole login) starts.
+# ── 4. Transit smoke test via KMS ─────────────────────────────────────────────
+# Login with the mistral-agents AppRole via KMS (which proxies /v1/auth/* to
+# auth-verifier).  On success, list transit keys to verify the full Vault API
+# path (auth → transit) is reachable through KMS.
 log "Transit smoke test: logging in with mistral-agents AppRole..."
 MISTRAL_TOKEN=""
 for attempt in 1 2 3 4 5 6 7 8 9 10; do
@@ -116,7 +111,7 @@ for attempt in 1 2 3 4 5 6 7 8 9 10; do
   if [[ -n "${MISTRAL_TOKEN:-}" ]]; then
     break
   fi
-  log "AppRole login via vault-proxy not ready yet (attempt ${attempt}/10), retrying in 3s..."
+  log "AppRole login via KMS not ready yet (attempt ${attempt}/10), retrying in 3s..."
   sleep 3
 done
 
@@ -127,7 +122,7 @@ if [[ -n "${MISTRAL_TOKEN:-}" ]]; then
     "${VAULT_ADDR}/v1/transit/keys" 2>/dev/null || echo "{}")
   log "Transit smoke test OK. Response: ${TRANSIT_LIST:0:80}..."
 else
-  echo "[provision] ERROR: vault-proxy could not reach auth-verifier via host.docker.internal after 10 attempts." >&2
+  echo "[provision] ERROR: KMS auth proxy could not reach auth-verifier after 10 attempts." >&2
   exit 1
 fi
 
