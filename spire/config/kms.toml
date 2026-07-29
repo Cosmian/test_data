@@ -34,9 +34,14 @@ tls_key_file  = "test_data/spire/certs/kms.key"
 [vault]
 vault_api_enabled          = true
 vault_auth_verifier_url    = "https://127.0.0.1:8443"
+# TLS to the auth-verifier. NOTE: vault_auth_verifier_accept_invalid_certs takes
+# PRECEDENCE over vault_auth_verifier_ca_cert (see start_kms_server.rs): when it
+# is true the KMS's reqwest client skips certificate verification entirely and
+# the ca_cert below is ignored. This test sets accept_invalid_certs = true
+# because reqwest custom-root verification is unreliable across CI/macOS here.
+# The ca_cert path is kept as the value production should use once
+# accept_invalid_certs is set back to false (its default).
 vault_auth_verifier_ca_cert = "test_data/spire/certs/ca.crt"
-# Accept the self-signed test CA cert without system store verification.
-# Production deployments should use vault_auth_verifier_ca_cert instead.
 vault_auth_verifier_accept_invalid_certs = true
 vault_transit_mount        = "transit"
 vault_pki_mount            = "pki"
