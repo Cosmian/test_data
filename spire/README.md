@@ -3,16 +3,27 @@
 End-to-end test stack that validates the full SPIRE → Cosmian KMS/auth-verifier integration
 described in `documentation/docs/adr/2026-07-26-spire-spiffe-via-vault-api.md`.
 
+The stack is **multi-tenant**: two INDEPENDENT SPIRE deployments (tenants `a` and `b`), each
+with its own trust domain, its own AppRole, its own agent, and two Mistral AI agent workloads,
+run against the **same** Cosmian KMS. Both tenants sign their own intermediate CA via the KMS
+PKI engine, chaining to the same KMS root CA (tag `vault_pki_ca`). This proves the KMS is a
+valid multi-tenant Vault upstream authority.
+
 ## Architecture
 
 ```
-SPIRE plugins ─────► nginx proxy (vault-proxy:8200)
-                          │
-               ┌──────────┴──────────────────┐
-               ▼                             ▼
-  auth-verifier:8443             cosmian-kms:9998
-  /v1/auth/approle/*             /v1/transit/*
-  /v1/auth/token/*               /v1/pki/*
+                         cosmian-kms:9998  (single, shared)
+                         /v1/auth/*  → auth-verifier:8443 (AppRole login, token lookup)
+                         /v1/transit/*, /v1/pki/*  → handled natively
+                                    ▲                    ▲
+              AppRole spire-server-a│                    │AppRole spire-server-b
+        ┌───────────────────────────┴──┐      ┌──────────┴───────────────────────┐
+        │ tenant a: cosmian-test-a.local│      │ tenant b: cosmian-test-b.local   │
+        │ spire-server-a (:8081)        │      │ spire-server-b (:8091)           │
+        │   └─ spire-agent-a            │      │   └─ spire-agent-b               │
+        │        ├─ mistral-agent-a1    │      │        ├─ mistral-agent-b1       │
+        │        └─ mistral-agent-a2    │      │        └─ mistral-agent-b2       │
+        └───────────────────────────────┘      └──────────────────────────────────┘
 ```
 
 ## Quick start
@@ -42,45 +53,54 @@ docker compose -f tests/spire/docker-compose.yml \
   exec cosmian-auth bash /setup/provision.sh
 ```
 
+> The recommended entry point is `mise run test:spire --variant non-fips`, which builds the
+> KMS + auth-verifier, provisions credentials, starts both tenants, runs all four Mistral
+> agents, and gates on the SPIRE server logs. The steps below describe the underlying flow.
+
 This creates:
-- AppRole `spire-server` — dedicated role for SPIRE's KeyManager and UpstreamAuthority plugins
-- AppRole `mistral-agents` — dedicated role for Mistral AI agent workloads
-- CA key pair in KMS tagged `vault_pki_ca`
+- AppRole `spire-server-a` — SPIRE tenant `a` KeyManager/UpstreamAuthority plugins
+- AppRole `spire-server-b` — SPIRE tenant `b` KeyManager/UpstreamAuthority plugins
+- AppRole `mistral-agents` — shared role used by the transit smoke test
+- CA key pair in KMS tagged `vault_pki_ca` (the shared root both tenants chain to)
 
 ### 4. Watch SPIRE start up
 
 ```bash
-docker compose -f tests/spire/docker-compose.yml logs -f spire-server spire-agent
+docker compose --profile spire logs -f spire-server-a spire-agent-a
+docker compose --profile spire logs -f spire-server-b spire-agent-b
 ```
 
-A successful startup shows SPIRE registering its transit key with the KMS, then fetching
-the public key via `GET /v1/transit/keys/<key-name>`.
+A successful startup shows each SPIRE server signing its intermediate CA via the KMS PKI
+engine (`POST /v1/pki/...`) and each agent attesting with its one-time join token.
 
 ### 5. Verify Mistral agent identities
 
 ```bash
-docker compose -f tests/spire/docker-compose.yml logs mistral-agent-1 mistral-agent-2
+docker compose --profile spire logs mistral-agent-a1 mistral-agent-a2 \
+                                     mistral-agent-b1 mistral-agent-b2
 ```
 
-Expected output (each agent):
+Expected output (tenant `a` agents; tenant `b` uses `cosmian-test-b.local`):
 ```
-[...] [mistral-agent-1] SPIFFE ID: spiffe://cosmian-test.local/mistral-agent
-[...] [mistral-agent-1] PASS: SVID valid until ...
-[...] [mistral-agent-1] === All assertions passed ===
+[...] [mistral-agent-a1] SPIFFE ID: spiffe://cosmian-test-a.local/mistral-agent
+[...] [mistral-agent-a1] PASS: SVID valid until ...
+[...] [mistral-agent-a1] === All assertions passed ===
 ```
 
 ## Services
 
 | Service | Port | Purpose |
 |---------|------|---------|
-| postgres | 5432 | Shared DB for auth-verifier and KMS |
-| cosmian-auth | 8443 | Vault /v1/auth/* API |
-| cosmian-kms | 9998 | Vault /v1/transit/* and /v1/pki/* API |
-| vault-proxy | 8200 | nginx — single `vault_addr` for SPIRE |
-| spire-server | 8081 | SPIRE server (gRPC) |
-| spire-agent | — | SPIRE agent (unix workload attestation) |
-| mistral-agent-1 | — | Simulated Mistral AI agent #1 |
-| mistral-agent-2 | — | Simulated Mistral AI agent #2 |
+| cosmian-auth (host) | 8443 | Vault /v1/auth/* API |
+| cosmian-kms (host) | 9998 | Vault /v1/transit/* and /v1/pki/* API (shared by both tenants) |
+| spire-server-a | 8081 | SPIRE server, tenant `a` (trust domain `cosmian-test-a.local`) |
+| spire-agent-a | — | SPIRE agent, tenant `a` (unix workload attestation) |
+| mistral-agent-a1 | — | Simulated Mistral AI agent #1 (tenant `a`) |
+| mistral-agent-a2 | — | Simulated Mistral AI agent #2 (tenant `a`) |
+| spire-server-b | 8091 | SPIRE server, tenant `b` (trust domain `cosmian-test-b.local`) |
+| spire-agent-b | — | SPIRE agent, tenant `b` (unix workload attestation) |
+| mistral-agent-b1 | — | Simulated Mistral AI agent #1 (tenant `b`) |
+| mistral-agent-b2 | — | Simulated Mistral AI agent #2 (tenant `b`) |
 
 ## Gap fixes implemented
 
@@ -90,19 +110,19 @@ Expected output (each agent):
 | G2 | ✅ | `POST /keys/{name}/config` no-op added (SPIRE delete worker) |
 | G3 | ✅ | `type` field derived from stored KMIP attributes (not `"unknown"`) |
 | G4 | ✅ | `ttl` field parsed and forwarded as `requested_validity_days` to Certify |
-| G5 | ✅ | Two separate AppRoles: `spire-server` and `mistral-agents` |
+| G5 | ✅ | Per-tenant AppRoles: `spire-server-a`, `spire-server-b`, plus `mistral-agents` |
 
 ## Troubleshooting
 
 **SPIRE startup fails with "key not found"**  
-→ Run the provision script (step 3). SPIRE cannot create its own transit key until
-   `provision.sh` has set up AppRole credentials.
+→ Run the provision script (step 3). SPIRE cannot sign its intermediate CA until
+   `provision.sh` has set up the per-tenant AppRole credentials.
 
-**nginx `502 Bad Gateway`**  
-→ Check that `cosmian-auth` and `cosmian-kms` are healthy before vault-proxy starts:
-   `docker compose -f tests/spire/docker-compose.yml ps`
+**SPIRE server logs an error (log gate fails)**  
+→ Inspect the captured logs written by the mise task: `/tmp/spire-server-a.log`,
+   `/tmp/spire-server-b.log`. The gate fails on any `level=error`/`level=fatal` line.
 
 **Mistral agent can't get an SVID**  
-→ Verify the SPIRE workload entry is registered:
-   `docker compose exec spire-server /opt/spire/bin/spire-server entry show`
-   See the workload registration commands printed by `provision.sh`.
+→ Verify the tenant's SPIRE workload entry is registered (replace `-a` with `-b` for
+   tenant `b`):
+   `docker compose --profile spire exec spire-server-a /opt/spire/bin/spire-server entry show -socketPath /tmp/spire-server/private/api.sock`
