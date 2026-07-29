@@ -102,6 +102,18 @@ Expected output (tenant `a` agents; tenant `b` uses `cosmian-test-b.local`):
 | mistral-agent-b1 | — | Simulated Mistral AI agent #1 (tenant `b`) |
 | mistral-agent-b2 | — | Simulated Mistral AI agent #2 (tenant `b`) |
 
+## Test scripts
+
+The `mise run test:spire --variant non-fips` orchestrator runs three layers of assertions
+against the live stack:
+
+| Script / step | Purpose |
+|---------------|---------|
+| `setup/test_vault_api.sh` | Happy-path Vault wire-contract conformance (auth §3, PKI §4, transit §5). |
+| SPIRE-server log gate | Fails the run if any SPIRE server logs `level=error`/`level=fatal`. |
+| `setup/test_negative_scenarios.sh` | Adversarial / negative scenarios (see `reviews_spire_live.md`): cross-tenant transit isolation (11), proxy path traversal + unauth admin CRUD (9), `secret_id` `num_uses` race (1), exportable bypass + sensitive-key export refusal (5), sign-intermediate input validation (4), revoke-vs-cache trade-off (3), AppRole login fuzzing (8), Kubernetes login rejection (7), delete/recreate lifecycle (12). |
+| Inline mise steps | Scenario 6 (transit allow-list + FIPS SKIP note), scenario 10 (bad PKI CA label → clean 5xx), scenario 2 (auth-verifier outage → HTTP 502 + recovery). |
+
 ## Gap fixes implemented
 
 | Gap | Status | Description |
