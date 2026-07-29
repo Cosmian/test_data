@@ -7,8 +7,6 @@
 #                              SANs: auth-verifier, localhost, host.docker.internal
 #   kms.crt  / kms.key       — KMS TLS cert
 #                              SANs: cosmian-kms, localhost, host.docker.internal
-#   vault-proxy.crt / .key   — nginx vault-proxy TLS cert (presented to SPIRE)
-#                              SANs: vault-proxy, localhost, 127.0.0.1
 #
 # Usage:
 #   bash tests/spire/certs/generate-test-certs.sh
@@ -59,14 +57,13 @@ issue_cert() {
   echo "issued: ${name}.crt (SANs: ${san_string})"
 }
 
-# auth-verifier: SANs include host.docker.internal so nginx proxy_ssl_verify works
+# auth-verifier: SANs include host.docker.internal so containers can reach the
+# process from inside the Docker network.
 issue_cert "auth" "auth-verifier" "localhost" "host.docker.internal" "127.0.0.1"
 
-# KMS: SANs include host.docker.internal so nginx proxy_ssl_verify works
+# KMS: SANs include host.docker.internal so containers (SPIRE servers) can reach
+# the KMS Vault-compatible API directly (KMS proxies /v1/auth/* itself).
 issue_cert "kms" "cosmian-kms" "localhost" "host.docker.internal" "127.0.0.1"
-
-# nginx vault-proxy: SANs for the proxy itself (SPIRE connects to vault-proxy:8200)
-issue_cert "vault-proxy" "vault-proxy" "localhost" "127.0.0.1"
 
 # P-256 JWT signing key pair for auth-verifier session tokens.
 # The auth-verifier TLS key uses P-384 (above); the JWKS builder requires P-256,
@@ -83,5 +80,4 @@ echo "Certificates generated in: ${DIR}"
 echo "  ca.crt              — root CA (import into containers)"
 echo "  auth.crt/key        — auth-verifier TLS (SANs: auth-verifier, localhost, host.docker.internal)"
 echo "  kms.crt/key         — KMS TLS (SANs: cosmian-kms, localhost, host.docker.internal)"
-echo "  vault-proxy.crt/key — nginx proxy TLS (SANs: vault-proxy, localhost)"
 echo "  jwt.key.pem/jwt.pub.pem — P-256 JWT signing key for auth-verifier"

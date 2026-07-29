@@ -12,19 +12,18 @@ sqlite_path   = "/tmp/kms-spire-test"
 clear_database = true
 
 # ── HTTP binding ──────────────────────────────────────────────────────────────
-# Bind to all interfaces (not just loopback): vault-proxy (nginx) and the
-# SPIRE server reach this process from inside Docker containers via
-# host.docker.internal, which (on Linux) routes through a real host
-# interface, not loopback -- a 127.0.0.1-only bind is unreachable from
-# containers there (this is not an issue on macOS Docker Desktop, whose
-# host.docker.internal implementation proxies regardless of bind address,
-# which is why this only surfaces in CI).
+# Bind to all interfaces (not just loopback): the SPIRE servers reach this
+# process from inside Docker containers via host.docker.internal, which (on
+# Linux) routes through a real host interface, not loopback -- a 127.0.0.1-only
+# bind is unreachable from containers there (this is not an issue on macOS
+# Docker Desktop, whose host.docker.internal implementation proxies regardless
+# of bind address, which is why this only surfaces in CI).
 [http]
 hostname = "0.0.0.0"
 port     = 9998
 
 # ── TLS ───────────────────────────────────────────────────────────────────────
-# Server presents this cert to the nginx proxy and to ckms CLI.
+# Server presents this cert to the SPIRE servers and to the ckms CLI.
 # SANs include localhost and host.docker.internal (see generate-test-certs.sh).
 [tls]
 tls_cert_file = "test_data/spire/certs/kms.crt"
