@@ -21,12 +21,6 @@ clear_database = true
 [http]
 hostname = "0.0.0.0"
 port     = 9998
-# API token for test-harness admin operations (ckms certificates certify, etc.).
-# Required because vault_api_enabled = true enables ensure_auth_middleware on all
-# scopes including the default (KMIP) scope; unauthenticated requests return 401.
-# The token value is arbitrary for tests — it only needs to be non-empty and must
-# match the access_token written into the test ckms.toml by the test harness.
-api_token_id = "spire-test-admin-token"
 
 # ── TLS ───────────────────────────────────────────────────────────────────────
 # Server presents this cert to the SPIRE servers and to the ckms CLI.
