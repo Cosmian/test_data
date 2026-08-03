@@ -49,7 +49,7 @@ clear_database = false
 # must be reachable over HTTPS with a valid certificate, and this flag must be
 # set to false.
 [auth_verifier]
-auth_verifier_url = "http://localhost:8443"
+auth_verifier_url = "https://localhost:8443"
 auth_verifier_realm = "_"
 auth_verifier_accept_invalid_certs = true   # dev/test only — never in production
 

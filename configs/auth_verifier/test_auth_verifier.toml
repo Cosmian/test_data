@@ -1,0 +1,50 @@
+# =============================================================================
+# Auth Verifier — integration-test template configuration
+# =============================================================================
+#
+# This file documents the settings used when the KMS integration tests spin up
+# a real auth-verifier process alongside the KMS server.
+#
+# The test dynamically generates a copy of this file with:
+#   - An OS-assigned free port replacing `host_port`.
+#   - Absolute filesystem paths for the TLS certificate files.
+#   - `sqlite::memory:` so the database is discarded after each test run.
+#
+# To start the auth-verifier manually using this template (from the repo root):
+#
+#   cd authentication
+#   cargo run --bin auth_verifier -- \
+#     ../test_data/configs/auth_verifier/test_auth_verifier.toml
+#
+# Default credentials seeded at first start (realm = "_"):
+#   username: admin
+#   password: change_me
+#
+# =============================================================================
+
+# Bind to localhost only — never expose this test server externally.
+host_name = "127.0.0.1"
+host_port = 8443   # overridden at runtime to a free OS-assigned port
+
+# ---------------------------------------------------------------------------
+# Console logging
+# ---------------------------------------------------------------------------
+[log]
+# Keep output quiet during tests; override with RUST_LOG=auth_verifier=debug if needed.
+level = "warn"
+
+# ---------------------------------------------------------------------------
+# TLS — paths are relative to the authentication/ submodule root
+# (tests substitute absolute paths at runtime)
+# ---------------------------------------------------------------------------
+[tls_params]
+server_private_key = "server/src/tests/certificates/ec/auth.server.key.pem"
+server_certificate = "server/src/tests/certificates/ec/auth.server.cert.pem"
+server_ca_chain    = "server/src/tests/certificates/ec/auth.ca.pem"
+
+# ---------------------------------------------------------------------------
+# In-memory SQLite — data is discarded when the process exits
+# ---------------------------------------------------------------------------
+[database_params]
+backend        = "sqlite"
+connection_url = "sqlite::memory:"
