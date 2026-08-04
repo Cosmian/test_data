@@ -1,0 +1,54 @@
+# Cosmian KMS configuration for SPIRE integration tests.
+#
+# Used by the `mise run test:spire` task when starting the KMS via
+# `cargo run`. Paths are relative to the kms_alt5 repository root.
+
+default_username = "admin"
+
+# ── Database ──────────────────────────────────────────────────────────────────
+[db]
+database_type = "sqlite"
+sqlite_path   = "/tmp/kms-spire-test"
+clear_database = true
+
+# ── HTTP binding ──────────────────────────────────────────────────────────────
+# Bind to all interfaces (not just loopback): the SPIRE servers reach this
+# process from inside Docker containers via host.docker.internal, which (on
+# Linux) routes through a real host interface, not loopback -- a 127.0.0.1-only
+# bind is unreachable from containers there (this is not an issue on macOS
+# Docker Desktop, whose host.docker.internal implementation proxies regardless
+# of bind address, which is why this only surfaces in CI).
+[http]
+hostname = "0.0.0.0"
+port     = 9998
+
+# ── TLS ───────────────────────────────────────────────────────────────────────
+# Server presents this cert to the SPIRE servers and to the ckms CLI.
+# SANs include localhost and host.docker.internal (see generate-test-certs.sh).
+[tls]
+tls_cert_file = "test_data/spire/certs/kms.crt"
+tls_key_file  = "test_data/spire/certs/kms.key"
+
+# ── Vault-compatible API ──────────────────────────────────────────────────────
+# The [vault] section maps to VaultConfig (flattened into ClapConfig).
+[vault]
+vault_api_enabled          = true
+vault_auth_verifier_url    = "https://127.0.0.1:8443"
+# TLS to the auth-verifier. NOTE: vault_auth_verifier_accept_invalid_certs takes
+# PRECEDENCE over vault_auth_verifier_ca_cert (see start_kms_server.rs): when it
+# is true the KMS's reqwest client skips certificate verification entirely and
+# the ca_cert below is ignored. This test sets accept_invalid_certs = true
+# because reqwest custom-root verification is unreliable across CI/macOS here.
+# The ca_cert path is kept as the value production should use once
+# accept_invalid_certs is set back to false (its default).
+vault_auth_verifier_ca_cert = "test_data/spire/certs/ca.crt"
+vault_auth_verifier_accept_invalid_certs = true
+vault_transit_mount        = "transit"
+vault_pki_mount            = "pki"
+vault_pki_ca_key_label     = "vault_pki_ca"
+vault_token_cache_ttl_secs = 30
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+[logging]
+rust_log    = "info,cosmian_kms_server=debug"
+ansi_colors = false
