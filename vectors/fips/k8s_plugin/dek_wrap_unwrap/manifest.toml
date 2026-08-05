@@ -1,6 +1,6 @@
 name = "K8s KMS Plugin: DEK wrap/unwrap via AES-256-GCM KEK"
 description = """
-Simulates the exact sequence performed by cosmian-kms-plugin when kube-apiserver
+Simulates the exact sequence performed by kubernetes-kms-plugin when kube-apiserver
 calls Encrypt (wrap DEK) and Decrypt (unwrap DEK).
 
 Steps:
