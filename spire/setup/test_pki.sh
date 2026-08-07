@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# test_mercedes_pki.sh — PKI capability validation tests.
+# test_pki.sh — PKI capability validation tests.
 #
 # Covers the KMS-owned test cases from the Aembit Capability Validation Test Plan
 # that are NOT yet exercised by test_vault_api.sh or test_negative_scenarios.sh.
