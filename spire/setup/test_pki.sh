@@ -216,7 +216,7 @@ fi
 M02_HOST=$(python3 -c "from urllib.parse import urlparse; u=urlparse('${VAULT_ADDR}'); print(u.hostname)")
 M02_PORT=$(python3 -c "from urllib.parse import urlparse; u=urlparse('${VAULT_ADDR}'); print(u.port or 443)")
 
-_MTLS_CA=(); [[ -n "${VAULT_CACERT}" ]] && _MTLS_CA+=(--cacert "${VAULT_CACERT}")
+_MTLS_CA=(); [[ -n "${VAULT_CACERT}" ]] && _MTLS_CA+=(-CAfile "${VAULT_CACERT}")
 M01_MTLS_OUT=$(echo "" | openssl s_client \
   -connect "${M02_HOST}:${M02_PORT}" \
   "${_MTLS_CA[@]}" \
@@ -250,8 +250,9 @@ _pass "M-01 / PKI-06: PASS — pathlen:0 enforced, self-signed/out-of-chain cert
 # =============================================================================
 _section "M-02 / PKI-11 — TLS version enforcement"
 
-_CA_ARGS=()
-[[ -n "${VAULT_CACERT}" ]] && _CA_ARGS+=(--cacert "${VAULT_CACERT}")
+_CA_ARGS_CURL=()
+_CA_ARGS_SSL=()
+[[ -n "${VAULT_CACERT}" ]] && _CA_ARGS_CURL+=(--cacert "${VAULT_CACERT}") && _CA_ARGS_SSL+=(-CAfile "${VAULT_CACERT}")
 
 # Extract host and port from VAULT_ADDR (e.g. https://localhost:9998)
 M02_HOST=$(python3 -c "from urllib.parse import urlparse; u=urlparse('${VAULT_ADDR}'); print(u.hostname)")
@@ -261,7 +262,7 @@ M02_PORT=$(python3 -c "from urllib.parse import urlparse; u=urlparse('${VAULT_AD
 M02_TLS11_OUT=$(echo "" | timeout 10 openssl s_client \
   -connect "${M02_HOST}:${M02_PORT}" \
   -tls1_1 \
-  "${_CA_ARGS[@]}" \
+  "${_CA_ARGS_SSL[@]}" \
   2>&1 || true)
 
 if echo "${M02_TLS11_OUT}" | grep -qiE "alert|error|wrong version|no protocols|handshake failure"; then
@@ -278,7 +279,7 @@ fi
 M02_TLS12_OUT=$(echo "" | timeout 10 openssl s_client \
   -connect "${M02_HOST}:${M02_PORT}" \
   -tls1_2 \
-  "${_CA_ARGS[@]}" \
+  "${_CA_ARGS_SSL[@]}" \
   -brief 2>&1 || true)
 
 if echo "${M02_TLS12_OUT}" | grep -qiE "Protocol.*TLSv1\.2|TLSv1\.2"; then
@@ -292,7 +293,7 @@ fi
 M02_TLS13_OUT=$(echo "" | timeout 10 openssl s_client \
   -connect "${M02_HOST}:${M02_PORT}" \
   -tls1_3 \
-  "${_CA_ARGS[@]}" \
+  "${_CA_ARGS_SSL[@]}" \
   -brief 2>&1 || true)
 
 if echo "${M02_TLS13_OUT}" | grep -qiE "Protocol.*TLSv1\.3|TLSv1\.3"; then
@@ -305,7 +306,7 @@ fi
 # (d) Verify default negotiation picks TLS 1.2 or 1.3 (not below)
 M02_DEFAULT_OUT=$(echo "" | timeout 10 openssl s_client \
   -connect "${M02_HOST}:${M02_PORT}" \
-  "${_CA_ARGS[@]}" \
+  "${_CA_ARGS_SSL[@]}" \
   -brief 2>&1 | head -20 || true)
 M02_TLS_VER=$(echo "${M02_DEFAULT_OUT}" | grep -oE "TLSv[0-9.]+" | head -1 || true)
 
