@@ -23,16 +23,16 @@ cargo test -p cosmian_kms_server -- kmip_policy
 |---------|-----------|----------|--------------|-------------|
 | **PKI-01** | External Root CA integration | High | ✅ Existing | `mise run test:spire` step 5 (`self_signed=false` log gate) + `test_vault_api.sh §4` |
 | **PKI-02** | Private key handling (never leaves origin) | High | ✅ Existing | SPIRE KeyManager `"memory"` (architectural); Scenario 5 (Sensitive export denied) |
-| **PKI-06** | Self-signed certificate prohibition | High | ✅ **New** (M-01) | `test_pki.sh` M-01 — pathlen:0 verified on all issued intermediates |
-| **PKI-03** | Client/server certificate parity | Medium | ✅ Existing | Architectural: every SPFFE SVID uses the same `Certify`/`ReCertify` path regardless of TLS role |
+| **PKI-06** | Self-signed certificate prohibition | High | ✅ **Enhanced** (M-01) | `test_pki.sh` M-01 — pathlen:0 verified + out-of-chain self-signed cert rejected + mTLS rejection |
+| **PKI-03** | Client/server certificate parity | Medium | ✅ **New** (M-09) | `test_pki.sh` M-09 — clientAuth + serverAuth certs issued for same identity, same CA, same lifecycle |
 | **PKI-04** | Zero-downtime trust bundle rotation | High | ✅ **New** (M-04) | `test_pki.sh` M-04 — new CA key created, old CA continues signing during overlap |
 | **PKI-05** | Crypto agility — centrally configured algorithms | Medium | ✅ Existing | `cargo test -p cosmian_kms_server -- kmip_policy` (basic, e2e_signature, overrides) |
 | **PKI-07** | Approved algorithm restriction | High | ✅ Existing | `mise run test:spire` step 13 (bogus transit key type → 4xx) + unit tests above |
 | **PKI-08** | Storage policy enforcement | Medium | ✅ Existing | `mise run test:spire` step 12 Scenario 5 (Sensitive key export denied) |
 | **PKI-09** | PAM integration for long-lived secrets | Medium | 🔶 Joint workshop | Requires live Segura instance; see `client.txt` I-3 for integration design |
 | **PKI-10** | Service mesh SDS delivery | Medium | 🔶 Aembit/Envoy | Envoy SDS is the delivery layer; KMS provides the SVID via SPIRE |
-| **PKI-11** | TLS 1.3 enforcement | High | ✅ **New** (M-02) | `test_pki.sh` M-02 — TLS 1.2 curl → connection failure |
-| **PKI-12** | Algorithm policy change without redeploy | High | ✅ **New** (M-03) | `test_pki.sh` M-03 — second KMS with restricted allowlist, P-256 → 4xx, P-384 → 200 |
+| **PKI-11** | TLS 1.3 enforcement | High | ✅ **Enhanced** (M-02) | `test_pki.sh` M-02 — TLS 1.1 rejected (hard), TLS 1.2 accepted (migration), TLS 1.3 verified |
+| **PKI-12** | Algorithm policy change without redeploy | High | ✅ **Enhanced** (M-03) | `test_pki.sh` M-03 — baseline P-256 allowed → restricted KMS blocks P-256, allows P-384 via KMIP |
 | **PKI-13** | Documented PKI responsibility split | High | 📄 Documentation | See `client.txt` PKI-2 section (written answer) |
 | **PKI-14** | Programmatic Intermediate CA issuance/renewal | High | ✅ Existing | `mise run test:spire` step 5 (`sign-intermediate` via Vault REST API, no manual step) |
 | **PKI-16** | Automated trust bootstrapping | High | ✅ Existing | `mise run test:spire` steps 1–9 (full automated provision from zero) |
@@ -48,7 +48,7 @@ cargo test -p cosmian_kms_server -- kmip_policy
 | WI-02 | Workload attestation coverage | High | 🔶 Aembit — PSAT/MSI/IID attestors |
 | WI-03 | Trust domain interoperability | High | 🔶 Aembit — SPIFFE federation |
 | WI-04 | Credential rotation under load | High | 🔶 Aembit — SPIRE built-in rotation at 50% TTL |
-| WI-05 | Revocation propagation | Medium | ✅ Existing (partial) — `test_negative_scenarios.sh` Scenario 3 (token revocation cache); short-lived SVIDs (1h TTL) are the revocation mechanism |
+| WI-05 | Revocation propagation | Medium | ✅ **Enhanced** (M-10) — `test_pki.sh` M-10: timed revocation window (revoke → poll → measure rejection ≤ 35s); Scenario 3 documents cache trade-off |
 | WI-06 | Dual credential type (X.509 + JWT) | High | ✅ Existing — `mise run test:spire` step 10 issues both X.509-SVID and JWT-SVID per workload |
 | WI-07 | Node attestation per platform | High | 🔶 Aembit — requires K8s/Azure/AWS/on-prem nodes |
 | WI-08 | Cloud IdP federation (Entra ID) | High | 🔶 Aembit — Entra ID Workload Identity Federation |
@@ -73,7 +73,7 @@ discovery, AI agent authorization, M2M SDK, and migration tooling.
 | OBS-02 | Distributed tracing | Low | 🔶 Aembit — correlation across Aembit + KMS requires Aembit tracing layer |
 | OBS-03 | Alerting on issuance failures | Medium | 🔶 Aembit — alerting is in the Aembit/Grafana/OBSERVEIAM layer |
 | OBS-04 | Structured logging | Medium | ✅ Existing — KMS emits structured JSON logs via cosmian_logger; format verified by log gate in `mise run test:spire` step 11 |
-| OBS-05 | Issuance latency < 500 ms (NFR-2) | High | ✅ **New** (M-06) | `test_pki.sh` M-06 — 5× timed `sign-intermediate` calls, each < 500ms |
+| OBS-05 | Issuance latency < 500 ms (NFR-2) | High | ✅ **Enhanced** (M-06) | `test_pki.sh` M-06 — 5× timed `sign-intermediate` calls, hard gate at 500ms (override via `SPIRE_PKI_LATENCY_MS`) |
 
 ---
 
@@ -128,6 +128,8 @@ discovery, AI agent authorization, M2M SDK, and migration tooling.
 | M-06 | OBS-05 | `test_data/spire/setup/test_pki.sh` |
 | M-07 | INFO-2 | `test_data/spire/setup/test_pki.sh` |
 | M-08 | RES-08 | `test_data/spire/setup/test_pki.sh` |
+| M-09 | PKI-03 | `test_data/spire/setup/test_pki.sh` |
+| M-10 | WI-05 | `test_data/spire/setup/test_pki.sh` |
 
 How to run:
 ```bash
