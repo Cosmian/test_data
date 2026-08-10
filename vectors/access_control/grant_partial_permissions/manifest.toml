@@ -1,6 +1,6 @@
 name = "Access Control: grant partial permissions"
 description = "Owner grants only Get; user Get succeeds and Encrypt is denied"
-server_config = "test_data/configs/server/cert_auth.toml"
+server_config = "test_data/configs/server/auth/cert.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"

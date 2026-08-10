@@ -1,6 +1,6 @@
 name = "Access Control: Operator blocked from lifecycle operations"
 description = "Operator role cannot perform lifecycle operations (Create, CreateKeyPair) without explicit Create grant."
-server_config = "test_data/configs/server/test/cert_auth_operator_and_crypto_officer.toml"
+server_config = "test_data/configs/server/auth/cert_roles.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"

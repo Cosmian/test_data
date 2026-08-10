@@ -1,6 +1,6 @@
 name = "Access Control: CryptoOfficer allowed lifecycle operations"
 description = "CryptoOfficer can perform lifecycle operations: Create, Locate, GetAttributes, Destroy."
-server_config = "test_data/configs/server/test/cert_auth_operator_and_crypto_officer.toml"
+server_config = "test_data/configs/server/auth/cert_roles.toml"
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
