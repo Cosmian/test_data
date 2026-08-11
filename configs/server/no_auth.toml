@@ -3,7 +3,7 @@ default_username = "admin"
 [http]
 port = 9998
 hostname = "0.0.0.0"
-cors_allowed_origins = ["http://localhost:9998"]
+cors_allowed_origins = ["http://localhost:9998", "http://localhost:5173"]
 
 [db]
 database_type = "sqlite"
