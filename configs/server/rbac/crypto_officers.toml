@@ -30,7 +30,8 @@ default_username = "admin"
 #        test_data/certificates/client_server/crypto-officer-2/crypto-officer-2.example.com.{key,crt}
 crypto_officer_users = [
   "user.client@acme.com",
-  "owner.client@acme.com",]
+  "owner.client@acme.com",
+  "co3.client@acme.com",]
 
 # Require a split-key ceremony (XOR n-of-n) to activate the Crypto Officer role.
 # All ceremony activation records are AES-256-GCM encrypted with keys derived

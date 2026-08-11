@@ -54,3 +54,18 @@ $OPENSSL_BIN x509 -req -days 3650 -in user.client.acme.com.csr -CA ca.crt -CAkey
 
 # Generate a PKCS12 file
 $OPENSSL_BIN pkcs12 -export -out user.client.acme.com.p12 -inkey user.client.acme.com.key -in user.client.acme.com.crt -certfile ca.crt -password pass:password
+
+
+## "co3" client cert — third Crypto Officer for 3-of-3 ceremony
+
+# Generate private key for co3.client.acme.com
+$OPENSSL_BIN genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out co3/co3.client.acme.com.key
+
+# Generate certificate signing request for co3.client.acme.com
+$OPENSSL_BIN req -new -key co3/co3.client.acme.com.key -subj "/C=FR/ST=IdF/L=Paris/O=AcmeTest/CN=co3.client@acme.com" -out co3/co3.client.acme.com.csr
+
+# Generate certificate for co3.client.acme.com signed by our own CA
+$OPENSSL_BIN x509 -req -days 3650 -in co3/co3.client.acme.com.csr -CA ca/ca.crt -CAkey ca/ca.key -CAcreateserial -out co3/co3.client.acme.com.crt
+
+# Generate a PKCS12 file
+$OPENSSL_BIN pkcs12 -export -password pass: -out co3/co3.client.acme.com.p12 -inkey co3/co3.client.acme.com.key -in co3/co3.client.acme.com.crt -certfile ca/ca.crt
