@@ -20,4 +20,4 @@ tmp_path = "/tmp"
 [auth_verifier]
 auth_verifier_url = "https://localhost:8443"
 auth_verifier_accept_invalid_certs = true
-auth_verifier_realm = "kms"
+auth_verifier_realm = "_"
