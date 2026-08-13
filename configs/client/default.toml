@@ -1,0 +1,4 @@
+# Default KMS client configuration used in tests.
+
+[http_config]
+server_url = "http://localhost:9998"

@@ -1,0 +1,33 @@
+# Test KMS server — TLS with mutual client-certificate authentication.
+# Uses PEM cert + key (works in both FIPS and non-FIPS mode).
+# Bound to port 9999. Loaded by start_default_test_kms_server_with_cert_auth().
+
+default_username = "tech@cosmian.com"
+kms_public_url = "https://localhost:9999/google_cse"
+
+[http]
+port = 9999
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms_test_cert_auth"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_cert_auth"
+tmp_path = "/tmp"
+
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[socket_server]
+socket_server_start = true
+socket_server_port = 10099
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = true
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

@@ -1,0 +1,23 @@
+# Auth test server — plain HTTP, no authentication.
+# Bound to port 12001.
+
+default_username = "tech@cosmian.com"
+kms_public_url = "http://localhost:12001/google_cse"
+
+[http]
+port = 12001
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "./sqlite-data-auth-tests"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_12001"
+tmp_path = "/tmp"
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = true
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

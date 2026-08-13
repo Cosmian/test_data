@@ -1,0 +1,4 @@
+# Bad KMS client configuration (missing required server_url) used in tests.
+
+[http_config]
+accept_invalid_certs = true
