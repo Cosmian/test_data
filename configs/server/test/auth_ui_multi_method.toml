@@ -1,0 +1,60 @@
+# Manual test config: Web UI login with all three browser-login methods enabled
+# simultaneously (OIDC, auth-verifier username/password, client certificate).
+# Corresponds to Scenario C in the multi-method login-page test plan.
+#
+# Prerequisites:
+#   1. Start the auth-verifier (from the authentication/ sibling repo):
+#        cargo run -p auth_verifier -- server/auth_verifier.dev.toml
+#      Admin UI at https://127.0.0.1:8443/admin-ui — create a test user in realm "_".
+#
+#   2. The TLS section below uses the repo's bundled test certificates.
+#      They work for connections to 127.0.0.1 and localhost in test environments.
+#      For a custom hostname, replace the paths and update kms_public_url.
+#
+#   3. Register "https://localhost:9998/ui/callback" as an allowed callback URL
+#      in the OIDC application (Auth0 or other IdP).
+#
+# Start the KMS:
+#   cargo run --bin cosmian_kms -- -c test_data/configs/server/test/auth_ui_multi_method.toml
+#
+# Expected GET /ui/auth_method response:
+#   {"auth_method":"JWT","auth_methods":["JWT","AUTH_VERIFIER","CERT"]}
+
+vendor_identification = "test_vendor"
+kms_public_url = "https://localhost:9998"
+
+[http]
+port = 9998
+hostname = "localhost"
+
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.key"
+clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[idp_auth]
+jwt_auth_provider = [
+  "https://demo-kms.eu.auth0.com/,https://demo-kms.eu.auth0.com/.well-known/jwks.json,",
+]
+
+[auth_verifier]
+auth_verifier_url = "https://127.0.0.1:8443"
+auth_verifier_realm = "_"
+auth_verifier_accept_invalid_certs = true
+
+[ui_config.ui_oidc_auth]
+ui_oidc_client_id = "mlTpGfub8n8PU2PsBQVdxp2VOyxtkL9m"
+ui_oidc_issuer_url = "https://demo-kms.eu.auth0.com/"
+ui_oidc_logout_url = "https://demo-kms.eu.auth0.com/logout"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
+# Must be identical across all KMS instances behind the same load balancer.
+ui_session_salt = "kms-test-local-salt-do-not-use-in-production"
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true
