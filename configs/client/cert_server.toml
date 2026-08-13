@@ -1,4 +1,11 @@
+# Test KMS client — HTTPS with server PEM client certificate. Operator identity (kmserver.acme.com).
+# Uses the server cert (Operator identity — never in crypto_officer_users).
+# Cert paths are relative to workspace root, resolved by load_client_config().
+
 vendor_id = "cosmian"
 
 [http_config]
-server_url = "http://localhost:9998"
+server_url = "https://localhost:10004"
+accept_invalid_certs = true
+tls_client_pem_cert_path = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
+tls_client_pem_key_path = "test_data/certificates/client_server/server/kmserver.acme.com.key"
