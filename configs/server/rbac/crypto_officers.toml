@@ -1,0 +1,31 @@
+# Test KMS server — ceremony mode (require_ceremony = true).
+# Loaded by start_ceremony_test_kms_server().
+# Bound to port 10004.
+#
+# CO users: owner.client@acme.com, user.client@acme.com, co3.client@acme.com
+# The ceremony_secret is a 32-byte test secret (hex-encoded).
+# NOTE: this secret is for testing only — never use in production.
+
+default_username = "owner.client@acme.com"
+
+[http]
+port = 10004
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms_test_ceremony"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_ceremony"
+tmp_path = "/tmp"
+
+[roles]
+crypto_officer_users = [
+  "owner.client@acme.com",
+  "user.client@acme.com",
+  "co3.client@acme.com",
+]
+crypto_officer_require_ceremony = true
+ceremony_secret = "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"

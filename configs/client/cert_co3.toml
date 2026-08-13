@@ -1,0 +1,4 @@
+vendor_id = "cosmian"
+
+[http_config]
+server_url = "http://localhost:9998"
