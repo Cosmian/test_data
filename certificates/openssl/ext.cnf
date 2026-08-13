@@ -1,11 +1,4 @@
-crlDistributionPoints=crl_section
-
-[crl_section]
-fullname = @url_section
-
-[url_section]
-URI.1=ldap://www.example.com/ldap?DN=TEST
-URI.2=https://package.cosmian.com/kms/crl_tests/intermediate.crl.pem
+crlDistributionPoints=URI:http://crl.example.com/crl.pem
 
 [v3_ca]
 basicConstraints=CA:FALSE,pathlen:0
