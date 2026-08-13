@@ -4,6 +4,6 @@ crlDistributionPoints=URI:http://crl.example.com/crl.pem
 basicConstraints=CA:FALSE,pathlen:0
 keyUsage=keyCertSign,digitalSignature
 extendedKeyUsage=emailProtection
-crlDistributionPoints=URI:https://package.cosmian.com/kms/crl_tests/intermediate.crl.pem
+crlDistributionPoints=URI:http://crl.example.com/crl.pem
 subjectKeyIdentifier=hash
 authorityKeyIdentifier=keyid:always,issuer

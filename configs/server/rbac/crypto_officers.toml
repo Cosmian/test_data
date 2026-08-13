@@ -29,8 +29,8 @@ clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
 
 [roles]
 crypto_officer_users = [
-  "owner.client@acme.com",
   "user.client@acme.com",
+  "owner.client@acme.com",
   "co3.client@acme.com",
 ]
 crypto_officer_require_ceremony = true
