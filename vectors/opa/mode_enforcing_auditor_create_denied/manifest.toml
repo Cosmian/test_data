@@ -1,0 +1,26 @@
+name = "OPA Mode 3 (Enforcing): Auditor denied Create (not in auditor_ops)"
+description = """
+OPA enforcing mode. A user holding the `Auditor` role attempts to create a
+new symmetric key. `Create` is intentionally absent from `auditor_ops` in
+kms.rego — auditors are read-only observers and must not generate key material.
+OPA returns allow=false → KMS returns 401 Unauthorized.
+
+This enforces separation-of-duties: the Auditor role cannot generate or modify
+cryptographic objects, even though it can read metadata (GetAttributes, Locate).
+
+Ref: kms.rego `auditor_ops` set (NIST SP 800-53 AU-9 separation-of-duties;
+PCI-DSS v4.0 Req 10 — auditor must not create evidence-generating objects).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL", "KMS_TEST_OPA_AUDITOR_JWT"]
+backends = ["sqlite"]
+
+# Auditor JWT — valid role, same domain as the server's OPA test realm.
+[identities.auditor]
+access_token_env = "KMS_TEST_OPA_AUDITOR_JWT"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+identity = "auditor"
+assert_success = false
+assert_error_contains = "access-right"

@@ -1,0 +1,28 @@
+name = "OPA Mode 2 (Exclusive): native KMS CO cert user denied Create (no JWT)"
+description = """
+OPA exclusive mode. A client authenticated via mTLS (cert CN = owner.client@acme.com)
+is NOT listed as a privileged/crypto-officer user in the server configuration.
+Because no JWT is presented, OPA receives `input.roles = []` and no allow rule
+fires → allow=false → KMS returns 401 Unauthorized.
+
+This proves that in exclusive OPA mode, even mTLS-authenticated clients are
+subject to OPA policy when they are not explicitly whitelisted as native COs:
+the KMS legacy privilege bypass does not apply.
+
+Ref: kms.rego default deny; OPA Mode 2 "OPA is sole authority" design contract.
+"""
+requires_env = ["KMS_OPA_URL"]
+backends = ["sqlite"]
+
+# mTLS cert client — authenticated but no JWT → empty roles → OPA denies.
+# The server is configured WITHOUT this user in crypto_officer_users.
+[identities.co_cert]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key  = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+identity = "co_cert"
+assert_success = false
+assert_error_contains = "access-right"

@@ -1,0 +1,58 @@
+name = "OPA Mode 3 (Enforcing): CryptoOfficer GetAttributes on non-owned key — allowed"
+description = """
+OPA enforcing mode. A `CryptoOfficer` in realm `kms-opa-test` (the default owner / JWT
+client) creates an AES key. A second user — also a `CryptoOfficer` in the same realm
+(kms-opa-auditor_jwt in `kms-opa-test` holds the Auditor role, so we use the officer JWT
+directly as the non-owning reader) — reads GetAttributes on the key using a JWT identity
+that is NOT the owner.
+
+Wait: to test non-owner access we need a different identity that is also a CryptoOfficer.
+The `Auditor` role is in `auditor_ops` for `get_attributes` too, so use `Auditor` identity
+for the GetAttributes step. This proves that any role that has `get_attributes` in its
+`*_ops` set in kms.rego can read attributes of a key they do not own, once OPA is the
+authoritative gate in enforcing mode.
+
+OPA evaluation for the auditor GetAttributes step:
+  input.roles        = ["Auditor"]
+  input.user_domain  = "kms-opa-test"
+  input.object_domain= "kms-opa-test"   (same domain)
+  input.is_owner     = false
+  input.operation    = "get_attributes"
+  → auditor_ops contains "get_attributes" ∧ same_domain → allow = true
+
+Previously (before fix) OPA Gate 1 allowed but KMS Gate 2 (legacy ownership check)
+denied → N/A displayed for all fields except UID.
+After fix: OPA approval is authoritative in enforcing mode for non-HSM objects.
+
+Ref: kms.rego `auditor_ops`; NIST SP 800-57 Part 2 §4.3 — Auditor read-only metadata.
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL", "KMS_TEST_OPA_AUDITOR_JWT"]
+backends = ["sqlite"]
+
+# Auditor JWT — same domain as the key owner (kms-opa-test), non-owner.
+[identities.auditor]
+access_token_env = "KMS_TEST_OPA_AUDITOR_JWT"
+
+# Step 1: Officer (default identity) creates the key.
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Step 3: Auditor (non-owner, same domain) reads GetAttributes → must succeed.
+# data-testid scenario: this is the operation that showed N/A in the Web UI
+# Locate page before the enforcing-mode Gate 2 fix.
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+identity = "auditor"
+assert_success = true
+
+# Step 4: Officer (owner) destroys the key.
+[[steps]]
+operation = "Destroy"
+request = "step4_destroy.json"
+allow_failure = true

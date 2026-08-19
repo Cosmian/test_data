@@ -1,0 +1,24 @@
+name = "OPA Mode 3 (Enforcing): empty JWT roles denied Create"
+description = """
+OPA enforcing mode. A bearer token with an empty `roles` claim (and no domain)
+is presented to the KMS. OPA evaluates `input.roles = []` against kms.rego:
+no allow rule matches → allow=false → KMS returns 401 Unauthorized.
+
+This proves that a JWT with no role claims (e.g. a misconfigured or legacy token)
+cannot bypass Gate 1 even in enforcing mode.
+
+Ref: kms.rego default deny (NIST SP 800-53 AC-6 least-privilege; fail-closed).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL", "KMS_TEST_OPA_NO_ROLES_JWT"]
+backends = ["sqlite"]
+
+# Token issued by the auth server for a user with no roles assigned.
+[identities.no_roles]
+access_token_env = "KMS_TEST_OPA_NO_ROLES_JWT"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+identity = "no_roles"
+assert_success = false
+assert_error_contains = "access-right"

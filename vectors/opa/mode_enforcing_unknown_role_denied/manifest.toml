@@ -1,0 +1,25 @@
+name = "OPA Mode 3 (Enforcing): unknown JWT role denied Create"
+description = """
+OPA enforcing mode. A bearer token carrying an unrecognised role `Hacker`
+(not in kms.rego's role hierarchy) is presented. OPA finds no allow rule for
+this role → allow=false → KMS returns 401 Unauthorized.
+
+This proves that an arbitrary or fabricated role claim cannot grant access:
+the policy is allow-list based, not deny-list based.
+
+Ref: kms.rego default deny (ANSI/INCITS 359 §4.2 RBAC named-role principle;
+NIST SP 800-53 AC-6 least-privilege).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL", "KMS_TEST_OPA_UNKNOWN_ROLE_JWT"]
+backends = ["sqlite"]
+
+# Token with a role name that does not appear in kms.rego's allow rules.
+[identities.unknown_role]
+access_token_env = "KMS_TEST_OPA_UNKNOWN_ROLE_JWT"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+identity = "unknown_role"
+assert_success = false
+assert_error_contains = "access-right"
