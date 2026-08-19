@@ -1,0 +1,25 @@
+# Minimal default configuration from quick_start.md
+vendor_identification = "test_vendor"
+kms_public_url = "http://localhost:9998"
+
+[http]
+port = 9998
+hostname = "localhost"
+
+[idp_auth]
+jwt_auth_provider = ["https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,",    "https://demo-kms.eu.auth0.com/,https://demo-kms.eu.auth0.com/.well-known/jwks.json,"]
+
+[ui_config.ui_oidc_auth]
+ui_oidc_client_id = "mlTpGfub8n8PU2PsBQVdxp2VOyxtkL9m"
+ui_oidc_issuer_url = "https://demo-kms.eu.auth0.com/"
+ui_oidc_logout_url = "https://demo-kms.eu.auth0.com/logout"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true

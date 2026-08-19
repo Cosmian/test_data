@@ -1,0 +1,24 @@
+# Test KMS server — plain HTTP, no authentication, for non-revocable key tests.
+# Bound to port 10000. non_revocable_key_id is injected at runtime.
+# Loaded by start_default_test_kms_server_with_non_revocable_key_ids().
+
+default_username = "tech@cosmian.com"
+kms_public_url = "http://localhost:10000/google_cse"
+
+[http]
+port = 10000
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms_test_non_revocable"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_non_revocable"
+tmp_path = "/tmp"
+
+[google_cse_config]
+google_cse_enable = true
+google_cse_disable_tokens_validation = true
+google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]
