@@ -81,3 +81,22 @@ echo "  ca.crt              — root CA (import into containers)"
 echo "  auth.crt/key        — auth-verifier TLS (SANs: auth-verifier, localhost, host.docker.internal)"
 echo "  kms.crt/key         — KMS TLS (SANs: cosmian-kms, localhost, host.docker.internal)"
 echo "  jwt.key.pem/jwt.pub.pem — P-256 JWT signing key for auth-verifier"
+
+# ── mTLS client certificate for SPIRE → KMS ──────────────────────────────────
+# Used by the eviden_kms KeyManager and UpstreamAuthority plugins to authenticate
+# to the KMS via mutual TLS. The KMS server validates this cert against ca.crt.
+# The cert carries CN=spire-client and extendedKeyUsage=clientAuth.
+openssl req -newkey ec -pkeyopt ec_paramgen_curve:P-384 \
+  -keyout "${DIR}/spire-client.key" \
+  -out "${DIR}/spire-client.csr" \
+  -nodes -subj "/CN=spire-client/O=SPIFFE/C=US"
+
+openssl x509 -req \
+  -in "${DIR}/spire-client.csr" \
+  -CA "${DIR}/ca.crt" -CAkey "${DIR}/ca.key" -CAcreateserial \
+  -out "${DIR}/spire-client.crt" \
+  -days 3650 \
+  -extfile <(printf "keyUsage=digitalSignature\nextendedKeyUsage=clientAuth")
+
+rm -f "${DIR}/spire-client.csr"
+echo "issued: spire-client.crt (mTLS client cert for SPIRE → KMS)"
