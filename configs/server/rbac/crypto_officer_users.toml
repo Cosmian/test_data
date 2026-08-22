@@ -33,3 +33,6 @@ jwt_auth_provider = [
   "https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/v2.0,https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/discovery/v2.0/keys",
   "https://demo-kms.eu.auth0.com/,https://demo-kms.eu.auth0.com/.well-known/jwks.json",
 ]
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
