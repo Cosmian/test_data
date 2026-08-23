@@ -1,4 +1,4 @@
 [ v3_ca ]
 basicConstraints=CA:TRUE,pathlen:0
-keyUsage=keyCertSign,digitalSignature
+keyUsage=keyCertSign,cRLSign,digitalSignature
 extendedKeyUsage=emailProtection
