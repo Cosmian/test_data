@@ -1,0 +1,55 @@
+name = "OPA Mode 2 (Exclusive): Auditor wrong domain denied (cross-domain isolation)"
+description = """
+OPA exclusive mode — multi-tenant isolation.
+
+A CryptoOfficer from realm `kms-opa-other` (domain=kms-opa-other) creates an AES key.
+An Auditor from realm `kms-opa-test` (domain=kms-opa-test) then calls `GetAttributes`
+on that key.  Even though `GetAttributes` is in `auditor_ops`, the `same_domain`
+helper in kms.rego fails because `user_domain (kms-opa-test) != object_domain
+(kms-opa-other)` → OPA returns `allow=false` → KMS returns Object_Not_Found.
+
+This test completes the multi-tenant isolation matrix for the Auditor role: the
+existing `mode_exclusive_auditor_get_attributes_allowed` vector proves an Auditor CAN
+read key metadata within their own domain; this vector proves they CANNOT read across
+domain boundaries — even for read-only metadata operations.
+
+Ref: kms.rego same_domain helper (ANSI/INCITS 359-2004 §4.2 Constrained RBAC;
+NIST SP 800-53 Rev 5 AC-3 access enforcement, AC-4 information flow enforcement;
+NIST SP 800-57 Part 2 §4.3 Audit and Compliance Officer role).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL"]
+backends = ["sqlite"]
+
+# other-domain CryptoOfficer creates the key (kms-opa-other domain).
+[identities.other_domain]
+access_token_env = "KMS_TEST_OPA_OTHER_DOMAIN_JWT"
+
+# kms-opa-test Auditor — domain mismatch triggers isolation.
+[identities.auditor]
+access_token_env = "KMS_TEST_OPA_AUDITOR_JWT"
+
+# Step 1: other-domain CO creates the key (object_domain = kms-opa-other).
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+identity = "other_domain"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Step 2: test-domain Auditor tries GetAttributes — same_domain fails → denied.
+[[steps]]
+operation = "GetAttributes"
+request = "step3_get_attributes.json"
+identity = "auditor"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+assert_error_contains = "not found"
+
+# Cleanup: other-domain CO (owner) destroys the key.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "other_domain"
+allow_failure = true
