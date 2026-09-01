@@ -1,56 +1,81 @@
 #!/bin/bash
+set -euo pipefail
 
-# on MacOS, you should pass a link to an actually installed openssl binary, and not use the default `libressl`
-# which generates PKCS12 files with the deprecated RC2 algorithm
+# On macOS, pass the path to a modern OpenSSL binary as the first argument.
+# The system `libressl` generates PKCS12 files with the deprecated RC2 algorithm.
 OPENSSL_BIN=${1:-openssl}
 
-# Generate CA private key
-$OPENSSL_BIN genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out ca.key
+# ---------------------------------------------------------------------------
+# generate_cert BASENAME CN OUTDIR [CADIR] [PASSOUT]
+#
+# Issues a CA-signed RSA-2048 certificate and writes four files under OUTDIR:
+#   BASENAME.key   private key
+#   BASENAME.csr   certificate signing request
+#   BASENAME.crt   signed certificate
+#   BASENAME.p12   PKCS12 bundle (password = PASSOUT, empty string = no password)
+#
+# Arguments:
+#   BASENAME  filename stem, e.g. "owner.client.acme.com"
+#   CN        X.509 Common Name, e.g. "owner.client@acme.com"
+#   OUTDIR    output directory, e.g. "owner"
+#   CADIR     directory containing ca.crt / ca.key (default: "ca")
+#   PASSOUT   PKCS12 export password (default: empty = no password)
+# ---------------------------------------------------------------------------
+generate_cert() {
+    local basename="$1"
+    local cn="$2"
+    local outdir="$3"
+    local cadir="${4:-ca}"
+    local passout="${5:-password}"
 
-# Generate self-signed CA certificate
-$OPENSSL_BIN req -new -x509 -days 3650 -key ca.key -subj "/C=FR/ST=IdF/L=Paris/O=AcmeTest/CN=Acme Test Root CA" -out ca.crt
+    mkdir -p "$outdir"
+
+    local key="${outdir}/${basename}.key"
+    local csr="${outdir}/${basename}.csr"
+    local crt="${outdir}/${basename}.crt"
+    local p12="${outdir}/${basename}.p12"
+
+    echo "── Generating ${cn} (${outdir}) ──"
+
+    "$OPENSSL_BIN" genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 \
+        -out "$key"
+
+    "$OPENSSL_BIN" req -new -key "$key" \
+        -subj "/C=FR/ST=IdF/L=Paris/O=AcmeTest/CN=${cn}" \
+        -out "$csr"
+
+    "$OPENSSL_BIN" x509 -req -days 3650 \
+        -in "$csr" -CA "${cadir}/ca.crt" -CAkey "${cadir}/ca.key" -CAcreateserial \
+        -out "$crt"
+
+    "$OPENSSL_BIN" pkcs12 -export \
+        -out "$p12" -inkey "$key" -in "$crt" -certfile "${cadir}/ca.crt" \
+        -passout "pass:${passout}"
+}
 
 
-## Server Cert
-
-# Generate private key for kmserver.acme.com
-$OPENSSL_BIN genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out kmserver.acme.com.key
-
-# Generate certificate signing request for kmserver.acme.com
-$OPENSSL_BIN req -new -key kmserver.acme.com.key -subj "/C=FR/ST=IdF/L=Paris/O=AcmeTest/CN=kmserver.acme.com" -out kmserver.acme.com.csr
-
-# Generate certificate for kmserver.acme.com signed by our own CA
-$OPENSSL_BIN x509 -req -days 3650 -in kmserver.acme.com.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out kmserver.acme.com.crt
-
-# Generate a PKCS12 file
-$OPENSSL_BIN pkcs12 -export -out kmserver.acme.com.p12 -inkey kmserver.acme.com.key -in kmserver.acme.com.crt -certfile ca.crt -password pass:password
+# ---------------------------------------------------------------------------
+# CA
+# ---------------------------------------------------------------------------
+mkdir -p ca
+echo "── Generating CA ──"
+"$OPENSSL_BIN" genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out ca/ca.key
+"$OPENSSL_BIN" req -new -x509 -days 3650 -key ca/ca.key \
+    -subj "/C=FR/ST=IdF/L=Paris/O=AcmeTest/CN=Acme Test Root CA" \
+    -out ca/ca.crt
 
 
-## "owner" client cert
-
-# Generate private key for owner.client.acme.com
-$OPENSSL_BIN genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out owner.client.acme.com.key
-
-# Generate certificate signing request for owner.client.acme.com
-$OPENSSL_BIN req -new -key owner.client.acme.com.key -subj "/C=FR/ST=IdF/L=Paris/O=AcmeTest/CN=owner.client@acme.com" -out owner.client.acme.com.csr
-
-# Generate certificate for owner.client.acme.com signed by our own CA
-$OPENSSL_BIN x509 -req -days 3650 -in owner.client.acme.com.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out owner.client.acme.com.crt
-
-# Generate a PKCS12 file
-$OPENSSL_BIN pkcs12 -export -out owner.client.acme.com.p12 -inkey owner.client.acme.com.key -in owner.client.acme.com.crt -certfile ca.crt -password pass:password
+# ---------------------------------------------------------------------------
+# Server cert
+# ---------------------------------------------------------------------------
+generate_cert "kmserver.acme.com" "kmserver.acme.com" "server"
 
 
-## "user" client cert
+# ---------------------------------------------------------------------------
+# Client certs
+# ---------------------------------------------------------------------------
+generate_cert "owner.client.acme.com" "owner.client@acme.com" "owner"
+generate_cert "user.client.acme.com"  "user.client@acme.com"  "user"
+generate_cert "co3.client.acme.com"   "co3.client@acme.com"   "co3"
 
-# Generate private key for user.client.acme.com
-$OPENSSL_BIN genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out user.client.acme.com.key
-
-# Generate certificate signing request for user.client.acme.com
-$OPENSSL_BIN req -new -key user.client.acme.com.key -subj "/C=FR/ST=IdF/L=Paris/O=AcmeTest/CN=user.client@acme.com" -out user.client.acme.com.csr
-
-# Generate certificate for user.client.acme.com signed by our own CA
-$OPENSSL_BIN x509 -req -days 3650 -in user.client.acme.com.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out user.client.acme.com.crt
-
-# Generate a PKCS12 file
-$OPENSSL_BIN pkcs12 -export -out user.client.acme.com.p12 -inkey user.client.acme.com.key -in user.client.acme.com.crt -certfile ca.crt -password pass:password
+echo "Done."

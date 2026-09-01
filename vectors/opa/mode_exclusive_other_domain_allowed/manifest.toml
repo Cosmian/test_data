@@ -1,0 +1,42 @@
+name = "OPA Mode 2 (Exclusive): other-domain owner key lifecycle allowed (multi-tenancy positive)"
+description = """
+OPA exclusive mode. A CryptoOfficer from realm `kms-opa-other` (domain=kms-opa-other)
+creates an AES key **in their own domain**, then retrieves and destroys it.
+
+This is the multi-tenancy positive counterpart to `mode_exclusive_wrong_domain`: it
+verifies that domain isolation does NOT block legitimate intra-domain operations.
+The `same_domain` check succeeds because `user_domain == object_domain == kms-opa-other`.
+
+Ref: kms.rego same_domain helper (ANSI/INCITS 359-2004 §4.2 Constrained RBAC;
+NIST SP 800-53 Rev 5 AC-6 least privilege; domain isolation requirement).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL", "KMS_TEST_OPA_OTHER_DOMAIN_JWT"]
+backends = ["sqlite"]
+
+# JWT-based identity: other-domain CryptoOfficer (kms-opa-other realm).
+[identities.other_domain]
+access_token_env = "KMS_TEST_OPA_OTHER_DOMAIN_JWT"
+
+# Step 1: other-domain officer creates their own key.
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+identity = "other_domain"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Step 2: same officer retrieves their own key (is_owner=true, same domain → allowed).
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+identity = "other_domain"
+assert_success = true
+
+# Step 3: same officer destroys their own key.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "other_domain"
+assert_success = true

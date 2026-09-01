@@ -1,0 +1,91 @@
+# =============================================================================
+# Authentication Verifier — KMS OPA RBAC configuration
+# =============================================================================
+#
+# Configures the Authentication Verifier for use with the Cosmian KMS
+# OPA RBAC integration.  The five role names declared here match exactly
+# the roles evaluated by `test_data/opa/kms.rego`.
+#
+# Start from the `authentication/` directory:
+#
+#   ./target/debug/auth_verifier \
+#     ../test_data/configs/auth_verifier/kms_opa_rbac.toml
+#
+# Default super-admin credentials (realm "_"):
+#   username : admin
+#   password : change_me
+#
+# KMS realm seeded on first start:
+#   realm    : kms
+#   admin    : kms-admin / kms-admin-pass
+#
+# =============================================================================
+
+host_name = "127.0.0.1"
+host_port = 8443
+
+# ---------------------------------------------------------------------------
+# RBAC role names — must match the role names used in test_data/opa/kms.rego.
+# Exposed at GET /public/roles so the KMS admin UI can list available roles.
+# ---------------------------------------------------------------------------
+roles = [
+  "SuperAdmin",      # Unrestricted, cross-domain  (ANSI/INCITS 359 §4.2)
+  "DomainAdmin",     # Full access within own domain
+  "CryptoOfficer",   # Key lifecycle within own domain (FIPS 140-3 §7.4)
+  "Auditor",         # Read-only metadata within own domain (NIST SP 800-53 AU-9)
+  "User",            # Crypto-use only, no lifecycle (FIPS 140-3 §7.4)
+]
+
+# Admin UI — serve the pre-built SPA at /admin-ui.
+# Path is relative to the directory where auth_verifier is started (authentication/).
+admin_ui_path = "admin-ui/dist"
+
+# ---------------------------------------------------------------------------
+# Console logging
+# ---------------------------------------------------------------------------
+[log]
+level = "info"
+
+# ---------------------------------------------------------------------------
+# TLS — paths are relative to the authentication/ submodule root.
+# Replace with production certificates for non-development environments.
+# ---------------------------------------------------------------------------
+[tls_params]
+server_private_key = "server/src/tests/certificates/ec/auth.server.key.pem"
+server_certificate = "server/src/tests/certificates/ec/auth.server.cert.pem"
+server_ca_chain    = "server/src/tests/certificates/ec/auth.ca.pem"
+
+# ---------------------------------------------------------------------------
+# JWT signing — reuse the server TLS key for token signing (dev only).
+# In production, use a dedicated signing key.
+# ---------------------------------------------------------------------------
+[session_jwt_params]
+jwt_ec_private_key = "server/src/tests/certificates/ec/auth.server.key.pem"
+jwt_ec_public_key  = "server/src/tests/certificates/ec/auth.server.cert.pem"
+
+# ---------------------------------------------------------------------------
+# Database — persistent SQLite for the KMS RBAC test environment.
+# Switch to `sqlite::memory:` for fully ephemeral test runs.
+# ---------------------------------------------------------------------------
+[database_params]
+auto_init_schema = true
+backend          = "sqlite"
+connection_url   = "sqlite:///tmp/kms_opa_rbac_auth.db"
+
+# ---------------------------------------------------------------------------
+# Development seed — creates the `kms` realm and a realm-admin on first start.
+# All operations are idempotent; the seed is safe to leave enabled.
+# ---------------------------------------------------------------------------
+[dev_seed]
+realm_id       = "kms"
+admin_username = "kms-admin"
+admin_password = "kms-admin-pass"
+
+# ---------------------------------------------------------------------------
+# CORS — allow the KMS server origin on admin endpoints.
+# Adjust to match the actual KMS public URL in your deployment.
+# ---------------------------------------------------------------------------
+allowed_origins = [
+  "http://localhost:9998",
+  "http://127.0.0.1:9998",
+]

@@ -1,0 +1,55 @@
+name = "OPA Mode 2 (Exclusive): SuperAdmin cross-domain access allowed (isolation bypass for top role)"
+description = """
+OPA exclusive mode — SuperAdmin cross-domain positive test.
+
+A CryptoOfficer from realm `kms-opa-other` (domain=kms-opa-other) creates an AES key.
+A SuperAdmin (kms-opa-test realm, no domain restriction) then calls `Get` and `Destroy`
+on that key and both succeed.
+
+The `SuperAdmin` rule in kms.rego is unconditional: `allow if { input.roles[_] ==
+"SuperAdmin" }`.  The `same_domain` helper is NOT invoked for this role, so
+`user_domain (kms-opa-test) != object_domain (kms-opa-other)` does not block access.
+
+This is the positive counterpart to `mode_exclusive_wrong_domain` (CO) and
+`mode_exclusive_domain_admin_wrong_domain` (DomainAdmin): it proves that domain
+isolation is correctly relaxed only for the one role that is explicitly allowed
+cross-domain access, and that no other role accidentally inherits this privilege.
+
+Ref: kms.rego SuperAdmin rule (ANSI/INCITS 359-2004 §4.2 top of the role hierarchy;
+NIST SP 800-53 Rev 5 AC-6(1) least privilege / authorize access to security functions;
+NIST SP 800-57 Part 2 §4.3 Key Management Authority role).
+"""
+requires_env = ["KMS_OPA_URL", "KMS_AUTH_SERVER_URL"]
+backends = ["sqlite"]
+
+# other-domain CryptoOfficer creates the key (object_domain = kms-opa-other).
+[identities.other_domain]
+access_token_env = "KMS_TEST_OPA_OTHER_DOMAIN_JWT"
+
+# SuperAdmin is cross-domain; its domain claim is irrelevant to OPA's decision.
+[identities.super_admin]
+access_token_env = "KMS_TEST_OPA_SUPER_ADMIN_JWT"
+
+# Step 1: other-domain CO creates the key.
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+identity = "other_domain"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+# Step 2: SuperAdmin retrieves the key across domain boundaries → allowed.
+[[steps]]
+operation = "Get"
+request = "step2_get.json"
+identity = "super_admin"
+assert_success = true
+
+# Step 3: SuperAdmin destroys the key across domain boundaries → allowed.
+[[steps]]
+operation = "Destroy"
+request = "step3_destroy.json"
+identity = "super_admin"
+assert_success = true

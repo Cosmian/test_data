@@ -1,0 +1,104 @@
+# Envoy SDS upstream configuration — mTLS server side.
+#
+# Envoy fetches its X.509-SVID and trust bundle from the SPIRE agent via
+# SDS (Secret Discovery Service) over the Workload API Unix socket.
+# No static certificate files are used — this is the core of PKI-10.
+#
+# Identity: spiffe://cosmian-test-a.local/envoy-upstream
+# Ports:
+#   :8001 — mTLS listener (receives connections from envoy-downstream)
+#   :9901 — admin interface (health / stats)
+
+node:
+  id: "envoy-upstream"
+  cluster: "spire-sds-test"
+
+admin:
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 9901
+
+static_resources:
+  clusters:
+  # ── Backend: echo service (socat-echo container) ─────────────────────────
+  - name: echo_backend
+    connect_timeout: 1s
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: echo_backend
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: socat-echo
+                port_value: 8000
+
+  # ── SPIRE agent SDS cluster (Unix socket) ────────────────────────────────
+  # Envoy connects to the SPIRE Workload API / SDS gRPC endpoint.
+  - name: spire_agent
+    connect_timeout: 1s
+    type: STATIC
+    typed_extension_protocol_options:
+      envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+        "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+        explicit_http_config:
+          http2_protocol_options: {}
+    load_assignment:
+      cluster_name: spire_agent
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              pipe:
+                path: /tmp/spire-agent/public/api.sock
+
+  listeners:
+  # ── mTLS listener: certificates delivered by SPIRE SDS (no cert files) ───
+  - name: listener_mtls
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 8001
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.tcp_proxy
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy
+          cluster: echo_backend
+          stat_prefix: mtls_ingress
+      transport_socket:
+        name: envoy.transport_sockets.tls
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+          require_client_certificate: true
+          common_tls_context:
+            # Server cert: X.509-SVID from SPIRE via SDS — no static cert file
+            tls_certificate_sds_secret_configs:
+            - name: "spiffe://cosmian-test-a.local/envoy-upstream"
+              sds_config:
+                resource_api_version: V3
+                api_config_source:
+                  api_type: GRPC
+                  transport_api_version: V3
+                  grpc_services:
+                  - envoy_grpc:
+                      cluster_name: spire_agent
+            # CA bundle: trust bundle from SPIRE via SDS — no static CA file
+            combined_validation_context:
+              default_validation_context:
+                match_typed_subject_alt_names:
+                - san_type: URI
+                  matcher:
+                    prefix: "spiffe://cosmian-test-a.local/"
+              validation_context_sds_secret_config:
+                name: "spiffe://cosmian-test-a.local"
+                sds_config:
+                  resource_api_version: V3
+                  api_config_source:
+                    api_type: GRPC
+                    transport_api_version: V3
+                    grpc_services:
+                    - envoy_grpc:
+                        cluster_name: spire_agent

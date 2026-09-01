@@ -30,7 +30,7 @@ cargo test -p cosmian_kms_server -- kmip_policy
 | **PKI-07** | Approved algorithm restriction | High | ✅ Existing | `mise run test:spire` step 13 (bogus transit key type → 4xx) + unit tests above |
 | **PKI-08** | Storage policy enforcement | Medium | ✅ Existing | `mise run test:spire` step 12 Scenario 5 (Sensitive key export denied) |
 | **PKI-09** | PAM integration for long-lived secrets | Medium | 🔶 Joint workshop | Requires live Segura instance; see `client.txt` I-3 for integration design |
-| **PKI-10** | Service mesh SDS delivery | Medium | 🔶 Aembit/Envoy | Envoy SDS is the delivery layer; KMS provides the SVID via SPIRE |
+| **PKI-10** | Service mesh SDS delivery | Medium | ✅ **New** | `mise run test:spire-sds` — Envoy upstream+downstream fetch X.509-SVIDs from SPIRE SDS (no static certs); mTLS probe validates delivery |
 | **PKI-11** | TLS 1.3 enforcement | High | ✅ **Enhanced** (M-02) | `test_pki.sh` M-02 — TLS 1.1 rejected (hard), TLS 1.2 accepted (migration), TLS 1.3 verified |
 | **PKI-12** | Algorithm policy change without redeploy | High | ✅ **Enhanced** (M-03) | `test_pki.sh` M-03 — baseline P-256 allowed → restricted KMS blocks P-256, allows P-384 via KMIP |
 | **PKI-13** | Documented PKI responsibility split | High | 📄 Documentation | See `client.txt` PKI-2 section (written answer) |

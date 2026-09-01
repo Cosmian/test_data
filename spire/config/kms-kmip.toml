@@ -1,0 +1,40 @@
+# Cosmian KMS configuration for the eviden_kms KMIP 2.1 plugin integration tests.
+#
+# Counterpart to kms.toml (which enables the Vault-compatible API for the
+# vault+auth-verifier stack). This config speaks pure KMIP 2.1 — no Vault API,
+# no auth-verifier dependency.
+#
+# mTLS is enabled: the KMS requires every HTTPS client to present a certificate
+# signed by the test CA (ca.crt). SPIRE servers present spire-client.crt.
+#
+# Used by:
+#   mise run test:live         (Go KMIP client live tests)
+#   mise run test:spire-e2e    (SPIRE + KMS e2e tests)
+#
+# Start via docker-compose.yml in the kmip-go repo:
+#   docker compose up -d kms-mtls
+
+default_username = "admin"
+
+[db]
+database_type  = "sqlite"
+sqlite_path    = "/tmp/kms-kmip-test"
+clear_database = true
+
+[http]
+hostname = "0.0.0.0"
+port     = 9998
+
+[tls]
+# KMS server certificate — presented to SPIRE and the Go KMIP client.
+# SANs: cosmian-kms, localhost, host.docker.internal (see generate-test-certs.sh).
+tls_cert_file = "/etc/kms/certs/kms.crt"
+tls_key_file  = "/etc/kms/certs/kms.key"
+
+# mTLS: require every HTTPS client to present a certificate signed by this CA.
+# SPIRE presents spire-client.crt; the Go KMIP client presents the same cert.
+clients_ca_cert_file = "/etc/kms/certs/ca.crt"
+
+[logging]
+rust_log    = "warn,cosmian_kms_server=info"
+ansi_colors = false

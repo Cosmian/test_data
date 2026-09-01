@@ -1,0 +1,23 @@
+# Test KMS server — plain HTTP with Auth Verifier (Cosmian authentication server).
+# Bound to port 12006.
+# Loaded by tests that verify auth_verifier_url round-trip parsing.
+
+default_username = "tech@cosmian.com"
+
+[http]
+port = 12006
+hostname = "0.0.0.0"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "./sqlite-data-auth-verifier-tests"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_12006"
+tmp_path = "/tmp"
+
+[auth_verifier]
+auth_verifier_url = "https://localhost:8443"
+auth_verifier_accept_invalid_certs = true
+auth_verifier_realm = "_"
