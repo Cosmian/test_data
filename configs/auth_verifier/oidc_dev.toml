@@ -1,0 +1,140 @@
+# =============================================================================
+# Authentication Verifier — on-premise OIDC development configuration
+#
+# Starts the auth-verifier with the full OpenID Connect Provider (OP) enabled.
+# Use together with:
+#   test_data/configs/server/auth_verifier_oidc.toml   (KMS server)
+#
+# Start from the authentication/ directory:
+#   cargo run --bin auth_verifier -- \
+#     ../test_data/configs/auth_verifier/oidc_dev.toml
+#
+# Or with the pre-built binary:
+#   ./target/debug/auth_verifier \
+#     ../test_data/configs/auth_verifier/oidc_dev.toml
+#
+# OIDC endpoints (after startup):
+#   Discovery : https://127.0.0.1:8443/.well-known/openid-configuration
+#   JWKS      : https://127.0.0.1:8443/oidc/jwks
+#   Authorize : https://127.0.0.1:8443/oidc/authorize
+#   Token     : https://127.0.0.1:8443/oidc/token
+#
+# Admin UI:   https://127.0.0.1:8443/admin-ui
+#
+# Seeded credentials (dev_seed below):
+#   Realm      : kms
+#   Realm-admin: kms-admin / change_me
+#     (login via POST /login?realm=_  — credentials are in the admin realm "_")
+#
+# Registering the KMS OIDC client (after first start):
+#   1. Login as kms-admin:
+#      curl -sk -X POST "https://127.0.0.1:8443/login?realm=_" \
+#        -H "Authorization: Basic $(printf 'kms-admin:change_me' | base64 -w0)" \
+#        -H "Content-Type: application/json" -d '{}' \
+#        -c /tmp/kms-admin.jar -b /tmp/kms-admin.jar
+#
+#   2. Register the KMS UI client:
+#      curl -sk -X POST "https://127.0.0.1:8443/realms/kms/clients" \
+#        -b /tmp/kms-admin.jar -c /tmp/kms-admin.jar \
+#        -H "Content-Type: application/json" \
+#        -d '{
+#          "client_name": "cosmian-kms-ui",
+#          "redirect_uris": ["http://localhost:9998/ui/callback"],
+#          "grant_types": ["authorization_code","refresh_token","client_credentials"],
+#          "response_types": ["code"],
+#          "scopes": ["openid","profile","email"],
+#          "token_endpoint_auth_method": "client_secret_basic"
+#        }'
+#      → Copy the returned client_id / client_secret into auth_verifier_oidc.toml
+#
+#   3. Create a test user in the kms realm:
+#      PASS=$(python3 -c "import json; print(json.dumps(list('alice123'.encode())))")
+#      curl -sk -X POST "https://127.0.0.1:8443/realms/kms/userpass" \
+#        -b /tmp/kms-admin.jar -c /tmp/kms-admin.jar \
+#        -H "Content-Type: application/json" \
+#        -d "{\"realm\":\"kms\",\"username\":\"alice\",\"password\":${PASS},
+#             \"change_password\":false,\"roles\":[]}"
+#
+# =============================================================================
+
+# Bind to localhost — never expose this dev server externally.
+host_name = "127.0.0.1"
+host_port = 8443
+
+# ---------------------------------------------------------------------------
+# Admin UI — pre-built React frontend served at /admin-ui.
+# Build first: cd admin-ui && pnpm build
+# Path is relative to the authentication/ directory (where the server is started).
+# ---------------------------------------------------------------------------
+admin_ui_path = "admin-ui/dist"
+
+# ---------------------------------------------------------------------------
+# Console logging
+# ---------------------------------------------------------------------------
+[log]
+level = "info"
+
+# ---------------------------------------------------------------------------
+# TLS — paths are relative to the authentication/ directory.
+# The OIDC issuer URL (https://127.0.0.1:8443) must match these TLS settings.
+# ---------------------------------------------------------------------------
+[tls_params]
+server_private_key = "server/src/tests/certificates/ec/auth.server.key.pem"
+server_certificate = "server/src/tests/certificates/ec/auth.server.cert.pem"
+server_ca_chain    = "server/src/tests/certificates/ec/auth.ca.pem"
+
+# ---------------------------------------------------------------------------
+# JWT signing keys — reuse the TLS cert/key for session JWTs (dev only).
+# In production, use a dedicated EC P-256 key pair.
+# ---------------------------------------------------------------------------
+[session_jwt_params]
+jwt_ec_private_key = "server/src/tests/certificates/ec/auth.server.key.pem"
+jwt_ec_public_key  = "server/src/tests/certificates/ec/auth.server.cert.pem"
+
+# ---------------------------------------------------------------------------
+# Persistent SQLite database — stored in /tmp for dev convenience.
+# Change to a stable path for data that must survive restarts.
+# ---------------------------------------------------------------------------
+[database_params]
+backend        = "sqlite"
+connection_url = "sqlite:///tmp/kms-auth-verifier-oidc-dev.db"
+auto_init_schema = true
+
+# ---------------------------------------------------------------------------
+# OpenID Connect Provider (OP)
+#
+# The issuer value must match the URL at which clients reach this server.
+# It is placed verbatim in the `iss` claim and in the discovery document.
+#
+# The OIDC endpoints are signed with the session/TLS key (fallback — dev only).
+# In production add a dedicated OIDC signing key:
+#   oidc_signing_private_key = "/path/to/oidc.key.pem"
+#   oidc_signing_public_key  = "/path/to/oidc.pub.pem"
+# ---------------------------------------------------------------------------
+[oidc_params]
+issuer           = "https://127.0.0.1:8443"
+default_audience = "cosmian-kms"
+
+# ---------------------------------------------------------------------------
+# Dev seed — creates the kms realm and its admin on first start (idempotent).
+# ---------------------------------------------------------------------------
+[dev_seed]
+realm_id       = "kms"
+admin_username = "kms-admin"
+admin_password = "change_me"
+
+# Pre-seed a plain test user for OIDC login testing.
+[[dev_seed.users]]
+username = "alice"
+password = "alice123"
+
+# Pre-seed a fixed OIDC client so KMS can be configured with stable credentials
+# without a manual registration step after every database reset.
+# The secret is stored as SHA-256 in the database — change it in production.
+[dev_seed.oidc_client]
+client_id     = "kms-ui-dev"
+client_secret = "kms-dev-secret"
+client_name   = "Cosmian KMS UI (dev)"
+redirect_uris = ["http://localhost:9998/ui/callback"]
+grant_types   = ["authorization_code", "refresh_token", "client_credentials"]
+scopes        = ["openid", "profile", "email"]
