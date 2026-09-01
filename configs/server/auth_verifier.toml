@@ -48,10 +48,20 @@ clear_database = false
 # URL (or a server with a self-signed certificate).  In production the verifier
 # must be reachable over HTTPS with a valid certificate, and this flag must be
 # set to false.
+#
+# The optional OIDC client fields enable:
+#   - `ckms login cosmian --use-oidc`  (CLI Authorization Code + PKCE flow)
+#   - Web UI OIDC button (auto-populated from auth_verifier_url when unset in
+#     the [ui_config.ui_oidc_auth] section)
+# Register the client first:
+#   POST {auth_verifier_url}/admin/realms/{realm}/clients
 [auth_verifier]
 auth_verifier_url = "https://localhost:8443"
 auth_verifier_realm = "_"
 auth_verifier_accept_invalid_certs = true   # dev/test only — never in production
+# auth_verifier_oidc_client_id     = "kms-client"
+# auth_verifier_oidc_client_secret = "s3cr3t"
+# auth_verifier_oidc_scopes        = "openid profile email"   # default
 
 [ui_config]
 ui_index_html_folder = "./ui/dist"

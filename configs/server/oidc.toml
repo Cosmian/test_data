@@ -1,0 +1,45 @@
+# =============================================================================
+# KMS — On-Premise OIDC via auth-verifier
+#
+# Prerequisites (in authentication/ directory):
+#   1. Build: cargo build -p auth_verifier
+#   2. Start: ./target/debug/auth_verifier /tmp/kms-oidc-dev/auth_verifier_oidc.toml
+#
+# Auth-verifier OIDC config is at /tmp/kms-oidc-dev/auth_verifier_oidc.toml
+# =============================================================================
+
+default_username = "alice"
+kms_public_url = "http://localhost:9998"
+
+[http]
+port = 9998
+hostname = "localhost"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-oidc-dev/kms.db"
+clear_database = false
+
+# ── Auth-Verifier (on-premise OIDC Provider) ─────────────────────────────────
+# Single section configures everything:
+#   - Bearer-token validation (OIDC at+jwt + legacy session JWTs)
+#   - Web UI OIDC button (auto-populated from auth_verifier_url)
+#   - ckms login cosmian --use-oidc
+[auth_verifier]
+auth_verifier_url                = "https://127.0.0.1:8443"
+auth_verifier_realm              = "kms"
+auth_verifier_oidc_client_id     = "kms-ui-dev"
+auth_verifier_oidc_client_secret = "kms-dev-secret"
+# auth_verifier_oidc_scopes      = "openid profile email"   # default
+auth_verifier_accept_invalid_certs = true   # dev/test only
+
+[ui_config]
+ui_index_html_folder = "./ui/dist"
+ui_session_salt = "dev-oidc-session-salt-c8d43922c1dc703010716ea69fa31bf4"
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true

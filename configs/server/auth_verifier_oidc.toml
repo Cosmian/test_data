@@ -1,0 +1,84 @@
+# KMS server configured with auth-verifier as the on-premise OIDC Provider.
+#
+# Two mutually-exclusive ways to configure OIDC for the Web UI:
+#
+# ── Option A: Explicit [ui_config.ui_oidc_auth] (this file) ──────────────────
+#   Set the OIDC client credentials directly in [ui_config.ui_oidc_auth].
+#   [auth_verifier] only needs the URL, realm, and TLS flag — no client
+#   credentials there. Use this when you want full control or when the OIDC
+#   issuer for the UI differs from the bearer-token auth-verifier.
+#
+# ── Option B: Auto-populate shorthand (see oidc.toml) ────────────────────────
+#   Omit [ui_config.ui_oidc_auth] entirely and add
+#   auth_verifier_oidc_client_id / auth_verifier_oidc_client_secret to
+#   [auth_verifier]. The KMS auto-derives [ui_config.ui_oidc_auth] from them.
+#   Simpler when the same auth-verifier covers both bearer-token validation
+#   and the UI OIDC flow.
+#
+# This file uses Option A (explicit [ui_config.ui_oidc_auth]).
+#
+# Prerequisites:
+#   1. Auth-verifier running:
+#        cd authentication
+#        ./target/debug/auth_verifier \
+#          ../test_data/configs/auth_verifier/oidc_dev.toml
+#   2. OIDC client registered via the Admin UI at
+#        https://127.0.0.1:8443/admin-ui → OIDC Clients → New Client
+#        redirect_uri = http://localhost:9998/ui/callback
+#   3. A test user in the kms realm (e.g. alice / alice123).
+#
+# Start the KMS:
+#   cargo run -p cosmian_kms_server --features non-fips -- \
+#     -c test_data/configs/server/auth_verifier_oidc.toml
+#
+# Browse to: http://localhost:9998/ui/
+#
+# Bound to port 9998 (plain HTTP — use a TLS-terminating reverse proxy in production).
+
+default_username = "admin"
+kms_public_url = "http://localhost:9998"
+
+[http]
+port = 9998
+hostname = "localhost"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-auth-verifier-oidc.db"
+clear_database = false
+
+# ── Auth Verifier ─────────────────────────────────────────────────────────────
+# Validates bearer tokens (OIDC at+jwt + legacy session JWTs) against the
+# combined JWKS at {auth_verifier_url}/oidc/jwks.
+# Also enables the Web UI password login form (POST /ui/login_as).
+#
+# No auth_verifier_oidc_client_id / _secret here: those are only needed
+# for Option B (auto-populate). OIDC client credentials live exclusively
+# in [ui_config.ui_oidc_auth] below.
+[auth_verifier]
+auth_verifier_url   = "https://127.0.0.1:8443"
+auth_verifier_realm = "kms"
+auth_verifier_accept_invalid_certs = true   # dev/test only
+
+[ui_config]
+ui_index_html_folder = "./ui/dist"
+# Session encryption key — must be identical across all KMS instances behind a
+# load balancer. Generate with: openssl rand -hex 32
+ui_session_salt = "oidc-dev-salt-a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+
+# ── OIDC client credentials (Option A: explicit) ──────────────────────────────
+# Obtained from the auth-verifier Admin UI:
+#   https://127.0.0.1:8443/admin-ui → OIDC Clients → New Client
+# Replace the placeholder values below with those returned at creation time.
+[ui_config.ui_oidc_auth]
+ui_oidc_issuer_url    = "https://127.0.0.1:8443"
+ui_oidc_client_id     = "kms-ui-dev"
+ui_oidc_client_secret = "kms-dev-secret"
+# ui_oidc_logout_url  = ""   # optional
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true

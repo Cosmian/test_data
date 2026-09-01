@@ -127,6 +127,10 @@ admin_password = "change_me"
 [[dev_seed.users]]
 username = "alice"
 password = "alice123"
+# Optional: set a dedicated email address for this user.
+# When set, this is the `email` claim in OIDC access tokens (instead of the username).
+# When absent, the username ("alice") is used as the email identifier.
+email = "alice@example.com"
 
 # Pre-seed a fixed OIDC client so KMS can be configured with stable credentials
 # without a manual registration step after every database reset.

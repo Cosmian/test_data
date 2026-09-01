@@ -1,0 +1,89 @@
+# KMS server — auth-verifier OIDC via standard [idp_auth] jwt_auth_provider.
+#
+# This config demonstrates "Option D": the auth-verifier OpenID Connect Provider
+# is used purely as a standard JWT identity provider.  No [auth_verifier] section
+# is needed.  Bearer tokens are validated using the standard JWT middleware path
+# (requires `kid` header and `iss` claim matching the issuer URL).
+#
+# The username is taken from the `email` claim when present, otherwise `sub`.
+#
+# What is intentionally absent from this config:
+#   - [auth_verifier]             → no Web UI password-form login (POST /ui/login_as)
+#   - Legacy session JWTs (no kid) → not supported by this path
+#
+# Prerequisites:
+#   1. Auth-verifier running with OIDC OP enabled:
+#        cd authentication
+#        ./target/debug/auth_verifier \
+#          ../test_data/configs/auth_verifier/oidc_dev.toml
+#
+#   2. Register an OIDC client on the auth-verifier for the Web UI:
+#        https://127.0.0.1:8443/admin-ui → OIDC Clients → New Client
+#        redirect_uri = http://localhost:9998/ui/callback
+#
+#   3. (Optional) Register a service-account client for M2M:
+#        grant_types = ["client_credentials"]
+#        → use the returned client_id/secret to obtain at+jwt tokens
+#
+# Start the KMS:
+#   cargo run -p cosmian_kms_server --features non-fips -- \
+#     -c test_data/configs/server/idp_auth_verifier_oidc.toml
+#
+# Obtain an access token (client_credentials example):
+#   curl -sk -X POST "https://127.0.0.1:8443/oidc/token?realm=kms" \
+#     -d "grant_type=client_credentials" \
+#     -d "client_id=<CLIENT_ID>" \
+#     -d "client_secret=<CLIENT_SECRET>" \
+#     | jq -r .access_token
+#
+# Use the token:
+#   ckms --url http://localhost:9998 \
+#        --bearer-token "<ACCESS_TOKEN>" \
+#        sym keys create --algorithm aes --size 256
+
+default_username = "admin"
+kms_public_url   = "http://localhost:9998"
+
+[http]
+port     = 9998
+hostname = "localhost"
+
+[db]
+database_type = "sqlite"
+sqlite_path   = "/tmp/kms-idp-auth-verifier-oidc.db"
+clear_database = false
+
+# ── IdP / JWT auth ────────────────────────────────────────────────────────────
+# Format per entry: "ISSUER_URL,JWKS_URI[,AUDIENCE_1[,AUDIENCE_2...]]"
+#
+# The auth-verifier OIDC issuer is https://127.0.0.1:8443 (matches the `iss`
+# claim in at+jwt tokens).  The combined JWKS is at /oidc/jwks.
+#
+# No audience restriction here — set e.g. `cosmian-kms` if your auth-verifier
+# is configured with a specific default_audience.
+[idp_auth]
+jwt_auth_provider = [
+  "https://127.0.0.1:8443,https://127.0.0.1:8443/oidc/jwks",
+]
+# Allow self-signed TLS certificate on the auth-verifier — dev/test only.
+idp_auth_accept_invalid_certs = true
+
+# ── Web UI ────────────────────────────────────────────────────────────────────
+[ui_config]
+ui_index_html_folder = "./ui/dist"
+# Session encryption key — generate with: openssl rand -hex 32
+ui_session_salt      = "idp-auth-dev-salt-a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3"
+
+# OIDC Authorization Code flow for the Web UI (browser login button).
+# Credentials from the auth-verifier Admin UI.
+[ui_config.ui_oidc_auth]
+ui_oidc_issuer_url    = "https://127.0.0.1:8443"
+ui_oidc_client_id     = "kms-ui-dev"
+ui_oidc_client_secret = "kms-dev-secret"
+
+[logging]
+rust_log    = "info,cosmian_kms=debug"
+quiet       = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true
