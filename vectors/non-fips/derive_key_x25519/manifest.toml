@@ -1,0 +1,59 @@
+name = "DeriveKey x25519"
+description = "Creates two X25519 key pairs, derives a non-exportable shared secret with DeriveKey, and verifies the stored SecretData attributes"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_create_alice_keypair.json"
+assert_success = true
+[steps.capture]
+alice_private_key_id = "PrivateKeyUniqueIdentifier"
+alice_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step2_create_bob_keypair.json"
+assert_success = true
+[steps.capture]
+bob_private_key_id = "PrivateKeyUniqueIdentifier"
+bob_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "DeriveKey"
+request = "step3_derive_x25519.json"
+assert_success = true
+[steps.capture]
+derived_secret_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step4_get_derived_secret_attributes.json"
+assert_success = true
+[steps.assert_fields]
+ObjectType = "SecretData"
+Sensitive = "true"
+Extractable = "false"
+
+[[steps]]
+operation = "Destroy"
+request = "step5_destroy_derived_secret.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy_alice_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step7_destroy_alice_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step8_destroy_bob_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step9_destroy_bob_public.json"
+assert_success = true
