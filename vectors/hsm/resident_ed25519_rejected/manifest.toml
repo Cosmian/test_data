@@ -1,8 +1,10 @@
-name = "HSM Resident: Ed25519 keypair rejected (unsupported on HSM)"
+name = "HSM Resident: Ed25519 keypair rejected (FIPS build)"
 description = """
-Attempts to create an Ed25519 keypair with an HSM-resident UID.
-This fails because HSM atomic keypair creation only supports RSA for now.
-Tests: HSM rejects non-RSA keypair algorithms.
+Attempts to create an Ed25519 keypair with an HSM-resident UID in a FIPS
+build. Ed25519 HSM keypair creation is gated behind the non-fips feature
+(Ed25519 is not FIPS-approved here), so this is rejected; see
+resident_ed25519_created for the non-FIPS success case.
+Tests: HSM rejects Ed25519 keypair creation in FIPS builds.
 """
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
