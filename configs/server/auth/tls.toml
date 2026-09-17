@@ -30,3 +30,6 @@ google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]
 
 [logging]
 rust_log = "off"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
