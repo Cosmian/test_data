@@ -34,8 +34,18 @@ Sensitive = "true"
 Extractable = "false"
 
 [[steps]]
+operation = "Revoke"
+request = "step4b_revoke_derived_secret.json"
+assert_success = true
+
+[[steps]]
 operation = "Destroy"
 request = "step5_destroy_derived_secret.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step5b_revoke_alice_private.json"
 assert_success = true
 
 [[steps]]
@@ -44,13 +54,28 @@ request = "step6_destroy_alice_private.json"
 assert_success = true
 
 [[steps]]
+operation = "Revoke"
+request = "step6b_revoke_alice_public.json"
+assert_success = true
+
+[[steps]]
 operation = "Destroy"
 request = "step7_destroy_alice_public.json"
 assert_success = true
 
 [[steps]]
+operation = "Revoke"
+request = "step7b_revoke_bob_private.json"
+assert_success = true
+
+[[steps]]
 operation = "Destroy"
 request = "step8_destroy_bob_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "step8b_revoke_bob_public.json"
 assert_success = true
 
 [[steps]]
