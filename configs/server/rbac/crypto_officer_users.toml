@@ -1,12 +1,16 @@
-# Test KMS server — TLS + JWT auth, for privileged-user tests.
-# Uses PEM cert + key (works in both FIPS and non-FIPS mode).
-# Bound to port 10003. crypto_officer_users is injected at runtime.
+# Test KMS server — RBAC mode with privileged users, no ceremony.
+# Loaded by start_default_test_kms_server_with_crypto_officer_users() and
+# start_default_test_kms_server_with_multi_crypto_officer_users().
+# The crypto_officer_users field is overridden at runtime by the test helper.
+# Port and database paths are allocated dynamically at runtime.
+#
+# CO users: injected at runtime (owner.client@acme.com, user.privileged@acme.com, …)
 
 default_username = "tech@cosmian.com"
-kms_public_url = "https://localhost:10003"
+kms_public_url = "https://localhost:10005"
 
 [http]
-port = 10003
+port = 10005
 hostname = "0.0.0.0"
 
 [db]
@@ -23,16 +27,5 @@ tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.c
 tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.key"
 clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
 
-[socket_server]
-socket_server_start = true
-socket_server_port = 10103
-
-[idp_auth]
-jwt_auth_provider = [
-  "https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,kacls-migration,996739510374-2tauakcggau7kvk37784k0s2lmveb9c9.apps.googleusercontent.com",
-  "https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/v2.0,https://login.microsoftonline.com/612da4de-35c0-42de-ba56-174b69062c96/discovery/v2.0/keys",
-  "https://demo-kms.eu.auth0.com/,https://demo-kms.eu.auth0.com/.well-known/jwks.json",
-]
-
-[ui_config]
-ui_index_html_folder = "ui/dist"
+[roles]
+crypto_officer_require_ceremony = false
