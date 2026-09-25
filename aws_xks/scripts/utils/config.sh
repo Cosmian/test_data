@@ -1,3 +1,8 @@
+# Each variable below is only defaulted, never forced: leaf test scripts (test_get_health_status,
+# test_get_key_metadata, test_encrypt_decrypt, ...) source this file unconditionally, so a hardcoded
+# `export VAR=value` here would silently clobber any value already exported by the caller (e.g. CI's
+# test_xks_remote.sh exporting XKS_PROXY_HOST=aws-xks-kms.cosmian.dev), sending every request to the
+# local default instead of the intended target.
 # Change this to your XKS Proxy endpoint to test.
 export XKS_PROXY_HOST="${XKS_PROXY_HOST:-localhost:9998}"
 # Change this to the URI_PREFIX of a logical keystore supported by your XKS Proxy.
