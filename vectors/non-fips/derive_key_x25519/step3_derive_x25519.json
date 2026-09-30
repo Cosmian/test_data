@@ -1,0 +1,44 @@
+{
+  "tag": "DeriveKey",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SecretData"
+    },
+    {
+      "tag": "ObjectUniqueIdentifier",
+      "type": "TextString",
+      "value": "{{alice_private_key_id}}"
+    },
+    {
+      "tag": "ObjectUniqueIdentifier",
+      "type": "TextString",
+      "value": "{{bob_public_key_id}}"
+    },
+    {
+      "tag": "DerivationMethod",
+      "type": "Enumeration",
+      "value": "Asymmetric_Key"
+    },
+    {
+      "tag": "DerivationParameters",
+      "value": []
+    },
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "CryptographicLength",
+          "type": "Integer",
+          "value": 256
+        },
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SecretData"
+        }
+      ]
+    }
+  ]
+}
