@@ -1,11 +1,18 @@
-name = "HSM Resident: RSA-2048 OAEP-SHA1 encrypt/decrypt round-trip"
+name = "HSM Resident: RSA-2048 OAEP-SHA1 encrypt rejected (SoftHSM2 limitation)"
 description = """
-Creates an RSA-2048 keypair on the HSM, then encrypts with RSA-OAEP-SHA1
-and decrypts. Verifies RSA-OAEP-SHA1 encryption is correctly delegated to the HSM.
-Tests: HSM-resident RSA key + oracle-delegated RSA-OAEP-SHA1 encrypt/decrypt.
+Creates an RSA-2048 keypair on the HSM, then attempts to encrypt with RSA-OAEP-SHA1.
+SoftHSM2 2.6.1 rejects CKM_RSA_PKCS_OAEP with explicit mechanism parameters
+(CKR_ARGUMENTS_BAD) regardless of the OAEP hash/MGF digest requested — this is the
+same underlying SoftHSM2 limitation documented in
+`test_data/vectors/hsm/resident_rsa2048_encrypt_oaep_sha256`, confirmed by a direct
+PKCS#11-level reproduction (bypassing the KMIP/server layer) in
+`crate/hsm/softhsm2/src/tests.rs::test_hsm_softhsm2_rsa_oaep_encrypt`.
+This vector documents the SoftHSM2 limitation — other HSMs may support this.
+Tests: SoftHSM2 rejects RSA-OAEP-SHA1 with return code 7.
 """
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
+requires_hsm_models = ["softhsm2"]
 backends = ["sqlite"]
 
 # Cleanup: destroy keys from any prior run (may not exist)
@@ -27,16 +34,8 @@ assert_success = true
 [[steps]]
 operation = "Encrypt"
 request = "step2_encrypt.json"
-assert_success = true
-[steps.capture]
-ciphertext = "Data"
-
-[[steps]]
-operation = "Decrypt"
-request = "step3_decrypt.json"
-assert_success = true
-[steps.assert_fields]
-Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
+assert_success = false
+assert_error_contains = "Failed to initialize encryption"
 
 [[steps]]
 operation = "Destroy"
