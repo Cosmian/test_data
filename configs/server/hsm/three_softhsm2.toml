@@ -36,11 +36,15 @@ hsm_password = ["12345678"]
 [http]
 hostname = "127.0.0.1"
 port = 9998
+cors_allowed_origins = ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:9998", "http://127.0.0.1:9998"]
 
 [db]
 database_type = "sqlite"
 sqlite_path = "/tmp/kms-three-softhsm2-data"
 clear_database = true
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
 
 [logging]
 rust_log = "info,cosmian_kms=debug"
