@@ -1,0 +1,43 @@
+name = "Negative: SetAttribute Rejects InitialDate"
+description = "Checks that InitialDate is read-only and remains unchanged after a rejected SetAttribute request."
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step2_get_attributes.json"
+assert_success = true
+
+[steps.capture]
+initial_date = "InitialDate"
+
+[[steps]]
+operation = "SetAttribute"
+request = "step3_set_initial_date.json"
+assert_success = false
+assert_error_reason = "Attribute_Read_Only"
+assert_error_contains = "server-managed"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step2_get_attributes.json"
+assert_success = true
+
+[steps.assert_fields]
+InitialDate = "{{initial_date}}"
+
+[[steps]]
+operation = "Revoke"
+request = "step5_revoke.json"
+assert_success = true
+
+[[steps]]
+operation = "Destroy"
+request = "step6_destroy.json"
+assert_success = true
