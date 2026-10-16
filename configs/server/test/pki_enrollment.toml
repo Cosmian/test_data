@@ -1,0 +1,48 @@
+# Local EST + SCEP test server (plain HTTP; EST Basic bootstrap credentials travel in clear).
+# The CA must exist before enrolling: create it with UID `device-ca`, then delegate it to the
+# reserved `[enrollment-service]` identity, which issues the certificates (see
+# documentation/docs/use_cases/pki-enrollment.md):
+#   ckms access-rights grant "[enrollment-service]" -i device-ca certify
+#   ckms access-rights grant "[enrollment-service]" -i <device-ca private key uid> certify
+# `default_username` must not be `[enrollment-service]` (refused at startup).
+default_username = "admin"
+
+[http]
+port = 9998
+hostname = "127.0.0.1"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-pki-enrollment"
+clear_database = false
+
+[est]
+est_enabled = true
+est_ca_uid = "device-ca"
+est_require_client_cert = false
+est_bootstrap_username = "device"
+est_bootstrap_password = "bootstrap-secret"
+est_template = "iot_device"
+
+[scep]
+scep_enabled = true
+scep_ca_uid = "device-ca"
+scep_challenge_password = "scep-secret"
+scep_allow_renewal_without_challenge = true
+scep_template = "iot_device"
+
+[templates.iot_device]
+name = "iot_device"
+min_rsa_key_bits = 2048
+allowed_ec_curves = ["prime256v1"]
+allowed_ekus = ["clientAuth"]
+max_validity_days = 365
+default_validity_days = 90
+subject_cn_regex = "[a-z0-9-]+\\.iot\\.example"
+san_dns_regex = "[a-z0-9-]+\\.iot\\.example"
+
+[logging]
+rust_log = "info,cosmian_kms=info"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
