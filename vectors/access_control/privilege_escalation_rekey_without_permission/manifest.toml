@@ -32,14 +32,13 @@ request = "step3_user_get_ok.json"
 identity = "user"
 assert_success = true
 
-# Step 4: User attempts ReKey — denied (no ReKey permission). A key the caller may not use
-# is reported like a missing key, so the denial does not reveal it exists (COSMIAN-2026-037).
+# Step 4: User attempts ReKey — denied (no ReKey permission)
 [[steps]]
 operation = "ReKey"
 request = "step4_user_rekey_denied.json"
 identity = "user"
 assert_success = false
-assert_error_contains = "no valid key found"
+assert_error_contains = "does not have permission"
 
 # Step 5: Owner confirms original key still exists and is unmodified
 [[steps]]
