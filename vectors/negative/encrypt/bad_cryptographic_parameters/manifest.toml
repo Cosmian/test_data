@@ -18,4 +18,6 @@ assert_success = true
 operation = "Encrypt"
 request = "step3_encrypt.json"
 assert_success = false
+# OASIS CS-BC-M-GCM-1-21 / CS-BC-M-CHACHA20POLY1305-1-21 mandate General_Failure for an invalid TagLength.
+assert_error_reason = "General_Failure"
 assert_error_contains = "tag"

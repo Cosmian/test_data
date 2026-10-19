@@ -53,6 +53,7 @@ gen1_id = "UniqueIdentifier"
 operation = "ReKey"
 request = "step3_rekey_duplicate.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "already exists"
 
 # ── 4. ReKey gen-1 (the actual latest) → SUCCESS ─────────────────────────

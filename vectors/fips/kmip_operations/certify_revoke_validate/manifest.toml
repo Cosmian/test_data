@@ -40,6 +40,7 @@ assert_success = true
 operation = "Validate"
 request = "step5_validate_after_revoke.json"
 assert_success = false
+assert_error_reason = "Object_Not_Found"
 assert_error_contains = "not found"
 
 [[steps]]

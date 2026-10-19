@@ -26,6 +26,7 @@ key_id = "UniqueIdentifier"
 operation = "SetAttribute"
 request = "step2_set_rotate_name_gen.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "rotate_name must not contain '@'"
 
 # Cleanup

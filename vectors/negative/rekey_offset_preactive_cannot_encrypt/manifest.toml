@@ -33,6 +33,7 @@ State = "PreActive"
 operation = "Encrypt"
 request = "step4_encrypt_fails.json"
 assert_success = false
+assert_error_reason = "Wrong_Key_Lifecycle_State"
 assert_error_contains = "is in state"
 
 # Cleanup

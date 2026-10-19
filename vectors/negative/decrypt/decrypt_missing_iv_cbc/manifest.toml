@@ -19,4 +19,5 @@ key_id = "UniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt_no_iv.json"
 assert_success = false
+assert_error_reason = "Invalid_Message"
 assert_error_contains = "missing-iv"

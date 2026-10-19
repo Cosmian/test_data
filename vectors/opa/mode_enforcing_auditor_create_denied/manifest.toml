@@ -23,4 +23,5 @@ operation = "Create"
 request = "step1_create.json"
 identity = "auditor"
 assert_success = false
+assert_error_reason = "Permission_Denied"
 assert_error_contains = "access-right"

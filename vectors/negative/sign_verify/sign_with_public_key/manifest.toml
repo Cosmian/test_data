@@ -13,4 +13,5 @@ pub_key_id = "PublicKeyUniqueIdentifier"
 operation = "Sign"
 request = "step2_sign_with_pubkey.json"
 assert_success = false
-assert_error_contains = "no valid key for id"
+assert_error_reason = "Invalid_Object_Type"
+assert_error_contains = "is not usable"
