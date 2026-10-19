@@ -1,8 +1,8 @@
-name = "Negative: Decrypt AES-CBC with missing IVCounterNonce returns Invalid_Message"
+name = "Negative: Decrypt AES-CBC with missing IVCounterNonce returns Missing_Initialization_Vector"
 description = """
 When IVCounterNonce is absent from a CBC Decrypt request the KMS must return
-Invalid_Message with reason "missing-iv" (KMIP mandatory conformance requirement,
-CS-BC-M-11-14 and CS-BC-M-11-21).
+Missing_Initialization_Vector with message "missing-iv" (KMIP 2.1 Decrypt error
+table; the OASIS vectors CS-BC-M-11-14/21 expect Invalid_Message instead).
 
 This is distinct from an explicitly empty IVCounterNonce (Some([])), which the
 KMS treats as a request for an all-zero IV.
@@ -19,5 +19,5 @@ key_id = "UniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt_no_iv.json"
 assert_success = false
-assert_error_reason = "Invalid_Message"
+assert_error_reason = "Missing_Initialization_Vector"
 assert_error_contains = "missing-iv"

@@ -35,7 +35,8 @@ assert_error_contains = "is in state"
 [[steps]]
 operation = "Revoke"
 request = "step4_revoke_old.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Permission_Denied"
 
 [[steps]]
 operation = "Destroy"

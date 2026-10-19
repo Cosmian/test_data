@@ -1,0 +1,9 @@
+name = "Negative: Create - Feature Not Supported"
+description = "Tests that Create rejects an unsupported algorithm (Blowfish) with Feature_Not_Supported, listed in the KMIP 2.1 Create error table"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = false
+assert_error_reason = "Feature_Not_Supported"
+assert_error_contains = "Blowfish"

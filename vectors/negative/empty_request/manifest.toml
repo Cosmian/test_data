@@ -5,5 +5,5 @@ description = "Tests that the server handles an empty JSON body gracefully"
 operation = "Unknown"
 request = "step1_empty.json"
 assert_success = false
-assert_error_reason = "Invalid_Message"
+assert_error_reason = "Unknown_Enumeration"
 assert_error_contains = "OperationEnumeration"

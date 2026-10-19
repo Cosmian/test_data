@@ -23,7 +23,8 @@ assert_error_contains = "rotate_name"
 [[steps]]
 operation = "Revoke"
 request = "step3_revoke.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Wrong_Key_Lifecycle_State"
 
 [[steps]]
 operation = "Destroy"
