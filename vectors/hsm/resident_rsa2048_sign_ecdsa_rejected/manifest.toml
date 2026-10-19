@@ -28,6 +28,7 @@ assert_success = true
 operation = "Sign"
 request = "step1_sign_ecdsa.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "Unsupported digital signature algorithm for HSM signing"
 
 [[steps]]

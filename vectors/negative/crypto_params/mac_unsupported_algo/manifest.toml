@@ -13,4 +13,5 @@ key_id = "UniqueIdentifier"
 operation = "MAC"
 request = "step2_mac_md5.json"
 assert_success = false
+assert_error_reason = "Feature_Not_Supported"
 assert_error_contains = "support"

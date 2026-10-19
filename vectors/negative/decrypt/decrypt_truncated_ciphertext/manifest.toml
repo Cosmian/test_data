@@ -12,4 +12,5 @@ key_id = "UniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt_short.json"
 assert_success = false
+assert_error_reason = "Cryptographic_Failure"
 assert_error_contains = "invalid tag"

@@ -13,4 +13,5 @@ key_id = "UniqueIdentifier"
 operation = "Export"
 request = "step2_export.json"
 assert_success = false
+assert_error_reason = "Key_Format_Type_Not_Supported"
 assert_error_contains = "unsupported"

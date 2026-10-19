@@ -32,6 +32,7 @@ new_private_key_id = "PrivateKeyUniqueIdentifier"
 operation = "ReKeyKeyPair"
 request = "step4_rekey_keypair_old.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "not the latest"
 
 # Cleanup: revoke and destroy gen-0 and gen-1 private keys

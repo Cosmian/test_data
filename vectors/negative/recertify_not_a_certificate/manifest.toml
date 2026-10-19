@@ -12,6 +12,7 @@ key_id = "UniqueIdentifier"
 operation = "ReCertify"
 request = "step2_recertify.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "ReCertify"
 
 # Cleanup

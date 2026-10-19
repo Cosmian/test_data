@@ -5,4 +5,5 @@ description = "Tests that Create Key Pair returns Invalid_Attribute_Value error 
 operation = "Create"
 request = "step1_create.json"
 assert_success = false
+assert_error_reason = "Invalid_Attribute_Value"
 assert_error_contains = "length"

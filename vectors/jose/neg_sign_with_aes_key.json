@@ -8,6 +8,6 @@
     "alg": "RS256",
     "data": "dGVzdA"
   },
-  "expected_status": 404,
-  "expected_error": "not_found"
+  "expected_status": 422,
+  "expected_error": "crypto_failure"
 }

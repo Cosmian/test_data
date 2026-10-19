@@ -27,4 +27,5 @@ tag = "AuthenticatedEncryptionTag"
 operation = "Decrypt"
 request = "step4_decrypt_wrong_key.json"
 assert_success = false
+assert_error_reason = "Cryptographic_Failure"
 assert_error_contains = "CRYPTO"

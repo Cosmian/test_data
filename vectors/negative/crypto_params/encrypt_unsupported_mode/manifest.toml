@@ -13,4 +13,5 @@ key_id = "UniqueIdentifier"
 operation = "Encrypt"
 request = "step2_encrypt_ctr.json"
 assert_success = false
+assert_error_reason = "Operation_Not_Supported"
 assert_error_contains = "not supported"

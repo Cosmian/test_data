@@ -14,4 +14,5 @@ backends = ["sqlite"]
 operation = "CreateKeyPair"
 request = "step1_create_keypair.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "only support RSA keypair"

@@ -5,4 +5,5 @@ description = "Tests that Create Key Pair returns Invalid_Message error as per K
 operation = "CreateKeyPair"
 request = "step1_createkeypair.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "cryptographic algorithm must be specified"

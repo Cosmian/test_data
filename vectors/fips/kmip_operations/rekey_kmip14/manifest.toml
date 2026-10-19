@@ -28,6 +28,7 @@ new_key_id = "UniqueIdentifier"
 operation = "Encrypt"
 request = "step3_encrypt.json"
 assert_success = false
+assert_error_reason = "Permission_Denied"
 assert_error_contains = "is in state"
 
 # Cleanup

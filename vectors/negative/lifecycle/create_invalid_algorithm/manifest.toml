@@ -5,4 +5,5 @@ description = "Tests that key creation fails when specifying an unsupported cryp
 operation = "Create"
 request = "step1_create.json"
 assert_success = false
+assert_error_reason = "Feature_Not_Supported"
 assert_error_contains = "Blowfish"

@@ -67,6 +67,7 @@ assert_success = true
 operation = "Validate"
 request = "step10_validate_ee_revoked.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "revoked"
 
 [[steps]]
