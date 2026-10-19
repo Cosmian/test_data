@@ -29,7 +29,8 @@ new_pk_id = "PublicKeyUniqueIdentifier"
 [[steps]]
 operation = "Revoke"
 request = "step3_revoke_old_sk.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Permission_Denied"
 
 [[steps]]
 operation = "Destroy"

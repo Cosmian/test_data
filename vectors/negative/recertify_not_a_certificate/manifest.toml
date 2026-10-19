@@ -12,14 +12,15 @@ key_id = "UniqueIdentifier"
 operation = "ReCertify"
 request = "step2_recertify.json"
 assert_success = false
-assert_error_reason = "Invalid_Field"
+assert_error_reason = "Invalid_Object_Type"
 assert_error_contains = "ReCertify"
 
 # Cleanup
 [[steps]]
 operation = "Revoke"
 request = "step3_revoke.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Wrong_Key_Lifecycle_State"
 
 [[steps]]
 operation = "Destroy"

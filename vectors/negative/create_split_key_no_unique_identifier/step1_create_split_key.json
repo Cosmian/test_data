@@ -1,0 +1,25 @@
+{
+  "tag": "CreateSplitKey",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "SplitKeyParts",
+      "type": "Integer",
+      "value": 2
+    },
+    {
+      "tag": "SplitKeyThreshold",
+      "type": "Integer",
+      "value": 2
+    },
+    {
+      "tag": "SplitKeyMethod",
+      "type": "Enumeration",
+      "value": "XOR"
+    }
+  ]
+}

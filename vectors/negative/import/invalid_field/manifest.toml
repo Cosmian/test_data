@@ -1,0 +1,9 @@
+name = "Negative: Import - Object Type does not match the object"
+description = "Tests that Import rejects a request whose Object Type differs from the type of the supplied object with Invalid_Field (KMIP 2.1 Table 240)"
+
+[[steps]]
+operation = "Import"
+request = "step1_import.json"
+assert_success = false
+assert_error_reason = "Invalid_Field"
+assert_error_contains = "does not match"

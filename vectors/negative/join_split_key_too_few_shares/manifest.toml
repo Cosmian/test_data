@@ -1,0 +1,26 @@
+name = "JoinSplitKey: fewer shares than Split Key Parts"
+description = "A JoinSplitKey request with fewer shares than the Split Key Parts of an XOR (n-of-n) split is rejected with Invalid_Field"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "CreateSplitKey"
+request = "step2_create_split_key.json"
+assert_success = true
+[steps.capture]
+share1_id = "UniqueIdentifier"
+[steps.capture_nth.share2_id]
+tag = "UniqueIdentifier"
+index = 1
+
+[[steps]]
+operation = "JoinSplitKey"
+request = "step3_join_split_key.json"
+assert_success = false
+assert_error_reason = "Invalid_Field"
+assert_error_contains = "n-of-n"

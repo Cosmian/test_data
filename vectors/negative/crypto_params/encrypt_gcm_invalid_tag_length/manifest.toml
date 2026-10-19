@@ -13,6 +13,7 @@ key_id = "UniqueIdentifier"
 operation = "Encrypt"
 request = "step2_encrypt_bad_tag.json"
 assert_success = false
-# OASIS CS-BC-M-GCM-1-21 / CS-BC-M-CHACHA20POLY1305-1-21 mandate General_Failure for an invalid TagLength.
-assert_error_reason = "General_Failure"
+# KMIP 2.1 Encrypt error table: an invalid TagLength is Bad_Cryptographic_Parameters
+# (OASIS CS-BC-M-GCM-1-21 expects General_Failure, which the table does not list).
+assert_error_reason = "Bad_Cryptographic_Parameters"
 assert_error_contains = "tag"

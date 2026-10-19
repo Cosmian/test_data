@@ -1,0 +1,10 @@
+name = "KAT: Hash SHA-256 with Init and Final Indicators is single-part"
+description = "KMIP 2.1 §6.1: a request with both Init Indicator and Final Indicator and no Correlation Value is a single-part operation; asserts SHA-256('Hello')"
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = true
+
+[steps.assert_fields]
+Data = "185F8DB32271FE25F561A6FC938B2E264306EC304EDA518007D1764826381969"

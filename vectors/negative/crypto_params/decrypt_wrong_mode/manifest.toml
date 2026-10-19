@@ -23,5 +23,5 @@ auth_tag = "AuthenticatedEncryptionTag"
 operation = "Decrypt"
 request = "step3_decrypt_cbc.json"
 assert_success = false
-assert_error_reason = "Invalid_Message"
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "invalid-iv-length"

@@ -53,6 +53,21 @@
               "value": 524
             }
           ]
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "Activation Date"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "DateTime",
+              "value": "2024-01-01T00:00:00Z"
+            }
+          ]
         }
       ]
     }
