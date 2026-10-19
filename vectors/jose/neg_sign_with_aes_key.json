@@ -1,6 +1,6 @@
 {
   "type": "expect_error",
-  "description": "POST /v1/crypto/sign: alg=RS256 but kid points to a symmetric AES key — AES keys lack the Sign usage mask, so the KMIP authorization layer returns 404 (not_found)",
+  "description": "POST /v1/crypto/sign: alg=RS256 but kid points to a symmetric AES key owned by the caller — the key cannot sign, so the server returns 422 (crypto_failure)",
   "endpoint": "/v1/crypto/sign",
   "setup_key": {"kty": "oct", "alg": "A256GCM"},
   "body": {
