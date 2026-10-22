@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadType</key><string>Configuration</string>
+  <key>PayloadVersion</key><integer>1</integer>
+  <key>PayloadIdentifier</key><string>com.cosmian.kms.scep.apple-interop.8f35e5cb-c23c-4fe6-8f46-2e44f05ae553</string>
+  <key>PayloadUUID</key><string>3AA2ED51-50CF-45E0-9373-299709D50B8B</string>
+  <key>PayloadDisplayName</key><string>KMS SCEP interop test</string>
+  <key>PayloadScope</key><string>System</string>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>PayloadType</key><string>com.apple.security.scep</string>
+      <key>PayloadVersion</key><integer>1</integer>
+      <key>PayloadIdentifier</key><string>com.cosmian.kms.scep.apple-interop.8f35e5cb-c23c-4fe6-8f46-2e44f05ae553.scep</string>
+      <key>PayloadUUID</key><string>6516B5FD-4FC3-4190-832C-B957CE021954</string>
+      <key>PayloadDisplayName</key><string>KMS SCEP identity</string>
+      <key>PayloadContent</key>
+      <dict>
+        <key>URL</key><string>http://127.0.0.1:60640/scep</string>
+        <key>Name</key><string>KMS SCEP CA</string>
+        <key>Subject</key><array><array><array><string>CN</string><string>mac-01.iot.example</string></array></array></array>
+        <key>Challenge</key><string>SecretChallenge123</string>
+        <key>Keysize</key><integer>2048</integer>
+        <key>Key Type</key><string>RSA</string>
+        <key>Key Usage</key><integer>5</integer>
+        <key>CAFingerprint</key><data>vQeXP/7dILoG1uKMefcWdMl8R+APyUvTTadO4cKGdF4=</data>
+      </dict>
+    </dict>
+  </array>
+</dict>
+</plist>
