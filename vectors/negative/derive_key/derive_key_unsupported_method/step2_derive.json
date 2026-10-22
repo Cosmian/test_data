@@ -14,7 +14,7 @@
     {
       "tag": "DerivationMethod",
       "type": "Enumeration",
-      "value": "HASH"
+      "value": "NIST800_108C"
     },
     {
       "tag": "DerivationParameters",
