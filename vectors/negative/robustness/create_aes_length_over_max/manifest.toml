@@ -1,0 +1,14 @@
+name = "Negative robustness: create_aes_length_over_max"
+description = "Create AES with a CryptographicLength above 8192 is rejected"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = false
+assert_error_reason = "Invalid_Attribute_Value"
+assert_error_contains = "must be between 8 and 8192"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

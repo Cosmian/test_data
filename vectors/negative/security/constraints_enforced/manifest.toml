@@ -1,0 +1,62 @@
+name = "Negative security: constraints_enforced"
+description = "Server constraints restrict Create and Register for every user until cleared"
+server_config = "test_data/configs/server/auth/cert_constraints.toml"
+backends = ["sqlite"]
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "SetConstraints"
+request = "step1_setconstraints.json"
+assert_success = true
+
+[[steps]]
+operation = "Create"
+request = "step2_owner_create128.json"
+assert_success = false
+assert_error_reason = "Constraint_Violation"
+assert_error_contains = "violates the server constraints"
+
+[[steps]]
+operation = "Create"
+request = "step3_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Create"
+request = "step4_user_create128.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Constraint_Violation"
+assert_error_contains = "violates the server constraints"
+
+[[steps]]
+operation = "Register"
+request = "step5_register.json"
+assert_success = false
+assert_error_reason = "Constraint_Violation"
+assert_error_contains = "violates the server constraints"
+
+[[steps]]
+operation = "SetConstraints"
+request = "step6_clear_constraints.json"
+assert_success = true
+
+[[steps]]
+operation = "Create"
+request = "step7_owner_create128.json"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributes"
+request = "step8_owner_integrity.json"
+assert_success = true

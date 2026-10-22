@@ -1,0 +1,9 @@
+{
+ "path": "/kmip/2_1",
+ "content_type": "application/json",
+ "body": [
+  {
+   "hex": "7b22ff227d"
+  }
+ ]
+}

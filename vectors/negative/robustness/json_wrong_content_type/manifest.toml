@@ -1,0 +1,13 @@
+name = "Negative robustness: json_wrong_content_type"
+description = "JSON endpoint rejects a non application/json Content-Type"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_contains = "requires `Content-Type: application/json`"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

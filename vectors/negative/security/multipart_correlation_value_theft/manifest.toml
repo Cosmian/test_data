@@ -1,0 +1,50 @@
+name = "Negative security: multipart_correlation_value_theft"
+description = "A user granted Sign cannot continue another user's multi-part Sign stream"
+server_config = "test_data/configs/server/auth/cert.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_createkeypair.json"
+assert_success = true
+
+[steps.capture]
+key_id = "PrivateKeyUniqueIdentifier"
+
+[[steps]]
+operation = "GrantAccess"
+request = "step2_grant.json"
+assert_success = true
+
+[[steps]]
+operation = "Sign"
+request = "step3_owner_sign_init.json"
+assert_success = true
+
+[steps.capture]
+cv = "CorrelationValue"
+
+[[steps]]
+operation = "Sign"
+request = "step4_user_sign_final.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Invalid_Correlation_Value"
+assert_error_contains = "unknown or expired Correlation Value"
+
+[[steps]]
+operation = "Sign"
+request = "step5_owner_sign_final.json"
+assert_success = true
+
+[[steps]]
+operation = "GetAttributes"
+request = "step6_owner_integrity.json"
+assert_success = true
