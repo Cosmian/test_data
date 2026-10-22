@@ -1,0 +1,15 @@
+name = "Negative robustness: msg_critical_extension"
+description = "A critical Message Extension the server does not know is refused"
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+raw_request = true
+assert_success = false
+assert_error_reason = "Unknown_Message_Extension"
+assert_error_contains = "is not supported"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

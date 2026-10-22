@@ -1,0 +1,14 @@
+name = "Negative robustness: bin_item_count_over_limit"
+description = "Binary TTLV structure with 100001 items exceeds the item count limit"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_reason = "Invalid_Message"
+assert_error_contains = "item count"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

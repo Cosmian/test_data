@@ -23,7 +23,7 @@ tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.ke
 clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
 
 [roles]
-crypto_officer_users = ["tech@cosmian.com"]
+crypto_officer_users = ["tech@cosmian.com", "owner.client@acme.com"]
 
 [google_cse_config]
 google_cse_enable = true

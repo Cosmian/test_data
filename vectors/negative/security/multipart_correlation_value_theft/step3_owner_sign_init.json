@@ -1,0 +1,30 @@
+{
+  "tag": "Sign",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "DigitalSignatureAlgorithm",
+          "type": "Enumeration",
+          "value": "ECDSAWithSHA256"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "0102"
+    },
+    {
+      "tag": "InitIndicator",
+      "type": "Boolean",
+      "value": true
+    }
+  ]
+}

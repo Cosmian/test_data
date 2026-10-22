@@ -1,0 +1,14 @@
+name = "Negative robustness: validate_chain_over_max"
+description = "Validate rejects a chain of 33 certificates"
+
+[[steps]]
+operation = "Validate"
+request = "step1_validate.json"
+assert_success = false
+assert_error_reason = "Invalid_Field"
+assert_error_contains = "exceeding the maximum supported length of 32"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

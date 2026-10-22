@@ -1,0 +1,14 @@
+name = "Negative robustness: import_garbage_pkcs8_4mib"
+description = "A 4 MiB blob of zeros imported as PKCS8 is rejected without hanging"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_rawhttp.json"
+assert_success = false
+assert_error_reason = "Cryptographic_Failure"
+assert_error_contains = "No supported data to decode"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

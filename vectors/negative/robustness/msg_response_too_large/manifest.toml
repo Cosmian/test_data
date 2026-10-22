@@ -1,0 +1,15 @@
+name = "Negative robustness: msg_response_too_large"
+description = "A response larger than MaximumResponseSize is refused"
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+raw_request = true
+assert_success = false
+assert_error_reason = "Response_Too_Large"
+assert_error_contains = "TOO_LARGE"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

@@ -1,0 +1,14 @@
+name = "Negative robustness: locate_offset_over_max"
+description = "Locate rejects OffsetItems above 1000"
+
+[[steps]]
+operation = "Locate"
+request = "step1_locate.json"
+assert_success = false
+assert_error_reason = "Invalid_Field"
+assert_error_contains = "OffsetItems must not exceed 1000"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

@@ -1,0 +1,53 @@
+name = "Negative security: not_extractable_get_export_wrap"
+description = "A key created Extractable=false cannot be Got, Exported or Got wrapped"
+server_config = "test_data/configs/server/auth/cert.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Create"
+request = "step2_create.json"
+assert_success = true
+
+[steps.capture]
+kek_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step3_get.json"
+assert_success = false
+assert_error_reason = "Not_Extractable"
+assert_error_contains = "DENIED"
+
+[[steps]]
+operation = "Export"
+request = "step4_export.json"
+assert_success = false
+assert_error_reason = "Not_Extractable"
+assert_error_contains = "DENIED"
+
+[[steps]]
+operation = "Get"
+request = "step5_get_wrapped.json"
+assert_success = false
+assert_error_reason = "Not_Extractable"
+assert_error_contains = "DENIED"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step6_owner_integrity.json"
+assert_success = true

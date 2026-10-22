@@ -1,0 +1,14 @@
+name = "Negative robustness: msg_undo_items_over_limit"
+description = "1001 batch items with the Undo option exceed the 1000 limit"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_rawhttp.json"
+assert_success = false
+assert_error_reason = "Server_Limit_Exceeded"
+assert_error_contains = "the maximum is 1000"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

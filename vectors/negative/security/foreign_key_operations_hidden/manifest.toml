@@ -1,0 +1,69 @@
+name = "Negative security: foreign_key_operations_hidden"
+description = "A user with no grant cannot read or alter another user's key"
+server_config = "test_data/configs/server/auth/cert.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step2_user_getattributes.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+assert_error_contains = "object not found for identifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step3_user_encrypt.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Item_Not_Found"
+assert_error_contains = "not found"
+
+[[steps]]
+operation = "Export"
+request = "step4_user_export.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+assert_error_contains = "not found"
+
+[[steps]]
+operation = "AddAttribute"
+request = "step5_user_addattribute.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+assert_error_contains = "not found"
+
+[[steps]]
+operation = "Revoke"
+request = "step6_user_revoke.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Object_Not_Found"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step7_owner_integrity.json"
+assert_success = true
+
+[steps.assert_fields]
+State = "Active"
+
+[steps.assert_none_field]
+NameValue = "neg-x"
