@@ -27,7 +27,7 @@
       "value": "48656C6C6F"
     },
     {
-      "tag": "Signature",
+      "tag": "SignatureData",
       "type": "ByteString",
       "value": "DEADBEEFCAFEBABE"
     }

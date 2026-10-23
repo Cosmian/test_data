@@ -1,0 +1,22 @@
+name = "Negative robustness: json_bigint_1mib"
+description = "A 1 MiB BigInteger modulus is answered promptly (no hang) and the resulting key is unusable"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_register_raw.json"
+assert_success = true
+
+[steps.capture]
+pk_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = false
+assert_error_reason = "Cryptographic_Failure"
+assert_error_contains = "modulus too large"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step3_liveness.json"
+assert_success = true

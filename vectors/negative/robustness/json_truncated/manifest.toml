@@ -1,0 +1,13 @@
+name = "Negative robustness: json_truncated"
+description = "Truncated JSON body is rejected and the server stays alive"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_contains = "EOF while parsing"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

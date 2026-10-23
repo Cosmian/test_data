@@ -18,4 +18,5 @@ assert_success = true
 operation = "Encrypt"
 request = "step3_encrypt.json"
 assert_success = false
-assert_error_contains = "not found"
+assert_error_reason = "Incompatible_Cryptographic_Usage_Mask"
+assert_error_contains = "is not usable"

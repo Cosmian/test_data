@@ -85,6 +85,7 @@ Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
 operation = "Decrypt"
 request = "step6_decrypt_direct_gen1_fail.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "Return code"
 
 # ── 7. Decrypt gen-0 ciphertext via bare keyset name → SUCCESS ───────────
@@ -122,6 +123,7 @@ Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
 operation = "Decrypt"
 request = "step10_decrypt_at_latest_fail.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "Return code"
 
 # ── 11. Same: gen-1 direct UID → FAILURE (wrong key) ─────────────────────
@@ -130,6 +132,7 @@ assert_error_contains = "Return code"
 operation = "Decrypt"
 request = "step11_decrypt_at_1_fail.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "Return code"
 
 # ── Cleanup ──────────────────────────────────────────────────────────────

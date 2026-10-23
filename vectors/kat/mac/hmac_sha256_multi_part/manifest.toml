@@ -1,0 +1,42 @@
+name = "KAT: multi-part HMAC-SHA-256 MAC and MAC Verify (TC-STREAM-MAC-1-20)"
+description = "KMIP 2.1 §6.1 multi-part MAC keyed with the stored key, and multi-part MAC Verify with MAC Data on the initial part; the HMAC algorithm comes from the request Cryptographic Algorithm (Table 259)"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_mac_init.json"
+assert_success = true
+[steps.capture]
+mac_cv = "CorrelationValue"
+
+[[steps]]
+operation = "Mac"
+request = "step3_mac_next.json"
+assert_success = true
+
+[[steps]]
+operation = "Mac"
+request = "step4_mac_final.json"
+assert_success = true
+[steps.assert_fields]
+MACData = "C911E78196D64C30F631BB079EA37B97A95936D4DA764D6A171DF030C895ECF9"
+
+[[steps]]
+operation = "MACVerify"
+request = "step5_verify_init.json"
+assert_success = true
+[steps.capture]
+verify_cv = "CorrelationValue"
+
+[[steps]]
+operation = "MACVerify"
+request = "step6_verify_final.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Valid"

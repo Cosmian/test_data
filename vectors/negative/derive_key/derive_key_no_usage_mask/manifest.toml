@@ -1,0 +1,16 @@
+name = "Negative: DeriveKey from a base key without the Derive Key usage mask"
+description = "Tests that DeriveKey refuses a base key whose Cryptographic Usage Mask lacks Derive Key with Incompatible_Cryptographic_Usage_Mask (KMIP 2.1 Table 207)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "DeriveKey"
+request = "step2_derive.json"
+assert_success = false
+assert_error_reason = "Incompatible_Cryptographic_Usage_Mask"
+assert_error_contains = "DeriveKey usage mask"

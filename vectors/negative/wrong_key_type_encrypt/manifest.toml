@@ -14,4 +14,5 @@ public_key_id = "PublicKeyUniqueIdentifier"
 operation = "Encrypt"
 request = "step2_encrypt_with_private.json"
 assert_success = false
-assert_error_contains = "not found"
+assert_error_reason = "Invalid_Object_Type"
+assert_error_contains = "is not usable"

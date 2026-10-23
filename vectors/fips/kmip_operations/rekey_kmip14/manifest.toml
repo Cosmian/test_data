@@ -28,13 +28,15 @@ new_key_id = "UniqueIdentifier"
 operation = "Encrypt"
 request = "step3_encrypt.json"
 assert_success = false
+assert_error_reason = "Permission_Denied"
 assert_error_contains = "is in state"
 
 # Cleanup
 [[steps]]
 operation = "Revoke"
 request = "step4_revoke_old.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Permission_Denied"
 
 [[steps]]
 operation = "Destroy"

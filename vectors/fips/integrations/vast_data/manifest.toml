@@ -109,7 +109,8 @@ AttributeValue = "Active"
 [[steps]]
 operation = "Revoke"
 request = "step14_revoke_old.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Permission_Denied"
 
 # Step 15: Destroy old key (now Deactivated)
 [[steps]]

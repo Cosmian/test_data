@@ -35,6 +35,7 @@ assert_success = true
 operation = "Encrypt"
 request = "step2_encrypt.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "Failed to initialize encryption"
 
 [[steps]]

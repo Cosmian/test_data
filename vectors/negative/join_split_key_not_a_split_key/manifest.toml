@@ -1,0 +1,16 @@
+name = "JoinSplitKey: a share that is not a Split Key"
+description = "A JoinSplitKey request referencing an object that is not a Split Key fails with Invalid_Object_Type (KMIP 2.1 Table 246)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "JoinSplitKey"
+request = "step2_join_split_key.json"
+assert_success = false
+assert_error_reason = "Invalid_Object_Type"
+assert_error_contains = "not a SplitKey"

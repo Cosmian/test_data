@@ -1,0 +1,35 @@
+{
+  "tag": "Mac",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "HMACSHA256"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "1516"
+    },
+    {
+      "tag": "CorrelationValue",
+      "type": "ByteString",
+      "value": "{{mac_cv}}"
+    },
+    {
+      "tag": "FinalIndicator",
+      "type": "Boolean",
+      "value": true
+    }
+  ]
+}

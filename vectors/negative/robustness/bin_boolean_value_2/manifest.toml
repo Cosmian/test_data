@@ -1,0 +1,14 @@
+name = "Negative robustness: bin_boolean_value_2"
+description = "Boolean value other than 0 or 1 is rejected"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_reason = "Invalid_Message"
+assert_error_contains = "Boolean value must be 0 or 1"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

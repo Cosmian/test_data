@@ -55,7 +55,8 @@ assert_success = true
 [[steps]]
 operation = "Revoke"
 request = "step10_revoke_priv.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Permission_Denied"
 
 [[steps]]
 operation = "Destroy"

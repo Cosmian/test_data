@@ -1,0 +1,15 @@
+name = "Negative robustness: msg_batch_count_mismatch"
+description = "BatchCount 2 with a single batch item is rejected"
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+raw_request = true
+assert_success = false
+assert_error_reason = "Invalid_Message"
+assert_error_contains = "BatchCount must match"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

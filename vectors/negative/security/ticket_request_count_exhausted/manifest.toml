@@ -1,0 +1,39 @@
+name = "Negative security: ticket_request_count_exhausted"
+description = "A ticket limited to one request is refused on the second use"
+server_config = "test_data/configs/server/auth/cert.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Login"
+request = "step1_login.json"
+assert_success = true
+
+[steps.capture]
+ticket = "TicketValue"
+
+[[steps]]
+operation = "Query"
+request = "step2_query_first.json"
+raw_request = true
+assert_success = true
+
+[[steps]]
+operation = "Query"
+request = "step3_query_second.json"
+raw_request = true
+assert_success = false
+assert_error_reason = "Usage_Limit_Exceeded"
+assert_error_contains = "Request Count is exhausted"
+
+[[steps]]
+operation = "Query"
+request = "step4_owner_query.json"
+raw_request = true
+assert_success = true

@@ -1,0 +1,20 @@
+{
+  "tag": "JoinSplitKey",
+  "value": [
+    {
+      "tag": "ObjectType",
+      "type": "Enumeration",
+      "value": "SymmetricKey"
+    },
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{share1_id}}"
+    },
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{share2_id}}"
+    }
+  ]
+}

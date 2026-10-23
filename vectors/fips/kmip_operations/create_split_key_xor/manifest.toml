@@ -23,13 +23,13 @@ request        = "step2_create_split_key.json"
 assert_success = true
 
 [steps.assert_count]
-PrivateKeyUniqueIdentifier = 2
+UniqueIdentifier = 2
 
 [steps.capture]
-share1_id = "PrivateKeyUniqueIdentifier"
+share1_id = "UniqueIdentifier"
 
 [steps.capture_nth.share2_id]
-tag   = "PrivateKeyUniqueIdentifier"
+tag   = "UniqueIdentifier"
 index = 1
 
 # ── Join both shares to reconstruct the key ──────────────────────────────────

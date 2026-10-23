@@ -1,0 +1,13 @@
+name = "Negative robustness: json_invalid_utf8"
+description = "JSON body with invalid UTF-8 is rejected"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_contains = "invalid utf-8"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

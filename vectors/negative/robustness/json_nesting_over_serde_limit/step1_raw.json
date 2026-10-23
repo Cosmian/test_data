@@ -1,0 +1,20 @@
+{
+ "path": "/kmip/2_1",
+ "content_type": "application/json",
+ "body": [
+  {
+   "text": "{\"tag\":\"RequestMessage\",\"value\":["
+  },
+  {
+   "text": "{\"tag\":\"Attributes\",\"value\":[",
+   "repeat": 200
+  },
+  {
+   "text": "]}",
+   "repeat": 200
+  },
+  {
+   "text": "]}"
+  }
+ ]
+}

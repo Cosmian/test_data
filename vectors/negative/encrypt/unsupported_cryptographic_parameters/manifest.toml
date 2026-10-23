@@ -18,4 +18,5 @@ assert_success = true
 operation = "Encrypt"
 request = "step3_encrypt.json"
 assert_success = false
-assert_error_contains = "tag"
+assert_error_reason = "Unsupported_Cryptographic_Parameters"
+assert_error_contains = "TagLength"

@@ -1,0 +1,21 @@
+name = "Negative robustness: rng_retrieve_bounds"
+description = "RNG Retrieve rejects a DataLength above 65536 and a negative one"
+
+[[steps]]
+operation = "RNGRetrieve"
+request = "step1_rngretrieve.json"
+assert_success = false
+assert_error_reason = "Invalid_Field"
+assert_error_contains = "exceeds maximum 65536"
+
+[[steps]]
+operation = "RNGRetrieve"
+request = "step2_rngretrieve_negative.json"
+assert_success = false
+assert_error_reason = "Invalid_Field"
+assert_error_contains = "invalid Data Length"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step3_liveness.json"
+assert_success = true

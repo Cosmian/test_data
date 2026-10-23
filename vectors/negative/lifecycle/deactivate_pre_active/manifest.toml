@@ -28,4 +28,5 @@ assert_success = true
 operation = "Activate"
 request = "step5_activate_destroyed.json"
 assert_success = false
+assert_error_reason = "Wrong_Key_Lifecycle_State"
 assert_error_contains = "cannot be activated"

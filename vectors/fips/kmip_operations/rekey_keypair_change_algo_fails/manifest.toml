@@ -16,6 +16,7 @@ public_key_id = "PublicKeyUniqueIdentifier"
 operation = "ReKeyKeyPair"
 request = "step2_rekey_keypair.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "changing the cryptographic algorithm is not allowed"
 
 # Cleanup

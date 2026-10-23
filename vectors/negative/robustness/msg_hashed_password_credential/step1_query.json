@@ -1,0 +1,90 @@
+{
+  "tag": "RequestMessage",
+  "value": [
+    {
+      "tag": "RequestHeader",
+      "value": [
+        {
+          "tag": "ProtocolVersion",
+          "value": [
+            {
+              "tag": "ProtocolVersionMajor",
+              "type": "Integer",
+              "value": 2
+            },
+            {
+              "tag": "ProtocolVersionMinor",
+              "type": "Integer",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "tag": "Authentication",
+          "value": [
+            {
+              "tag": "Credential",
+              "value": [
+                {
+                  "tag": "CredentialType",
+                  "type": "Enumeration",
+                  "value": "HashedPassword"
+                },
+                {
+                  "tag": "CredentialValue",
+                  "value": [
+                    {
+                      "tag": "Username",
+                      "type": "TextString",
+                      "value": "neg-user"
+                    },
+                    {
+                      "tag": "TimeStamp",
+                      "type": "DateTimeExtended",
+                      "value": "0x0006000000000000"
+                    },
+                    {
+                      "tag": "HashingAlgorithm",
+                      "type": "Enumeration",
+                      "value": "SHA256"
+                    },
+                    {
+                      "tag": "HashedPassword",
+                      "type": "ByteString",
+                      "value": "00112233"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "BatchCount",
+          "type": "Integer",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "tag": "BatchItem",
+      "value": [
+        {
+          "tag": "Operation",
+          "type": "Enumeration",
+          "value": "Query"
+        },
+        {
+          "tag": "RequestPayload",
+          "value": [
+            {
+              "tag": "QueryFunction",
+              "type": "Enumeration",
+              "value": "QueryOperations"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

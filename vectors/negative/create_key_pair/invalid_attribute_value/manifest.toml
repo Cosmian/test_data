@@ -1,8 +1,9 @@
 name = "Negative: Create Key Pair - Invalid Attribute Value"
-description = "Tests that Create Key Pair returns Invalid_Attribute_Value error as per KMIP spec"
+description = "Tests that Create Key Pair rejects an RSA Cryptographic Length of 0 with Invalid_Attribute_Value (KMIP 2.1 Table 192)"
 
 [[steps]]
-operation = "Create"
-request = "step1_create.json"
+operation = "CreateKeyPair"
+request = "step1_createkeypair.json"
 assert_success = false
-assert_error_contains = "length"
+assert_error_reason = "Invalid_Attribute_Value"
+assert_error_contains = "Cryptographic Length"

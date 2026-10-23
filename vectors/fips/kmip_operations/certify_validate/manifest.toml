@@ -32,6 +32,11 @@ assert_success = true
 ValidityIndicator = "Valid"
 
 [[steps]]
+operation = "Revoke"
+request = "revoke_before_step4_destroy_cert.json"
+assert_success = true
+
+[[steps]]
 operation = "Destroy"
 request = "step4_destroy_cert.json"
 assert_success = true

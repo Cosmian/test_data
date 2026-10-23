@@ -87,13 +87,28 @@ ValidityIndicator = "Valid"
 # ── Cleanup ──────────────────────────────────────────────────────────────
 
 [[steps]]
+operation = "Revoke"
+request = "revoke_before_step8_destroy_leaf_cert.json"
+assert_success = true
+
+[[steps]]
 operation = "Destroy"
 request = "step8_destroy_leaf_cert.json"
 assert_success = true
 
 [[steps]]
+operation = "Revoke"
+request = "revoke_before_step9_destroy_int_cert.json"
+assert_success = true
+
+[[steps]]
 operation = "Destroy"
 request = "step9_destroy_int_cert.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "revoke_before_step10_destroy_root_cert.json"
 assert_success = true
 
 [[steps]]
@@ -139,6 +154,11 @@ assert_success = true
 [[steps]]
 operation = "Destroy"
 request = "step16_destroy_root_public.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "revoke_before_step17_destroy_root_bootstrap_cert.json"
 assert_success = true
 
 [[steps]]

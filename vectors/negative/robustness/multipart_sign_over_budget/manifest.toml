@@ -1,0 +1,30 @@
+name = "Negative robustness: multipart_sign_over_budget"
+description = "A multi-part Sign stream beyond the 16 MiB budget is refused"
+
+[[steps]]
+operation = "CreateKeyPair"
+request = "step1_createkeypair.json"
+assert_success = true
+
+[steps.capture]
+sk_id = "PrivateKeyUniqueIdentifier"
+
+[[steps]]
+operation = "RawHttp"
+request = "step2_sign_init.json"
+assert_success = true
+
+[steps.capture]
+cv = "CorrelationValue"
+
+[[steps]]
+operation = "RawHttp"
+request = "step3_sign_over_budget.json"
+assert_success = false
+assert_error_reason = "Server_Limit_Exceeded"
+assert_error_contains = "multi-part input exceeds the server limits"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step4_liveness.json"
+assert_success = true

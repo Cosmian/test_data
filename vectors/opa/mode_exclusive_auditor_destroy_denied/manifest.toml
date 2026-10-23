@@ -4,8 +4,8 @@ OPA exclusive mode. The CryptoOfficer (default JWT client, owner) creates an AES
 A second user holding the `Auditor` role (kms-opa-auditor, non-owner, same domain)
 attempts `Destroy` — which is intentionally absent from `auditor_ops` in kms.rego
 because auditors must not be able to delete evidence or key material.
-OPA returns allow=false → KMS returns Item_Not_Found (Destroy uses a
-count-based guard: when no object passes the permission check count==0 → Item_Not_Found).
+OPA returns allow=false → KMS returns Object_Not_Found (Destroy uses a
+count-based guard: when no object passes the permission check count==0 → Object_Not_Found).
 
 Ref: kms.rego auditor_ops set (NIST SP 800-53 AU-9 separation-of-duties;
 PCI-DSS v4.0 Req 10 — auditor cannot erase audit evidence).
@@ -31,7 +31,7 @@ operation = "Destroy"
 request = "step3_destroy.json"
 identity = "auditor"
 assert_success = false
-assert_error_reason = "Item_Not_Found"
+assert_error_reason = "Object_Not_Found"
 
 # Cleanup: officer (owner) destroys the key.
 [[steps]]

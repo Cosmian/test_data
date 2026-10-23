@@ -5,4 +5,5 @@ description = "Tests that Create returns Invalid_Attribute_Value error as per KM
 operation = "Create"
 request = "step1_create.json"
 assert_success = false
+assert_error_reason = "Invalid_Attribute_Value"
 assert_error_contains = "length"

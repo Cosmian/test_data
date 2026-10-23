@@ -1,5 +1,5 @@
 name = "Negative: Encrypt - Invalid Field"
-description = "Tests that Encrypt returns Invalid_Field error as per KMIP spec"
+description = "Tests that Encrypt rejects an unsupported field value (OFB mode) with Unsupported_Cryptographic_Parameters, listed in the KMIP 2.1 Encrypt error table"
 
 [[steps]]
 operation = "Create"
@@ -18,4 +18,5 @@ assert_success = true
 operation = "Encrypt"
 request = "step3_encrypt.json"
 assert_success = false
+assert_error_reason = "Unsupported_Cryptographic_Parameters"
 assert_error_contains = "not supported"

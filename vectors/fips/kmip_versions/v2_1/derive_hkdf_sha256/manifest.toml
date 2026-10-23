@@ -36,6 +36,11 @@ request = "step5_destroy_derived.json"
 assert_success = true
 
 [[steps]]
+operation = "Revoke"
+request = "revoke_before_step6_destroy_base.json"
+assert_success = true
+
+[[steps]]
 operation = "Destroy"
 request = "step6_destroy_base.json"
 assert_success = true

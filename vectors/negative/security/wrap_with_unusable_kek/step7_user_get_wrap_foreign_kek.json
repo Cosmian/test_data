@@ -1,0 +1,30 @@
+{
+  "tag": "Get",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{user_key}}"
+    },
+    {
+      "tag": "KeyWrappingSpecification",
+      "value": [
+        {
+          "tag": "WrappingMethod",
+          "type": "Enumeration",
+          "value": "Encrypt"
+        },
+        {
+          "tag": "EncryptionKeyInformation",
+          "value": [
+            {
+              "tag": "UniqueIdentifier",
+              "type": "TextString",
+              "value": "{{kek_a}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

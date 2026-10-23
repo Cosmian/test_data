@@ -27,6 +27,7 @@ key_id = "UniqueIdentifier"
 operation = "SetAttribute"
 request = "step2_set_rotate_offset.json"
 assert_success = false
+assert_error_reason = "Feature_Not_Supported"
 assert_error_contains = "rotate_offset is not supported for HSM keys"
 
 # Cleanup
