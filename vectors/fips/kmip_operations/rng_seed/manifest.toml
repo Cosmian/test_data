@@ -7,4 +7,4 @@ request = "step1_rng_seed.json"
 assert_success = true
 
 [steps.assert_fields]
-AmountOfSeedData = "32"
+DataLength = "32"

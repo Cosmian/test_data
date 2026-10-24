@@ -12,4 +12,5 @@ key_id = "UniqueIdentifier"
 operation = "DeriveKey"
 request = "step2_derive.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "Salt"
