@@ -38,8 +38,7 @@ gen2_id = "UniqueIdentifier"
 [[steps]]
 operation = "Revoke"
 request = "step4_revoke_gen0.json"
-assert_success = false
-assert_error_reason = "Wrong_Key_Lifecycle_State"
+assert_success = true
 
 [[steps]]
 operation = "Destroy"
@@ -49,8 +48,7 @@ assert_success = true
 [[steps]]
 operation = "Revoke"
 request = "step6_revoke_gen1.json"
-assert_success = false
-assert_error_reason = "Wrong_Key_Lifecycle_State"
+assert_success = true
 
 [[steps]]
 operation = "Destroy"

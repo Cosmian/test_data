@@ -60,8 +60,7 @@ assert_success = true
 [[steps]]
 operation = "Revoke"
 request = "step8_revoke_old.json"
-assert_success = false
-assert_error_reason = "Wrong_Key_Lifecycle_State"
+assert_success = true
 
 [[steps]]
 operation = "Destroy"

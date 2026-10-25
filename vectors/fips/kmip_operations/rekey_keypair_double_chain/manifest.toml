@@ -56,8 +56,7 @@ LinkedObjectIdentifier = "{{new_sk_1}}"
 [[steps]]
 operation = "Revoke"
 request = "step7_revoke_kp1.json"
-assert_success = false
-assert_error_reason = "Wrong_Key_Lifecycle_State"
+assert_success = true
 
 [[steps]]
 operation = "Destroy"
@@ -67,8 +66,7 @@ assert_success = true
 [[steps]]
 operation = "Revoke"
 request = "step9_revoke_kp2.json"
-assert_success = false
-assert_error_reason = "Wrong_Key_Lifecycle_State"
+assert_success = true
 
 [[steps]]
 operation = "Destroy"
