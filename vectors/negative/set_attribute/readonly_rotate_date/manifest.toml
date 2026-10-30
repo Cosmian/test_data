@@ -1,7 +1,7 @@
 name = "Negative: SetAttribute Rejects RotateDate"
 description = """
 x-rotate-date is a server-managed read-only attribute. \
-Any attempt to set it via SetAttribute must be rejected with Attribute_Read_Only.
+Any attempt to set it via SetAttribute must be rejected with Read_Only_Attribute.
 """
 
 # Create a key

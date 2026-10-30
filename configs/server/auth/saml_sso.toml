@@ -1,0 +1,28 @@
+# KMS server — SAML single sign-on stack (Web UI SAML login through the Auth Verifier), dev/test only.
+#
+# Loaded by `.mise/scripts/test/saml_sso/stack.sh up` (used by `mise run test:ui-saml`), which
+# copies this file to `${SAML_SSO_DIR}/kms.toml` (default `/tmp/kms-saml-sso`) and substitutes
+# the values of `hostname` / `auth_verifier_url` (docker bridge gateway on Linux, loopback on
+# macOS), `sqlite_path` and `ui_index_html_folder` (absolute `<repo>/ui/dist`).
+# `test_ui_saml.sh` then starts the KMS with that copy.
+#
+# Bound port: 9998 (plain HTTP; nginx proxies the public origin https://localhost:8443 to it).
+# Paired Auth Verifier fixture: test_data/configs/auth_verifier/saml_sso.toml (port 8444).
+
+kms_public_url = "https://localhost:8443"
+
+[http]
+port = 9998
+hostname = "127.0.0.1"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms-saml-sso/kms-data"
+
+[auth_verifier]
+auth_verifier_url = "https://127.0.0.1:8444"
+auth_verifier_saml_realm = "kms-saml"
+auth_verifier_accept_invalid_certs = true   # self-signed local certificate, test only
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
