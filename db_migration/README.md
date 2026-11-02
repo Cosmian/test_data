@@ -8,7 +8,7 @@ From the parent KMS checkout:
 MISE_CONFIG_ROOT="$(pwd)" bash .mise/scripts/test/generate_db_migration_fixtures.sh
 ```
 
-The generator refuses to overwrite an existing `kms.db`. To regenerate a fixture, remove only that version's database first. Generation requires Docker and Python 3; it uses randomly assigned loopback host ports and removes its containers and scratch directories on exit.
+Pass a version, such as `5.29.0`, to generate just that fixture. The generator refuses to overwrite an existing `kms.db`. To regenerate a fixture, remove only that version's database first. Generation requires Docker and Python 3; it uses randomly assigned loopback host ports and removes its containers and scratch directories on exit.
 
 ## Versions and migration steps
 
@@ -17,8 +17,9 @@ The generator refuses to overwrite an existing `kms.db`. To regenerate a fixture
 | `5.20.0` | [SQLite database](5.20.0/sqlite/kms.db) | Wrapping-key ID backfill at `5.25.0`, then certificate serial-tag backfill at `5.29.0` |
 | `5.24.0` | [SQLite database](5.24.0/sqlite/kms.db) | Both steps, immediately before the wrapping-key ID change |
 | `5.28.0` | [SQLite database](5.28.0/sqlite/kms.db) | Certificate serial-tag backfill only; the wrapping-key ID marker is already `true` |
+| `5.29.0` | [SQLite database](5.29.0/sqlite/kms.db) | No data step; both completion markers and the certificate serial tag are already present |
 
-All three databases are unversioned: none has a `db_version` row. The first two have neither a `wrapping_key_id` column nor its completion marker. None has the certificate serial-tag completion marker or a `_serial=` tag on `mig_cert`.
+All four databases are unversioned: none has a `db_version` row. The first two have neither a `wrapping_key_id` column nor its completion marker. Only `5.29.0` has the certificate serial-tag completion marker and a `_serial=` tag on `mig_cert`.
 
 ## Stored data
 
