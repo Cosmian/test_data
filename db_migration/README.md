@@ -9,12 +9,7 @@ MISE_CONFIG_ROOT="$(pwd)" bash .mise/scripts/test/generate_db_migration_fixtures
   [sqlite|postgresql|mysql|all] [VERSION]
 ```
 
-The backend defaults to `all`. Pass a version as the second argument, such as
-`sqlite 5.29.0`, to generate only that fixture. The generator refuses to
-overwrite an existing `kms.db` or `dump.sql`. To regenerate a fixture, remove
-only that file first. Generation requires Docker, plus Python 3 for SQLite.
-Every container joins a Docker network created for the run, and the generator
-removes its containers, network, and scratch directory on exit.
+The backend defaults to `all`. Pass a version as the second argument, such as `sqlite 5.29.0`, to generate only that fixture. The generator refuses to overwrite an existing `kms.db` or `dump.sql`. To regenerate a fixture, remove only that file first. Generation requires Docker, plus Python 3 for SQLite. Every container joins a Docker network created for the run, and the generator removes its containers, network, and scratch directory on exit.
 
 ## Versions and migration steps
 
