@@ -24,7 +24,7 @@ auto_rotation_check_interval_secs = 60
 [[hsm_instances]]
 hsm_model = "softhsm2"
 hsm_admin = ["admin"]
-hsm_slot = [1]
+hsm_slot = [1663221437]
 hsm_password = ["12345678"]
 
 [[hsm_instances]]
@@ -35,8 +35,7 @@ hsm_password = ["12345678"]
 
 [http]
 hostname = "127.0.0.1"
-port = 9998
-cors_allowed_origins = ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:9998", "http://127.0.0.1:9998"]
+port = 19998
 
 [db]
 database_type = "sqlite"

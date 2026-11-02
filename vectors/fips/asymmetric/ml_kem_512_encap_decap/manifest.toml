@@ -16,8 +16,8 @@ request = "step2_encapsulate.json"
 assert_success = true
 
 [steps.capture]
-shared_secret = "Data"
-ciphertext = "IVCounterNonce"
+shared_secret = "Data:kem_shared_secret"
+ciphertext = "Data:kem_encapsulation"
 
 [[steps]]
 operation = "Decrypt"

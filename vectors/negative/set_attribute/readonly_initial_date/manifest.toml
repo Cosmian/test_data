@@ -21,7 +21,7 @@ initial_date = "InitialDate"
 operation = "SetAttribute"
 request = "step3_set_initial_date.json"
 assert_success = false
-assert_error_reason = "Attribute_Read_Only"
+assert_error_reason = "Read_Only_Attribute"
 assert_error_contains = "server-managed"
 
 [[steps]]
