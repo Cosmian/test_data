@@ -1,6 +1,7 @@
 # Test KMS server — mTLS cert auth, dedicated to the Set Constraints vector.
+# Set Constraints requires a configured Crypto Officer (like PKCS11), hence [roles].
 # The constraint set is server-wide, so this vector gets its own server instead of
-# sharing auth/cert.toml. Ports and storage paths are overridden by the test runner.
+# sharing auth/cert_roles.toml. Ports and storage paths are overridden by the test runner.
 
 default_username = "tech@cosmian.com"
 
@@ -21,3 +22,6 @@ tmp_path = "/tmp"
 tls_cert_file = "test_data/certificates/client_server/server/kmserver.acme.com.crt"
 tls_key_file = "test_data/certificates/client_server/server/kmserver.acme.com.key"
 clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
+
+[roles]
+crypto_officer_users = ["tech@cosmian.com", "owner.client@acme.com"]

@@ -32,6 +32,11 @@ assert_success = true
 key_id = "UniqueIdentifier"
 
 [[steps]]
+operation = "GrantAccess"
+request = "step3b_grant_user_create.json"
+assert_success = true
+
+[[steps]]
 operation = "Create"
 request = "step4_user_create128.json"
 identity = "user"
