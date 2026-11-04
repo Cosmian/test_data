@@ -7,6 +7,22 @@ The file test_data/certificates/client_server/ca/stack_of_ca.pem is the result o
 - test_data/certificates/p12/root.pem
 - test_data/certificates/another_p12/root.crt
 
+## Keycloak and KMS HTTPS certificate (RBAC demo)
+
+`generate_idp_server_cert.sh` issues the TLS server certificate shared by Keycloak and the KMS HTTPS listener of the `deploy/rbac_rego` Docker Compose stack of the Cosmian/kms repository. It signs with the existing root CA of `ca/` and never regenerates it, so every certificate already signed by that CA stays valid.
+
+```sh
+# from any directory; the optional argument selects the OpenSSL binary
+test_data/certificates/client_server/generate_idp_server_cert.sh [OPENSSL_BIN]
+```
+
+Generated artifacts in `server/`:
+
+- `keycloak.localhost.key`: RSA-3072 private key, mode 644 because the non-root user of the Keycloak container must read it (it is a public test key)
+- `keycloak.localhost.crt`: leaf certificate valid 3000 days, with the SANs `keycloak.localhost`, `localhost`, `127.0.0.1` and `::1`
+
+Each run bumps the serial number stored in `ca/ca.srl`.
+
 ## Server 3072 (FIPS-friendly) certificate generation
 
 The files in `server-3072/` were generated with OpenSSL using a 3072‑bit RSA key and explicit TLS server extensions. This aligns with FIPS guidance (RSA ≥ 2048, SHA‑256 signatures, proper EKU/KeyUsage).

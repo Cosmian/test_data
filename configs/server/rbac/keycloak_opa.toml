@@ -1,0 +1,63 @@
+# =============================================================================
+# KMS server — Keycloak (OIDC) + OPA RBAC, exclusive mode
+# =============================================================================
+#
+# Purpose:  complete server config for the `deploy/rbac_rego` Docker Compose
+#           stack. Bearer tokens issued by Keycloak carry the user's `roles`
+#           (Keycloak group names) and `as_rid` (domain) claims; every KMIP
+#           request is authorised by OPA evaluating `test_data/opa/kms.rego`.
+# Port:     9998 (HTTPS, TLS certificate valid for localhost / 127.0.0.1).
+# Loader:   `deploy/rbac_rego/docker-compose.yml` mounts this file at
+#           /etc/cosmian/kms.toml with the working directory set to /repo, so
+#           the relative paths below resolve against the mounted `test_data`.
+#           On a host, run from the repository root: `cosmian_kms -c <this file>`
+#           after patching `opa_url`, `sqlite_path` and `root_data_path`.
+# Pairing:  Keycloak realm `deploy/rbac_rego/keycloak/kms-realm.json` (issuer,
+#           audience, group names) and the OPA policy `test_data/opa/kms.rego`.
+#
+# Authorization model: exclusive — OPA is the only authority. Native KMS
+# grants are ignored; the object owner is always allowed by the policy.
+# Edit `opa_mode` to "enforcing" to try the two-gate model instead.
+# =============================================================================
+
+# Used by the Web UI for redirect URLs and CORS (the UI is not part of this stack).
+kms_public_url = "https://localhost:9998"
+
+[http]
+hostname = "0.0.0.0"
+port     = 9998
+
+# HTTPS protects the bearer tokens in transit; the JWKS URI below must be HTTPS too.
+# No client CA is configured, so mTLS authentication is disabled.
+[tls]
+tls_cert_file = "test_data/certificates/client_server/server/keycloak.localhost.crt"
+tls_key_file  = "test_data/certificates/client_server/server/keycloak.localhost.key"
+
+# Keycloak realm `kms`. The issuer must match the token `iss` claim exactly
+# (no trailing slash) and the JWKS URI is mandatory because Keycloak does not
+# serve /.well-known/jwks.json. The last item is the required `aud` claim,
+# added to access tokens by the audience mapper of the realm.
+# The KMS reads the flat `roles` and `as_rid` claims and uses `email` as the
+# user identity.
+[idp_auth]
+jwt_auth_provider = [
+  "https://keycloak.localhost:8443/realms/kms,https://keycloak.localhost:8443/realms/kms/protocol/openid-connect/certs,cosmian-kms",
+]
+
+# OPA evaluates test_data/opa/kms.rego on every KMIP operation.
+# `opa` is the Compose service name; patch it to http://127.0.0.1:8181 on a host.
+[opa]
+opa_url  = "http://opa:8181"
+opa_mode = "exclusive"
+
+[db]
+database_type  = "sqlite"
+sqlite_path    = "/var/lib/cosmian-kms/sqlite-data"
+clear_database = false
+
+[workspace]
+root_data_path = "/var/lib/cosmian-kms/workspace"
+tmp_path       = "/tmp"
+
+[logging]
+rust_log = "info,cosmian_kms_server=info"
