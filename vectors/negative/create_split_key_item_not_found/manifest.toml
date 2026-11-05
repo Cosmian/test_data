@@ -1,0 +1,9 @@
+name = "CreateSplitKey: missing source key is Item_Not_Found"
+description = "A CreateSplitKey request for a Unique Identifier that does not exist fails with Item_Not_Found (KMIP 2.1 Table 195)"
+
+[[steps]]
+operation = "CreateSplitKey"
+request = "step1_create_split_key.json"
+assert_success = false
+assert_error_reason = "Item_Not_Found"
+assert_error_contains = "not found"

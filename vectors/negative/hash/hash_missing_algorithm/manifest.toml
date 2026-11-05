@@ -5,4 +5,5 @@ description = "Tests that Hash operation fails when CryptographicParameters has 
 operation = "Hash"
 request = "step1_hash.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "algorithm"

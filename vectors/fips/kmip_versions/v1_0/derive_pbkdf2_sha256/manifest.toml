@@ -30,11 +30,17 @@ ObjectType = "SymmetricKey"
 [[steps]]
 operation = "Revoke"
 request = "step4_revoke_derived.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Permission_Denied"
 
 [[steps]]
 operation = "Destroy"
 request = "step5_destroy_derived.json"
+assert_success = true
+
+[[steps]]
+operation = "Revoke"
+request = "revoke_before_step6_destroy_base.json"
 assert_success = true
 
 [[steps]]

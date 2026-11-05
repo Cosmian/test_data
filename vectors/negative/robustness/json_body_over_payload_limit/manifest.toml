@@ -1,0 +1,13 @@
+name = "Negative robustness: json_body_over_payload_limit"
+description = "A body one byte over the 64 MiB payload limit is rejected with HTTP 413"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_http_status = 413
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

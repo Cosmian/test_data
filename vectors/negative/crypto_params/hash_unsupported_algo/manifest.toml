@@ -5,4 +5,5 @@ description = "Tests that hashing fails when using an unsupported algorithm (MD5
 operation = "Hash"
 request = "step1_hash_md5.json"
 assert_success = false
+assert_error_reason = "Feature_Not_Supported"
 assert_error_contains = "support"

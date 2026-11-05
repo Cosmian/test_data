@@ -7,12 +7,12 @@
       "value": "SymmetricKey"
     },
     {
-      "tag": "PrivateKeyUniqueIdentifier",
+      "tag": "UniqueIdentifier",
       "type": "TextString",
       "value": "{{share1_id}}"
     },
     {
-      "tag": "PrivateKeyUniqueIdentifier",
+      "tag": "UniqueIdentifier",
       "type": "TextString",
       "value": "{{share2_id}}"
     },

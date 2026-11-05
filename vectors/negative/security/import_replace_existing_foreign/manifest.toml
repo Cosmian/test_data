@@ -1,0 +1,35 @@
+name = "Negative security: import_replace_existing_foreign"
+description = "Import with ReplaceExisting cannot overwrite another user's object"
+server_config = "test_data/configs/server/auth/cert.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Import"
+request = "step2_import.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"
+assert_error_contains = "cannot replace it"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step3_owner_integrity.json"
+assert_success = true
+
+[steps.assert_fields]
+CryptographicLength = "256"

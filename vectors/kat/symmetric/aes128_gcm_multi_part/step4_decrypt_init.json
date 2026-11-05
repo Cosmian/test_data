@@ -1,0 +1,50 @@
+{
+  "tag": "Decrypt",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "BlockCipherMode",
+          "type": "Enumeration",
+          "value": "GCM"
+        },
+        {
+          "tag": "TagLength",
+          "type": "Integer",
+          "value": 16
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "61353B4C2806934A777FF51FA22A4755699B2A714FCDC6F83766E5F97B6C7423"
+    },
+    {
+      "tag": "IVCounterNonce",
+      "type": "ByteString",
+      "value": "CAFEBABEFACEDBAD"
+    },
+    {
+      "tag": "InitIndicator",
+      "type": "Boolean",
+      "value": true
+    },
+    {
+      "tag": "AuthenticatedEncryptionAdditionalData",
+      "type": "ByteString",
+      "value": "FEEDFACEDEADBEEFFEEDFACEDEADBEEFABADDAD2"
+    },
+    {
+      "tag": "AuthenticatedEncryptionTag",
+      "type": "ByteString",
+      "value": "3612D2E79E3B0785561BE14AACA2FCCB"
+    }
+  ]
+}

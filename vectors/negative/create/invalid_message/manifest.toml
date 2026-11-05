@@ -5,4 +5,5 @@ description = "Tests that Create returns Invalid_Message error as per KMIP spec"
 operation = "Create"
 request = "step1_create.json"
 assert_success = false
+assert_error_reason = "Invalid_Message"
 assert_error_contains = "missing field"

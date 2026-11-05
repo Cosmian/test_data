@@ -1,0 +1,9 @@
+name = "Negative: Hash with an unknown Correlation Value"
+description = "KMIP 2.1 §6.1.24.1: a Correlation Value the server never issued returns Invalid_Correlation_Value"
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash.json"
+assert_success = false
+assert_error_reason = "Invalid_Correlation_Value"
+assert_error_contains = "Correlation Value"

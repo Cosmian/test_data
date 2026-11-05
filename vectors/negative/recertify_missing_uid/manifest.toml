@@ -5,4 +5,5 @@ description = "Tests that ReCertify fails — ReCertify is a KMIP 1.4 operation 
 operation = "ReCertify"
 request = "step1_recertify_empty.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "ReCertify"

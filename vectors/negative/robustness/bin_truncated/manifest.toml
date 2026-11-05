@@ -1,0 +1,14 @@
+name = "Negative robustness: bin_truncated"
+description = "Binary TTLV declaring 256 content bytes but carrying 32 is rejected"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_reason = "Invalid_Message"
+assert_error_contains = "failed to fill whole buffer"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

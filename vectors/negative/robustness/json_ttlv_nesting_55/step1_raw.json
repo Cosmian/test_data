@@ -1,0 +1,20 @@
+{
+ "path": "/kmip/2_1",
+ "content_type": "application/json",
+ "body": [
+  {
+   "text": "{\"tag\":\"RequestMessage\",\"value\":[{\"tag\":\"RequestHeader\",\"value\":[{\"tag\":\"ProtocolVersion\",\"value\":[{\"tag\":\"ProtocolVersionMajor\",\"type\":\"Integer\",\"value\":2},{\"tag\":\"ProtocolVersionMinor\",\"type\":\"Integer\",\"value\":1}]},{\"tag\":\"BatchCount\",\"type\":\"Integer\",\"value\":1}]},{\"tag\":\"BatchItem\",\"value\":[{\"tag\":\"Operation\",\"type\":\"Enumeration\",\"value\":\"Create\"},{\"tag\":\"RequestPayload\",\"value\":[{\"tag\":\"ObjectType\",\"type\":\"Enumeration\",\"value\":\"SymmetricKey\"},"
+  },
+  {
+   "text": "{\"tag\":\"Attributes\",\"value\":[",
+   "repeat": 55
+  },
+  {
+   "text": "]}",
+   "repeat": 55
+  },
+  {
+   "text": "]}]}]}"
+  }
+ ]
+}

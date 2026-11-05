@@ -17,6 +17,7 @@ key_id = "UniqueIdentifier"
 operation = "SetAttribute"
 request = "step2_set_rotate_date.json"
 assert_success = false
+assert_error_reason = "Read_Only_Attribute"
 assert_error_contains = "server-managed"
 
 # Cleanup

@@ -1,7 +1,6 @@
 name = "Negative: ReKey Destroyed Key Fails"
 description = """
-Verifies that ReKey on a Destroyed symmetric key fails with Wrong_Key_Lifecycle_State.
-A Destroyed key cannot be rotated.
+Verifies that ReKey on a Destroyed symmetric key fails: a Destroyed key behaves as not found.
 """
 
 [[steps]]
@@ -11,13 +10,14 @@ assert_success = true
 [steps.capture]
 key_id = "UniqueIdentifier"
 
-# Revoke the key (Active → Deactivated)
+# Revoke with a non-compromise reason is refused on a Pre-Active key (KMIP 2.1 §4.57)
 [[steps]]
 operation = "Revoke"
 request = "step2_revoke.json"
-assert_success = true
+assert_success = false
+assert_error_reason = "Wrong_Key_Lifecycle_State"
 
-# Destroy the key (Deactivated → Destroyed)
+# Destroy the key (Pre-Active → Destroyed)
 [[steps]]
 operation = "Destroy"
 request = "step3_destroy.json"
@@ -28,4 +28,5 @@ assert_success = true
 operation = "ReKey"
 request = "step4_rekey.json"
 assert_success = false
-assert_error_contains = "is in state 'Destroyed'"
+assert_error_reason = "Item_Not_Found"
+assert_error_contains = "no valid key found"

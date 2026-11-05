@@ -35,6 +35,7 @@ operation = "Destroy"
 request = "step2_user_destroy.json"
 identity = "user"
 assert_success = false
+assert_error_reason = "Permission_Denied"
 assert_error_contains = "HSM admins"
 
 # Admin cleans up

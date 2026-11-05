@@ -1,0 +1,13 @@
+name = "Negative robustness: json_bytestring_not_hex"
+description = "ByteString value that is not hexadecimal is rejected"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_contains = "Invalid value for a ByteString"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

@@ -12,4 +12,5 @@ backends = ["sqlite"]
 operation = "Encrypt"
 request = "step1_encrypt_wrong_prefix.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "slot 99 is not accessible"

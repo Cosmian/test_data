@@ -1,0 +1,13 @@
+name = "Negative robustness: json_integer_overflow"
+description = "Integer value 2^32 does not fit KMIP's 32-bit Integer"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_contains = "Invalid value for i32"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true
