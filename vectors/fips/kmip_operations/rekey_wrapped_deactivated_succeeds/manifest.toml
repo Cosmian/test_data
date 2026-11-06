@@ -69,13 +69,3 @@ assert_success = true
 operation = "Destroy"
 request = "step10_destroy_new.json"
 assert_success = true
-
-[[steps]]
-operation = "Revoke"
-request = "step7_revoke_wrapping.json"
-assert_success = true
-
-[[steps]]
-operation = "Destroy"
-request = "step8_destroy_wrapping.json"
-assert_success = true

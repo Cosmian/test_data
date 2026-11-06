@@ -1,8 +1,9 @@
 name = "Negative: Create Key Pair - Invalid Attribute"
-description = "Tests that Create Key Pair returns Invalid_Attribute error as per KMIP spec"
+description = "Tests that Create Key Pair rejects different Cryptographic Algorithms for the private and public key (KMIP 2.1 Table 191) with Invalid_Attribute"
 
 [[steps]]
-operation = "Create"
-request = "step1_create.json"
+operation = "CreateKeyPair"
+request = "step1_createkeypair.json"
 assert_success = false
-assert_error_contains = "length"
+assert_error_reason = "Invalid_Attribute"
+assert_error_contains = "same value"

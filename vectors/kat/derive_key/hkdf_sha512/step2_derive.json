@@ -2,7 +2,7 @@
   "tag": "DeriveKey",
   "value": [
     { "tag": "ObjectType", "type": "Enumeration", "value": "SymmetricKey" },
-    { "tag": "ObjectUniqueIdentifier", "type": "TextString", "value": "{{base_key_id}}" },
+    { "tag": "UniqueIdentifier", "type": "TextString", "value": "{{base_key_id}}" },
     { "tag": "DerivationMethod", "type": "Enumeration", "value": "HKDF" },
     {
       "tag": "DerivationParameters",

@@ -9,4 +9,5 @@ name, the server would assign a random UUID, violating the gen-0 UID invariant.
 operation = "Create"
 request = "step1_create_no_uid.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "set the key ID to the keyset name"

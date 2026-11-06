@@ -27,6 +27,7 @@ key_id = "UniqueIdentifier"
 operation = "SetAttribute"
 request = "step2_set_rotate_name_bare.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "must be the key's base UID"
 
 # Cleanup

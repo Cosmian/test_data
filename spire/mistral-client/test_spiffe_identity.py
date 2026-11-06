@@ -310,42 +310,27 @@ def block3_jwt_signature(svid: Any, client: Any) -> bool:
     _section("[3] JWT signature — independent cryptographic re-verification")
     token = getattr(svid, "token", None)
     if token is None:
-        log_skip("JWT signature re-verification", "token string not available from SDK")
-        return True
+        return _assert(False, "JWT token available for signature re-verification")
 
     try:
+        from spiffe import TrustDomain
+
         bundle_set = client.fetch_jwt_bundles()
-        # spiffe-py ≥ 0.3: bundle_set.bundles is a dict; get the entry for our trust domain
-        bundles = getattr(bundle_set, "bundles", {})
-        td_key = None
-        for key in bundles:
-            if str(key) == EXPECTED_TRUST_DOMAIN or getattr(key, "name", "") == EXPECTED_TRUST_DOMAIN:
-                td_key = key
-                break
-        if td_key is None:
-            log_warn("JWT bundle for trust domain not found",
-                     f"available: {[str(k) for k in bundles.keys()]}")
-            log_skip("JWT signature re-verification", "no bundle for trust domain")
-            return True
+        bundle = bundle_set.get_bundle_for_trust_domain(TrustDomain(EXPECTED_TRUST_DOMAIN))
+        if bundle is None:
+            return _assert(False, "JWT bundle found for expected trust domain",
+                           fail_detail=EXPECTED_TRUST_DOMAIN)
 
-        bundle       = bundles[td_key]
-        authorities  = getattr(bundle, "jwt_authorities", {})
-        key_count    = len(authorities)
-        log_ok(f"Fetched SPIRE JWT bundle", f"{key_count} key(s)")
-
-        if key_count == 0:
-            log_warn("JWT bundle has no authorities — cannot verify signature")
-            log_skip("JWT signature re-verification", "empty JWT bundle")
-            return True
+        authorities = bundle.jwt_authorities
+        key_count = len(authorities)
+        log_ok("Fetched SPIRE JWT bundle", f"{key_count} key(s)")
 
         ok, detail = _verify_jwt_sig(token, authorities)
         return _assert(ok, "JWT signature verifies against SPIRE JWKS",
                        ok_detail=detail, fail_detail=detail)
 
     except Exception as exc:
-        log_warn("fetch_jwt_bundles() failed", str(exc))
-        log_skip("JWT signature re-verification", "bundle fetch error (non-fatal)")
-        return True  # treat as warning, not hard failure
+        return _assert(False, "JWT bundle fetched and signature verified", fail_detail=str(exc))
 
 
 def block4_x509_svid(client: Any) -> Optional[Any]:

@@ -1,0 +1,35 @@
+{
+  "tag": "Locate",
+  "value": [
+    {
+      "tag": "Attributes",
+      "value": [
+        {
+          "tag": "ObjectType",
+          "type": "Enumeration",
+          "value": "SymmetricKey"
+        },
+        {
+          "tag": "Attribute",
+          "value": [
+            {
+              "tag": "VendorIdentification",
+              "type": "TextString",
+              "value": "cosmian"
+            },
+            {
+              "tag": "AttributeName",
+              "type": "TextString",
+              "value": "tag"
+            },
+            {
+              "tag": "AttributeValue",
+              "type": "TextString",
+              "value": "[\"neg-tag_handle_cross_tenant\"]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -31,13 +31,13 @@ request = "step3_user_get_ok.json"
 identity = "user"
 assert_success = true
 
-# User attempts Destroy — denied with Item_Not_Found (no Destroy permission, Get wildcard does NOT apply)
+# User attempts Destroy — denied with Object_Not_Found (no Destroy permission, Get wildcard does NOT apply)
 [[steps]]
 operation = "Destroy"
 request = "step4_user_destroy_noop.json"
 identity = "user"
 assert_success = false
-assert_error_reason = "Item_Not_Found"
+assert_error_reason = "Object_Not_Found"
 
 # Owner confirms key still exists after user's Destroy attempt
 [[steps]]

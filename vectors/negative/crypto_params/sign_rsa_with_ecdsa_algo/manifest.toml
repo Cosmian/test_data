@@ -14,4 +14,5 @@ public_key_id = "PublicKeyUniqueIdentifier"
 operation = "Sign"
 request = "step2_sign_ecdsa.json"
 assert_success = false
+assert_error_reason = "Unsupported_Cryptographic_Parameters"
 assert_error_contains = "not supported: ECDSAWithSHA256"

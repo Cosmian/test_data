@@ -13,4 +13,5 @@ pub_key_id = "PublicKeyUniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt_garbage.json"
 assert_success = false
+assert_error_reason = "Cryptographic_Failure"
 assert_error_contains = "decrypt"
