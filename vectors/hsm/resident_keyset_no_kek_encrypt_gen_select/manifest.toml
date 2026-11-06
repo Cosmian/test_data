@@ -102,6 +102,7 @@ Data = "48656C6C6F20576F726C642066726F6D20484D53207465737421"
 operation = "Decrypt"
 request = "step8_decrypt_ct0_gen1_fail.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "Return code"
 
 # ── 9. Decrypt ct_gen1 via keyset chain-walk → SUCCESS ────────────────────

@@ -13,4 +13,5 @@ key_id = "UniqueIdentifier"
 operation = "Certify"
 request = "step2_certify.json"
 assert_success = false
+assert_error_reason = "Invalid_Object_Type"
 assert_error_contains = "Invalid Certify request"

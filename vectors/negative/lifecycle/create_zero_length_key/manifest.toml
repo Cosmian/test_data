@@ -5,4 +5,5 @@ description = "Tests that key creation fails when CryptographicLength is set to 
 operation = "Create"
 request = "step1_create.json"
 assert_success = false
+assert_error_reason = "Invalid_Attribute_Value"
 assert_error_contains = "length"

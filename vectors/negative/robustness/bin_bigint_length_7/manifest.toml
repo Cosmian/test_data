@@ -1,0 +1,14 @@
+name = "Negative robustness: bin_bigint_length_7"
+description = "BigInteger whose length is not a multiple of 8 is rejected"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_reason = "Invalid_Message"
+assert_error_contains = "must be a multiple of 8"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

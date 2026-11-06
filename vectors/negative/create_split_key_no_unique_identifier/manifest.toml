@@ -1,0 +1,9 @@
+name = "CreateSplitKey: server-side key generation is Feature_Not_Supported"
+description = "A CreateSplitKey request without a Unique Identifier asks the server to generate the key to split, which is not supported: Feature_Not_Supported (KMIP 2.1 Table 195)"
+
+[[steps]]
+operation = "CreateSplitKey"
+request = "step1_create_split_key.json"
+assert_success = false
+assert_error_reason = "Feature_Not_Supported"
+assert_error_contains = "unique_identifier is required"

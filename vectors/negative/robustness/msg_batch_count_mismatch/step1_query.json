@@ -1,0 +1,50 @@
+{
+  "tag": "RequestMessage",
+  "value": [
+    {
+      "tag": "RequestHeader",
+      "value": [
+        {
+          "tag": "ProtocolVersion",
+          "value": [
+            {
+              "tag": "ProtocolVersionMajor",
+              "type": "Integer",
+              "value": 2
+            },
+            {
+              "tag": "ProtocolVersionMinor",
+              "type": "Integer",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "tag": "BatchCount",
+          "type": "Integer",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "tag": "BatchItem",
+      "value": [
+        {
+          "tag": "Operation",
+          "type": "Enumeration",
+          "value": "Query"
+        },
+        {
+          "tag": "RequestPayload",
+          "value": [
+            {
+              "tag": "QueryFunction",
+              "type": "Enumeration",
+              "value": "QueryOperations"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

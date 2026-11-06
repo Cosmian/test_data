@@ -1,0 +1,22 @@
+name = "Negative robustness: register_rsa_modulus_oversized"
+description = "An RSA public key above the 16384-bit maximum cannot be registered and used"
+
+[[steps]]
+operation = "Register"
+request = "step1_register.json"
+assert_success = true
+
+[steps.capture]
+pk_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = false
+assert_error_reason = "Cryptographic_Failure"
+assert_error_contains = "modulus too large"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step3_liveness.json"
+assert_success = true

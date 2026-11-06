@@ -12,7 +12,7 @@
         {
           "tag": "BlockCipherMode",
           "type": "Enumeration",
-          "value": "GCM"
+          "value": "CBC"
         },
         {
           "tag": "CryptographicAlgorithm",
@@ -22,7 +22,7 @@
         {
           "tag": "TagLength",
           "type": "Integer",
-          "value": 999
+          "value": 16
         }
       ]
     },

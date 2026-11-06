@@ -39,8 +39,10 @@ assert_success = true
 [[steps]]
 operation = "Validate"
 request = "step5_validate_after_revoke.json"
-assert_success = false
-assert_error_contains = "not found"
+assert_success = true
+
+[steps.assert_fields]
+ValidityIndicator = "Invalid"
 
 [[steps]]
 operation = "Destroy"

@@ -18,6 +18,7 @@ key_id = "UniqueIdentifier"
 operation             = "CreateSplitKey"
 request               = "step2_create_split_key_bad_parts.json"
 assert_success        = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "split_key_parts must be >= split_key_threshold"
 
 # ── Cleanup ──────────────────────────────────────────────────────────────────

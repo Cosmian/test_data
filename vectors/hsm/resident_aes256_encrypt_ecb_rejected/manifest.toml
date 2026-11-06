@@ -24,6 +24,7 @@ assert_success = true
 operation = "Encrypt"
 request = "step2_encrypt_ecb.json"
 assert_success = false
+assert_error_reason = "General_Failure"
 assert_error_contains = "not supported"
 
 [[steps]]

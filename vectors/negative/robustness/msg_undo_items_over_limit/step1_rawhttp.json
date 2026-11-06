@@ -1,0 +1,16 @@
+{
+ "path": "/kmip/2_1",
+ "content_type": "application/json",
+ "body": [
+  {
+   "text": "{\"tag\":\"RequestMessage\",\"value\":[{\"tag\":\"RequestHeader\",\"value\":[{\"tag\":\"ProtocolVersion\",\"value\":[{\"tag\":\"ProtocolVersionMajor\",\"type\":\"Integer\",\"value\":2},{\"tag\":\"ProtocolVersionMinor\",\"type\":\"Integer\",\"value\":1}]},{\"tag\":\"BatchErrorContinuationOption\",\"type\":\"Enumeration\",\"value\":\"Undo\"},{\"tag\":\"BatchCount\",\"type\":\"Integer\",\"value\":1001}]},"
+  },
+  {
+   "text": "{\"tag\":\"BatchItem\",\"value\":[{\"tag\":\"Operation\",\"type\":\"Enumeration\",\"value\":\"Query\"},{\"tag\":\"RequestPayload\",\"value\":[{\"tag\":\"QueryFunction\",\"type\":\"Enumeration\",\"value\":\"QueryOperations\"}]}]},",
+   "repeat": 1000
+  },
+  {
+   "text": "{\"tag\":\"BatchItem\",\"value\":[{\"tag\":\"Operation\",\"type\":\"Enumeration\",\"value\":\"Query\"},{\"tag\":\"RequestPayload\",\"value\":[{\"tag\":\"QueryFunction\",\"type\":\"Enumeration\",\"value\":\"QueryOperations\"}]}]}]}"
+  }
+ ]
+}

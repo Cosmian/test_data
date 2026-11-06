@@ -7,7 +7,7 @@
       "value": "SymmetricKey"
     },
     {
-      "tag": "ObjectUniqueIdentifier",
+      "tag": "UniqueIdentifier",
       "type": "TextString",
       "value": "{{base_key_id}}"
     },

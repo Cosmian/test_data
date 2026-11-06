@@ -28,6 +28,11 @@
           "tag": "KeyFormatType",
           "type": "Enumeration",
           "value": "TransparentSymmetricKey"
+        },
+        {
+          "tag": "ActivationDate",
+          "type": "DateTime",
+          "value": "2024-01-01T00:00:00Z"
         }
       ]
     }
