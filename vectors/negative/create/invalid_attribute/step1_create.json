@@ -17,7 +17,17 @@
         {
           "tag": "CryptographicLength",
           "type": "Integer",
-          "value": 0
+          "value": 256
+        },
+        {
+          "tag": "CryptographicDomainParameters",
+          "value": [
+            {
+              "tag": "RecommendedCurve",
+              "type": "Enumeration",
+              "value": "P256"
+            }
+          ]
         },
         {
           "tag": "CryptographicUsageMask",

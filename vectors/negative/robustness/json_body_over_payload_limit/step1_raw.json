@@ -1,0 +1,16 @@
+{
+ "path": "/kmip/2_1",
+ "content_type": "application/json",
+ "body": [
+  {
+   "text": "{\"a\":\""
+  },
+  {
+   "text": "A",
+   "repeat": 67108865
+  },
+  {
+   "text": "\"}"
+  }
+ ]
+}

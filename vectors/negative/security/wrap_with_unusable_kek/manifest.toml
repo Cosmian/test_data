@@ -1,0 +1,71 @@
+name = "Negative security: wrap_with_unusable_kek"
+description = "Wrapping with a KEK that cannot wrap, is not active, or belongs to another user is refused"
+server_config = "test_data/configs/server/auth/cert.toml"
+
+[identities.owner]
+client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/owner/owner.client.acme.com.key"
+
+[identities.user]
+client_cert = "test_data/certificates/client_server/user/user.client.acme.com.crt"
+client_key = "test_data/certificates/client_server/user/user.client.acme.com.key"
+
+[[steps]]
+operation = "Create"
+request = "step1_create.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Create"
+request = "step2_create_kek_a.json"
+assert_success = true
+
+[steps.capture]
+kek_a = "UniqueIdentifier"
+
+[[steps]]
+operation = "Create"
+request = "step3_create_kek_b.json"
+assert_success = true
+
+[steps.capture]
+kek_b = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step4_get_wrap_kek_a.json"
+assert_success = false
+assert_error_reason = "Feature_Not_Supported"
+assert_error_contains = "is not meant to wrap keys"
+
+[[steps]]
+operation = "Get"
+request = "step5_get_wrap_kek_b.json"
+assert_success = false
+assert_error_reason = "Feature_Not_Supported"
+assert_error_contains = "is not active"
+
+[[steps]]
+operation = "Create"
+request = "step6_user_create.json"
+identity = "user"
+assert_success = true
+
+[steps.capture]
+user_key = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step7_user_get_wrap_foreign_kek.json"
+identity = "user"
+assert_success = false
+assert_error_reason = "Permission_Denied"
+assert_error_contains = "does not have the permission to wrap with the key"
+
+[[steps]]
+operation = "GetAttributes"
+request = "step8_owner_integrity.json"
+assert_success = true

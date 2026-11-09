@@ -1,0 +1,13 @@
+name = "Negative robustness: json_nesting_over_serde_limit"
+description = "JSON nested 200 levels deep hits the parser recursion limit instead of overflowing the stack"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_contains = "recursion limit exceeded"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

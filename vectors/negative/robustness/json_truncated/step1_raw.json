@@ -1,0 +1,9 @@
+{
+ "path": "/kmip/2_1",
+ "content_type": "application/json",
+ "body": [
+  {
+   "text": "{\"tag\":\"RequestMessage\",\"value\":["
+  }
+ ]
+}

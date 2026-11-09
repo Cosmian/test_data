@@ -12,7 +12,7 @@
         {
           "tag": "RevocationReasonCode",
           "type": "Enumeration",
-          "value": "Unspecified"
+          "value": "KeyCompromise"
         }
       ]
     }

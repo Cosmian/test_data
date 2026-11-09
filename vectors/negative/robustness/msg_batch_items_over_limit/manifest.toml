@@ -1,0 +1,14 @@
+name = "Negative robustness: msg_batch_items_over_limit"
+description = "10001 batch items exceed the 10000 limit"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_rawhttp.json"
+assert_success = false
+assert_error_reason = "Invalid_Message"
+assert_error_contains = "the maximum is 10000"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

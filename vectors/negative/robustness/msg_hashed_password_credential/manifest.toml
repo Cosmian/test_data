@@ -1,0 +1,15 @@
+name = "Negative robustness: msg_hashed_password_credential"
+description = "Hashed Password credentials are refused"
+
+[[steps]]
+operation = "Query"
+request = "step1_query.json"
+raw_request = true
+assert_success = false
+assert_error_reason = "Feature_Not_Supported"
+assert_error_contains = "Hashed Password credentials are not supported"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

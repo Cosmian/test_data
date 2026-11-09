@@ -1,0 +1,13 @@
+name = "Negative robustness: json_datetime_out_of_range"
+description = "DateTime far outside the representable range is rejected"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_contains = "Invalid value for an RFC3339 date"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

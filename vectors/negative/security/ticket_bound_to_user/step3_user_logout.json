@@ -1,0 +1,20 @@
+{
+  "tag": "Logout",
+  "value": [
+    {
+      "tag": "Ticket",
+      "value": [
+        {
+          "tag": "TicketType",
+          "type": "Enumeration",
+          "value": "Login"
+        },
+        {
+          "tag": "TicketValue",
+          "type": "ByteString",
+          "value": "{{ticket}}"
+        }
+      ]
+    }
+  ]
+}

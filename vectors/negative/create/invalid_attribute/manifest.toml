@@ -1,8 +1,9 @@
 name = "Negative: Create - Invalid Attribute"
-description = "Tests that Create returns Invalid_Attribute error as per KMIP spec"
+description = "Tests that Create rejects an attribute that does not apply to the requested object type (Cryptographic Domain Parameters on a Symmetric Key, KMIP 2.1 §4.14) with Invalid_Attribute"
 
 [[steps]]
 operation = "Create"
 request = "step1_create.json"
 assert_success = false
-assert_error_contains = "length"
+assert_error_reason = "Invalid_Attribute"
+assert_error_contains = "Cryptographic Domain Parameters"

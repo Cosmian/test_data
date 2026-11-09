@@ -1,0 +1,21 @@
+name = "KAT: multi-part Hash SHA-256 (TC-STREAM-HASH-2-20)"
+description = "KMIP 2.1 §6.1 multi-part Hash: 'a' | 'b' | 'c' hashed in three parts equals SHA-256('abc')"
+
+[[steps]]
+operation = "Hash"
+request = "step1_hash_init.json"
+assert_success = true
+[steps.capture]
+cv = "CorrelationValue"
+
+[[steps]]
+operation = "Hash"
+request = "step2_hash_next.json"
+assert_success = true
+
+[[steps]]
+operation = "Hash"
+request = "step3_hash_final.json"
+assert_success = true
+[steps.assert_fields]
+Data = "BA7816BF8F01CFEA414140DE5DAE2223B00361A396177A9CB410FF61F20015AD"

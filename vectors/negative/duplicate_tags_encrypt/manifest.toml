@@ -23,6 +23,7 @@ key_id_b = "UniqueIdentifier"
 operation = "Encrypt"
 request = "step3_encrypt_by_tag.json"
 assert_success = false
+assert_error_reason = "Invalid_Field"
 assert_error_contains = "resolves to"
 
 [[steps]]

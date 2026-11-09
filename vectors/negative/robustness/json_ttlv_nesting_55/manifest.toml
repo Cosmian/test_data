@@ -1,0 +1,14 @@
+name = "Negative robustness: json_ttlv_nesting_55"
+description = "TTLV nested 55 levels deep inside a Create request does not crash the typed decoder"
+
+[[steps]]
+operation = "RawHttp"
+request = "step1_raw.json"
+assert_success = false
+assert_error_reason = "Invalid_Field"
+assert_error_contains = "the cryptographic algorithm must be specified"
+
+[[steps]]
+operation = "DiscoverVersions"
+request = "step2_liveness.json"
+assert_success = true

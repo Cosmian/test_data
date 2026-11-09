@@ -37,6 +37,7 @@ new_public_key_id = "PublicKeyUniqueIdentifier"
 operation = "Sign"
 request = "step4_sign_after.json"
 assert_success = false
+assert_error_reason = "Wrong_Key_Lifecycle_State"
 assert_error_contains = "is in state"
 
 # Cleanup

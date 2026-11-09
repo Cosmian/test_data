@@ -13,4 +13,5 @@ pub_key_id = "PublicKeyUniqueIdentifier"
 operation = "Decrypt"
 request = "step2_decrypt_with_pubkey.json"
 assert_success = false
-assert_error_contains = "failed to retrieve the key"
+assert_error_reason = "Invalid_Object_Type"
+assert_error_contains = "is not usable"
