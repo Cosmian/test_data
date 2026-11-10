@@ -6,23 +6,25 @@ From the parent KMS checkout:
 
 ```bash
 MISE_CONFIG_ROOT="$(pwd)" bash .mise/scripts/test/generate_db_migration_fixtures.sh \
-  [sqlite|postgresql|mysql|all] [VERSION]
+  [sqlite|postgresql|mysql|redis|all] [VERSION]
 ```
 
-The backend defaults to `all`. Pass a version as the second argument, such as `sqlite 5.29.0`, to generate only that fixture. The generator refuses to overwrite an existing `kms.db` or `dump.sql`. To regenerate a fixture, remove only that file first. Generation requires Docker and Python 3. Every container joins a Docker network created for the run, and the generator removes its containers, network, and scratch directory on exit.
+The backend defaults to `all`. Pass a version as the second argument, such as `sqlite 5.29.0`, to generate only that fixture. The generator refuses to overwrite an existing `kms.db`, `dump.sql`, or `dump.bin`. To regenerate a fixture, remove only that file first. Generation requires Docker and Python 3 (plus `cryptography` for Redis). Every container joins a Docker network created for the run, and the generator removes its containers, network, and scratch directory on exit.
 
 ## Versions and migration steps
 
-| Released image | SQLite | PostgreSQL | MySQL | Steps exercised |
-|---|---|---|---|---|
-| `5.14.0` | — | [dump](5.14.0/postgresql/dump.sql) | — | `json` to `jsonb` attributes conversion at `5.15.0`, then the two steps below |
-| `5.20.0` | [database](5.20.0/sqlite/kms.db) | [dump](5.20.0/postgresql/dump.sql) | [dump](5.20.0/mysql/dump.sql) | Wrapping-key ID backfill at `5.25.0`, then certificate serial-tag backfill at `5.29.0` |
-| `5.24.0` | [database](5.24.0/sqlite/kms.db) | [dump](5.24.0/postgresql/dump.sql) | [dump](5.24.0/mysql/dump.sql) | Both backfills, immediately before the wrapping-key ID change |
-| `5.28.0` | [database](5.28.0/sqlite/kms.db) | [dump](5.28.0/postgresql/dump.sql) | [dump](5.28.0/mysql/dump.sql) | Certificate serial-tag backfill only; the wrapping-key ID marker is already `true` |
-| `5.29.0` | [database](5.29.0/sqlite/kms.db) | — | — | No data step; both completion markers and the certificate serial tag are already present |
+| Released image | SQLite | PostgreSQL | MySQL | Redis | Steps exercised |
+|---|---|---|---|---|---|
+| `5.14.0` | — | [dump](5.14.0/postgresql/dump.sql) | — | — | `json` to `jsonb` attributes conversion at `5.15.0`, then the two steps below |
+| `5.20.0` | [database](5.20.0/sqlite/kms.db) | [dump](5.20.0/postgresql/dump.sql) | [dump](5.20.0/mysql/dump.sql) | [dump](5.20.0/redis/dump.bin) | Wrapping-key ID backfill at `5.25.0`, then certificate serial-tag backfill at `5.29.0` |
+| `5.24.0` | [database](5.24.0/sqlite/kms.db) | [dump](5.24.0/postgresql/dump.sql) | [dump](5.24.0/mysql/dump.sql) | [dump](5.24.0/redis/dump.bin) | Both backfills, immediately before the wrapping-key ID change |
+| `5.28.0` | [database](5.28.0/sqlite/kms.db) | [dump](5.28.0/postgresql/dump.sql) | [dump](5.28.0/mysql/dump.sql) | [dump](5.28.0/redis/dump.bin) | Certificate serial-tag backfill only; the wrapping-key ID marker is already `true` |
+| `5.29.0` | [database](5.29.0/sqlite/kms.db) | — | — | — | No data step; both completion markers and the certificate serial tag are already present |
 
-The `5.20.0`, `5.24.0`, `5.28.0`, and `5.29.0` databases are
-unversioned: none has a `db_version` row. The `5.20.0` and `5.24.0`
+The `5.20.0`, `5.24.0`, `5.28.0`, and `5.29.0` SQL databases are
+unversioned: none has a `db_version` row. The `5.20.0`, `5.24.0`, and `5.28.0`
+Redis dumps record their creation version in `db_version` (`5.20.0`, `5.24.0`,
+`5.28.0`) and `db_state = "ready"`. The `5.20.0` and `5.24.0`
 databases have neither a `wrapping_key_id` column nor its completion marker.
 Only the `5.29.0` SQLite database has the certificate serial-tag completion
 marker and `_serial=` tags on `mig_cert` and `bulk_cert_2`.
@@ -30,7 +32,7 @@ marker and `_serial=` tags on `mig_cert` and `bulk_cert_2`.
 The `5.14.0` PostgreSQL database is versioned below the `5.20.0` baseline: it
 records `db_version = 5.14.0` and `db_state = "ready"`, stores `attributes` as
 `json`, and has no `wrapping_key_id` column. Only PostgreSQL has a step older
-than `5.20.0`, so `5.14.0` exists for PostgreSQL alone. No PostgreSQL or MySQL
+than `5.20.0`, so `5.14.0` exists for PostgreSQL alone. No PostgreSQL, MySQL, or Redis
 fixture has the certificate serial-tag completion marker or `_serial=` tags on
 `mig_cert` and `bulk_cert_2`. On PostgreSQL, every fixture except `5.14.0`
 already stores `attributes` as `jsonb`.
@@ -74,3 +76,7 @@ The servers run `postgres:18` and `mysql:8.0`. Each dump is taken after stopping
 
 - PostgreSQL: `pg_dump --no-owner --no-privileges --inserts`. `pg_dump` 17.6 and later bracket the dump in `\restrict` and `\unrestrict` psql meta-commands, which no SQL driver can execute: the generator deletes them and fails on any other line starting with `\`. The dump sets `search_path` to an empty string, so restore it on a dedicated connection, never on a pooled one.
 - MySQL: `mysqldump --no-tablespaces --skip-add-locks --skip-lock-tables --skip-comments --set-gtid-purged=OFF`. Percona XtraDB Cluster rejects `LOCK TABLES` with `pxc_strict_mode = ENFORCING`. The dumps restore unchanged on MySQL 8.0, MariaDB 11.4, and Percona XtraDB Cluster 8.0 with `pxc_strict_mode = ENFORCING`.
+
+## Redis dumps
+
+The Redis fixtures run against `redis:6.2-alpine` with master password `kms-fixture`. Each `dump.bin` file stores all keys in sorted order as `<u64_le key_len><key_bytes><u64_le value_len><DUMP_bytes>` using RDB format version 9, which restores with `RESTORE` on Redis 6.0, 6.2, 7.x, and 8.x.
