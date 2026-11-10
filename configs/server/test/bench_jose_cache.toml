@@ -1,4 +1,4 @@
-# Benchmark KMS server — plain HTTP, no authentication, public JWKS endpoint enabled.
+# Benchmark KMS server — plain HTTP, no authentication.
 # Bound to port 12100 (replaced at runtime by a free port).
 # Loaded by .mise/tasks/bench/jose-cache, which also replaces sqlite_path and
 # disable_unwrapped_cache (false = JOSE CEK cache on, true = UnwrappedCache and CEK cache off).
@@ -11,6 +11,3 @@ hostname = "127.0.0.1"
 database_type = "sqlite"
 sqlite_path = "/tmp/kms_bench_jose_cache"
 disable_unwrapped_cache = false
-
-[jwks_endpoint]
-jwks_endpoint_enabled = true
