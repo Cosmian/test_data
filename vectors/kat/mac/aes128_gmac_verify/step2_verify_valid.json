@@ -1,0 +1,35 @@
+{
+  "tag": "MACVerify",
+  "value": [
+    {
+      "tag": "UniqueIdentifier",
+      "type": "TextString",
+      "value": "{{key_id}}"
+    },
+    {
+      "tag": "CryptographicParameters",
+      "value": [
+        {
+          "tag": "BlockCipherMode",
+          "type": "Enumeration",
+          "value": "GCM"
+        },
+        {
+          "tag": "CryptographicAlgorithm",
+          "type": "Enumeration",
+          "value": "AES"
+        }
+      ]
+    },
+    {
+      "tag": "Data",
+      "type": "ByteString",
+      "value": "7A43EC1D9C0A5A78A0B16533A6213CAB"
+    },
+    {
+      "tag": "MACData",
+      "type": "ByteString",
+      "value": "E0E00F19FED7BA0136A797F3209FCC8D3675ED938E9C7166709DD946"
+    }
+  ]
+}
