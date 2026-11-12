@@ -1,0 +1,33 @@
+# Test KMS server — plain HTTP, Vault KV v2-compatible store, `X-Vault-Token` authentication.
+# Bound to port 12007; the token verifier URL points to port 12008.
+# Loaded by .mise/tasks/test/interop/openbao (also through test:db:openbao-psql/mysql) and
+# .mise/scripts/test/test_secret_rotation.sh. Both copy it and set port, paths and
+# vault_auth_verifier_url to the OpenBao token-lookup proxy they start
+# (.mise/scripts/test/bao_verifier.sh). No paired Auth Verifier fixture: the token verifier is a
+# throw-away OpenBao dev server. database_url is read only when a caller switches database_type
+# to "postgresql" or "mysql".
+
+default_username = "tech@cosmian.com"
+
+[http]
+port = 12007
+hostname = "127.0.0.1"
+
+[db]
+database_type = "sqlite"
+database_url = "postgresql://kms:kms@127.0.0.1:5432/kms"
+sqlite_path = "./sqlite-data-vault-kv-tests"
+clear_database = true
+
+[workspace]
+root_data_path = "/tmp/kms_test_workspace_12007"
+tmp_path = "/tmp"
+
+[kv]
+kv_enabled = true
+kv_mount = "kv"
+kv_ttl_check_interval_secs = 1
+
+[vault]
+vault_api_enabled = true
+vault_auth_verifier_url = "http://127.0.0.1:12008"
