@@ -1,0 +1,20 @@
+# Benchmark KMS server for `mise run bench:jose-cek-switch` (.mise/tasks/bench/jose-cek-switch):
+# one copy per server; the task replaces port, sqlite_path, hsm_model, hsm_slot, hsm_password.
+# Plain HTTP, no authentication; RSA key pair lives in the HSM (hsm::<slot>::...).
+# cek_cache debug logging is on so the task can count "JOSE CEK cached for" lines (one per HSM unwrap).
+default_username = "admin"
+hsm_model = "kryoptic"
+hsm_admin = ["admin"]
+hsm_slot = [1]
+hsm_password = ["12345678"]
+
+[http]
+port = 12101
+hostname = "127.0.0.1"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "/tmp/kms_bench_jose_cek_switch"
+
+[logging]
+rust_log = "info,cosmian_kms_server::routes::jose::cek_cache=debug"
