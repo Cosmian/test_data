@@ -11,11 +11,11 @@ default_username = "tech@cosmian.com"
 
 [http]
 port = 12007
-hostname = "127.0.0.1"
+hostname = "0.0.0.0"
+cors_allowed_origins = ["http://localhost:12007", "http://192.168.1.17:12007", "http://localhost:5173"]
 
 [db]
 database_type = "sqlite"
-database_url = "postgresql://kms:kms@127.0.0.1:5432/kms"
 sqlite_path = "./sqlite-data-vault-kv-tests"
 clear_database = true
 
@@ -31,3 +31,6 @@ kv_ttl_check_interval_secs = 1
 [vault]
 vault_api_enabled = true
 vault_auth_verifier_url = "http://127.0.0.1:12008"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
