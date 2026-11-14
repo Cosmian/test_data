@@ -1,9 +1,9 @@
 name = "Baseline: AES-256-GCM Encrypt/Decrypt without KEK (no HSM)"
 description = """
 Imports the same AES-256 key as kek_encrypt_decrypt scenario but on a plain SQLite
-server without any HSM or KEK. Encrypts with the same fixed IV and verifies the
-same deterministic ciphertext is produced. This confirms the crypto result is
-identical regardless of whether a KEK wraps the key at rest.
+server without any HSM or KEK. The server generates the IV (a FIPS build refuses a
+caller-chosen one); the ciphertext is decrypted back with the returned IV, tag and AAD.
+This confirms the round trip is identical regardless of whether a KEK wraps the key at rest.
 """
 backends = ["sqlite"]
 
@@ -18,12 +18,10 @@ key_id = "UniqueIdentifier"
 operation = "Encrypt"
 request = "step2_encrypt.json"
 assert_success = true
-[steps.assert_fields]
-Data = "522DC1F099567D07F47F37A32A84427D643A8CDCBFE5C0C97598A2BD2555D1AA8CB08E48590DBB3DA7B08B1056828838C5F61E6393BA7A0ABCC9F662898015AD"
-AuthenticatedEncryptionTag = "2DF7CD675B4F09163B41EBF980A7F638"
 [steps.capture]
 ciphertext = "Data"
 auth_tag = "AuthenticatedEncryptionTag"
+iv = "IVCounterNonce"
 
 [[steps]]
 operation = "Decrypt"

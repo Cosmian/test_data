@@ -8,6 +8,7 @@ on HSM-resident keys.
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
 backends = ["sqlite"]
+fips_excluded_hsm_models = ["softhsm2", "kryoptic"]
 
 [identities.owner]
 client_cert = "test_data/certificates/client_server/owner/owner.client.acme.com.crt"

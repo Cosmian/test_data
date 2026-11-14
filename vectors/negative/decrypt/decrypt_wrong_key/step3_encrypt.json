@@ -25,11 +25,6 @@
       "tag": "Data",
       "type": "ByteString",
       "value": "48656C6C6F"
-    },
-    {
-      "tag": "IVCounterNonce",
-      "type": "ByteString",
-      "value": "000102030405060708090A0B"
     }
   ]
 }
