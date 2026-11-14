@@ -50,12 +50,13 @@ jwt_auth_provider = [
 
 # OPA evaluates test_data/opa/kms.rego for the operations routed through it.
 # `opa` is the Compose service name; patch it to http://127.0.0.1:8181 on a host.
-# The KMS sends no credentials to OPA and trusts its answers. Cleartext http://
-# is acceptable only on the private Compose network or the host loopback. The
-# server logs a SECURITY warning for any host other than localhost or a loopback
-# IP, so this Compose service name triggers it: the warning is expected here
-# because the traffic never leaves the private network. Anywhere else, use an
-# https:// proxy that authenticates callers.
+# The KMS has no OPA-specific authentication (no bearer token, no client
+# certificate) and trusts OPA's answers. Cleartext http:// is acceptable only on
+# the private Compose network or the host loopback. The server logs a SECURITY
+# warning for any host other than localhost or a loopback IP, so this Compose
+# service name triggers it: the warning is expected here because the traffic
+# never leaves the private network. Anywhere else, use an https:// proxy that
+# authenticates callers.
 [opa]
 opa_url  = "http://opa:8181"
 opa_mode = "exclusive"
