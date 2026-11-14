@@ -7,6 +7,7 @@ Tests: HSM-resident symmetric key creation + oracle-delegated encrypt/decrypt.
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
 backends = ["sqlite"]
+fips_excluded_hsm_models = ["softhsm2", "kryoptic"]
 
 # Cleanup: destroy key from any prior run (may not exist)
 [[steps]]

@@ -1,0 +1,17 @@
+name = "Negative (FIPS): Encrypt GCM With A Truncated Tag"
+description = "A FIPS build seals AES-GCM with the full 16-byte tag only (SP 800-38D 5.2.1.2)"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = false
+assert_error_reason = "Bad_Cryptographic_Parameters"
+assert_error_contains = "tag"

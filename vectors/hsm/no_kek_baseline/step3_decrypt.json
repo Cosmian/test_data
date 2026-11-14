@@ -10,7 +10,7 @@
       ]
     },
     { "tag": "Data", "type": "ByteString", "value": "{{ciphertext}}" },
-    { "tag": "IVCounterNonce", "type": "ByteString", "value": "CAFEBABEFACEDBADDECAF888" },
+    { "tag": "IVCounterNonce", "type": "ByteString", "value": "{{iv}}" },
     { "tag": "AuthenticatedEncryptionTag", "type": "ByteString", "value": "{{auth_tag}}" },
     { "tag": "AuthenticatedEncryptionAdditionalData", "type": "ByteString", "value": "FEEDFACEDEADBEEFFEEDFACEDEADBEEFABADDAD2" }
   ]

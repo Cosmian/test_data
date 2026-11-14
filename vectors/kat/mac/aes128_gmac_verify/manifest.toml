@@ -1,0 +1,23 @@
+name = "KAT: AES-128-GMAC MAC Verify (NIST CAVP GCM, PTlen=0)"
+description = "AES-GMAC is the GCM tag over the data as AAD; MAC Data is IV (12 bytes) || tag (16 bytes). A CAVP GCM vector with empty plaintext verifies, a flipped tag bit does not; MAC output is random-IV and so is checked in the server unit tests"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "MACVerify"
+request = "step2_verify_valid.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Valid"
+
+[[steps]]
+operation = "MACVerify"
+request = "step3_verify_tampered.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Invalid"
