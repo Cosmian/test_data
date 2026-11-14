@@ -3,14 +3,19 @@
 # Endpoint evaluated by KMS: POST /v1/data/kms/allow
 #
 # Input document (all fields are strings unless noted):
-#   input.user            — authenticated identity (JWT sub, TLS CN, API-token id)
-#   input.user_domain     — domain from `as_domain` JWT private claim; "" for non-JWT
+#   input.user            — authenticated identity: JWT `email` claim (falling back to `sub`),
+#                           TLS client-certificate CN, or API-token id
+#   input.user_domain     — domain from the `as_rid` JWT private claim (`as_domain` is accepted
+#                           as a legacy alias); "" when the token has no domain claim and for
+#                           non-JWT auth schemes
 #   input.roles           — array of role strings from JWT `roles` claim (RFC 9068).
 #                           For non-JWT auth schemes (mTLS, API token) this is []
 #                           and all role-based rules deny (fail-closed).
 #   input.operation       — KMIP operation name in lowercase snake_case, e.g. "create", "get_attributes"
 #   input.object_uid      — UID of the target KMIP object ("*" for object-less ops)
-#   input.object_domain   — domain the target object belongs to ("" for object-less ops)
+#   input.object_domain   — domain the target object was stamped with at creation ("" when the
+#                           object carries no domain); for object-less ops the KMS sends the
+#                           caller's own domain
 #   input.is_owner        — boolean: true when the caller owns the object
 #
 # Role names (defined in the auth server's realm configuration, carried in JWT):
@@ -102,12 +107,14 @@ allow if {
 # (NIST SP 800-57 Part 2 §4.3 "Audit and Compliance Officer";
 #  NIST SP 800-53 AU-9; PCI-DSS v4.0 Req 10)
 #
+# `get` is deliberately absent: it returns the key material, which an auditor
+# does not need to inspect the state of the keys (`get_attributes` does).
+#
 # SSD constraint: must not be the same identity as CryptoOfficer in the same
 # domain — enforced at role-assignment time, not in this policy.
 # ---------------------------------------------------------------------------
 auditor_ops := {
     "locate",
-    "get",
     "get_attributes",
     "list_access",
     "query_access",
@@ -129,7 +136,7 @@ user_ops := {
     "encrypt",
     "decrypt",
     "sign",
-    "verify",
+    "signature_verify",
     "mac",
     "mac_verify",
     "derive_key",
@@ -147,16 +154,19 @@ allow if {
 
 # ---------------------------------------------------------------------------
 # Helper: the caller's domain and the object's domain are the same.
-# SuperAdmin rules and object-less operations (object_domain == "") are
-# handled by their own rules above and do not rely on this helper.
+# Both must be non-empty. A caller without a domain claim (and every non-JWT caller),
+# or an object that was never stamped with a domain, never matches: without this check
+# "" == "" would let any role-holder without a domain reach every unstamped object of
+# every tenant. The owner and SuperAdmin rules above do not rely on this helper.
 # ---------------------------------------------------------------------------
 same_domain if {
+    input.user_domain != ""
     input.user_domain == input.object_domain
 }
 
 # ---------------------------------------------------------------------------
 # Debug rule: reason for the access decision.
-# Query via POST /v1/data/kms/reason
+# Query via POST /v1/data/kms/reasons
 # Returns a set of matching reasons (avoids Rego "complete rule" conflicts).
 # ---------------------------------------------------------------------------
 reasons contains "owner"                  if { input.is_owner == true }
