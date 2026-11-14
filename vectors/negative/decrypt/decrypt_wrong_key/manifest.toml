@@ -21,6 +21,7 @@ request = "step3_encrypt.json"
 assert_success = true
 [steps.capture]
 ciphertext = "Data"
+iv = "IVCounterNonce"
 tag = "AuthenticatedEncryptionTag"
 
 [[steps]]
