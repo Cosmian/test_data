@@ -3,8 +3,11 @@ description = """
 OPA exclusive mode — SuperAdmin cross-domain positive test.
 
 A CryptoOfficer from realm `kms-opa-other` (domain=kms-opa-other) creates an AES key.
-A SuperAdmin (kms-opa-test realm, no domain restriction) then calls `Get` and `Destroy`
-on that key and both succeed.
+A SuperAdmin (kms-opa-test realm, no domain restriction) then calls `Get` on that key
+and it succeeds. The owner finally destroys its key (cleanup).
+
+The server does not query OPA for `Destroy` (it is authorized from native ownership and
+grants), so a cross-domain `Destroy` by the SuperAdmin is not part of this vector.
 
 The `SuperAdmin` rule in kms.rego is unconditional: `allow if { input.roles[_] ==
 "SuperAdmin" }`.  The `same_domain` helper is NOT invoked for this role, so
@@ -47,9 +50,9 @@ request = "step2_get.json"
 identity = "super_admin"
 assert_success = true
 
-# Step 3: SuperAdmin destroys the key across domain boundaries → allowed.
+# Step 3: the owner destroys its own key (cleanup); OPA is not queried for Destroy.
 [[steps]]
 operation = "Destroy"
 request = "step3_destroy.json"
-identity = "super_admin"
+identity = "other_domain"
 assert_success = true
