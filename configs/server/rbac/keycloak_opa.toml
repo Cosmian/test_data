@@ -15,8 +15,12 @@
 # Pairing:  Keycloak realm `deploy/rbac_rego/keycloak/kms-realm.json` (issuer,
 #           audience, group names) and the OPA policy `test_data/opa/kms.rego`.
 #
-# Authorization model: exclusive — OPA is the only authority. Native KMS
-# grants are ignored; the object owner is always allowed by the policy.
+# Authorization model: exclusive — OPA is the only authority for the
+# operations the server routes through it (Create, Get, attribute changes...);
+# the policy always allows the object owner and every SuperAdmin. Native KMS
+# grants are ignored for those operations. Encrypt, Decrypt, Sign, MAC, Revoke,
+# Destroy, Rekey and Locate never reach OPA: they are authorized from the native
+# ownership and grants only (see `documentation/docs/configuration/authorization/mode2.md`).
 # Edit `opa_mode` to "enforcing" to try the two-gate model instead.
 # =============================================================================
 
@@ -44,8 +48,14 @@ jwt_auth_provider = [
   "https://keycloak.localhost:8443/realms/kms,https://keycloak.localhost:8443/realms/kms/protocol/openid-connect/certs,cosmian-kms",
 ]
 
-# OPA evaluates test_data/opa/kms.rego on every KMIP operation.
+# OPA evaluates test_data/opa/kms.rego for the operations routed through it.
 # `opa` is the Compose service name; patch it to http://127.0.0.1:8181 on a host.
+# The KMS sends no credentials to OPA and trusts its answers. Cleartext http://
+# is acceptable only on the private Compose network or the host loopback. The
+# server logs a SECURITY warning for any host other than localhost or a loopback
+# IP, so this Compose service name triggers it: the warning is expected here
+# because the traffic never leaves the private network. Anywhere else, use an
+# https:// proxy that authenticates callers.
 [opa]
 opa_url  = "http://opa:8181"
 opa_mode = "exclusive"
