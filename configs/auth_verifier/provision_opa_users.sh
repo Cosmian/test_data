@@ -31,7 +31,10 @@
 #   export KMS_TEST_OPA_OTHER_DOMAIN_JWT="…"
 #
 # Human-readable status messages are written to STDERR so they do not
-# interfere with `eval "$(…)"`.
+# interfere with `eval "$(…)"`.  Every value printed on STDOUT is checked to be a
+# JWT (three base64url segments) first, so the output can never carry shell
+# metacharacters into the caller's `eval`.  TLS verification is always on: the
+# server certificate must chain to ${CA_CERT}.
 #
 # ── Usage ─────────────────────────────────────────────────────────────────────
 #
@@ -50,11 +53,15 @@
 #   REALM_A    — primary realm ID                 (default: kms-opa-test)
 #   REALM_B    — secondary realm ID               (default: kms-opa-other)
 #   PASSWORD   — password for all provisioned users (default: change_me)
+#   ADMIN_PASSWORD — password of the built-in `admin` super-admin (default: change_me)
 #   CA_CERT    — path to the server CA certificate
 #                (default: authentication/server/src/tests/certificates/ec/auth.ca.pem
 #                 relative to the repo root; override via env when running from an
 #                 arbitrary directory)
 #   REPO_ROOT  — repository root path              (default: auto-detected)
+#
+# Requires `curl` and `jq`. The request bodies follow the auth verifier 0.5.0 API
+# (`password_input`; the realm ID is emitted as the `as_rid` JWT claim).
 
 set -euo pipefail
 
@@ -62,7 +69,9 @@ set -euo pipefail
 AUTH_URL="${AUTH_URL:-https://127.0.0.1:8443}"
 REALM_A="${REALM_A:-kms-opa-test}"
 REALM_B="${REALM_B:-kms-opa-other}"
+# Obviously fake fixture credentials for a throw-away test auth verifier.
 PASSWORD="${PASSWORD:-change_me}"
+ADMIN_PASSWORD="${ADMIN_PASSWORD:-change_me}"
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../../../.." && pwd)}"
 CA_CERT="${CA_CERT:-${REPO_ROOT}/authentication/server/src/tests/certificates/ec/auth.ca.pem}"
 
@@ -76,46 +85,38 @@ log()  { echo "$*" >&2; }
 warn() { echo "  ⚠  $*" >&2; }
 fail() { echo "  ✗  $*" >&2; exit 1; }
 
-# Convert a plain-text password to a JSON byte-array for the auth verifier API.
-# The UserPass endpoint expects Vec<u8> (Rust serde_json → array of integers).
-str_to_json_bytes() {
-    printf '%s' "$1" \
-        | od -v -tu1 -An \
-        | tr -s ' \n' ' ' \
-        | sed 's/^ //; s/ $//' \
-        | tr ' ' ','
-}
+command -v jq >/dev/null || fail "jq is required to build the JSON request bodies"
 
-# POST with admin session cookie; non-2xx responses are ignored (idempotent).
-admin_post_idempotent() {
-    local path="$1" body="$2"
-    curl -sk --cacert "${CA_CERT}" \
-        -b "${COOKIE_JAR}" -c "${COOKIE_JAR}" \
-        -o /dev/null \
-        -H "Content-Type: application/json" \
-        -X POST "${AUTH_URL}${path}" \
-        -d "${body}" || true
-}
-
-# DELETE — idempotent (404 is fine).
-admin_delete_idempotent() {
-    local path="$1"
-    curl -sk --cacert "${CA_CERT}" \
-        -b "${COOKIE_JAR}" -c "${COOKIE_JAR}" \
-        -o /dev/null \
-        -X DELETE "${AUTH_URL}${path}" || true
+# Call the admin API with the super-admin session cookie. The HTTP status must match the
+# regular expression in $4, otherwise the script aborts with the server's message: a changed
+# API must never be swallowed silently.
+admin_call() {
+    local method="$1" path="$2" body="$3" accepted="$4"
+    local response status
+    local args=(-s --cacert "${CA_CERT}" -b "${COOKIE_JAR}" -c "${COOKIE_JAR}"
+        -w $'\n%{http_code}' -X "${method}")
+    if [[ -n "${body}" ]]; then
+        args+=(-H "Content-Type: application/json" -d "${body}")
+    fi
+    response=$(curl "${args[@]}" "${AUTH_URL}${path}") \
+        || fail "${method} ${path}: the request could not be sent to ${AUTH_URL}"
+    status="${response##*$'\n'}"
+    if [[ ! "${status}" =~ ${accepted} ]]; then
+        local message="${response%$'\n'*}"
+        fail "${method} ${path} → HTTP ${status}: ${message:0:200}"
+    fi
 }
 
 # Login and return the JWT from the `_ea_` cookie via STDOUT.
 user_login_jwt() {
-    local realm="$1" username="$2" ******
+    local realm="$1" username="$2" password="$3"
     local cookie_output
     cookie_output=$(mktemp /tmp/opa-login-XXXXXX.txt)
     # shellcheck disable=SC2064
     trap "rm -f '${cookie_output}'" RETURN
 
     local http_status
-    http_status=$(curl -sk --cacert "${CA_CERT}" \
+    http_status=$(curl -s --cacert "${CA_CERT}" \
         -c "${cookie_output}" \
         -o /dev/null -w "%{http_code}" \
         -u "${username}:${password}" \
@@ -132,6 +133,11 @@ user_login_jwt() {
     if [[ -z "${jwt}" ]]; then
         fail "no '_ea_' cookie in login response for '${username}' in '${realm}'"
     fi
+    # The value ends up inside the caller's `eval "$(…)"`: refuse anything that is
+    # not exactly three base64url segments rather than trusting the server's cookie.
+    if [[ ! "${jwt}" =~ ^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$ ]]; then
+        fail "'_ea_' cookie for '${username}' in '${realm}' is not a JWT"
+    fi
     printf '%s' "${jwt}"
 }
 
@@ -141,10 +147,10 @@ log "Auth Verifier: ${AUTH_URL}"
 log "Realms: ${REALM_A} (primary)  ${REALM_B} (cross-domain)"
 log ""
 
-http_status=$(curl -sk --cacert "${CA_CERT}" \
+http_status=$(curl -s --cacert "${CA_CERT}" \
     -c "${COOKIE_JAR}" -b "${COOKIE_JAR}" \
     -o /dev/null -w "%{http_code}" \
-    -u "admin:change_me" \
+    -u "admin:${ADMIN_PASSWORD}" \
     -H "Content-Type: application/json" \
     -X POST "${AUTH_URL}/login?realm=_" \
     -d '{"public_key_pem":null,"totp_code":null}')
@@ -153,45 +159,48 @@ if [[ "${http_status}" != 2* ]]; then
 fi
 log "  ✓ super-admin authenticated"
 
-# ── Step 2: Create realms (idempotent) ───────────────────────────────────────
+# ── Step 2: Create realms (idempotent: 409 means the realm already exists) ──
 for realm in "${REALM_A}" "${REALM_B}"; do
-    admin_post_idempotent "/admins/realms" \
-        "{\"id\":\"${realm}\",\"auth_params\":{\"username_password_params\":{\"allow_expired_passwords\":false}},\"session_max_age_seconds\":3600,\"session_max_stale_age_seconds\":7200}"
+    body=$(jq -nc --arg id "${realm}" \
+        '{id: $id, auth_params: {username_password_params: {allow_expired_passwords: false}},
+          session_max_age_seconds: 3600, session_max_stale_age_seconds: 7200}')
+    admin_call POST "/admins/realms" "${body}" '^(201|409)$'
     log "  ✓ realm '${realm}' ready"
 done
 
-# ── Step 3: Create realm admins (idempotent) ─────────────────────────────────
-admin_post_idempotent "/admins" \
-    '{"id":"kms-opa-officer","realms":["'"${REALM_A}"'"],"userpass":"kms-opa-officer"}'
-admin_post_idempotent "/admins" \
-    '{"id":"kms-opa-other-officer","realms":["'"${REALM_B}"'"],"userpass":"kms-opa-other-officer"}'
+# No realm admin is created on purpose: since auth verifier 0.5.0 an admin scoped to a realm
+# owns it exclusively, and the built-in super admin then gets HTTP 403 when it manages that
+# realm's users (which would also break re-running this script).
 
-# ── Step 4: Create users (delete-then-create for idempotency) ────────────────
+# ── Step 3: Create users (delete-then-create for idempotency) ────────────────
 #
-# Format: "username:password:realm:roles_json_array"
+# Format: "username:realm:roles_json_array"; every user gets ${PASSWORD}.
+# The realm ID is the user's domain: the auth verifier emits it as the `as_rid` JWT claim.
 # Empty roles array ("[]") → OPA deny edge-case.
 # Unknown role ("Hacker") → OPA deny edge-case (no matching rule in kms.rego).
 USERS=(
-    "kms-opa-super-admin:${PASSWORD}:${REALM_A}:[\"SuperAdmin\"]"
-    "kms-opa-officer:${PASSWORD}:${REALM_A}:[\"CryptoOfficer\"]"
-    "kms-opa-user:${PASSWORD}:${REALM_A}:[\"User\"]"
-    "kms-opa-auditor:${PASSWORD}:${REALM_A}:[\"Auditor\"]"
-    "kms-opa-no-roles:${PASSWORD}:${REALM_A}:[]"
-    "kms-opa-unknown-role:${PASSWORD}:${REALM_A}:[\"Hacker\"]"
-    "kms-opa-domain-admin-other:${PASSWORD}:${REALM_B}:[\"DomainAdmin\"]"
-    "kms-opa-other-officer:${PASSWORD}:${REALM_B}:[\"CryptoOfficer\"]"
+    "kms-opa-super-admin:${REALM_A}:[\"SuperAdmin\"]"
+    "kms-opa-officer:${REALM_A}:[\"CryptoOfficer\"]"
+    "kms-opa-user:${REALM_A}:[\"User\"]"
+    "kms-opa-auditor:${REALM_A}:[\"Auditor\"]"
+    "kms-opa-no-roles:${REALM_A}:[]"
+    "kms-opa-unknown-role:${REALM_A}:[\"Hacker\"]"
+    "kms-opa-domain-admin-other:${REALM_B}:[\"DomainAdmin\"]"
+    "kms-opa-other-officer:${REALM_B}:[\"CryptoOfficer\"]"
 )
 
 for entry in "${USERS[@]}"; do
-    IFS=: read -r username password realm roles <<< "${entry}"
-    admin_delete_idempotent "/realms/${realm}/userpass/${username}"
-    password_bytes="[$(str_to_json_bytes "${password}")]"
-    admin_post_idempotent "/realms/${realm}/userpass" \
-        "{\"realm\":\"${realm}\",\"username\":\"${username}\",\"password\":${password_bytes},\"change_password\":false,\"roles\":${roles}}"
+    IFS=: read -r username realm roles <<< "${entry}"
+    admin_call DELETE "/realms/${realm}/userpass/${username}" "" '^204$'
+    body=$(jq -nc --arg realm "${realm}" --arg username "${username}" \
+        --arg password "${PASSWORD}" --argjson roles "${roles}" \
+        '{realm: $realm, username: $username, password_input: {plaintext: $password},
+          change_password: false, roles: $roles}')
+    admin_call POST "/realms/${realm}/userpass" "${body}" '^201$'
     log "  ✓ ${username} (${roles}) → realm '${realm}'"
 done
 
-# ── Step 5: Login as each user, capture JWTs ─────────────────────────────────
+# ── Step 4: Login as each user, capture JWTs ─────────────────────────────────
 log ""
 log "Obtaining JWTs…"
 
@@ -206,7 +215,7 @@ OTHER_OFFICER_JWT=$(user_login_jwt   "${REALM_B}" "kms-opa-other-officer"       
 
 log "  ✓ all JWTs obtained"
 
-# ── Step 6: Summary table (to STDERR) ────────────────────────────────────────
+# ── Step 5: Summary table (to STDERR) ────────────────────────────────────────
 log ""
 log "  Realm           Username                      Password      Role"
 log "  ──────────────  ────────────────────────────  ────────────  ─────────────────────"
