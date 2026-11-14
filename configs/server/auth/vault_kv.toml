@@ -11,11 +11,12 @@ default_username = "tech@cosmian.com"
 
 [http]
 port = 12007
-hostname = "0.0.0.0"
-cors_allowed_origins = ["http://localhost:12007", "http://192.168.1.17:12007", "http://localhost:5173"]
+hostname = "127.0.0.1"
+cors_allowed_origins = ["http://localhost:12007", "http://localhost:5173"]
 
 [db]
 database_type = "sqlite"
+database_url = "postgresql://kms:kms@127.0.0.1:5432/kms"
 sqlite_path = "./sqlite-data-vault-kv-tests"
 clear_database = true
 
