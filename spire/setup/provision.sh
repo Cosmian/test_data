@@ -9,8 +9,8 @@
 #     `/login?realm=_` cookie handshake internally). The KMS never proxies the
 #     admin API.
 #   - Transit smoke test goes through KMS at VAULT_ADDR using an
-#     AppRole token obtained via `POST /v1/auth/approle/login` (KMS proxies
-#     /v1/auth/* to auth-verifier /auth/*).
+#     AppRole token obtained via `POST /v1/auth/approle/login` (KMS forwards
+#     /v1/auth/* unchanged to auth-verifier /v1/auth/*).
 #
 # Environment:
 #   AUTH_VERIFIER_URL -- auth-verifier base URL; default: https://localhost:8443
