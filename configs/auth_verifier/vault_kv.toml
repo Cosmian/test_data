@@ -1,0 +1,16 @@
+# Auth Verifier for .mise/tasks/test/interop/openbao-auth-verifier: issues the Vault tokens
+# (AppRole and userpass) that the KMS (configs/server/auth/vault_kv.toml) validates and to which
+# it forwards /v1/auth/*. Plain HTTP on port 12009, loopback only. The task copies this file
+# and overrides host_port and connection_url; paths are relative to the repository root.
+host_name = "127.0.0.1"
+host_port = 12009
+vault_userpass_realm = "kv-users"
+
+[session_jwt_params]
+jwt_ec_private_key = "test_data/spire/certs/jwt.key.pem"
+jwt_ec_public_key  = "test_data/spire/certs/jwt.pub.pem"
+
+[database_params]
+auto_init_schema = true
+backend          = "sqlite"
+connection_url   = "sqlite:///tmp/kms-openbao-av-test.db"
