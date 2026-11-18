@@ -29,7 +29,7 @@
     {
       "tag": "IVCounterNonce",
       "type": "ByteString",
-      "value": "000102030405060708090A0B"
+      "value": "{{iv}}"
     }
   ]
 }

@@ -37,7 +37,7 @@
         {
           "tag": "Salt",
           "type": "ByteString",
-          "value": "746573742073616C74"
+          "value": "746573742073616C7420303132333435"
         },
         {
           "tag": "IterationCount",

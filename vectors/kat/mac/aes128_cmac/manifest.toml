@@ -1,0 +1,23 @@
+name = "KAT: AES-128-CMAC MAC and MAC Verify (SP 800-38B Appendix D.1 Example 2)"
+description = "Known-Answer Test: AES-CMAC of a 16-byte message with the NIST SP 800-38B key (SP 800-38B Appendix D.1 Example 2); BlockCipherMode CMAC selects AES-CMAC"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_compute_mac.json"
+assert_success = true
+[steps.assert_fields]
+MACData = "070A16B46B4D4144F79BDD9DD04A287C"
+
+[[steps]]
+operation = "MACVerify"
+request = "step3_verify_mac.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Valid"

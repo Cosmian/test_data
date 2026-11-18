@@ -1,0 +1,42 @@
+name = "KAT: multi-part AES-128-CMAC MAC and MAC Verify (SP 800-38B Appendix D.1 Example 3)"
+description = "Multi-part MAC over the 40-byte SP 800-38B message split 16+16+8 bytes, then multi-part MAC Verify with MAC Data on the initial part"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_mac_init.json"
+assert_success = true
+[steps.capture]
+cv = "CorrelationValue"
+
+[[steps]]
+operation = "Mac"
+request = "step3_mac_next.json"
+assert_success = true
+
+[[steps]]
+operation = "Mac"
+request = "step4_mac_final.json"
+assert_success = true
+[steps.assert_fields]
+MACData = "DFA66747DE9AE63030CA32611497C827"
+
+[[steps]]
+operation = "MACVerify"
+request = "step5_verify_init.json"
+assert_success = true
+[steps.capture]
+cv = "CorrelationValue"
+
+[[steps]]
+operation = "MACVerify"
+request = "step6_verify_final.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Valid"

@@ -1,0 +1,23 @@
+name = "KAT: AES-128-GMAC MAC with caller IV (IEEE 802.1AE, OpenSSL 3.1.2 evpmac_common.txt)"
+description = "Non-FIPS only: a FIPS build refuses a caller-chosen GMAC IV (SP 800-38D 9.1, IG C.H). MAC with the IV in IVCounterNonce returns IV || tag, which verifies"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_compute_mac.json"
+assert_success = true
+[steps.assert_fields]
+MACData = "12153524C0895E81B2C28465F09478A9B09007D06F46E9B6A1DA25DD"
+
+[[steps]]
+operation = "MACVerify"
+request = "step3_verify_mac.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Valid"

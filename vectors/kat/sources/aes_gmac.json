@@ -1,0 +1,1496 @@
+[
+ {
+  "id": "openssl-gmac-1",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "77be63708971c4e240d1cb79e8d77feb",
+  "iv": "e0e00f19fed7ba0136a797f3",
+  "msg": "7a43ec1d9c0a5a78a0b16533a6213cab",
+  "tag": "209fcc8d3675ed938e9c7166709dd946",
+  "valid": true
+ },
+ {
+  "id": "openssl-gmac-2",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "ad7a2bd03eac835a6f620fdcb506b345",
+  "iv": "12153524c0895e81b2c28465",
+  "msg": "d609b1f056637a0d46df998d88e5222ab2c2846512153524c0895e8108000f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f30313233340001",
+  "tag": "f09478a9b09007d06f46e9b6a1da25dd",
+  "valid": true
+ },
+ {
+  "id": "openssl-gmac-3",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "e3c08a8f06c6e3ad95a70557b23f75483ce33021a9c72b7025666204c69c0b72",
+  "iv": "12153524c0895e81b2c28465",
+  "msg": "d609b1f056637a0d46df998d88e5222ab2c2846512153524c0895e8108000f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f30313233340001",
+  "tag": "2f0bc5af409e06d609ea8b7d0fa5ea50",
+  "valid": true
+ },
+ {
+  "id": "openssl-gmac-4",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "071b113b0ca743fecccf3d051f737382",
+  "iv": "f0761e8dcd3d000176d457ed",
+  "msg": "e20106d7cd0df0761e8dcd3d88e5400076d457ed08000f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a0003",
+  "tag": "0c017bc73b227dfcc9bafa1c41acc353",
+  "valid": true
+ },
+ {
+  "id": "openssl-gmac-5",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "691d3ee909d7f54167fd1ca0b5d769081f2bde1aee655fdbab80bd5295ae6be7",
+  "iv": "f0761e8dcd3d000176d457ed",
+  "msg": "e20106d7cd0df0761e8dcd3d88e5400076d457ed08000f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a0003",
+  "tag": "35217c774bbc31b63166bcf9d4abed07",
+  "valid": true
+ },
+ {
+  "id": "openssl-gmac-6",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "013fe00b5f11be7f866d0cbbc55a7a90",
+  "iv": "7cfde9f9e33724c68932d612",
+  "msg": "84c5d513d2aaf6e5bbd2727788e523008932d6127cfde9f9e33724c608000f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f0005",
+  "tag": "217867e50c2dad74c28c3b50abdf695a",
+  "valid": true
+ },
+ {
+  "id": "openssl-gmac-7",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "83c093b58de7ffe1c0da926ac43fb3609ac1c80fee1b624497ef942e2f79a823",
+  "iv": "7cfde9f9e33724c68932d612",
+  "msg": "84c5d513d2aaf6e5bbd2727788e523008932d6127cfde9f9e33724c608000f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f0005",
+  "tag": "6ee160e8faeca4b36c86b234920ca975",
+  "valid": true
+ },
+ {
+  "id": "openssl-gmac-8",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "88ee087fd95da9fbf6725aa9d757b0cd",
+  "iv": "7ae8e2ca4ec500012e58495c",
+  "msg": "68f2e77696ce7ae8e2ca4ec588e541002e58495c08000f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d0007",
+  "tag": "07922b8ebcf10bb2297588ca4c614523",
+  "valid": true
+ },
+ {
+  "id": "openssl-gmac-9",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpmac_common.txt (GMAC: NIST, IEEE 802.1AE)",
+  "key": "4c973dbc7364621674f8b5b89e5c15511fced9216490fb1c1a2caa0ffe0407e5",
+  "iv": "7ae8e2ca4ec500012e58495c",
+  "msg": "68f2e77696ce7ae8e2ca4ec588e541002e58495c08000f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d0007",
+  "tag": "00bda1b7e87608bcbf470f12157f4c07",
+  "valid": true
+ },
+ {
+  "id": "openssl-gcm-1-gmac",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpciph_aes_common.txt (gcm-spec / NIST), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "00000000000000000000000000000000",
+  "iv": "000000000000000000000000",
+  "msg": "",
+  "tag": "58e2fccefa7e3061367f1d57a4e7455a",
+  "valid": true
+ },
+ {
+  "id": "openssl-gcm-5-gmac",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpciph_aes_common.txt (gcm-spec / NIST), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "000000000000000000000000",
+  "msg": "",
+  "tag": "cd33b28ac773f74ba00ed1f312572435",
+  "valid": true
+ },
+ {
+  "id": "openssl-gcm-9-gmac",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpciph_aes_common.txt (gcm-spec / NIST), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "000000000000000000000000",
+  "msg": "",
+  "tag": "530f8afbc74536b9a963b4f1c4cb738b",
+  "valid": true
+ },
+ {
+  "id": "openssl-gcm-13-gmac",
+  "source": "OpenSSL 3.1.2 test/recipes/30-test_evp_data/evpciph_aes_common.txt (gcm-spec / NIST), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "00000000000000000000000000000000",
+  "iv": "000000000000000000000000",
+  "msg": "d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b391aafd255522dc1f099567d07f47f37a32a84427d643a8cdcbfe5c0c97598a2bd2555d1aa8cb08e48590dbb3da7b08b1056828838c5f61e6393ba7a0abcc9f662898015ad",
+  "tag": "5fea793a2d6f974d37e68e0cb8ff9492",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-1-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "11754cd72aec309bf52f7687212e8957",
+  "iv": "3c819d9a9bed087615030b65",
+  "msg": "",
+  "tag": "250327c674aaf477aef2675748cf6971",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-2-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "ca47248ac0b6f8372a97ac43508308ed",
+  "iv": "ffd2b598feabc9019262d2be",
+  "msg": "",
+  "tag": "60d20404af527d248d893ae495707d1a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-3-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "db1ad0bd1cf6db0b5d86efdd8914b218",
+  "iv": "36fad6acb3c98e0138aeb9b1",
+  "msg": "",
+  "tag": "5ee2ba737d3f2a944b335a81f6653cce",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-4-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "1c7135af627c04c32957f33f9ac08590",
+  "iv": "355c094fa09c8e9281178d34",
+  "msg": "",
+  "tag": "b6ab2c7d906c9d9ec4c1498d2cbb5029",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-5-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "6ca2c11205a6e55ab504dbf3491f8bdc",
+  "iv": "b1008b650a2fee642175c60d",
+  "msg": "",
+  "tag": "7a9a225d5f9a0ebfe0e69f371871a672",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-6-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "69f2ca78bb5690acc6587302628828d5",
+  "iv": "701da282cb6b6018dabd00d3",
+  "msg": "",
+  "tag": "ab1d40dda1798d56687892e2159decfd",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-7-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "dcf4e339c487b6797aaca931725f7bbd",
+  "iv": "2c1d955e35366760ead8817c",
+  "msg": "",
+  "tag": "32b542c5f344cceceb460a02938d6b0c",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-8-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "7658cdbb81572a23a78ee4596f844ee9",
+  "iv": "1c3baae9b9065961842cbe52",
+  "msg": "",
+  "tag": "70c7123fc819aa060ed2d3c159b6ea41",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-9-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "281a570b1e8f265ee09303ecae0cc46d",
+  "iv": "8c2941f73cf8713ad5bc13df",
+  "msg": "",
+  "tag": "a42e5e5f6fb00a9f1206b302edbfd87c",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-10-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "cd332a986f82d98c215278131ad387b7",
+  "iv": "1d12b259f44b873d3942bc11",
+  "msg": "",
+  "tag": "34238023648185d7ef0cfcf5836e93cc",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-11-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "80e1d98d10b27237386f029189ec0448",
+  "iv": "239ebab2f524fd62c554a190",
+  "msg": "",
+  "tag": "4c0f29d963f0ed68dccf34496cf43d00",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-12-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "40650cdb61e3e19a1a98fb4e05377d35",
+  "iv": "69f0a81aaf6bb8486282f1b9",
+  "msg": "",
+  "tag": "2657e12dec21c3ecf071af6179529fb4",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-13-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "1e89a6cd7528cce1e2b2b5f7fd2b6b52",
+  "iv": "e11fd427a782d543f78efc60",
+  "msg": "",
+  "tag": "eeedff874c8edeea53e8be2a13afd81b",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-14-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "2a7ad6146676057db777dea4683d0d45",
+  "iv": "ed721ea67456d4594aafbd51",
+  "msg": "",
+  "tag": "ee3cab5778888439d90fa718b75738ad",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-15-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "a364f494a4cd0147c34731074dc1a85b",
+  "iv": "4aa8470dd404e4054b30093a",
+  "msg": "",
+  "tag": "d8a7bba3a451902e3adc01060c3c91a7",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-16-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "77be63708971c4e240d1cb79e8d77feb",
+  "iv": "e0e00f19fed7ba0136a797f3",
+  "msg": "7a43ec1d9c0a5a78a0b16533a6213cab",
+  "tag": "209fcc8d3675ed938e9c7166709dd946",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-17-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "7680c5d3ca6154758e510f4d25b98820",
+  "iv": "f8f105f9c3df4965780321f8",
+  "msg": "c94c410194c765e3dcc7964379758ed3",
+  "tag": "94dca8edfcf90bb74b153c8d48a17930",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-18-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "a82bb1edc7c01a3689006f34bfed783e",
+  "iv": "963836b67b188becf9ba1411",
+  "msg": "9d115bb9bbd119fb777b6316065a9ac8",
+  "tag": "c491889fa3eca4544ba0d51b8e0f3837",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-19-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "b9782d0a5986c63f352d3bc4c7ecc96d",
+  "iv": "4541e15b92edea44eceb1f2a",
+  "msg": "f1a9f0723429c5b26185ac3ea7e13d7a",
+  "tag": "74d0d36949f0276670f9ddc579e94f3a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-20-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "59b95785b30f205679fc4f3f9a90102f",
+  "iv": "1908787cc1e1880a6ef5dd17",
+  "msg": "39852d3182944a5177db277b63910702",
+  "tag": "8f9a96c013992485b43e2b62745ad173",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-21-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "34dd7926ab13d4078160d87de2e3c724",
+  "iv": "c11ccdaf798ab03af2d97ef9",
+  "msg": "af698717a6d790b3bfc39195857bb5ff",
+  "tag": "48116050bbd9118270d0be252d29d5d4",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-22-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "8ec86fab55aaab0e77455e9cd3dbc78e",
+  "iv": "15fd90a9867e14f0d63b53b9",
+  "msg": "e7509e276209a6d3ecfabb53ccdcd236",
+  "tag": "d96d6ac0d309cebedeba2af9f262132f",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-23-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "66b2473d9e0121666d47633f7008eb1c",
+  "iv": "c1716c68a24d57770b867e51",
+  "msg": "c20f686317d67e53dd79bae5c46dc111",
+  "tag": "9a08616809cf15247dfeb9756ba4f609",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-24-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "5b262a9d00904d30a2587caade091381",
+  "iv": "f7bc154ca562e8f2c1845598",
+  "msg": "23112d078c9914fa3dfe5218cd191016",
+  "tag": "98854d193a06dbe32ce4497eec5c9a8b",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-25-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "2e4fb9cc320188a6f1fa89a7a252273a",
+  "iv": "7a6d4ee69c7256c14fba8f5e",
+  "msg": "80ba4a202a68c3590d6557912c6f878e",
+  "tag": "9280313273befb8afa0bceca5a966d85",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-26-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "5ea94973d8616dafa7f31db0716d1729",
+  "iv": "a05b62669d250e61b077d28a",
+  "msg": "9620baf2f58d013f8a4c4871989c1b17",
+  "tag": "7e550398dee728256d6928cdaac43b73",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-27-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "910385f6f07f9e57e483c47dd5206bcc",
+  "iv": "518f56e33658df311d42d9fe",
+  "msg": "5d157909a2a4607117e77da0e4493b88",
+  "tag": "a7041ea4a1d74d9e66b9571b59b6a1d8",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-28-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "cab3af7a15b430e034e793bb30db8ab2",
+  "iv": "963a56e2e12f387062e18498",
+  "msg": "a094a1dd1121d3aa52c81e8f10bf9f0c",
+  "tag": "1a31d295601eb3c82a54b234984ffdf5",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-29-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "89c949e9c804af014d5604b39459f2c8",
+  "iv": "d1b104c815bf1e94e28c8f16",
+  "msg": "82adcd638d3fa9d9f3e84100d61e0777",
+  "tag": "88db9d62172ed043aa10f16d227dc41b",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-30-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "a4d994c4ac5ac0f02913245714fbe235",
+  "iv": "a9472dadcca8d7e0e3b8084d",
+  "msg": "eb318b9e17575203dd29ebed20ec82f9",
+  "tag": "323df7f33694106f56739de0973216a3",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-31-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "2fb45e5b8f993a2bfebc4b15b533e0b4",
+  "iv": "5b05755f984d2b90f94b8027",
+  "msg": "e85491b2202caf1d7dce03b97e09331c32473941",
+  "tag": "c75b7832b2a2d9bd827412b6ef5769db",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-32-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "952117048f77e276c2ef6580537c1403",
+  "iv": "070b8fb46a7ad52885be1b26",
+  "msg": "34b088f982818b5f07dabe2b62f9547f4ed09912",
+  "tag": "bedd4cf30fd7a4abc49bdcc3f3b248b1",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-33-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "7f6453b39bde018560a16a2704217543",
+  "iv": "0f3eecf48d68353226a77fe4",
+  "msg": "11e4ecb256ebff56453fa2e75e43eb9d641049e6",
+  "tag": "b512623a12d5492b7d76d39be0df5777",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-34-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "9332e433bf6100c6cc23b08710627c40",
+  "iv": "aab3db3015b29d24f329beb4",
+  "msg": "bd843a08f0a822f8f4f76c3648380aab7622e719",
+  "tag": "e54f1d18c61d8be15484727605b5a5dc",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-35-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "5773750a493096a99d84c0563fc293e9",
+  "iv": "c390ed70dc9497234413ad52",
+  "msg": "6012517258716c1f0035efa60a0f36b5c65e7379",
+  "tag": "b011b264610e58082705476f040b8c86",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-36-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "41b0d0fce5d31359cfd5db4064e2d46b",
+  "iv": "b903e9d0cea25795a82e73e3",
+  "msg": "4cba501876f33e1fda9cd456e3180683e3863bd9",
+  "tag": "18bc39d0b95cf059cd8c25004f5e507c",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-37-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "4748b782e3fe5e4effeb7c67232d2b07",
+  "iv": "c5e4dcf18f86076b88a5d5e9",
+  "msg": "3b2fcad8739ed87e1d02e80845f120e249ea92b1",
+  "tag": "b8ae718e2879c9cb658d5d1122e69bb7",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-38-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "e30cc22077d5951216d07f37c51b58f9",
+  "iv": "fc583ad159b52e0b6378157e",
+  "msg": "c3cb7be8888ef44ca5aa93dde26d2751288e1f5a",
+  "tag": "a8ce25b5dc8f84e2f5dae5f085aaccd4",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-39-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "7c8b10ba75ee6ab4a997d3f598b79d40",
+  "iv": "6fb55188ddf00dde09596587",
+  "msg": "2ddc0acf9705f8d18f905b8f9d472e7dbf6b91e3",
+  "tag": "5791d3805109c5e18adff4e80906a018",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-40-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "72c7db6ca29f83641c3fff5b71c4bc30",
+  "iv": "f2000742e249ac56d5b2f65f",
+  "msg": "cd994d2d08232770927d854ef2b6ca2f087370cf",
+  "tag": "a5966df39feeba0336f0b9a3f4ffe6c3",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-41-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "2833cc10195030e4a1155532666cb049",
+  "iv": "ad802b9a5c9409fa3e7dcfcc",
+  "msg": "b3ecbea2797d006c07b8ce621be3b0eccd37c3ec",
+  "tag": "81deab8bdee0d391495eed4029a6d205",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-42-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "d8985bb5ac0258adad86660ebbc6d19f",
+  "iv": "b5ee26f8c463bbfc27115b0a",
+  "msg": "613f51f832fbf434b8e3fe9454ae46a862d831f0",
+  "tag": "fe9f0b1bdc68dee6e8dc2ce12665d336",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-43-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "9b8f6924dc22f1073c1a38448a2f0447",
+  "iv": "09cdabf87d82828eca1c0c7f",
+  "msg": "69210e4e0a1cfd5038756652790b9a8cfbbd943d",
+  "tag": "a60c104a6fb4638427a88a86c04923bd",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-44-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "72132213d5d95309bf7e10f8318d7c20",
+  "iv": "fb90bf283c5411230355d7a1",
+  "msg": "a30bb17c8089c6f5f61b250a94cbbbfdf5f2a3e6",
+  "tag": "09191af418949fe6be8dbf13e006527a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-45-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "652ffbad4e1fcbe75564395e6c1c3924",
+  "iv": "111349636d106fd5f6a1e088",
+  "msg": "5f52aa85dc3ac042647e32ada050d67e59b519aa",
+  "tag": "28d980d7bfd878c227c140de3482765b",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-46-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "99e3e8793e686e571d8285c564f75e2b",
+  "iv": "c2dd0ab868da6aa8ad9c0d23",
+  "msg": "b668e42d4e444ca8b23cfdd95a9fedd5178aa521144890b093733cf5cf22526c5917ee476541809ac6867a8c399309fc",
+  "tag": "3f4fba100eaf1f34b0baadaae9995d85",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-47-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "f8e29efd00a423c4ea9456863f83c54f",
+  "iv": "2d3cf67cbce69d639bd1c092",
+  "msg": "02c70fc8a2544619c1c3e9fce6b3c6c3bc24643e0f140e6b48ac505ea666cd9a2010c3a8e2f5f10437887fe803b54db3",
+  "tag": "963cb50aca3e09dd0d9a013c8734155f",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-48-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "00e3491dfcf3bec39c89ccfd80a5a896",
+  "iv": "29f6ff4edc4ac3e97ffb1680",
+  "msg": "73813351b39f5e4000a9ee8d2b85f131634acaede0dd25d691a2b829ad4fe9ea699f12242519847cb083b0b4d3d8b3bc",
+  "tag": "01b2e9ba719ad77c753b364ecc5aabeb",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-49-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "0ad06f4c19af1d5f602b38f86e56291c",
+  "iv": "0b235c6a75cecdfcba9001ce",
+  "msg": "7d4f26f7895b2ef3da2e4f93e411cdb74025c7759c038d872344a45ce56d92a581862c3bace039090a2ccfa43b623dcb",
+  "tag": "b4bc9ce1475d0c93dfd5a5d8d45bd8e5",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-50-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "eeeb33e0c8a406ea236a075cdbe9d6f9",
+  "iv": "b935e8eed66227836ede189a",
+  "msg": "9a4291acb9924bba4241b0c9c3c2e1262b25a7c7f02c92adeadf92254d618ab59388aa30b47eafa58899c357cf281e31",
+  "tag": "143d6954eb6fe70aff70da978ccd4509",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-51-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "600b5442a0b550a38f85d2fb0acc9c96",
+  "iv": "5e65dd6e8b20d6b2931fe6c2",
+  "msg": "461e54a092f8392466849fb0370ae30c14c1bf3987ab2ebbe98e18d13f041d09d043f7aea78bfcc42f864a9fb40f0031",
+  "tag": "2cd626f9a0686300cf23c0bc597c63b4",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-52-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "ce8d1103100fa290f953fbb439efdee4",
+  "iv": "4874c6f8082366fc7e49b933",
+  "msg": "d69d033c32029789263c689e11ff7e9e8eefc48ddbc4e10eeae1c9edbb44f04e7cc6471501eadda3940ab433d0a8c210",
+  "tag": "a5964b77af0b8aecd844d6adec8b7b1c",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-53-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "ae7114c09ffa04298834412f6a8de453",
+  "iv": "f380c2d860be2af41e1be5c6",
+  "msg": "7e16082f689c63e8adddd5cb2da610bbfb88d073cf8b204384a937aab0376523a50d3d5f1392978f79609f12df8fc288",
+  "tag": "40d3a36358a6f6caaa6af92cfd874a22",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-54-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "d8f520b6f3cf6b835ce4cce48f4cb033",
+  "iv": "019a55c98615c022afff9644",
+  "msg": "c3fb518ddb2d73417e243359a0ed8c126750eb163e7bd845637159397075e3db1db72fe2f0e13b599c333c473feb2245",
+  "tag": "467cfad5af11852d6eca289c86f967ad",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-55-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "13ba95606b01af035bf961e39852e34b",
+  "iv": "9ec9cf3b002cfed9e761934f",
+  "msg": "bb9de563836d1f1b1de964514ecebb8ad10501db562280b7bd98804814735817908b2856cafadecd40b04832fbde2bfb",
+  "tag": "172a3bcbc5001dfd3815175a88f7056c",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-56-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "1c97da5fc5a9640f289622842408cba2",
+  "iv": "6d765a988e934588163e29b7",
+  "msg": "1026a590816d2e1aa67aa0d13d50a8413af4d8ee9b1fa5ceb8deacc9f41e8e764b3ac15f98295e8800adf6a7175448cd",
+  "tag": "4945a79d5edbb934c5cf94395c359deb",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-57-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "8dd46f271a201cc21ca0823248157e6b",
+  "iv": "1821b310ce2dba999cdf7576",
+  "msg": "34ba409997ceba065f4a5457078a9e232a84f594011aecfdbfbd24a802ca129e01cb1327e265b4a9004fb4c5003fffd3",
+  "tag": "304cc2cd2fcdd4abc844bc9c1cbe0241",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-58-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "0c545d95333b6acf8b2928f3efd083de",
+  "iv": "31de89d07e7577956fa95ef3",
+  "msg": "5574d65f5afffb2d31cca8f58cf5945b83553cd45d2dba0e05fa54e42aa3f5a051e1624de16d4b93cbab7988c6d95f8c",
+  "tag": "4ed91cfe90a49900e0565697bc82b659",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-59-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "790b39f301383a82b377f585d3bf0f26",
+  "iv": "2fd9c142b5fc62e87efff1fd",
+  "msg": "45634e0afc59ae9f6e30f7f5fe43cf5a4e1f78d0aebb9e5a7ad9d86f25278e521f4845d49d6cb533cac6439839647fd0",
+  "tag": "69637c3f9233da23f8df7b09e8cfb252",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-60-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "8f63652632d07b2a4a83c26dedd32657",
+  "iv": "747bee0e1d462a9016f1468d",
+  "msg": "9c00ff969b55a497dc523fa0cedaa339dc3c6ce18e61c7bf800c361201351bc49728c3bb15067e906162ee791b8d333a",
+  "tag": "bd5a0cbf859a6133a7f2d504d97cae05",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-61-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "20b5b6b854e187b058a84d57bc1538b6",
+  "iv": "94c1935afc061cbf254b936f",
+  "msg": "ca418e71dbf810038174eaa3719b3fcb80531c7110ad9192d105eeaafa15b819ac005668752b344ed1b22faf77048baf03dbddb3b47d6b00e95c4f005e0cc9b7627ccafd3f21b3312aa8d91d3fa0893fe5bff7d44ca46f23afe0",
+  "tag": "b37286ebaf4a54e0ffc2a1deafc9f6db",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-62-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "7aa53188a9c597126a10d248603ebb62",
+  "iv": "aa45ca5dac41a825c45d36bf",
+  "msg": "417fd5147d56de0c74329597824ec2788a344fb60b403edf0187afa12e72a05009bb70f83ccad11efa487c1965cf84feac067c1ffdbf531fca97c554f875c4a1a1d3ab3c53c8a74ef3ee9415a87e231699c82d764debeda18132",
+  "tag": "997bf84654bb9616c0cc9b45f82c7673",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-63-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "72b5848ed1d2badbd427e16fc3b3e44d",
+  "iv": "a84c7e928dc6e6379a513a20",
+  "msg": "1c0dfcecbd7bb0e680ce042d08b2d9a741267bd1da768df2ba08379233a9973f14928e9da6353768b9b2601c033fd964b16a16daaa3ea35ad7cef7e31eb1f7340aa34e8bfc08b0a6e6205292570ced43316876d0d499d9192e6b",
+  "tag": "270cd786b95e6820cdb65a231b7530ed",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-64-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "6d0512ebf2e73d63f42849c57f073fd0",
+  "iv": "c1c46927c74c03f19342c33a",
+  "msg": "28bf8903b2dfb7e69f1a735121c7efe9a4c42b6a295327bceb0246c85d782ce62bf075dbdf6e8ec6589c26d30696ccceef03870bd0abfd26d30600eafc65613740b54d777d379e8aacf241ecfba11b060186ac065db171aab099",
+  "tag": "a686f5941ceb510e126a6316e3404dc0",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-65-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "6438bc79520def5db58e49639774687a",
+  "iv": "d682b47418ceb5bc09c713c2",
+  "msg": "d252b164ae559ed155c8417b96652529df151f24ccf1ce98d0c7ddf293f4f1236630a19b24dc23978d3377a099065d0ba71d4bb8a7dc0cb76760ca7c4a0e12c8cb56c6102646323c08c4f4f56226fd5b71a84590913ad20da287",
+  "tag": "04e78796dbf42e9ffa6bb9e346581f13",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-66-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "117a0aa592fff17ae36c94917db16c65",
+  "iv": "c3537be6029d54ffefab2730",
+  "msg": "29e959b96817547ae06bf85fe164e82a2693f82a7aeb66d535f0d2c3bffd1ba18e94ef457939f0c0733eda4738d136380fc876075c4943220237a5929b01b32da2bc2a6afd6ae1d89fd470093835962ff6708bb39ba365202f56",
+  "tag": "b87fcc4d5c484e68ea52c01b55ffa438",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-67-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "5d995a338ed60f8ab0b59da6c9a40c52",
+  "iv": "2723c54e31c5c57f0236e816",
+  "msg": "239c80683feb6afd38f8759a27cb5f350fbc2f757838c40858c9d08f699cc56c4236f4a77bd80df0e8e41d5f9ba732db2e0a3a5e952ede7bfdd5fcbebd23d07271134db5b82461537c47e2ca51b348b0830f5ee575ad4b4414dc",
+  "tag": "94356a3bfaf07f2ef0ebe3a507076b16",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-68-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "c8a863a1ebaf10c0fc0e80df12444e6e",
+  "iv": "c3e8cdf086827fee7095d0ea",
+  "msg": "9927da88c5d336256699c76845e946dc53c87bf0e11e4bec9450981602b32010d2b52bfc91283a6329d455598998ede2e61e352e553110154b4da5ce668d664b83f671c010bf220b7d32b34f4ca69b66cc87233d792337cb2bff",
+  "tag": "098837de27707ea3593e31ceb8276732",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-69-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "69cc28b161f214a580e6ba4bc2e3de9d",
+  "iv": "f2a566f9cf83fd280c8fe08e",
+  "msg": "f8c5263a4e06b49e184589a1e071978643c353aa27b4817fe39e45abc442e22ab5d683bcee5dbbd589fa583f171bb59536addd2b6cefd49823413005efb2a665e26a6029c927d3891cb0d4f23e8ccc60cfd02ce8978c451ddc11",
+  "tag": "c9c806cb8b1a889809695c2ec5a7a86e",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-70-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "bbf35920fcab2cedaafdf3f00321f544",
+  "iv": "2c7ee3ff1df84f3650bc9298",
+  "msg": "a75f50ba9a50f48799594b6195b3125ed92df73144bfcb624ce67323d834ba1afaf0df4c6c022c11d48bd75c86675a5927ac1250030f720f97498d4fe0787bae655dc5537ac1bcac198a893f9af7c2ef9b971dd64f7e7b62603e",
+  "tag": "c7cd3f938f4ab18642d86234edfc17ed",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-71-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "9690de669702ba72aeb934f5ac50e03c",
+  "iv": "da8713fe2b2058c438aff260",
+  "msg": "f30ee950da37c7224b5c93e9a29cafdbf8e2070f65c226244b1a683459e0c5c11c9b77c8fc286d4298a5b9cd1fee3e13d4690a88780d35b558b5d9e52b1a67fc8857076691dca7f5fe8ef22065cc5d9c003ffd25ebe23e61440e",
+  "tag": "7f92914518ddbe842b06771f64c40f59",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-72-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "e5d8c6e2ac6935c85e81ee0ef723eacf",
+  "iv": "c73140ee90cc1dcf88457da2",
+  "msg": "f6c267a6ae5ce3cf4bcdf59cfd1f777c66133e0ec4772785f33e5fa800d310b24b5773bc603a76b30fc32328a8e40f02f823a813a9e4b4fac726e992c183bd0815111c1d3a35884a4eff32027ba60dba679b469af31bc50c0591",
+  "tag": "f938fd0d8c148d81765109df66dac9aa",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-73-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "e23458f6b304c2d8feb3dedd3741bc24",
+  "iv": "4619036b50ba012fe50be1d7",
+  "msg": "74bfdc6bc4bfc38d666b985cfe043c67798b2db98f149268dba24436cab83e9a91f244ffc5748c93f8df339ae24ba4318c50da011ab368d3167c16e503309b01351a11f14d067cc6769b9989c7d952e3315011ee2ea034db8cb8",
+  "tag": "6053ab80c746821ec50c97e5a1424a85",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-74-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "5372ac5d3b08d860919110bdeb7f31df",
+  "iv": "06ca979d8c250d9b7be45573",
+  "msg": "e1f958834e63c75c8c758bafaa2f257ea5689d0d55b877b4d67b8b73c25ce24e9b094b976db920a159968da9d33c511aa8999aba42b8bb886e6545dd108693150af357496bb5898b4e8f725d50ef474afb836a3358da2217bb93",
+  "tag": "9338e14fe0b08a969a104c828528a6a4",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm128-75-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV128.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes128gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "bf1cb49e980cec0b153fe3573875ac6c",
+  "iv": "5426669d25524036fbe81e89",
+  "msg": "b336949766e9948a7e6f36a2d377b84a25c4b4988794f3deab7af4b14a12dac641e25fe2ae9ff53450ace1513acd0b284a490b455f04f40af94418c8792ec1a0983fb1d9a31d93dc3ed2c75e6a6ce092111eabad039bac2a49f6",
+  "tag": "e2996a2b3b6bf52217cfc4d0f5bb351b",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-1-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "b52c505a37d78eda5dd34f20c22540ea1b58963cf8e5bf8ffa85f9f2492505b4",
+  "iv": "516c33929df5a3284ff463d7",
+  "msg": "",
+  "tag": "bdc1ac884d332457a1d2664f168c76f0",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-2-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "5fe0861cdc2690ce69b3658c7f26f8458eec1c9243c5ba0845305d897e96ca0f",
+  "iv": "770ac1a5a3d476d5d96944a1",
+  "msg": "",
+  "tag": "196d691e1047093ca4b3d2ef4baba216",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-3-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "7620b79b17b21b06d97019aa70e1ca105e1c03d2a0cf8b20b5a0ce5c3903e548",
+  "iv": "60f56eb7a4b38d4f03395511",
+  "msg": "",
+  "tag": "f570c38202d94564bab39f75617bc87a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-4-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "7e2db00321189476d144c5f27e787087302a48b5f7786cd91e93641628c2328b",
+  "iv": "ea9d525bf01de7b2234b606a",
+  "msg": "",
+  "tag": "db9df5f14f6c9f2ae81fd421412ddbbb",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-5-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "a23dfb84b5976b46b1830d93bcf61941cae5e409e4f5551dc684bdcef9876480",
+  "iv": "5aa345908048de10a2bd3d32",
+  "msg": "",
+  "tag": "f28217649230bd7a40a9a4ddabc67c43",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-6-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "dfe928f86430b78add7bb7696023e6153d76977e56103b180253490affb9431c",
+  "iv": "1dd0785af9f58979a10bd62d",
+  "msg": "",
+  "tag": "a55eb09e9edef58d9f671d72207f8b3c",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-7-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "34048db81591ee68224956bd6989e1630fcf068d7ff726ae81e5b29f548cfcfb",
+  "iv": "1621d34cff2a5b250c7b76fc",
+  "msg": "",
+  "tag": "4992ec3d57cccfa58fd8916c59b70b11",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-8-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "a1114f8749c72b8cef62e7503f1ad921d33eeede32b0b5b8e0d6807aa233d0ad",
+  "iv": "a190ed3ff2e238be56f90bd6",
+  "msg": "",
+  "tag": "c8464d95d540fb191156fbbc1608842a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-9-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "ddbb99dc3102d31102c0e14b238518605766c5b23d9bea52c7c5a771042c85a0",
+  "iv": "95d15ed75c6a109aac1b1d86",
+  "msg": "",
+  "tag": "813d1da3775cacd78e96d86f036cff96",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-10-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "1faa506b8f13a2e6660af78d92915adf333658f748f4e48fa20135a29e9abe5f",
+  "iv": "e50f278d3662c99d750f60d3",
+  "msg": "",
+  "tag": "aec7ece66b7344afd6f6cc7419cf6027",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-11-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "f30b5942faf57d4c13e7a82495aedf1b4e603539b2e1599317cc6e53225a2493",
+  "iv": "336c388e18e6abf92bb739a9",
+  "msg": "",
+  "tag": "ddaf8ef4cb2f8a6d401f3be5ff0baf6a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-12-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "daf4d9c12c5d29fc3fa936532c96196e56ae842e47063a4b29bfff2a35ed9280",
+  "iv": "5381f21197e093b96cdac4fa",
+  "msg": "",
+  "tag": "7f1832c7f7cd7812a004b79c3d399473",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-13-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "6b524754149c81401d29a4b8a6f4a47833372806b2d4083ff17f2db3bfc17bca",
+  "iv": "ac7d3d618ab690555ec24408",
+  "msg": "",
+  "tag": "db07a885e2bd39da74116d06c316a5c9",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-14-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "cff083303ff40a1f66c4aed1ac7f50628fe7e9311f5d037ebf49f4a4b9f0223f",
+  "iv": "45d46e1baadcfbc8f0e922ff",
+  "msg": "",
+  "tag": "1687c6d459ea481bf88e4b2263227906",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-15-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "3954f60cddbb39d2d8b058adf545d5b82490c8ae9283afa5278689041d415a3a",
+  "iv": "8fb3d98ef24fba03746ac84f",
+  "msg": "",
+  "tag": "7fb130855dfe7a373313361f33f55237",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-16-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "78dc4e0aaf52d935c3c01eea57428f00ca1fd475f5da86a49c8dd73d68c8e223",
+  "iv": "d79cf22d504cc793c3fb6c8a",
+  "msg": "b96baa8c1c75a671bfb2d08d06be5f36",
+  "tag": "3e5d486aa2e30b22e040b85723a06e76",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-17-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "4457ff33683cca6ca493878bdc00373893a9763412eef8cddb54f91318e0da88",
+  "iv": "699d1f29d7b8c55300bb1fd2",
+  "msg": "6749daeea367d0e9809e2dc2f309e6e3",
+  "tag": "d60c74d2517fde4a74e0cd4709ed43a9",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-18-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "4d01c96ef9d98d4fb4e9b61be5efa772c9788545b3eac39eb1cacb997a5f0792",
+  "iv": "32124a4d9e576aea2589f238",
+  "msg": "d72bad0c38495eda50d55811945ee205",
+  "tag": "6d6397c9e2030f5b8053bfe510f3f2cf",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-19-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "8378193a4ce64180814bd60591d1054a04dbc4da02afde453799cd6888ee0c6c",
+  "iv": "bd8b4e352c7f69878a475435",
+  "msg": "1c6b343c4d045cbba562bae3e5ff1b18",
+  "tag": "0833967a6a53ba24e75c0372a6a17bda",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-20-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "22fc82db5b606998ad45099b7978b5b4f9dd4ea6017e57370ac56141caaabd12",
+  "iv": "880d05c5ee599e5f151e302f",
+  "msg": "3e3eb5747e390f7bc80e748233484ffc",
+  "tag": "2e122a478e64463286f8b489dcdd09c8",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-21-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "fc00960ddd698d35728c5ac607596b51b3f89741d14c25b8badac91976120d99",
+  "iv": "a424a32a237f0df530f05e30",
+  "msg": "cfb7e05e3157f0c90549d5c786506311",
+  "tag": "dcdcb9e4004b852a0da12bdf255b4ddd",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-22-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "69749943092f5605bf971e185c191c618261b2c7cc1693cda1080ca2fd8d5111",
+  "iv": "bd0d62c02ee682069bd1e128",
+  "msg": "6967dce878f03b643bf5cdba596a7af3",
+  "tag": "378f796ae543e1b29115cc18acd193f4",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-23-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "fc4875db84819834b1cb43828d2f0ae3473aa380111c2737e82a9ab11fea1f19",
+  "iv": "da6a684d3ff63a2d109decd6",
+  "msg": "91b6fa2ab4de44282ffc86c8cde6e7f5",
+  "tag": "504e81d2e7877e4dad6f31cdeb07bdbd",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-24-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "9f9fe7d2a26dcf59d684f1c0945b5ffafe0a4746845ed317d35f3ed76c93044d",
+  "iv": "13b59971cd4dd36b19ac7104",
+  "msg": "190a6934f45f89c90067c2f62e04c53b",
+  "tag": "4f636a294bfbf51fc0e131d694d5c222",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-25-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "ab9155d7d81ba6f33193695cf4566a9b6e97a3e409f57159ae6ca49655cca071",
+  "iv": "26a9f8d665d163ddb92d035d",
+  "msg": "4a203ac26b951a1f673c6605653ec02d",
+  "tag": "437ea77a3879f010691e288d6269a996",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-26-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "0f1c62dd80b4a6d09ee9d787b1b04327aa361529ffa3407560414ac47b7ef7bc",
+  "iv": "c87613a3b70d2a048f32cb9a",
+  "msg": "8f23d404be2d9e888d219f1b40aa29e8",
+  "tag": "36d8a309acbb8716c9c08c7f5de4911e",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-27-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "f3e954a38956df890255f01709e457b33f4bfe7ecb36d0ee50f2500471eebcde",
+  "iv": "9799abd3c52110c704b0f36a",
+  "msg": "ddb70173f44157755b6c9b7058f40cb7",
+  "tag": "b323ae3abcb415c7f420876c980f4858",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-28-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "0625316534fbd82fe8fdea50fa573c462022c42f79e8b21360e5a6dce66dde28",
+  "iv": "da64a674907cd6cf248f5fbb",
+  "msg": "f24d48e04f5a0d987ba7c745b73b0364",
+  "tag": "df360b810f27e794673a8bb2dc0d68b0",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-29-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "28f045ac7c4fe5d4b01a9dcd5f1ad3efff1c4f170fc8ab8758d97292868d5828",
+  "iv": "5d85de95b0bdc44514143919",
+  "msg": "601d2158f17ab3c7b4dcb6950fbdcdde",
+  "tag": "42c3f527418cf2c3f5d5010ccba8f271",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-30-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "19310eed5f5f44eb47075c105eb31e36bbfd1310f741b9baa66a81138d357242",
+  "iv": "a1247120138fa4f0e96c992c",
+  "msg": "29d746414333e0f72b4c3f44ec6bfe42",
+  "tag": "d5997e2f956df3fa2c2388e20f30c480",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-31-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "886cff5f3e6b8d0e1ad0a38fcdb26de97e8acbe79f6bed66959a598fa5047d65",
+  "iv": "3a8efa1cd74bbab5448f9945",
+  "msg": "519fee519d25c7a304d6c6aa1897ee1eb8c59655",
+  "tag": "f6d47505ec96c98a42dc3ae719877b87",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-32-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "6937a57d35fe6dc3fc420b123bccdce874bd4c18f2e7c01ce2faf33d3944fd9d",
+  "iv": "a87247797b758467b96310f3",
+  "msg": "ead961939a33dd578f8e93db8b28a1c85362905f",
+  "tag": "599de3ecf22cb867f03f7f6d9fd7428a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-33-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "e65a331776c9dcdf5eba6c59e05ec079d97473bcdce84daf836be323456263a0",
+  "iv": "ca731f768da01d02eb8e727e",
+  "msg": "d7274586517bf1d8da866f4a47ad0bcf2948a862",
+  "tag": "a8abe7a8085f25130a7206d37a8aaf6d",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-34-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "77bb1b6ef898683c981b2fc899319ffbb6000edca22566b634db3a3c804059e5",
+  "iv": "354a19283769b3b991b05a4c",
+  "msg": "b5566251a8a8bec212dc08113229ff8590168800",
+  "tag": "e5c2dccf8fc7f296cac95d7071cb8d7d",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-35-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "2a43308d520a59ed51e47a3a915e1dbf20a91f0886506e481ad3de65d50975b4",
+  "iv": "bcbf99733d8ec90cb23e6ce6",
+  "msg": "eb88288729289d26fe0e757a99ad8eec96106053",
+  "tag": "01b0196933aa49123eab4e1571250383",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-36-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "2379b35f85102db4e7aecc52b705bc695d4768d412e2d7bebe999236783972ff",
+  "iv": "918998c4801037b1cd102faa",
+  "msg": "b3722309e0f066225e8d1659084ebb07a93b435d",
+  "tag": "dfb18aee99d1f67f5748d4b4843cb649",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-37-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "98b3cb7537167e6d14a2a8b2310fe94b715c729fdf85216568150b556d0797ba",
+  "iv": "bca5e2e5a6b30f18d263c6b2",
+  "msg": "260d3d72db70d677a4e3e1f3e11431217a2e4713",
+  "tag": "d6b7560f8ac2f0a90bad42a6a07204bc",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-38-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "30341ae0f199b10a15175d00913d5029526ab7f761c0b936a7dd5f1b1583429d",
+  "iv": "dbe109a8ce5f7b241e99f7af",
+  "msg": "fe4bdee5ca9c4806fa024715fbf66ab845285fa7",
+  "tag": "ae91daed658e26c0d126575147af9899",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-39-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "8232b6a1d2e367e9ce1ea8d42fcfc83a4bc8bdec465c6ba326e353ad9255f207",
+  "iv": "cd2fb5ff9cf0f39868ad8685",
+  "msg": "02418b3dde54924a9628de06004c0882ae4ec3bb",
+  "tag": "d5308f63708675ced19b2710afd2db49",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-40-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "f9a132a50a508145ffd8294e68944ea436ce0f9a97e181f5e0d6c5d272311fc1",
+  "iv": "892991b54e94b9d57442ccaf",
+  "msg": "4e0fbd3799da250fa27911b7e68d7623bfe60a53",
+  "tag": "89881d5f786e6d53e0d19c3b4e6887d8",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-41-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "0e3746e5064633ea9311b2b8427c536af92717de20eeb6260db1333c3d8a8114",
+  "iv": "f84c3a1c94533f7f25cec0ac",
+  "msg": "8c0d41e6135338c8d3e63e2a5fa0a9667ec9a580",
+  "tag": "479ccfe9241de2c474f2edebbb385c09",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-42-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "b997e9b0746abaaed6e64b63bdf64882526ad92e24a2f5649df055c9ec0f1daa",
+  "iv": "f141d8d71b033755022f0a7d",
+  "msg": "681d6583f527b1a92f66caae9b1d4d028e2e631e",
+  "tag": "b30442a6395ec13246c48b21ffc65509",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-43-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "87660ec1700d4e9f88a323a49f0b871e6aaf434a2d8448d04d4a22f6561028e0",
+  "iv": "2a07b42593cd24f0a6fe406c",
+  "msg": "1dd239b57185b7e457ced73ebba043057f049edd",
+  "tag": "df7a501049b37a534098cb45cb9c21b7",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-44-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "ea4792e1f1717b77a00de4d109e627549b165c82af35f33ca7e1a6b8ed62f14f",
+  "iv": "7453cc8b46fe4b93bcc48381",
+  "msg": "46d98970a636e7cd7b76fc362ae88298436f834f",
+  "tag": "518dbacd36be6fba5c12871678a55516",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-45-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "34892cdd1d48ca166f7ba73182cb97336c2c754ac160a3e37183d6fb5078cec3",
+  "iv": "ed3198c5861b78c71a6a4eec",
+  "msg": "a6fa6d0dd1e0b95b4609951bbbe714de0ae0ccfa",
+  "tag": "c6387795096b348ecf1d1f6caaa3c813",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-46-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "f4069bb739d07d0cafdcbc609ca01597f985c43db63bbaaa0debbb04d384e49c",
+  "iv": "d25ff30fdc3d464fe173e805",
+  "msg": "3e1449c4837f0892f9d55127c75c4b25d69be334baf5f19394d2d8bb460cbf2120e14736d0f634aa792feca20e455f11",
+  "tag": "805ec2931c2181e5bfb74fa0a975f0cf",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-47-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "62189dcc4beb97462d6c0927d8a270d39a1b07d72d0ad28840badd4f68cf9c8b",
+  "iv": "859fda5247c888823a4b8032",
+  "msg": "b28d1621ee110f4c9d709fad764bba2dd6d291bc003748faac6d901937120d41c1b7ce67633763e99e05c71363fceca8",
+  "tag": "27330907d0002880bbb4c1a1d23c0be2",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-48-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "59012d85a1b90aeb0359e6384c9991e7be219319f5b891c92c384ade2f371816",
+  "iv": "3c9cde00c23912cff9689c7c",
+  "msg": "e5daf473a470860b55210a483c0d1a978d8add843c2c097f73a3cda49ac4a614c8e887d94e6692309d2ed97ebe1eaf5d",
+  "tag": "048239e4e5c2c8b33890a7c950cda852",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-49-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "4be09b408ad68b890f94be5efa7fe9c917362712a3480c57cd3844935f35acb7",
+  "iv": "8f350bd3b8eea173fc7370bc",
+  "msg": "2819d65aec942198ca97d4435efd9dd4d4393b96cf5ba44f09bce4ba135fc8636e8275dcb515414b8befd32f91fc4822",
+  "tag": "a133cb7a7d0471dbac61fb41589a2efe",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-50-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "13cb965a4d9d1a36efad9f6ca1ba76386a5bb160d80b0917277102357ac7afc8",
+  "iv": "f313adec42a66d13c3958180",
+  "msg": "717b48358898e5ccfea4289049adcc1bb0db3b3ebd1767ac24fb2b7d37dc80ea2316c17f14fb51b5e18cd5bb09afe414",
+  "tag": "81b4ef7a84dc4a0b1fddbefe37f53852",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-51-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "d27f1bebbbdef0edca393a6261b0338abbc491262eab0737f55246458f6668cc",
+  "iv": "fc062f857886e278f3a567d2",
+  "msg": "2bae92dea64aa99189de8ea4c046745306002e02cfb46a41444ce8bfcc329bd4205963d9ab5357b026a4a34b1a861771",
+  "tag": "5c5a6c4613f1e522596330d45f243fdd",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-52-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "7b4d19cd3569f74c7b5df61ab78379ee6bfa15105d21b10bf6096699539006d0",
+  "iv": "fbed5695c4a739eded97b1e3",
+  "msg": "c6f2e5d663bfaf668d014550ef2e66bf89978799a785f1f2c79a2cb3eb3f2fd4076207d5f7e1c284b4af5cffc4e46198",
+  "tag": "7101b434fb90c7f95b9b7a0deeeb5c81",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-53-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "d3431488d8f048590bd76ec66e71421ef09f655d7cf8043bf32f75b4b2e7efcc",
+  "iv": "cc766e98b40a81519fa46392",
+  "msg": "93320179fdb40cbc1ccf00b872a3b4a5f6c70b56e43a84fcac5eb454a0a19a747d452042611bf3bbaafd925e806ffe8e",
+  "tag": "3afcc336ce8b7191eab04ad679163c2a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-54-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "a440948c0378561c3956813c031f81573208c7ffa815114ef2eee1eb642e74c6",
+  "iv": "c1f4ffe54b8680832eed8819",
+  "msg": "253438f132b18e8483074561898c5652b43a82cc941e8b4ae37e792a8ed6ec5ce2bcec9f1ffcf4216e46696307bb774a",
+  "tag": "129445f0a3c979a112a3afb10a24e245",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-55-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "798706b651033d9e9bf2ce064fb12be7df7308cf45df44776588cd391c49ff85",
+  "iv": "5a43368a39e7ffb775edfaf4",
+  "msg": "926b74fe6381ebd35757e42e8e557601f2287bfc133a13fd86d61c01aa84f39713bf99a8dc07b812f0274c9d3280a138",
+  "tag": "89fe481a3d95c03a0a9d4ee3e3f0ed4a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-56-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "c3aa2a39a9fef4a466618d1288bb62f8da7b1cb760ccc8f1be3e99e076f08eff",
+  "iv": "9965ba5e23d9453d7267ca5b",
+  "msg": "93efb6a2affc304cb25dfd49aa3e3ccdb25ceac3d3cea90dd99e38976978217ad5f2b990d10b91725c7fd2035ecc6a30",
+  "tag": "00a94c18a4572dcf4f9e2226a03d4c07",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-57-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "14e06858008f7e77186a2b3a7928a0c7fcee22136bc36f53553f20fa5c37edcd",
+  "iv": "32ebe0dc9ada849b5eda7b48",
+  "msg": "6c0152abfa485b8cd67c154a5f0411f22121379774d745f40ee577b028fd0e188297581561ae972223d75a24b488aed7",
+  "tag": "2625b0ba6ee02b58bc529e43e2eb471b",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-58-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "fbb56b11c51a093ce169a6990399c4d741f62b3cc61f9e8a609a1b6ae8e7e965",
+  "iv": "9c5a953247e91aceceb9defb",
+  "msg": "46cb5c4f617916a9b1b2e03272cb0590ce716498533047d73c81e4cbe9278a3686116f5632753ea2df52efb3551aea2d",
+  "tag": "4f3b82e6be4f08756071f2c46c31fedf",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-59-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "b303bf02f6a8dbb5bc4baccab0800db5ee06de648e2fae299b95f135c9b107cc",
+  "iv": "906495b67ef4ce00b44422fa",
+  "msg": "872c6c370926535c3fa1baec031e31e7c6c82808c8a060742dbef114961c314f1986b2131a9d91f30f53067ec012c6b7",
+  "tag": "64dde37169082d181a69107f60c5c6bb",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-60-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "29f5f8075903063cb6d7050669b1f74e08a3f79ef566292dfdef1c06a408e1ab",
+  "iv": "35f25c48b4b5355e78b9fb3a",
+  "msg": "107e2e23159fc5c0748ca7a077e5cc053fa5c682ff5269d350ee817f8b5de4d3972041d107b1e2f2e54ca93b72cd0408",
+  "tag": "fee5a9baebb5be0165deaa867e967a9e",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-61-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "03ccb7dbc7b8425465c2c3fc39ed0593929ffd02a45ff583bd89b79c6f646fe9",
+  "iv": "fd119985533bd5520b301d12",
+  "msg": "98e68c10bf4b5ae62d434928fc6405147c6301417303ef3a703dcfd2c0c339a4d0a89bd29fe61fecf1066ab06d7a5c31a48ffbfed22f749b17e9bd0dc1c6f8fbd6fd4587184db964d5456132106d782338c3f117ec05229b0899",
+  "tag": "cf54e7141349b66f248154427810c87a",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-62-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "57e112cd45f2c57ddb819ea651c206763163ef016ceead5c4eae40f2bbe0e4b4",
+  "iv": "188022c2125d2b1fcf9e4769",
+  "msg": "09c8f445ce5b71465695f838c4bb2b00624a1c9185a3d552546d9d2ee4870007aaf3007008f8ae9affb7588b88d09a90e58b457f88f1e3752e3fb949ce378670b67a95f8cf7f5c7ceb650efd735dbc652cae06e546a5dbd861bd",
+  "tag": "9efcddfa0be21582a05749f4050d29fe",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-63-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "a4ddf3cab7453aaefad616fd65d63d13005e9459c17d3173cd6ed7f2a86c921f",
+  "iv": "06177b24c58f3be4f3dd4920",
+  "msg": "f95b046d80485e411c56b834209d3abd5a8a9ddf72b1b916679adfdde893044315a5f4967fd0405ec297aa332f676ff0fa5bd795eb609b2e4f088db1cdf37ccff0735a5e53c4c12173a0026aea42388a7d7153a8830b8a901cf9",
+  "tag": "9d1bd8ecb3276906138d0b03fcb8c1bb",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-64-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "24a92b24e85903cd4aaabfe07c310df5a4f8f459e03a63cbd1b47855b09c0be8",
+  "iv": "22e756dc898d4cf122080612",
+  "msg": "2e01b2536dbe376be144296f5c38fb099e008f962b9f0e896334b6408393bff1020a0e442477abfdb1727213b6ccc577f5e16cb057c8945a07e307264b65979aed96b5995f40250ffbaaa1a1f0eccf394015f6290f5e64dfe5ca",
+  "tag": "0d7f1aed4708a03b0c80b2a18785c96d",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-65-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "15276fc64438578e0ec53366b90a0e23d93910fec10dc3003d9b3f3fa72db702",
+  "iv": "c5e931946d5caebc227656d2",
+  "msg": "3f967c83ba02e77c14e9d41185eb87f172250e93edb0f82b6742c124298ab69418358eddefa39fedc3cade9d80f036d864a59ead37c87727c56c701a8cd9634469ff31c704f5ee39354157e6558467b92824da36b1c071bedfe9",
+  "tag": "a0ffa19adcf31d061cd0dd46d24015ef",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-66-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "ec09804a048bb854c71618b5a3a1c590910fc8a68455139b719486d2280ea59a",
+  "iv": "d0b1247e7121a9276ac18ca3",
+  "msg": "66b1d39d414596308e866b04476e053b71acd1cd07ce80939577ebbeace0430f7e4c0c185fe1d97ac7569950c83db40bbed0f1d173e1aa0dc28b4773705032d97551f7fcef7f55e4b69f88df650032dfc5232c156641104b5397",
+  "tag": "8440e6d864ab778f9be478f203162d86",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-67-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "4adf86bfa547725e4b80365a5a327c107040facfff007dc35102066bd6a995c4",
+  "iv": "b1018cc331911255a55a0795",
+  "msg": "053ca4428c990b4456d3c1895d5d52deff675896de9faa53d8cf241255f4a31dc3399f15d83be380256616e5af043abfb37552655adf4f2e68dda24bc3736951134f359d9c0e288bb798b6c3ea46239231a3cb280066db9862e7",
+  "tag": "c7424f38084930bfc5edc1fcf1e7608d",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-68-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "3c92e0d1e39a3c766573c4646c768c402ccff48a56682a93433512abf0456e00",
+  "iv": "d57f319e590191841d2b98bd",
+  "msg": "840d9394aa240e52ba152151c12acd1cd44881e8549dc832b71a45da7efcc74fb7e844d9fec25e5d497b8fb8f47f328c8d99045a19e366e6ce5e19dc26f67a81a94fa6c97c314d886e7b56eff144c09f6fa519db6308bc73422e",
+  "tag": "cb4ef72dbda4914d7434f9686f823e2f",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-69-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "b66ba39733888a9e0a2e30452844161dc33cb383c02ce16c4efad5452509b5b5",
+  "iv": "937cb665e37059b2e40359f2",
+  "msg": "dbcd9694a8834860034e8ede3a5bd419fcf91c005ad99f488aa623f581622093f9d41e6a68e20fd202f302bcfc4417ca89090bfcd4d5224e8ff4eb5bbae4ecb27baa239f59c2f99cd47c0a269c497906b41a8f320a3dd2dc2de2",
+  "tag": "bdc8249302d9d666cf7168317c118743",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-70-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "2f9fcd1043455695638c991a1b1d35ad57c18ef0727322747b7991abc3d787f3",
+  "iv": "d06cf548f62869f4bed7a318",
+  "msg": "432023c12cf1f614e1005112a17dbe6c5d54022a95cf6335a5bc55004c75f09a5699739ecf928e1c78d03dad5096a17a084afe1cc22041bbdfb5985bd08b0dcc59d2b08cd86b7aad597c4cd7b4ba6d6a7370b83995a6511a1f9e",
+  "tag": "322eb84fb6884f10cfb766c2e3ec779e",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-71-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "21c5839a63e1230c06b086341c96ab74585e69bced94332caeb1fa77d510c24f",
+  "iv": "5ab6e5ed6ee733be7250858c",
+  "msg": "c92f08e30f67d42516133c48e97b65cc9e124365e110aba5e7b2cbe83debcc99edf4eb0007af052bda22d85900271b1897af4fd9ace6a2d09d984ac3de79d05de0b105a81b12542b2c48e27d409fd6992dd062d6055d6fc66842",
+  "tag": "53b0e450309d146459f2a1e46c9d9e23",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-72-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "25a144f0fdba184125d81a87e7ed82fad33c701a094a67a81fe4692dc69afa31",
+  "iv": "8bf575c5c2b45b4efc6746e4",
+  "msg": "2a367cb0d3b7c5b8320b3cf95e82b6ba0bba1d09a2055885dedd9ef5641623682212103238b8f775cce42ddfd4f66382f2c3a5e8d6dff9163ced83580a75705574026b55db90f75f8abb3014c9a707021dedc075da38bebbf0a0",
+  "tag": "0e2ce9cac8dfcedb0572ec6cab621efd",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-73-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "42bc841b3b03a807cd366a35ecec8a6aebef7c4cba0ec8cb8da0da41df8ccef1",
+  "iv": "1bd46f85df5f4b3a126ee315",
+  "msg": "ede3dcddbdc7d8e5d034c01661332ec349cb4e7a9fbaaf7abe2c647587db86cd427ce66908e070bc49ef838747e06b45ac486dfbea6f8698b4625e21e69db8327ec05cfd74accbe67ab644948cdb554af179a1e264e08fe16641",
+  "tag": "633ab6aaf5b32b53a794f6be6262fc5f",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-74-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "c25b8500be73210596fc4a9fb4d84d1a3379a91e3f0a6cc4177d996046627679",
+  "iv": "b56c48c0c4cd318b20437002",
+  "msg": "bcd14dd043fdc8c327957e1c1428698543ec8602521a7c74788d296d37d4828f10f90656883d2531c702ebda2dc0a68dab00154577454455fad986ff8e0973098dbf370ff703ed98222b945726ed9be7909210ddbc672e99fdd9",
+  "tag": "8171d4ff60fe7ef6de0288326aa73223",
+  "valid": true
+ },
+ {
+  "id": "cavp-gcm256-75-gmac",
+  "source": "NIST CAVP gcmEncryptExtIV256.rsp (via RustCrypto aes-gcm 0.10.3 tests/aes256gcm.rs), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "dd95259bc8eefa3e493cb1a6ba1d8ee2b341d5230d50363094a2cc3433b3d9b9",
+  "iv": "a1a6ced084f4f13990750a9e",
+  "msg": "d46db90e13684b26149cb3b7f776e228a0538fa1892c418aaad07aa08d3076f4a52bee8f130ff560db2b8d1009e9260fa6233fc22733e050c9e4f7cc699062765e261dffff1159e9060b26c8065dfab04055b58c82c340d987c9",
+  "tag": "9e120b01899fe2cb3e3a0b0c05045940",
+  "valid": true
+ },
+ {
+  "id": "wycheproof-gcm128-4-gmac",
+  "source": "Wycheproof aes_gcm_test (via RustCrypto aes-gcm 0.10.3), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "bedcfb5a011ebc84600fcb296c15af0d",
+  "iv": "438a547a94ea88dce46c6c85",
+  "msg": "",
+  "tag": "960247ba5cde02e41a313c4c0136edc3",
+  "valid": true
+ },
+ {
+  "id": "wycheproof-gcm256-2-gmac",
+  "source": "Wycheproof aes_gcm_test (via RustCrypto aes-gcm 0.10.3), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "29d3a44f8723dc640239100c365423a312934ac80239212ac3df3421a2098123",
+  "iv": "00112233445566778899aabb",
+  "msg": "aabbccddeeff",
+  "tag": "2a7d77fa526b8250cb296078926b5020",
+  "valid": true
+ },
+ {
+  "id": "wycheproof-gcm256-3-gmac",
+  "source": "Wycheproof aes_gcm_test (via RustCrypto aes-gcm 0.10.3), empty plaintext = GMAC (SP 800-38D 3)",
+  "key": "80ba3192c803ce965ea371d5ff073cf0f43b6a2ab576b208426e11409c09b9b0",
+  "iv": "4da5bf8dfd5852c1ea12379d",
+  "msg": "",
+  "tag": "4771a7c404a472966cea8f73c8bfe17a",
+  "valid": true
+ }
+]

@@ -1,0 +1,3458 @@
+[
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg1-tc1",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "b26aeb1874e47ca8358ff22378f09144",
+  "ct": "459264f4798f6a78bacb89c15ed3d601",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg1-tc2",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "f34481ec3cc627bacd5dc3fb08f273e6",
+  "ct": "0336763e966d92595a567cc9ce537f5e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg1-tc3",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "9798c4640bad75c7c3227db910174e72",
+  "ct": "a9a1631bf4996954ebc093957b234589",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg1-tc4",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "96ab5c2ff612d9dfaae8c31f30c42168",
+  "ct": "ff4f8391a6a40ca5b25d23bedd44a597",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg1-tc5",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "cb9fceec81286ca3e989bd979b0cb284",
+  "ct": "92beedab1895a94faa69b632e5cc47ce",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg1-tc6",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "58c8e00b2631686d54eab84b91f0aca1",
+  "ct": "08a4e2efec8a8e3312ca7460b9040bbf",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg1-tc7",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "6a118a874519e64e9963798a503f1d35",
+  "ct": "dc43be40be0e53712f7e2bf5ca707209",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc8",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "64110a924f0743d500ccadae72c13427",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "35870c6a57e9e92314bcb8087cde72ce",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc9",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b6364ac4e1de1e285eaf144a2415f7a0",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "5d9b05578fc944b3cf1ccf0e746cd581",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc10",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "caea65cdbb75e9169ecd22ebe6e54675",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6e29201190152df4ee058139def610bb",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc11",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "3eb39790678c56bee34bbcdeccf6cdb5",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "858075d536d79ccee571f7d7204b1f67",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc12",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "47d6742eefcc0465dc96355e851b64d9",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "0306194f666d183624aa230a8b264ae7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc13",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "10a58869d74be5a374cf867cfb473859",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6d251e6944b051e04eaa6fb4dbf78465",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc14",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "64cf9c7abc50b888af65f49d521944b2",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "f7efc89d5dba578104016ce5ad659c05",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc15",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "18d8126516f8a12ab1a36d9f04d68e51",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6c68e9be5ec41e22c825b7c7affb4363",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc16",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "a2e2fa9baf7d20822ca9f0542f764a41",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "c3b44b95d9d2f25670eee9a0de099fa3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc17",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f530357968578480b398a3c251cd1093",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "f5df39990fc688f1b07224cc03e86cea",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc18",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e37b1c6aa2846f6fdb413f238b089f23",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "43c9f7e62f5d288bb27aa40ef8fe1ea8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc19",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "da84367f325d42d601b4326964802e8e",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "bba071bcb470f8f6586e5d3add18bc66",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc20",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "6c002b682483e0cabcc731c253be5674",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "3580d19cff44f1014a7c966a69059de5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc21",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "143ae8ed6555aba96110ab58893a8ae1",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "806da864dd29d48deafbe764f8202aef",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc22",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "13237c49074a3da078dc1d828bb78c6f",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "8146a08e2357f0caa30ca8c94d1a0544",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg2-tc23",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "febd9a24d8b65c1c787d50a4ed3619a9",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "f4a70d8af877f9b02b4c40df57d45b17",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc29",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "80000000000000000000000000000000",
+  "ct": "3ad78e726c1ec02b7ebfe92b23d9ec34",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc30",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "c0000000000000000000000000000000",
+  "ct": "aae5939c8efdf2f04e60b9fe7117b2c2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc31",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "e0000000000000000000000000000000",
+  "ct": "f031d4d74f5dcbf39daaf8ca3af6e527",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc32",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "f0000000000000000000000000000000",
+  "ct": "96d9fd5cc4f07441727df0f33e401a36",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc33",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "f8000000000000000000000000000000",
+  "ct": "30ccdb044646d7e1f3ccea3dca08b8c0",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc34",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fc000000000000000000000000000000",
+  "ct": "16ae4ce5042a67ee8e177b7c587ecc82",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc35",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fe000000000000000000000000000000",
+  "ct": "b6da0bb11a23855d9c5cb1b4c6412e0a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc36",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fff00000000000000000000000000000",
+  "ct": "965135f8a81f25c9d630b17502f68e53",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc37",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff000000000000000000000000000000",
+  "ct": "db4f1aa530967d6732ce4715eb0ee24b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc38",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff800000000000000000000000000000",
+  "ct": "a81738252621dd180a34f3455b4baa2f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc39",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffc00000000000000000000000000000",
+  "ct": "77e2b508db7fd89234caf7939ee5621a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc40",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffe0000000000000000000000000000",
+  "ct": "64b4d629810fda6bafdf08f3b0d8d2c5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc41",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffe00000000000000000000000000000",
+  "ct": "b8499c251f8442ee13f0933b688fcd19",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc42",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fff80000000000000000000000000000",
+  "ct": "8b87145a01ad1c6cede995ea3670454f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc43",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffffffffe00000000000000000000000",
+  "ct": "43b02ff929a1485af6f5c6d6558baa0f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg3-tc44",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffc0000000000000000000000000000",
+  "ct": "8eae3b10a0c8ca6d1d3b0fa61e56b0b2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc157",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffffffff80000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "0f18aff94274696d9b61848bd50ac5e5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc158",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "80000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "0edd33d3c621e546455bd8ba1418bec8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc159",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e0000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "72a1da770f5d7ac4c9ef94d822affd97",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc160",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c0000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4bc3f883450c113c64ca42e1112a9e87",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc161",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f0000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "970014d634e2b7650777e8e84d03ccd8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc162",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f8000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "f17e79aed0db7e279e955b5f493875a7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc163",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fc000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9ed5a75136a940d0963da379db4af26a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc164",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff800000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "42ffb34c743de4d88ca38011c990890b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc165",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fe000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "c4295f83465c7755e8fa364bac6a7ea5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc166",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b1d758256b28fd850ad4944208cf1155",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc167",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffff0000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "97d0754fe68f11b9e375d070a608c884",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc168",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffe0000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "113ecbe4a453269a0dd26069467fb5b5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc169",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffc00000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9958f0ecea8b2172c0c1995f9182c0f3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc170",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffe00000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "956d7798fac20f82a8823f984d06f7f5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc171",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff00000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a01bf44f2d16be928ca44aaf7b9b106b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg4-tc172",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff80000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b5f1a33e50d40d103764c76bd4c6b6f8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg5-tc285",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "bff52510095f518ecca60af4205444bb",
+  "ct": "4a3650c3371ce2eb35e389a171427440",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg5-tc286",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "9c2d8842e5f48f57648205d39a239af1",
+  "ct": "c9b8135ff1b5adc413dfd053b21bd96d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg5-tc287",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "1b077a6af4b7f98229de786d7516b639",
+  "ct": "275cfc0413d8ccb70513c3859b1d0f72",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg5-tc288",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "51719783d3185a535bd75adc65071ce1",
+  "ct": "4f354592ff7c8847d2d0870ca9481b7c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg5-tc289",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "26aa49dcfe7629a8901a69a9914e6dfd",
+  "ct": "d5e08bf9a182e857cf40b3a36ee248cc",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg5-tc290",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "941a4773058224e1ef66d10e0a6ee782",
+  "ct": "067cd9d3749207791841562507fa9626",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc291",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e9f065d7c13573587f7875357dfbb16c53489f6a4bd0f7cd",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "0956259c9cd5cfd0181cca53380cde06",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc292",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "25a39dbfd8034f71a81f9ceb55026e4037f8f6aa30ab44ce",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "3608c344868e94555d23a120f8a5502d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc293",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "15d20f6ebc7e649fd95b76b107e6daba967c8a9484797f29",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "8e4e18424e591a3d5b6f0876f16f8594",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc294",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c88f5b00a4ef9a6840e2acaf33f00a3bdc4e25895303fa72",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a67cf333b314d411d3c0ae6e1cfcd8f5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc295",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "7001c487cc3e572cfc92f4d0e697d982e8856fdcc957da40",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "ff558c5d27210b7929b73fc708eb4cf1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc296",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "a8a282ee31c03fae4f8e9b8930d5473c2ed695a347e88b7c",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "93f3270cfc877ef17e106ce938979cb0",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc297",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "cd62376d5ebb414917f0c78f05266433dc9192a1ec943300",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "7f6c25ff41858561bb62f36492e93c29",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc298",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "502a6ab36984af268bf423c7f509205207fc1552af4a91e5",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "8e06556dcbb00b809a025047cff2a940",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc299",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e08c15411774ec4a908b64eadc6ac4199c7cd453f3aaef53",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "77da2021935b840b7f5dcc39132da9e5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc300",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "3b375a1ff7e8d44409696e6326ec9dec86138e2ae010b980",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "3b7c24f825e3bf9873c9f14d39a0e6f4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc301",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "982215f4e173dfa0fcffe5d3da41c4812c7bcc8ed3540f93",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "d4f0aae13c8fe9339fbf9e69ed0ad74d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc302",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "950bb9f22cc35be6fe79f52c320af93dec5bc9c0c2f9cd53",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "64ebf95686b353508c90ecd8b6134316",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc303",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f029ce61d4e5a405b41ead0a883cc6a737da2cf50a6c92ae",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a2c3b2a818075490a7b4c14380f02702",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc304",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "61257134a518a0d57d9d244d45f6498cbc32f2bafc522d79",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "cfe4d74002696ccf7d87b14a2f9cafc9",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc305",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ee053aa011c8b428cdcc3636313c54d6a03cac01c71579d6",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9b9fdd1c5975655f539998b306a324af",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg6-tc306",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b0ab0a6a818baef2d11fa33eac947284fb7d748cfb75e570",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "d2eafd86f63b109b91f5dbb3a3fb7e13",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc315",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "80000000000000000000000000000000",
+  "ct": "6cd02513e8d4dc986b4afe087a60bd0c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc316",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffffe000000000000000000000000000",
+  "ct": "a7e1842e8a87861c221a500883245c51",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc317",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffffffffffffffe0000000000000000",
+  "ct": "b46b09809d68b9a456432a79bdc2e38c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc318",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "c0000000000000000000000000000000",
+  "ct": "2ce1f8b7e30627c1c4519eada44bc436",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc319",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffffffffffffff800000000000000000",
+  "ct": "fa75e05bcdc7e00c273fa33f6ee441d2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc320",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffffc000000000000000000000000000",
+  "ct": "283d3b069d8eb9fb432d74b96ca762b4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc321",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "f8000000000000000000000000000000",
+  "ct": "35c1471837af446153bce55d5ba72a0a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc322",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "e0000000000000000000000000000000",
+  "ct": "9946b5f87af446f5796c1fee63a2da24",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc323",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fe000000000000000000000000000000",
+  "ct": "8c7c27ff32bcf8dc2dc57c90c2903961",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc324",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff000000000000000000000000000000",
+  "ct": "32bb6a7ec84499e166f936003d55a5bb",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc325",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "f0000000000000000000000000000000",
+  "ct": "2a560364ce529efc21788779568d5555",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc326",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fc000000000000000000000000000000",
+  "ct": "ce60bc52386234f158f84341e534cd9e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc327",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff800000000000000000000000000000",
+  "ct": "a5c772e5c62631ef660ee1d5877f6d1b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc328",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffc00000000000000000000000000000",
+  "ct": "030d7e5b64f380a7e4ea5387b5cd7f49",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc329",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffe00000000000000000000000000000",
+  "ct": "0dc9a2610037009b698f11bb7e86c83e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg7-tc330",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffff0000000000000000000000000000",
+  "ct": "e98f4ba4f073df4baa116d011dc24a28",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc443",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "800000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "de885dc87f5a92594082d02cc1e1b42c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc444",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffffffffffc000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "d365ab8df8ffd782e358121a4a4fc541",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc445",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffffffffffffffffffff000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "cbfe61810fd5467ccdacb75800f3ac07",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc446",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c00000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "132b074e80f2a597bf5febd8ea5da55e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc447",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f80000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "edd807ef7652d7eb0e13c8b5e15b3bc0",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc448",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e00000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6eccedf8de592c22fb81347b79f2db1f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc449",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f00000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "180b09f267c45145db2f826c2582d35c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc450",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fe0000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "5310f654343e8f27e12c83a48d24ff81",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc451",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fc0000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9978bcf8dd8fd72241223ad24b31b8a4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc452",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff0000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "833f71258d53036b02952c76c744f5a1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc453",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffe000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "7ababc4b3f516c9aafb35f4140b548f9",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc454",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffc000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "ff620ccbe9f3292abdf2176b09f04eba",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc455",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff8000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "eba83ff200cff9318a92f8691a06b09f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc456",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffffffffffffc0000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "27b8070270810f9d023f9dd7ff3b4aa2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc457",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "aa187824d9c4582b0916493ecbde8c57",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg8-tc458",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff800000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "1c0ad553177fd5ea1092c9d626a29dc4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg9-tc635",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "014730f80ac625fe84f026c60bfd547d",
+  "ct": "5c9d844ed46f9885085e5d6a4f94c7d7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg9-tc636",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "8a560769d605868ad80d819bdba03771",
+  "ct": "38f2c7ae10612415d27ca190d27da8b4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg9-tc637",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "014730f80ac625fe84f026c60bfd547d",
+  "ct": "5c9d844ed46f9885085e5d6a4f94c7d7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg9-tc638",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "761c1fe41a18acf20d241650611d90f1",
+  "ct": "623a52fcea5d443e48d9181ab32c7421",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg9-tc639",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "0b24af36193ce4665f2825d7b4749c98",
+  "ct": "a9ff75bd7cf6613d3731c77c3b6d0c04",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc640",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "28d46cffa158533194214a91e712fc2b45b518076675affd910edeca5f41ac64",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4bf3b0a69aeb6657794f2901b1440ad4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc641",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fca02f3d5011cfc5c1e23165d413a049d4526a991827424d896fe3435e0bf68e",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "179a49c712154bbffbe6e7a84a18e220",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc642",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c47b0294dbbbee0fec4757f22ffeee3587ca4730c3d33b691df38bab076bc558",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "46f2fb342d6f0ab477476fc501242c5f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc643",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c1cc358b449909a19436cfbb3f852ef8bcb5ed12ac7058325f56e6099aab1a1c",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "352065272169abf9856843927d0674fd",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc644",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "90143ae20cd78c5d8ebdd6cb9dc1762427a96c78c639bccc41a61424564eafe1",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "798c7c005dee432b2c8ea5dfa381ecc3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc645",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "07eb03a08d291d1b07408bf3512ab40c91097ac77461aad4bb859647f74f00ee",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "47cb030da2ab051dfc6c4bf6910d12bb",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc646",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b7a5794d52737475d53d5a377200849be0260a67a2b22ced8bbef12882270d07",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "637c31dc2591a07636f646b72daabbe7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc647",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "984ca75f4ee8d706f46c2d98c0bf4a45f5b00d791c2dfeb191b5ed8e420fd627",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4307456a9e67813b452e15fa8fffe398",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc648",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "13428b5e4c005e0636dd338405d173ab135dec2a25c22c5df0722d69dcc43887",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "649a71545378c783e368c9ade7114f6c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc649",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b43d08a447ac8609baadae4ff12918b9f68fc1653f1269222f123981ded7a92f",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4663446607354989477a5c6f0f007ef4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc650",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "6838d40caf927749c13f0329d331f448e202c73ef52c5f73a37ca635d4c47707",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b91d4ea4488644b56cf0812fa7fcf5fc",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc651",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "1d85a181b54cde51f0e098095b2962fdc93b51fe9b88602b3f54130bf76a5bd9",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "531c2c38344578b84d50b3c917bbb6e1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc652",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "dc0eba1f2232a7879ded34ed8428eeb8769b056bbaf8ad77cb65c3541430b4cf",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "fc6aec906323480005c58e7e1ab004ad",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc653",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f8be9ba615c5a952cabbca24f68f8593039624d524c816acda2c9183bd917cb9",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a3944b95ca0b52043584ef02151926a8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc654",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "797f8b3d176dac5b7e34a2d539c4ef367a16f8635f6264737591c5c07bf57a3e",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a74289fe73a4c123ca189ea1e1b49ad5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg10-tc655",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ccd1bc3c659cd3c59bc437484e3c5c724441da8d6e90ce556cd57d0752663bbc",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "304f81ab61a80c2e743b94d5002a126b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc656",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "80000000000000000000000000000000",
+  "ct": "ddc6bf790c15760d8d9aeb6f9a75fd4e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc657",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "c0000000000000000000000000000000",
+  "ct": "0a6bdc6d4c1e6280301fd8e97ddbe601",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc658",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "e0000000000000000000000000000000",
+  "ct": "9b80eefb7ebe2d2b16247aa0efc72f5d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc659",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "f0000000000000000000000000000000",
+  "ct": "7f2c5ece07a98d8bee13c51177395ff7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc660",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "f8000000000000000000000000000000",
+  "ct": "7818d800dcf6f4be1e0e94f403d1e4c2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc661",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fc000000000000000000000000000000",
+  "ct": "e74cd1c92f0919c35a0324123d6177d3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc662",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fe000000000000000000000000000000",
+  "ct": "8092a4dcf2da7e77e93bdd371dfed82e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc663",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff000000000000000000000000000000",
+  "ct": "49af6b372135acef10132e548f217b17",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc664",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff800000000000000000000000000000",
+  "ct": "8bcd40f94ebb63b9f7909676e667f1e7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc665",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffc00000000000000000000000000000",
+  "ct": "fe1cffb83f45dcfb38b29be438dbd3ab",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc666",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffe0000000000000000000000000000",
+  "ct": "1569859ea6b7206c30bf4fd0cbfac33c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc667",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffe00000000000000000000000000000",
+  "ct": "0dc58a8d886623705aec15cb1e70dc0e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc668",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fff00000000000000000000000000000",
+  "ct": "c218faa16056bd0774c3e8d79c35a5e4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc669",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fff80000000000000000000000000000",
+  "ct": "047bba83f7aa841731504e012208fc9e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc670",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffc0000000000000000000000000000",
+  "ct": "dc8f0e4915fd81ba70a331310882f6da",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg11-tc671",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffe0000000000000000000000000000",
+  "ct": "1569859ea6b7206c30bf4fd0cbfac33c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc784",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "8000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "e35a6dcb19b201a01ebcfa8aa22b5759",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc785",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fe00000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "60e32246bed2b0e859e55c1cc6b26502",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc786",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffffffe000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "bbd1097a62433f79449fa97d4ee80dbf",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc787",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b29169cdcf2d83e838125a12ee6aa400",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc788",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff0000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "cc111f6c37cf40a1159d00fb59fb0488",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc789",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b29169cdcf2d83e838125a12ee6aa400",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc790",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffffffffffffffffffffffffe000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "7606fa36d86473e6fb3a1bb0e2c0adf5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc791",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f800000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9cf4893ecafa0a0247a898e040691559",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc792",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "d8f3a72fc3cdf74dfaf6c3e6b97b2fa6",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc793",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffffffffffffffffffffffffffffffffffffe000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "dcf4e129136c1a4b7a0f38935cc34b2b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc794",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffffffffffffffffffffffffffffffffffffffff000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "93201481665cbafc1fcc220bc545fb3d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc795",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "1c777679d50037c79491a94da76a9a35",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc796",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fc00000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "8fbb413703735326310a269bd3aa94b2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc797",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffffff0000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "2c75e2d36eebd65411f14fd0eb1d2a06",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc798",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff00000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "ec52a212f80a09df6317021bc2a9819e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg12-tc799",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffff00000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6e1b482b53761cf631819b749a6f3724",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg13-tc1040",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "f34481ec3cc627bacd5dc3fb08f273e6",
+  "ct": "0336763e966d92595a567cc9ce537f5e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg13-tc1041",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "cb9fceec81286ca3e989bd979b0cb284",
+  "ct": "92beedab1895a94faa69b632e5cc47ce",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg13-tc1042",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "9798c4640bad75c7c3227db910174e72",
+  "ct": "a9a1631bf4996954ebc093957b234589",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg13-tc1043",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "b26aeb1874e47ca8358ff22378f09144",
+  "ct": "459264f4798f6a78bacb89c15ed3d601",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg13-tc1044",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "96ab5c2ff612d9dfaae8c31f30c42168",
+  "ct": "ff4f8391a6a40ca5b25d23bedd44a597",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg13-tc1045",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "6a118a874519e64e9963798a503f1d35",
+  "ct": "dc43be40be0e53712f7e2bf5ca707209",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg13-tc1046",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "58c8e00b2631686d54eab84b91f0aca1",
+  "ct": "08a4e2efec8a8e3312ca7460b9040bbf",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1047",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "10a58869d74be5a374cf867cfb473859",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6d251e6944b051e04eaa6fb4dbf78465",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1048",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "caea65cdbb75e9169ecd22ebe6e54675",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6e29201190152df4ee058139def610bb",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1049",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b6364ac4e1de1e285eaf144a2415f7a0",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "5d9b05578fc944b3cf1ccf0e746cd581",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1050",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "64110a924f0743d500ccadae72c13427",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "35870c6a57e9e92314bcb8087cde72ce",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1051",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "64cf9c7abc50b888af65f49d521944b2",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "f7efc89d5dba578104016ce5ad659c05",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1052",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "a2e2fa9baf7d20822ca9f0542f764a41",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "c3b44b95d9d2f25670eee9a0de099fa3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1053",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "47d6742eefcc0465dc96355e851b64d9",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "0306194f666d183624aa230a8b264ae7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1054",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "3eb39790678c56bee34bbcdeccf6cdb5",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "858075d536d79ccee571f7d7204b1f67",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1055",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "18d8126516f8a12ab1a36d9f04d68e51",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6c68e9be5ec41e22c825b7c7affb4363",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1056",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f530357968578480b398a3c251cd1093",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "f5df39990fc688f1b07224cc03e86cea",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1057",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e37b1c6aa2846f6fdb413f238b089f23",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "43c9f7e62f5d288bb27aa40ef8fe1ea8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1058",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "da84367f325d42d601b4326964802e8e",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "bba071bcb470f8f6586e5d3add18bc66",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1059",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "6c002b682483e0cabcc731c253be5674",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "3580d19cff44f1014a7c966a69059de5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1060",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "3071a2a48fe6cbd04f1a129098e308f8",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4b98e06d356deb07ebb824e5713f7be3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1061",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "143ae8ed6555aba96110ab58893a8ae1",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "806da864dd29d48deafbe764f8202aef",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg14-tc1062",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b69418a85332240dc82492353956ae0c",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a303d940ded8f0baff6f75414cac5243",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1068",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "80000000000000000000000000000000",
+  "ct": "3ad78e726c1ec02b7ebfe92b23d9ec34",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1069",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffffffffffffe000000000000000000",
+  "ct": "d2d99c6bcc1f06fda8e27e8ae3f1ccc7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1070",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "c0000000000000000000000000000000",
+  "ct": "aae5939c8efdf2f04e60b9fe7117b2c2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1071",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "e0000000000000000000000000000000",
+  "ct": "f031d4d74f5dcbf39daaf8ca3af6e527",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1072",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "f8000000000000000000000000000000",
+  "ct": "30ccdb044646d7e1f3ccea3dca08b8c0",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1073",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffc0000000000000000000000000000",
+  "ct": "8eae3b10a0c8ca6d1d3b0fa61e56b0b2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1074",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "f0000000000000000000000000000000",
+  "ct": "96d9fd5cc4f07441727df0f33e401a36",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1075",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffe00000000000000000000000000000",
+  "ct": "b8499c251f8442ee13f0933b688fcd19",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1076",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fc000000000000000000000000000000",
+  "ct": "16ae4ce5042a67ee8e177b7c587ecc82",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1077",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fe000000000000000000000000000000",
+  "ct": "b6da0bb11a23855d9c5cb1b4c6412e0a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1078",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff000000000000000000000000000000",
+  "ct": "db4f1aa530967d6732ce4715eb0ee24b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1079",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff800000000000000000000000000000",
+  "ct": "a81738252621dd180a34f3455b4baa2f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1080",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffc00000000000000000000000000000",
+  "ct": "77e2b508db7fd89234caf7939ee5621a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1081",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fff00000000000000000000000000000",
+  "ct": "965135f8a81f25c9d630b17502f68e53",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1082",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fff80000000000000000000000000000",
+  "ct": "8b87145a01ad1c6cede995ea3670454f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg15-tc1083",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "00000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffe0000000000000000000000000000",
+  "ct": "64b4d629810fda6bafdf08f3b0d8d2c5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1196",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f0000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "970014d634e2b7650777e8e84d03ccd8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1197",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c0000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4bc3f883450c113c64ca42e1112a9e87",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1198",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "80000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "0edd33d3c621e546455bd8ba1418bec8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1199",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffffffffffffffffff80000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "acc5599dd8ac02239a0fef4a36dd1668",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1200",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e0000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "72a1da770f5d7ac4c9ef94d822affd97",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1201",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f8000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "f17e79aed0db7e279e955b5f493875a7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1202",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fc000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9ed5a75136a940d0963da379db4af26a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1203",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fe000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "c4295f83465c7755e8fa364bac6a7ea5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1204",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b1d758256b28fd850ad4944208cf1155",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1205",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff800000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "42ffb34c743de4d88ca38011c990890b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1206",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffc00000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9958f0ecea8b2172c0c1995f9182c0f3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1207",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffff800000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a6cb761d61f8292d0df393a279ad0380",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1208",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffe00000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "956d7798fac20f82a8823f984d06f7f5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1209",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff00000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a01bf44f2d16be928ca44aaf7b9b106b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1210",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff80000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b5f1a33e50d40d103764c76bd4c6b6f8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg16-tc1211",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffc0000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "2637050c9fc0d4817e2d69de878aee8d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg17-tc1324",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "1b077a6af4b7f98229de786d7516b639",
+  "ct": "275cfc0413d8ccb70513c3859b1d0f72",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg17-tc1325",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "941a4773058224e1ef66d10e0a6ee782",
+  "ct": "067cd9d3749207791841562507fa9626",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg17-tc1326",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "9c2d8842e5f48f57648205d39a239af1",
+  "ct": "c9b8135ff1b5adc413dfd053b21bd96d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg17-tc1327",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "26aa49dcfe7629a8901a69a9914e6dfd",
+  "ct": "d5e08bf9a182e857cf40b3a36ee248cc",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg17-tc1328",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "51719783d3185a535bd75adc65071ce1",
+  "ct": "4f354592ff7c8847d2d0870ca9481b7c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg17-tc1329",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "bff52510095f518ecca60af4205444bb",
+  "ct": "4a3650c3371ce2eb35e389a171427440",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1330",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e9f065d7c13573587f7875357dfbb16c53489f6a4bd0f7cd",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "0956259c9cd5cfd0181cca53380cde06",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1331",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "15d20f6ebc7e649fd95b76b107e6daba967c8a9484797f29",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "8e4e18424e591a3d5b6f0876f16f8594",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1332",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "950bb9f22cc35be6fe79f52c320af93dec5bc9c0c2f9cd53",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "64ebf95686b353508c90ecd8b6134316",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1333",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "a8a282ee31c03fae4f8e9b8930d5473c2ed695a347e88b7c",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "93f3270cfc877ef17e106ce938979cb0",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1334",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "cd62376d5ebb414917f0c78f05266433dc9192a1ec943300",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "7f6c25ff41858561bb62f36492e93c29",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1335",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f029ce61d4e5a405b41ead0a883cc6a737da2cf50a6c92ae",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a2c3b2a818075490a7b4c14380f02702",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1336",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "502a6ab36984af268bf423c7f509205207fc1552af4a91e5",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "8e06556dcbb00b809a025047cff2a940",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1337",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "25a39dbfd8034f71a81f9ceb55026e4037f8f6aa30ab44ce",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "3608c344868e94555d23a120f8a5502d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1338",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e08c15411774ec4a908b64eadc6ac4199c7cd453f3aaef53",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "77da2021935b840b7f5dcc39132da9e5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1339",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "3b375a1ff7e8d44409696e6326ec9dec86138e2ae010b980",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "3b7c24f825e3bf9873c9f14d39a0e6f4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1340",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "7001c487cc3e572cfc92f4d0e697d982e8856fdcc957da40",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "ff558c5d27210b7929b73fc708eb4cf1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1341",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "61257134a518a0d57d9d244d45f6498cbc32f2bafc522d79",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "cfe4d74002696ccf7d87b14a2f9cafc9",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1342",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b0ab0a6a818baef2d11fa33eac947284fb7d748cfb75e570",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "d2eafd86f63b109b91f5dbb3a3fb7e13",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1343",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "d2926527e0aa9f37b45e2ec2ade5853ef807576104c7ace3",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "dd619e1cf204446112e0af2b9afa8f8c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1344",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ee053aa011c8b428cdcc3636313c54d6a03cac01c71579d6",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9b9fdd1c5975655f539998b306a324af",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg18-tc1345",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "982215f4e173dfa0fcffe5d3da41c4812c7bcc8ed3540f93",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "d4f0aae13c8fe9339fbf9e69ed0ad74d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1354",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "80000000000000000000000000000000",
+  "ct": "6cd02513e8d4dc986b4afe087a60bd0c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1355",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffff0000000000000000000000000000",
+  "ct": "e98f4ba4f073df4baa116d011dc24a28",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1356",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "c0000000000000000000000000000000",
+  "ct": "2ce1f8b7e30627c1c4519eada44bc436",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1357",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffe0000000000000000000000000000",
+  "ct": "8765e8acc169758319cb46dc7bcf3dca",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1358",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffffffffffffffc00000000000000000",
+  "ct": "7d350fa6057080f1086a56b17ec240db",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1359",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "80000000000000000000000000000000",
+  "ct": "6cd02513e8d4dc986b4afe087a60bd0c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1360",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "e0000000000000000000000000000000",
+  "ct": "9946b5f87af446f5796c1fee63a2da24",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1361",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffffffffff8000000000000000000000",
+  "ct": "8e3558c135252fb9c9f367ed609467a1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1362",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "f0000000000000000000000000000000",
+  "ct": "2a560364ce529efc21788779568d5555",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1363",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffffffffffc00000000000000000000",
+  "ct": "36ff1ec9ccfbc349e5d356d063693ad6",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1364",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff000000000000000000000000000000",
+  "ct": "32bb6a7ec84499e166f936003d55a5bb",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1365",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffffffe0000000000000000000000000",
+  "ct": "7f5e05bd2068738196fee79ace7e3aec",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1366",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "f8000000000000000000000000000000",
+  "ct": "35c1471837af446153bce55d5ba72a0a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1367",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fc000000000000000000000000000000",
+  "ct": "ce60bc52386234f158f84341e534cd9e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1368",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fe000000000000000000000000000000",
+  "ct": "8c7c27ff32bcf8dc2dc57c90c2903961",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg19-tc1369",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff800000000000000000000000000000",
+  "ct": "a5c772e5c62631ef660ee1d5877f6d1b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1482",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e00000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "6eccedf8de592c22fb81347b79f2db1f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1483",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "800000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "de885dc87f5a92594082d02cc1e1b42c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1484",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff0000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "833f71258d53036b02952c76c744f5a1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1485",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f00000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "180b09f267c45145db2f826c2582d35c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1486",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c00000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "132b074e80f2a597bf5febd8ea5da55e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1487",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fe0000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "5310f654343e8f27e12c83a48d24ff81",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1488",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fc0000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9978bcf8dd8fd72241223ad24b31b8a4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1489",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f80000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "edd807ef7652d7eb0e13c8b5e15b3bc0",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1490",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff8000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "eba83ff200cff9318a92f8691a06b09f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1491",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffc000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "ff620ccbe9f3292abdf2176b09f04eba",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1492",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffe000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "7ababc4b3f516c9aafb35f4140b548f9",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1493",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "aa187824d9c4582b0916493ecbde8c57",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1494",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffe00000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "e4f2f2ae23e9b10bacfa58601531ba54",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1495",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffff00000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b7d67cf1a1e91e8ff3a57a172c7bf412",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1496",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff800000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "1c0ad553177fd5ea1092c9d626a29dc4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg20-tc1497",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffc00000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a5dc46c37261194124ecaebd680408ec",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg21-tc1674",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "014730f80ac625fe84f026c60bfd547d",
+  "ct": "5c9d844ed46f9885085e5d6a4f94c7d7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg21-tc1675",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "0b24af36193ce4665f2825d7b4749c98",
+  "ct": "a9ff75bd7cf6613d3731c77c3b6d0c04",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg21-tc1676",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "91fbef2d15a97816060bee1feaa49afe",
+  "ct": "1bc704f1bce135ceb810341b216d7abe",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg21-tc1677",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "761c1fe41a18acf20d241650611d90f1",
+  "ct": "623a52fcea5d443e48d9181ab32c7421",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg21-tc1678",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "8a560769d605868ad80d819bdba03771",
+  "ct": "38f2c7ae10612415d27ca190d27da8b4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1679",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c1cc358b449909a19436cfbb3f852ef8bcb5ed12ac7058325f56e6099aab1a1c",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "352065272169abf9856843927d0674fd",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1680",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c47b0294dbbbee0fec4757f22ffeee3587ca4730c3d33b691df38bab076bc558",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "46f2fb342d6f0ab477476fc501242c5f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1681",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "28d46cffa158533194214a91e712fc2b45b518076675affd910edeca5f41ac64",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4bf3b0a69aeb6657794f2901b1440ad4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1682",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b7a5794d52737475d53d5a377200849be0260a67a2b22ced8bbef12882270d07",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "637c31dc2591a07636f646b72daabbe7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1683",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "984ca75f4ee8d706f46c2d98c0bf4a45f5b00d791c2dfeb191b5ed8e420fd627",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4307456a9e67813b452e15fa8fffe398",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1684",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "b43d08a447ac8609baadae4ff12918b9f68fc1653f1269222f123981ded7a92f",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "4663446607354989477a5c6f0f007ef4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1685",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fca02f3d5011cfc5c1e23165d413a049d4526a991827424d896fe3435e0bf68e",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "179a49c712154bbffbe6e7a84a18e220",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1686",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "797f8b3d176dac5b7e34a2d539c4ef367a16f8635f6264737591c5c07bf57a3e",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a74289fe73a4c123ca189ea1e1b49ad5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1687",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "1d85a181b54cde51f0e098095b2962fdc93b51fe9b88602b3f54130bf76a5bd9",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "531c2c38344578b84d50b3c917bbb6e1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1688",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "dc0eba1f2232a7879ded34ed8428eeb8769b056bbaf8ad77cb65c3541430b4cf",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "fc6aec906323480005c58e7e1ab004ad",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1689",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "90143ae20cd78c5d8ebdd6cb9dc1762427a96c78c639bccc41a61424564eafe1",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "798c7c005dee432b2c8ea5dfa381ecc3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1690",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f8be9ba615c5a952cabbca24f68f8593039624d524c816acda2c9183bd917cb9",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a3944b95ca0b52043584ef02151926a8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1691",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "6838d40caf927749c13f0329d331f448e202c73ef52c5f73a37ca635d4c47707",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b91d4ea4488644b56cf0812fa7fcf5fc",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1692",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ccd1bc3c659cd3c59bc437484e3c5c724441da8d6e90ce556cd57d0752663bbc",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "304f81ab61a80c2e743b94d5002a126b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1693",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "13428b5e4c005e0636dd338405d173ab135dec2a25c22c5df0722d69dcc43887",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "649a71545378c783e368c9ade7114f6c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg22-tc1694",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "07eb03a08d291d1b07408bf3512ab40c91097ac77461aad4bb859647f74f00ee",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "47cb030da2ab051dfc6c4bf6910d12bb",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1695",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "80000000000000000000000000000000",
+  "ct": "ddc6bf790c15760d8d9aeb6f9a75fd4e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1696",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "c0000000000000000000000000000000",
+  "ct": "0a6bdc6d4c1e6280301fd8e97ddbe601",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1697",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fe000000000000000000000000000000",
+  "ct": "8092a4dcf2da7e77e93bdd371dfed82e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1698",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "e0000000000000000000000000000000",
+  "ct": "9b80eefb7ebe2d2b16247aa0efc72f5d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1699",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "f0000000000000000000000000000000",
+  "ct": "7f2c5ece07a98d8bee13c51177395ff7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1700",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fc000000000000000000000000000000",
+  "ct": "e74cd1c92f0919c35a0324123d6177d3",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1701",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "f8000000000000000000000000000000",
+  "ct": "7818d800dcf6f4be1e0e94f403d1e4c2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1702",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff800000000000000000000000000000",
+  "ct": "8bcd40f94ebb63b9f7909676e667f1e7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1703",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ff000000000000000000000000000000",
+  "ct": "49af6b372135acef10132e548f217b17",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1704",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffc00000000000000000000000000000",
+  "ct": "fe1cffb83f45dcfb38b29be438dbd3ab",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1705",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffe00000000000000000000000000000",
+  "ct": "0dc58a8d886623705aec15cb1e70dc0e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1706",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fff00000000000000000000000000000",
+  "ct": "c218faa16056bd0774c3e8d79c35a5e4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1707",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffc0000000000000000000000000000",
+  "ct": "dc8f0e4915fd81ba70a331310882f6da",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1708",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fff80000000000000000000000000000",
+  "ct": "047bba83f7aa841731504e012208fc9e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1709",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "ffff0000000000000000000000000000",
+  "ct": "300ade92f88f48fa2df730ec16ef44cd",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg23-tc1710",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "fffe0000000000000000000000000000",
+  "ct": "1569859ea6b7206c30bf4fd0cbfac33c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1823",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff00000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "ec52a212f80a09df6317021bc2a9819e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1824",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "8000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "e35a6dcb19b201a01ebcfa8aa22b5759",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1825",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "d8f3a72fc3cdf74dfaf6c3e6b97b2fa6",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1826",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "8000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "e35a6dcb19b201a01ebcfa8aa22b5759",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1827",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffffc00000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "27ef2495dabf323885aab39c80f18d8b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1828",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "b29169cdcf2d83e838125a12ee6aa400",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1829",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffe0000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "d1ccb9b1337002cbac42c520b5d67722",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1830",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f000000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "1c777679d50037c79491a94da76a9a35",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1831",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fe00000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "60e32246bed2b0e859e55c1cc6b26502",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1832",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fffe000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "1a4c1c263bbccfafc11782894685e3a8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1833",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f800000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "9cf4893ecafa0a0247a898e040691559",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1834",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fc00000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "8fbb413703735326310a269bd3aa94b2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1835",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ffc0000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "a3f599d63a82a968c33fe26590745970",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1836",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ff80000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "f23e5b600eb70dbccf6c0b1d9a68182c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1837",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff0000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "cc111f6c37cf40a1159d00fb59fb0488",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg24-tc1838",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fff8000000000000000000000000000000000000000000000000000000000000",
+  "iv": "",
+  "pt": "00000000000000000000000000000000",
+  "ct": "dc43b51ab609052372989a26e9cdd714",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2079",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "d8774f3042b041f588ec3bed8863693b",
+  "iv": "",
+  "pt": "7950d1f290cfed8a8b2f5189ba21bbbcbb6d3297730d4e781bf80bb8eece720ace52b9218f9fcf0b0fc23e91295dee93a529bbfa6d378d327260915fdafc4dcac17ae6a9b560e67668a0cf0040c1d8ad",
+  "ct": "cde11eb24fde0548738e5d6c921860ffe03dcafbb43b161d254ed0750bdc721e60e2d0058d3a019bc385dbd4c0a40ac2621f3d5349e96e5d749ef9d1cb8ffeaf10bb681d7dd913b082532ee4567a48d1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2080",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c73c1f0fc140f26fb5dddbf10baf4af7",
+  "iv": "",
+  "pt": "42ecc79c68c5333034505e86304e07b4dda6e0fc08e2ef547e73a64bca447f606a43a050825077a73827f2b09470e25c28a6358a10b53ae23d49eddf6c6c572600f3f712aa305a1331f0b142c42d9e6b5213b8226b7f5462564a81dd64a998ea6ab7dd33dc356fe0c9a10a6417902dbf",
+  "ct": "1beac973339622bea1249228b3b7d0c77afbc55d2b1bd7555120f26b2df81067cbc75cf5b77db8be9a2c5394eb72c621ccbddb079418380bf47a20c22910c41be73ae0e12eea019f5e6e1629e680bf56a501974fe8bf0af9802449d7dc29ab8b69f146a882e98c8821981e065f8a2ea5",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2081",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "53a6d1bf34334367b43b4b93346357df",
+  "iv": "",
+  "pt": "987c00abc719f04e0f1a73b7413a60b9edcf7cc59665a66687806cc3a1ba6621f5930d2eb86a01cf6c6725db99cae720ffed4d9a844d72a5aab815c8e95db634f60c82295a5fa63a6a0013090a511e9c49552057ee5d2d78bc688e5ea46cd07f71302cb867307620443bf7b2c52f0d3817ba35b9dc276423c5e959d180eb7662",
+  "ct": "bbd2eda729efd8abe2d112080160c523575d3b51bf0599b256af0f797dd5f0c584d32342a515e5e704b017a69509f4734b864b32787ac5d18c35a70b6205bc5a6faf0152427f18c17b2a370dbe10de2980453a1504d2251e9809798efebd36499d9e06a4b9bed251b2a72bcf729482889ebffd8b1e25ccb19778d6eaae7d73f1",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2082",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "9ba165b6f8b5e669d5b282abde57a9cd",
+  "iv": "",
+  "pt": "cd7fba604b045b7a267037e5fe80e0c3",
+  "ct": "742aba8bbbe7e84819ede849cfef34eb",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2083",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "acfa21a9da5a28a88885ec30d1521690",
+  "iv": "",
+  "pt": "d44c3363d7f35bf7ac1790fa556239943828f0c695aea434e237c4f2242e63c4",
+  "ct": "04bb0e7aaff461b58da609398d0401579dea3f31485e6615892bf29080d73202",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2084",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e8162672daa08cd3a6f6e815e5b4b97f",
+  "iv": "",
+  "pt": "be92e6c6b127551f1fe488fc99d1e3c537bd1ac1bc3316bb26fbda2bb884384ef86b4b0944a75a02d7e2a5f05bb2cf81",
+  "ct": "1907d17ab4dd571112fd4e6f87cd57f6adbb5313e21b6025036e00b150a3951b033c9f45909d00bbaab0a8f68e4baa04",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2085",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f42d32dee6b095557554e22715356b36",
+  "iv": "",
+  "pt": "4dc3c94f25dac058075b24c072bfbc8e4ca5695957feef82c9825cf076f0eeeb868a43e1551aa05d8789dcd6325fd7d24558180320f2c190a51f6ac53747e1e4",
+  "ct": "a18d7e7e7b6bda78869d698efc088f8820e1523bff269fdbc7ebc99aa202259b60cde5a58ca36f1d796d1927531dd7af4f519840a510cf359dbe881a3afba6a2",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2086",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "9273dae551fa993808cd739640c799c1",
+  "iv": "",
+  "pt": "b1d04d3e62a8243719f92e2ce79ebd5f36c7539197222272f21824336e2c5831e61d05d9cb4b4fe6057207746d8c502c00e2c398f87fdeb6aa1989b28f29aa216d9bb837cabe41f95f4c1176d9cc8b7ccbb35d184ec5cd9e55cf980c45af3316",
+  "ct": "6c9cb5f85dc6e43413f94b6290046277ab68a33c851fafa8a642aa39f8dc3ce9d839aadcc9e7caef1005feb610dba21a3b15a9673eeaf63af9dcc474d7b7fa40e3a4422e57006b53da450ba1661e6a9e4f693143ce50c5372390502f2d24a6f7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2087",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "028b3ef26cacdf11c9ccb1bbddde5718",
+  "iv": "",
+  "pt": "761b67d76bb08df84c93c94b18555b1cb43070724c09509f4bdb51e4301b05129176f3a023ff7573fe8afbbc4c2bed1bb0e2d7e2f1e98f69bb8bd7e0238c82474f167605700cff8b12625cdb720c2b22bc7571b3635528087b63ac238b88d55b656dc9774da99022963a371af20acd68ae6268f8e8e8b5198dc4ae012e95c64a7d4fe64074da85246d5a9b186eb6cd2a",
+  "ct": "4fde1f99a1b78c53ea40023d7a649f6b5a08e7b387596ea83309288e764157d7aff73e04a7fd036dac78d8f23309b607fe007385c4f27327a40748bb8a9aa5c9533a7d8f597500658777a9b4c4bc65287e1dd0ae692c9368ef2632841b427a7cd8fa3f5662b9d2f3fe0a69c31a7435e3772fff36a464b1caeffda847f0a0ac56407d34f7363e0a657e25ef9a64696305",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg25-tc2088",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "55c9d3f2ecc5bddc180ee4495e7a369f",
+  "iv": "",
+  "pt": "64930219e6edb33ea9caf8991287efaeea69de4e309252296b6ff20a0087a91f6d5aa101d29fa6331803843fef284b0a19e5d00899a4f90694d4b98c21cb422e0ae7c25d920993ba7278f22999e7fe24fc13d642b5b4062fb8340a665a18ac0a2d1d27ed4d471ef02785bca0d3b23a9f3b13a5cdd66f4b32d50fa5b0f9bb402e18c6dcd4873937a1e1adb201e6dc3e5de404219a47c5d109f1af2784e8ff9dd9",
+  "ct": "0d846e1b89c7162d19c6aea7243078c7eda8fbee4261529b07020cafd759c9fc5152dab97afc26d86efc0d1e8956de1edc20f9c9821f89e3a65b65903b67e390eb360a4d997a5a34c690076e588b697805db165e82a1b6fc65d67c5f16da7444978a37dd96127de2a5ce83f2bca9101d964d3d304828048d098b1d6d185ad8886ef4968b1dac2c5c24a6d97a42785fb4b59b845d9019b154cc734ea32d4b9ce9",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2089",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "390e491bce8259aa48b7eebeae851ec48f78a52845474661",
+  "iv": "",
+  "pt": "d6033c35d1addab3a808579eb005da57",
+  "ct": "b7c24e64824309cd10f0fb6ef99bc409",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2090",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "6c878f716ec1fcc126d40ee1e524430a759d5cb64f64ce7d",
+  "iv": "",
+  "pt": "0e1fa70f1fd222c4f4011ddcb1ecbfe28d5fd2ac56146fe8013a0feee927248a",
+  "ct": "f40f2b0fd706928ad7335b70817bb0f0d1e8309545c80a3cc613c38fe7d94d82",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2091",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "5212fcb97c0d245642e7e50dc44901e78cb7f7319c9df8bf",
+  "iv": "",
+  "pt": "1e519cfa39bc1ba96bc03f122dbaf71cf8f325c43e826ea41ec99e01812ae592252974742a1d4a68ab248f33ee20b12b",
+  "ct": "a64cc041d5a3a93175e910b6ee5bb117e9535a7828d5e935c475a6c7a715a122ded8d52c0757b9a3da1bd668f10cc0b7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2092",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c37f52010a47795a66532ef3ec89a1f4d5a79686db114913",
+  "iv": "",
+  "pt": "7cf1f02ebb4cca9693bb8ae2b5ad55ef6c904de14701a5eb9d3dc1e0ce3f994d6108af5f36e6ebb33575f591743f32968765c5755fab1b2c502614a600ff0c89",
+  "ct": "403a1d46f37249cc2f396befa44a97ec70b5cf8443924aa856065d2f306ed8accadcdf96c7ad7b8547f714b2895dc29ddd7791df7aa89702bdd46d2b334e7030",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2093",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "0994bf47d1176914dc7e0cc558cd3e5f21538087b0f84812",
+  "iv": "",
+  "pt": "319ff535c6084ebc2f10aeb41c443b37ce8c714676499030176c0a3673979fb849dc8b0d4e37a14dc5820fe9fe55cb2b89f31f4fb091efbdac446c6856133f3ef9ac0ae870c52beddc22d865073c7484",
+  "ct": "e6dc429710f36d075ba03856560ef11014e43a259d3e10612bd4fa142a305cf82bd7248362b6653126a6478c7690d46caa538df3e0c640bca5c3519fec450347f146aed5c944d79dc6d5d67405ee3eb4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2094",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fc16c8aaaab8e19838f83c2cf92487c11c9c44678bc36f98",
+  "iv": "",
+  "pt": "abc3d0df7b5a489294c5997b755eabddf96e8ccd448bcf3a8a7499247bc61495923d085696db06c4c680b8c95f1136b6c0c02ea05902d6b41967ba821f0e134d8ef88dac146c9e270ee5cf1b40e9a245f7b8338f13a28e1fea1dc2340215aa95",
+  "ct": "86f957c48f72449e9431882a0559e40eb0704c7a532fb64a2f798a90fcd280dbb69c61bd3084246b7d7a3b1cb90561e179210da0a31ddc803c770a6f6b5a447504630f4776f82c8a857155aa00ba8ff6cb219b05c7862c03858c60d3a214753f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2095",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e4c1dfdac8e64c83eff43c8a18f061c2d8238787f1165867",
+  "iv": "",
+  "pt": "3f8e5bac2e0b208db12c9761c2e5acd48613fe9c4493c0615abc6f4f83c3df7c23a2bf75bbd397ee91811ed852bb7f47730b4bd1937b0afe03177fc6fab20fd005e91d412d1fe0d1e591184f92c478d98269019394e46540e4ec959ca47c80a9d1b19cca9501b1749fdfb6f8bbefeb99b324427a5be081a1b4b243de947fb09b",
+  "ct": "910560888bc8ac4e5374582b56defcf039c81d6d85398e2214e7aa00446d8ede5f11f88c81af94d0a3850c3219f7f3dd368843cf2f61d0501b8b041b2a55855ae3a7ff94f315cc832befaae8ba49549a14f49321ff5e4942f162eaf8ff701bb5a5af16c09941508f93dbcb078420247407b2b4615e1933c91a5e6d26fe04446d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2096",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "9e825e18f44d87b9fdd739e76fbba538869abb20207c7fcf",
+  "iv": "",
+  "pt": "512dc00e8b18acc9dd8a026a465889f205b30f3292f436a128b22574901126a1eca4707d408d6c0d0accdba65dceebac0f4c32461d6c73c2aa019cf825b696b9305f393104983f37fa2d9f06b7e1a3c5aa4b2b26ca560126d6751680c5673aa9d29387009495f73a73fd9d1e924938c1",
+  "ct": "6d12fea3c56b5137e11dec4e7760d75967adab8289a074f0e9de7e447c86a2d4b7a7b37e03deba94648fe09f95d3311f091ddc59f28dc8f32900048747cdddd0213d97de6e7c482d69cd2d24d060815f7dacc17cb8e01988a329c2d6b338319f65c081d9d8fec551c7e8e8100c70eb34",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2097",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "4c324fefa325260aab8b8f160f61f39d72ea32f9ff86dc22",
+  "iv": "",
+  "pt": "822b25ba9fa3c60214ad8086e7aaacb45b5fe63c8bcfe48687679f99b54945cdb8369a4fd9816992c71be5f3e87a041184e742445394591d7bff3c09358d1df9a06901ebbc309c9ea33ad1e5ec5f85c370d427d342e536b9225680761f0dcd9800d2536e3e74e6abbb852a894e7c74fc755b1602261dccf3d73f60a2dc5724cec42061615bfb1f86d74df10fd90df982",
+  "ct": "25d1d934381e444d62fa97a9cc2d4f58e4c685dd186996b4b1f838df1a05e67395f09901fdc93e246b16e533909fe9483b5f3d503356cc2f5a67591ebde928d6a85c2fe7fd8b4416b7c1c3c9c0ebdee6066b5cc4201d5c54b3974133f3a318aa35b815f3e6bdef9124b59e5bdbaf238b39bdc8358a0b7caf1825d0528ad594629774fc83c6de2ba3f908caa89294b110",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg26-tc2098",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f337cde13649fa2daf3a1302f202399db53862791c9c059b",
+  "iv": "",
+  "pt": "61f0aa45310ab439732ae8381e95fc3241aeaadaf86b2ec616f90d6af10eefdb6fec76327c3bdb59140c6e20c85097c2a353880c777487d82326810d64c946e14bb088b5579f86c9bb224e804351ec9706713437f03b8cf7a2ced20205967b638db172b5e79e34d78b7848046c2aa6f52987a4e02cd393bd666f548b7711420326bbaae946161eab52600a84f8f267f65a4914489aa21e389bb9cb0549863896",
+  "ct": "1f61a10550317f7fdf18e463bd7a67880110cf900307968f2c87e69fc5e9789322539bf705603599d2929857f458d4183722f69e37916f96eff8a12373f92550ea4f9fbee86eb6f315252e03d84a753030d12c1419c692700263af7e721eb6ae1312c0f2bdb53af894f51d04e0e8b06fe4aa6d5161c4838e615025b09f03edc963204ab4acbed0e43732bd12f09fbce1e5560da85718582143ade625fb7ece59",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2099",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ca82069d2b53329548c17227b1ba73549d58c2198b72e2d847eea3bca9e2164d",
+  "iv": "",
+  "pt": "2c6c64b05a072eded5ded8223312e165",
+  "ct": "a7e2a6a12f4f3686901c11ff24cecb5f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2100",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "d4c3a7fcb2d360e145a1b332bee088202f71819a7a726c0cb01f450033553776",
+  "iv": "",
+  "pt": "42e280175dbef869a588907a0820a760d2aac35089149955da04baaa3c066ad5",
+  "ct": "252f8801ce3ffe68bd2d31ecce77d3f5f91a55f9637a4c83b191f41eba4ba51d",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2101",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "3a91c1dbc0b26438cbc80e2dba93d415dc83605a2ed2ebc2570e44a5277dffdb",
+  "iv": "",
+  "pt": "fa5baf6b02ce5a2b5a7beb339a5010e3c24bb041bbd90eeafcc4aa1bdebeb4b7fba97ecb7796618cc41b343cbce78602",
+  "ct": "001f88faca8609d8a0739e30b310f59a1775a2aab90cb5db7e5dcd581750d2921692aa12c4699f4f2d2d88182fd88593",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2102",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "26ce61c2409402ae94c153a91d3d0bbd1230aa5f0fb14a2c759ead51746260a8",
+  "iv": "",
+  "pt": "79b54a506c454694404faa534854fda863d2277fdd00f7701fce07872843fe3f149bfe1ae56e8f3aaf875f072169fb7c25d59472a1754477d02fbffc7ff61ca0",
+  "ct": "00dafe3559a437fa933cac15b7174468fc36bdd154e7d46efb186ed1a4bffe66f99994727de82c2e9de015ca93b52d6dc543cf35c74bf08dcd03328e5bb80102",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2103",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "968f1c0123450975599d9646b747890de1deca6346a787645e86532ff2dab4e4",
+  "iv": "",
+  "pt": "83576942fadb3c69a4a90062beb720b05739de393c68e800d116dc5faeae1e590054fed8f8e146bf1706cc2fa8597b3ae602dd1133b539822f6124419a547070d9a8bc39f206b2354b12ef75eb1861f6",
+  "ct": "41cc7e883883b7f93d5b73098e3e34aa41d4de32b9dde525cc0b43fed628d3b1bf6a5742a876c5b1838098299ed3bb62d90f854d3b620bb79324e7c96e0a9692fac23721a5b0bf199d32716b3e5342ce",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2104",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "101a22a7421539f73dd0e848d3bd520d6c575b3b1a15ed9c75d921e6a4778145",
+  "iv": "",
+  "pt": "73a4585bd79efe711288a93021051b1d858562d51e07306975fa4641864b7fe6010a4eeedbd893ce2d79424a7f6396bc1aa831235e824fc19234336a6d2ceb54d22894b8c136c5b6a9c0586ec8c39da964b36d72a0520f96c31024a08f3c8f86",
+  "ct": "6d0d339298a7e42b853569c258b699a29e0bc73ca24b95146b3f616d6e375be8579308863024a8b128ec8565a76460f92afe4dcdd0d60b3518f09a1b9c80d79271c4c87fbe19bad8249c3dc88a49203e525b00fe029f277779e8d9bf74b0db7f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2105",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "faa7c8498278c7f3eae4ded3a7735b502349452929b33dc229d18ea1c4c9e0b1",
+  "iv": "",
+  "pt": "8bbe82dda722b8ae5484083e886391139b513f54da45ff7d84706c3b271b77f22367363886f6a2639e206f2931c132960cb5bd3cbb0318c2f709d3498657cec3ae39ffbbf99dc8588efb58f308f78657baf292f5de252b232230d64f4e305ef6137720b719ec889fab9c62e7263bf3ce",
+  "ct": "5d901b2eef8458840fc1254985d22e8d4ed4e221465000b4cd21adffecd03ab977c4c13e898d2cd248fbc2dfc206eb54d1e0b0b331c3cdce611ec398ff0d41f78ff97b152c2de36bada564fb8287f7e8074f2227a59dc29164494279e07740452c4824d4e4daf69d71c8a75541684526",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2106",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "1c7334df4494868e570f8fe9955a506b1c730e4c25dce64c99b7ac63c7a5aa28",
+  "iv": "",
+  "pt": "847087ad5caed134bf5e3795ff8d15e336c49c053decbea321918d15c945ec8ea58f77aa3d8630b8784b38e48008dd26cd76a9b33450b8fb1bc4348d674a80f842b79dddb4e259df78d055f5e7d968551ef45f4a3e2e46436c2b8c9666a889cd4120bde85dfc1b2dc0e7e27a932427a85b9a35f117c21800a0fbdad00f1ac75b",
+  "ct": "d26f0dec4e52c32c7204af92e990644ecddac3df0d13f5d0d465f0872f55499f360d79607a4e9db503b05a755f24433167c04dcc333ee5993de38cdf17002f50df7b73e072a4c7808f4f20b5e4d3d6dca4c4db3461fdd18b887c05e1d0f9ed9396e5b6b096c051ef139544b925c59a346377fee9a38b744fda8e0369767f4fd8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2107",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "eedf949b2109befcf97d9c6825adda216dbfcad3c1801ab18d057ac42fbb6546",
+  "iv": "",
+  "pt": "47f70d1283d51a0358d7483d8bc3dfc3ea9253a6750aacfbf217713b0c16d441ba272b0570c5b3c06640de6d7b0cc9ff4187db04fc1f6d72fc7dd7379680433645c34954c2214ac59650c6e37da879c94e08bc504d1905037bed26ba8b49112d235c16f4d51707fed7281d0123e96022386280a8ad67935cb81f6cc91f21eeb452eacddecbb12ccfb06ab7e076bd23e7",
+  "ct": "4145434b072760642e4e94329674b24e6ce79961e3d5e1441f0a32aff87b66c33dc2914598f011e08aac8d78c264968b7efe2eae272e63d3a3dd9554a71f85c738515b215bcd7ef9fa9e7306b0406adc74dacba5bf6fd4a03a2ddbebbaabdb5711b1cbdae555880dd319a9ffe4fbeb6a0bd926f34d030e11114c3b09fb788816b3eeab8eca8396222bbb97962c26b900",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg27-tc2108",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "c2fa68fb7605e6e6ec7d6de242e47e5f4963df1f489a4f2cc5684c2342fccb9b",
+  "iv": "",
+  "pt": "9b582128c564f7a2523f774a7a7c3e2053062faf79de73e3232d5f6da7392663c8e85e8105d266791359fdbc7e735a24d6f45c68609383f9da26fa2bdd0bfb4ffbf5bed4a11515b06f9043fdd74d0a1e593d79a389225986bcff961a82d6095756d50a8891b3624f97e58bba1a40f971417c01e7625225067e50870364ad95fa4a5e3dd0bf4c9b5b25dbf6ae28d8d74402fbc718d054b594a6c9d52c0e872a8d",
+  "ct": "4d3f2e335256445d27dba47ba7cd5be02d66c85ad96687c457e5d3d7ce7e98899315628d92ed21557db62c7ad8edc02e936825a067c97f8c9f9638255268b4e05c15a66eefe1f67e91b45ece102f39d13935a0f9e36a198f2c0258c9388c7cf8515cf470c080a4fffacca2746c7aabfa90e9c69122b0313415a6b51306eea8814888f28daa23a869180340ed9442248b1fe1ccde1b90f7117b3364f541637638",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2109",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "77115e341662e6922cd3ba91911bae04",
+  "iv": "",
+  "pt": "711666dd4cd0b641d1199efc92072430",
+  "ct": "961f0435afb1a6965d07287c41d0079c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2110",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e48df3672396b08a05855102e0e243b4",
+  "iv": "",
+  "pt": "3ed47d44b5a1dde1bc73696a9f5f2ec989a456dc3036c31281a937ff85084f7a",
+  "ct": "f00e821f2b6c104e9b167f01dc2dd754c3c9f2473c5c104d2db8153ca9651a94",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2111",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "578037861546b73d514e54e27696eb68",
+  "iv": "",
+  "pt": "8f6f61e5dce779938c7ad18764e886d31ec393aacfd0d310fc944a745655f70d0c163f2655357e76104964dcd59230ce",
+  "ct": "9f5bdebb907d6f1f0774eee8fa4c3b25b1b8f635db95e352ef39d136832cf747ed9db0e5125eab4eb5131cf898a77622",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2112",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "26d0e053acf9b2ec2b22bfa8972e364c",
+  "iv": "",
+  "pt": "6f361c0b5c42e8ef01b58880e3d91d460481628e7a0b4fd04ca136a2945665f9053b7b3c75e85e8890689879390bf0d8325560c78931b8cd2f9685d65ce74e5e",
+  "ct": "ada823a0240993b413a91a39455528e75617fdd3009752157c094a189c4409188d4c21d8aa45aa24a4e0eafe0e2ef6753b5beca147c498ce80cee5cf2d3794fe",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2113",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e27f2ffbc5df7a34d7e0d719f41c3cca",
+  "iv": "",
+  "pt": "9bef2d362e9f993b4a4de4618e034158488ee1df9a4d9eadd733f85f1854bd45f7025ee5b6968ebdfcaf4643b5c2a1257874dd52464744e234c4075fe3614b5e95353565334488c6050f16b8f04db4b1",
+  "ct": "b313c3432141764273e6979320607f83b556036305a7e21c659b26c324adb488acc8e2bcf7a947e6e234a3a7fbe0d0fda3fcc7a9a5e89296d0bbed68275877168d9373f15d237f7c00a94b973db2d753",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2114",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "cce05ad333d44bbf988bebc1094cd6af",
+  "iv": "",
+  "pt": "80c4e40fcff451e49b1d08086bff61b67a46939e379e42af242cbf355f128cc267dbc041b75691504e2e0043a6c85c7808a7a4b0dc1ec71983ba7cd9dfa41cef7e83efcdab46221254e5293843b994fcfcd6921407ea01aa3b31962fc268cac6",
+  "ct": "3213b0b78644f7e767a6c5a9e21807ec6a55e313620a66b405a2e0bb2a83c77fe9c28f2e33fa83b0f4bcdd9988516279461544d0cbc071c142e3b20af4eba345404efb45914e01af26afd4d3cba897b8add4a7cec808cde407207d35aaaa5fc8",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2115",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ca2a1b55180a7d0f2ef9f693c794d213",
+  "iv": "",
+  "pt": "2e5bef2cbe042da89ec9367c36ed5edb4acba8da655f9c79f06fd16a28066f0f2b8193e47ee9a0598d363ed06ad4bfd04e161d099955ace8e7f6af79470da3038a1a3712ada175e343d858cb55d5b1d304927db694993822d3a64c8f2381bc279a2b3e8fe0590b25c7a0e0b6e66141c5",
+  "ct": "f43c12ae17b6c3cf795a84d9f0b09baa460a726793a5d89d82563420fb7820683764c521c439333d91affaf0a70066621af10ce7fd0977ba5ed7e84af4547e744b2cda5612b59c52f26f700b5f36746ba0287579ec6b9511bbd8d6608c25ad02ba5a271c6b068b8f6af852921b339235",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2116",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "8c46de74ee32be6d4d4a9a40cba329ea",
+  "iv": "",
+  "pt": "cbd535d2ff7729384e7892ee3682e0588dc347200ecde90718ca25e56059a2f37d82739bdbe7ea469aeb0bd47aeb43e31e774df2159aa1b1effb252a95d975d869376aae6d779f0498b2b29e354fdaa50a8cd078a2b054018afa8c40f39372331f962b9dac080cbea6c36032ce839be6ed67c6fb8a7cd67de77ee56095e4e6d5",
+  "ct": "562a22f5714c296bd4c0de1581bc339b7ada9213127bb58536cf7accf6f5b95f7a771140e1bf5f1e59f0f0a4b8f53cc71791358402a461686b03b4d06a825cc465960bbe844a2cb05f94b773e32189eba0e44f52b91ef68635958b0e6fbeb31164d3c541e1dcac66e3efa3f82a97fef611248e1d94c0982ad8ec9b31b110a002",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2117",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "47943757d51f42a6d4d4e33c7e49e6d2",
+  "iv": "",
+  "pt": "597123a543d3af9cd932d0d762e17a00ff54e82493742613c84f4e9cfbc1a981e23f2e05e90cd122527b6cbcad56cf0118cf6f207f1fd8859fa40886056b3ca93bce0c84bf8ff49b1e016792c6cf6bf8e98dd5af0531f33c0b2d3468c9c80b744473bf92945a3b6835639e24ecfaa270ddfc4484a63e52d69eb1b9fe7713c1a38818b856fbebf28adbcb10eb5b65181a",
+  "ct": "a26b6bd3931f667db0ed2362989564895be90e1e1a844f9d2bb369f87e9652ccece4aef31efd1d56b252dc25bd6d5a3dcc62d3d115d3b6505e8ad1b07519cf8c12e0d0f2d331ec2fba24f1d1d4ae27fc64df114e2364adbcd682240a2cd77ba423b0d3e46abe1dddb1f635c38f8dd38395fe88f1bdf33de5c53ab0f10f9d26efe8815fa731bdfaecd0ce42604a73f687",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg28-tc2118",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "10c14631a5b9121d240b090e20d249bc",
+  "iv": "",
+  "pt": "70bcc7d7ceaf125d9edc76d123316e46e574d288f8d65d3b572774d2021c49abbfa33b186900845f501cad3c5ddaa20aafb277898b23d3f88789731a557492a87a7165a9842d74bdde3a7e38db60598cf1e89373aceb1aab3fa7f804a2436f3904c702044b32f196b54ad44da5bee99a29873e32826f575df455785886080c5852a70e2c893509f3d0af1ff355b109fa63714659d35abab09bc0e81e15b7e0b4",
+  "ct": "60e098cf3c0644737c58b3ed9971fa85287d97ce01e641899051abb199a68b4323f2ae7fa84084a7904817e742a26ecfbda3b4ac156dae0f5f400fc1aed5bb9440f6900741b729dc29ad3bb0f6a1caa0125a86553acc3ab4faf037d11cae55cbf80d880d43812944f8ee784f21a8ff96112c6f04a0b3a2c903d4896bfc21cba2fc5c59f538dbcd825e2708dc953e88835b33f2e85052285103c1e91003886b01",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2119",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "9cbd97c9a3b04541fae4da8260ed6952cef1dc11c53e028e",
+  "iv": "",
+  "pt": "84c0bc11c2bafbbe4076153e23c370f8",
+  "ct": "81d74059e38904c49f23226c67788779",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2120",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "462d8d609a3b9c39ea1ef4c3a8bf7bcd71ef16434de56e13",
+  "iv": "",
+  "pt": "d81b293d65fb64b78b539028f57c3e6cdada59bcd7470f061df510f859be47f2",
+  "ct": "55fc60dcf537237e6e2518f9e4d8c07317ba7317dd394e9b999adb2d5cf1915e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2121",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "7cb7480950d3b19a21fb0a3571c7720e0c3bd36c5cec2721",
+  "iv": "",
+  "pt": "28d89af76ef39cf213f6e8a5a25b0b8c64af4ff1206c13b86d9d403ae5a8fc8a6e1ab0b5283487969b0063ae5383205f",
+  "ct": "b20c0da3a1d3305547613d5d276e322be3100c451ab4c89c94807e47e71968b9146f7882ff95ab2d4124e93a64078f8a",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2122",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "95049648fe6e59439ff194de7f00a2409d5b60d503b9d25b",
+  "iv": "",
+  "pt": "cd388e63d55b1aae07f711b36b02e0b7390041fb743bb6b1cd05decf0be73e73d5e2664c2d189eed442a2ee8a34bba25757f2eff5c6939617ae44cf09b817dfe",
+  "ct": "685fcfb53fbf786b2c70107c4e97de5a32d1fdadec21c10364a91d7329251ca580e4dfddc88c159d9f8000400407eabacf8afb205f5340483d9741555c17ec2c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2123",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "759e12afa83f431c8ecbea8554ede9d5ab16b46f23dc946c",
+  "iv": "",
+  "pt": "421dddb0e17cad781f3286d0031353c3e4603dc3e87c95e8ce8078f3bdc33c20749b9fa5883c44de11439d2617ca75092e47f0f5e849b026bcca285ddb2611ec841d5aa175d139a126a849015e64be12",
+  "ct": "f9bd88debead03863e20f3325be3acb1af19b0b56c38fb581c41f80fb5b55268d06e9254f1f3363f8057be50460516a3256a24764565da8c1179d2f5ec84ddfd7139387287d21bd490f51b47c40dd2ee",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2124",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fb9cb12e03d5b55c2f3fab4e5101a4ce3e1161d16b23440c",
+  "iv": "",
+  "pt": "c0507ca558504f8b7d1e922f7871670a045012099dd245e6c26d93462bd04efab9769569cbbf7445de83642c27c8da0d83f6d54783b957d7b622dab6dc1e489f9ef83f1f6d2ba440bd04520be800da4cd38e0ca10cbbc2ef711541a7221e5207",
+  "ct": "c938c6cd1e483f4c4a2bd1b4e8066cadba8532c6cfb98dac452b9f6e328872cd50993470836fe262057b08deaeeafade80945addf095a6fea94a3d00ab44c752097f9ee2e4ed421463235b75b836f6822c4bb2fadb7b4cef7c195dc584458561",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2125",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "d69b24e70c30bb03db92f54308b0b771a34b36d81302c289",
+  "iv": "",
+  "pt": "89a4aaa1c7ab40bee6c823a6eff3383ce52db2eb382396478e0bdf6db7ec1d7512738cc7a08bbcc8c522666b20947a58c06e0084ad34fea9ecc70292cdb5f46c23cd22d400262792c692f0e12d661ea63ed43b6b36790a2fbb0f49287cb06bfd08885e5a81f842dd9be826a30a2814d3",
+  "ct": "77c903ab51b313ab5fdb5b105813bfe97866a2c64c6db0abbf7e2a2636800a31ab7dfbcb1a346a7e5942b1b95c76f0cd716d591e346e0672941ddfbb316ced1094b78749e03056d285d73552e045c99f3a5b9224909fe933c6dbfc7006ef558e9591fe25152a290492eabe1ea1cc4e90",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2126",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "29ff412b2a50b93a3d97722b7d047940186283c5fd2c8ec3",
+  "iv": "",
+  "pt": "a9a003153c02e972618bd747143f479de91ba4b0ee6a4805530e041b37395900b0d8a5f005d73e2ddbe22c1357d935522317d721189282a9e9a1fe582c2457d1721dbd1dbe5c8f111eb9c366c32a464e1e12711d85896204f7a0d09894abeaac5925caed2b9a24f1ead71a48431710debb270aa3d9a31c1b5806b91d89cbbd35",
+  "ct": "026aa99dc3425b124fa070e1b99fdb8d3e3d854bb3cefa45c43568e1834e5f9ae0faca06ddf778c3e226fa784a3e76804306145cc66fbecd7087953b053d384918bb1f2f201f94529a4cba729b6bcd5a716e1ebc987855002aeb25714a12109c9895e31798e7ef62c2acd51c70e8b896f9df4e15dad1defcd3b8160f8156ff6f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2127",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "ed915199d937fddd4bc1ebb8c636540e03a31301694f5a15",
+  "iv": "",
+  "pt": "8d398152995496814ee21457af151cb3f1221af106f74a9bdc8e634a06f3c68b8145c10593771c73d793d5e92f7fde5c27784883fb06f32a7aa2f9ba6be838cceb9d6eb4a0ba15dfba275ed6b3b3bbcd2f3b5ad2509bead89cb54b6862fe14b74a4e6b25246d373933e702337fea87d3e62117e45ec2079f3d5aafe1157151137800a4e6f09ba01535dc0f531b997c79",
+  "ct": "2037f5bd32b76f1e17846fb6a7014939c4e29a48aeafcb9f375cb4831a68235d47f89a2270c1bfe50a996791d68b6ab7262d698caca10eba5a667ef29d79b87e15454111b870662d6f46eabc6a2505b54e51fcd2e739a2890a5393d7ef2f2bf456d1b6db41b808230051c64f2b180eed3d6d21c96e0e50cc2182cac194677f359515d5781343236f1a6be13805c40cd4",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg29-tc2128",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "5400089d2804aeb3fb92527e856346b86c45c67832d847a1",
+  "iv": "",
+  "pt": "9e360e4607d3d8caddd74e0b37edc7a764bbd2bc18b353a983fda07a454aa16dcf8b037828369b7313956ed8a3784a54cca509fc2a8a6039f9a9884901430309d7ac33859252254996e17a800e64006a9bd036bfa791cab71480bd7e8cd9a419cae4e53be2e2724215631488de2156f9887ab27fe5f077b7ef1a86e83a87319418d8499f099ca109b4256375f5babba3f3ca33bf0c6a49b97c128f88618930bf",
+  "ct": "8fb7454146c925bdb902bf7622f2672c6a0522b0c99426820d2fcb5a57fdbd14772b90903118b81e431c12ace554e8379f1e75efecbecd20477759ffe768dacbafa4ca0a2a074be0f40f6f97b46ef9672fb3c331c86cb84136bb977cf8ad2db2b3c61adebb17ea62503e5ba50004dbdef352ad151b8d92c983862215699b1f50b56f9b904dedb9dcc8debf5b363cc759d0001817fde3224f5667cb75f4b3410f",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2129",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "f5d61f2ed65885e5e38da83233c6d03ae53159c3334b64b4bfd47e9b100c923a",
+  "iv": "",
+  "pt": "90835f36aa0c69883019d9e927d0e95c",
+  "ct": "1df1e4710633c2e8a9ded2603761685b",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2130",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "195cb454b433ee836e0455df3de6bcff47794dad68b01561295c01b68b3ce95d",
+  "iv": "",
+  "pt": "aca817b9811cafaf52974a6364664126de4fca17e0ccff696a0e7ea81df9bb4a",
+  "ct": "00ba1b66a9a741dd57aad11f71774ae5c364d58ed6e27a34c35dfbf611452e40",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2131",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "a302fcd7e27ce1ef96a5f44e600dbb25d544491e0cea1090feb2ff7cb50ecb82",
+  "iv": "",
+  "pt": "4e77ba91c50a0941bc8a973524b3cf018f1cbe06d3b7d5cc4804a452ce8c2d0d9469a74e8d337abd21ff67a0d017028e",
+  "ct": "5369e181be4551c25a51a9e6c3044e0994bf6a471e2a518583bb1d333e3c403f8bb752ae1750e43f8b68495d6f944b1c",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2132",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "45d1f2db20b502f460ee2b53a0690295a5f007450da85e3a542d62168d0b65a4",
+  "iv": "",
+  "pt": "61af32c21baef34c524c3c998bd21d9fc436f43b4a957205c14e1c549c162e787ae84bbc886680a939951f028dce287792a2d311559e3afa65b02b1dd2ff0534",
+  "ct": "7feabe55c33b8cc81d094033e4238ae6bb5408a804a51d0327b617ad7e20fda0210f772a4fbdeaad990beb2bab86f06bdae1368bac87b4f6150d13aee825d408",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2133",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "e4a539921f3aac9438575762a11539ed48d5c41c03fbf365ff84eb079b66352c",
+  "iv": "",
+  "pt": "3676483040b8796cb85f16d031a246627bc950cbf7f9f5daa70229e095c55da383ebe7dd34bfd9d10807a5b9cc69ee69157a2278055a965bbbb83fba73fa303a96ecb7f5a03c4130266c5a3268951beb",
+  "ct": "417a376dff2a3b8b75fada88a3d6b31d6841c06734b49b1c1238bd5bc5228e12e0fa395532a22e093cf8d19e17069ebcdfb1292a7916277acf6a0f2d3478844699f18e419293ce926b3a7d5b2f6a8622",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2134",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "804351ef110dffeccc2436dfe240003f1f5edd1b69088dabea4e63fc3083527d",
+  "iv": "",
+  "pt": "d7ba3d33d8050b15b4f5fbaf96260b22e8337c058fa71e56eb119b61a7c26126e83587b80b53507447f63d9c1675c9ba9ede6317617e6bb7057d7791856953068464101a20b9cc47c1182d5929e84b16c1ffc5afae9d778663ba310f89a764b1",
+  "ct": "7929f71cd9a2539cde1731925fb805e6ddbb27376d6969785f2b9164aade04feb79598e727defb47954a84d281edd77cb30dda35810a1311111ffad5eae9e763eab2803635b8f4b8f1a941807b7b975a007c4e9141eeb137cccda01b96ecf1d7",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2135",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "af187a0f2034484db5b89e59d16a7d555ea31169e0f05706c773e35f9d9af82a",
+  "iv": "",
+  "pt": "c822c9da1484468008605d2b3c48e22f0b873558bf3920370ad3cddd79ccc8c72f167765630544abff86e4d6653e54dd19395522d9f408dafe79abe41f833e6723bf37b0b5e11cacac991192b80004b79055390eeebda2da62ceab4823445f932843b5f53d1f4e9ec2463dc13bc9160a",
+  "ct": "c11ac8ede9aabff7a798e6a55e0119fb586e3d7e07ebbe770564b9e02cf0e59c5efc5beb65d6c39c2219549e685d6b80540f4f823657271c052ec3ad47e211fc374e02c9826d0ba8f174d62f07c4a5c81200c23ded1ceb61c6dd59717eb511f8485c630e257d81174d3d9f21b8edf95e",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2136",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "83d5ab3e9098a97be37d21962713e5b1db419d1a6e6d8d36f119e5b2dc804557",
+  "iv": "",
+  "pt": "d875eb946569e85fc6849655ede95407a4d997fb57fe6902fe46079e45b2346f9cefb31789853ccf07131860c125883d614a34cb6510bbf284783b8e56f853fef9476f7d52d8b192de5272f59915a4f4f5ba9d25fe5bce9b705168e356f2cdc25cf66e9c25e973e08783ce9d43dc93de4f2974a7342db9d97383d5fb9be58108",
+  "ct": "f205679403a317797505a07a590594a6de458ff10cffaeea69afe1a7111f8184f87b9cbcbac4f76a32a91a1c57f6e6d2c0f7d15e053dd28fc12158fb0d4a239022f8713fd8559eb0a4942fdf8e700bc2aaeff234afa47d69bb751158759bfe6289a98d63b891c2b32b810282a78d04d379cd960cacac3ab05c2ad19b08ca32a6",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2137",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "fe798b1652ccba041d328bacba07faa0ad6a3e9fade8345aa04ded1a575d7ac8",
+  "iv": "",
+  "pt": "ed8740d138ba0a89be9766d66e49e799e7d216f53bac8ce4bde783e4b52a3d1ae73d60c5efb6cf0aede29bb89b7f453dd66572b9e95c806cdd4e535290064261aaed14bc4f0350a41d7c5864c56da3a5b5a0b69388968e0fc9fd6110f9173fcc72db57371f6f8950f16d9d13c807d4658a04d6478c22ca2554f8839d87f7ea79a079304ef093ccf0653b3c24051d1ede",
+  "ct": "44fc5c57b79a96efb430208608847bde77588ae4c7dfa25ad043b0e8bc6e353eb8943136e672f8384f067f4f43059e5136a9898c9b335d753242c9b0d3e5f5337f648ba6d6b28800e526172455d49c9af383ceb2a2b5a2443b07e86e72dd5f662ad423e09f91d5055c2b423e77987d1bb03c8d324c2008a3442b38abb7e42c27648fbcd3ef4dd781b61bd3aa59e67073",
+  "valid": true
+ },
+ {
+  "id": "acvp-acvp-aes-ecb-1.0-tg30-tc2138",
+  "source": "NIST ACVP-Server 975de31 gen-val/json-files/ACVP-AES-ECB-1.0",
+  "key": "89cb1337ed23157cdc868a79399b9640e7f2e424490801a94dc29c28bf00f6a5",
+  "iv": "",
+  "pt": "22eae999f9354e5d2fe3846645b8588a411af064779aa5e98a4795f9be07914bc26e786131091b3a25f0c3acf0f7dceae1419a7e32ff9a6315f4d9984861878a06c51c9f43911f012da987d010cac1dd974d51f8fa5775d9c02c49ccebc0e342f7fce744886e261c57accb7ce83255f4040bf346e54063949523983b08a10fb95b5b704bf6d605c22b285fa8f1239a9c75001839b1ac6d1a10c3c0f2a7a4c8ae",
+  "ct": "e41bd39c04f4c7f94c8877666a58eee6f2de651ec874fd5d68182bb51c610553edf5d12882891e4d11ac9846666ac17978b88ac453e39ab64356262241d9a6e4cfddd02bd1669f7da2b802622a40b48f3a6c8ec346d431bd21a28e2207c105130fc3871af9fce6067cd09885a1bb58d1782de447edb6a856f8ca28b76d1b4e3b3ea31e83122cbd1fb47b79ee2a2987495afb3d55fd43b72e479947b61b9a82f5",
+  "valid": true
+ }
+]

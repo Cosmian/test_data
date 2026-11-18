@@ -1,0 +1,14 @@
+name = "HSM KEK: Ed25519 Import wrapped by the KEK"
+description = """
+Imports an Ed25519 private key into a KMS server backed by a SoftHSM2 KEK.
+Regression test: a FIPS build used to close the TLS connection of the Import request, because
+the PKCS#8 parse left OpenSSL errors on the worker thread's error queue.
+"""
+server_type = "hsm_kek"
+requires_env = ["HSM_SLOT_ID"]
+backends = ["sqlite"]
+
+[[steps]]
+operation = "Import"
+request = "step1_import_privkey.json"
+assert_success = true
