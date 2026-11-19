@@ -7,6 +7,8 @@
 #                              SANs: auth-verifier, localhost, host.docker.internal
 #   kms.crt  / kms.key       — KMS TLS cert
 #                              SANs: cosmian-kms, localhost, host.docker.internal
+#   admin.crt / admin.key    — mTLS client cert, CN=admin (= default_username), clientAuth
+#   spire-client.crt / .key  — mTLS client cert, CN=spire-client, clientAuth
 #
 # Usage:
 #   bash tests/spire/certs/generate-test-certs.sh
@@ -100,3 +102,23 @@ openssl x509 -req \
 
 rm -f "${DIR}/spire-client.csr"
 echo "issued: spire-client.crt (mTLS client cert for SPIRE → KMS)"
+
+# ── mTLS client certificate for the KMS admin (default_username) ─────────────
+# When the Vault token verifier is the only configured auth method, token-less
+# requests (ckms provisioning) are rejected with 401; the ckms CLI then
+# authenticates with this cert. CN must equal `default_username` in
+# ../config/kms.toml ("admin"). Requires `[tls] clients_ca_cert_file = ca.crt`.
+openssl req -newkey ec -pkeyopt ec_paramgen_curve:P-384 \
+  -keyout "${DIR}/admin.key" \
+  -out "${DIR}/admin.csr" \
+  -nodes -subj "/CN=admin/O=Cosmian/C=FR"
+
+openssl x509 -req \
+  -in "${DIR}/admin.csr" \
+  -CA "${DIR}/ca.crt" -CAkey "${DIR}/ca.key" -CAcreateserial \
+  -out "${DIR}/admin.crt" \
+  -days 3650 \
+  -extfile <(printf "keyUsage=digitalSignature\nextendedKeyUsage=clientAuth")
+
+rm -f "${DIR}/admin.csr"
+echo "issued: admin.crt (mTLS client cert, CN=admin, for ckms provisioning)"
