@@ -1,5 +1,5 @@
 name = "Access Control: non-owner cannot ReKey without explicit grant"
-description = "Owner creates AES key, grants user only Get. User's ReKey attempt is denied because `Get` implies no other operation, lifecycle-mutating ones like ReKey included."
+description = "Owner creates AES key, grants user only Get. User's ReKey attempt is denied because Get wildcard does NOT apply to lifecycle-mutating operations like ReKey."
 server_config = "test_data/configs/server/auth/cert.toml"
 
 [identities.owner]

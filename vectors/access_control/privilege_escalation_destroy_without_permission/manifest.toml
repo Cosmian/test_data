@@ -1,5 +1,5 @@
 name = "Access Control: user cannot destroy without permission"
-description = "Owner creates AES key, grants user only Get. `Get` implies no other operation — user's Destroy attempt is denied."
+description = "Owner creates AES key, grants user only Get. Get acts as wildcard for crypto ops but NOT for Destroy — user's Destroy attempt is denied."
 server_config = "test_data/configs/server/auth/cert.toml"
 
 [identities.owner]
@@ -31,7 +31,7 @@ request = "step3_user_get_ok.json"
 identity = "user"
 assert_success = true
 
-# User attempts Destroy — denied with Object_Not_Found (no Destroy permission, `Get` implies no other operation)
+# User attempts Destroy — denied with Object_Not_Found (no Destroy permission, Get wildcard does NOT apply)
 [[steps]]
 operation = "Destroy"
 request = "step4_user_destroy_noop.json"
