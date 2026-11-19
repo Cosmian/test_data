@@ -388,10 +388,10 @@ CFGEOF
   fi
 
   M03_CKMS_CONF="${_TMP}/ckms-m03.toml"
-  cat >"${M03_CKMS_CONF}" <<CCEOF
-[http_config]
-server_url = "https://localhost:${M03_PORT}"
-CCEOF
+  # Reuse the admin mTLS client certificate of CKMS_CONF: the ephemeral KMS has the same
+  # (Vault-token-only) authentication, so token-less requests are rejected with 401.
+  sed "s#^server_url[[:space:]]*=.*#server_url = \"https://localhost:${M03_PORT}\"#" \
+    "${CKMS_CONF}" >"${M03_CKMS_CONF}"
 
   # P-256 via KMIP CreateKeyPair → must be rejected by the new allowlist
   M03_P256_EXIT=0
