@@ -28,6 +28,9 @@ port     = 9998
 [tls]
 tls_cert_file = "test_data/spire/certs/kms.crt"
 tls_key_file  = "test_data/spire/certs/kms.key"
+# Verify optional client certificates (mTLS) against the test CA. Token-less
+# ckms provisioning authenticates with admin.crt (CN = default_username).
+clients_ca_cert_file = "test_data/spire/certs/ca.crt"
 
 # ── Vault-compatible API ──────────────────────────────────────────────────────
 # The [vault] section maps to VaultConfig (flattened into ClapConfig).
