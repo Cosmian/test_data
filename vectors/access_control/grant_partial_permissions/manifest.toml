@@ -33,7 +33,8 @@ assert_success = true
 operation = "Encrypt"
 request = "step4_user_encrypt_denied.json"
 identity = "user"
-assert_success = true
+assert_success = false
+assert_error_reason = "Permission_Denied"
 
 [[steps]]
 operation = "Revoke"
