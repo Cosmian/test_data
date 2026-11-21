@@ -7,6 +7,7 @@ bare-name syntax. Verifies that HSM keyset resolution via CKA_LABEL works correc
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
 backends = ["sqlite"]
+fips_excluded_hsm_models = ["softhsm2", "kryoptic"]
 
 # Pre-cleanup: destroy key from any prior run (may not exist)
 [[steps]]
