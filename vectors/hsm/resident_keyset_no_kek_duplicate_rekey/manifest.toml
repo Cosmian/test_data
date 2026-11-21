@@ -1,11 +1,10 @@
-name = "HSM No-KEK: Duplicate re-key without keyset gives actionable error"
+name = "HSM No-KEK: Re-key of a retired generation without keyset redirects to latest"
 description = """
-Creates an HSM-resident key WITHOUT a keyset name (no rotate_name). Re-keys it
-once (gen-0 → gen-1), then re-keys gen-0 again. Without a keyset guard the
-server attempts to create a key with the same UID that already exists — the
-error must contain \"already exists\" with an actionable hint pointing the user
-to re-key the existing latest key instead.
-Finally verifies that re-keying gen-1 (the actual latest) succeeds → gen-2.
+Creates an HSM-resident key WITHOUT a keyset name (no rotate_name). The first
+ReKey enrolls it in a keyset named after its base UID (gen-0 → gen-1). Re-keying
+gen-0 again no longer fails with \"already exists\": gen-0 is a retired
+generation, so the request is redirected to the latest generation (gen-1) and
+produces gen-2.
 """
 server_type = "hsm"
 requires_env = ["HSM_SLOT_ID"]
@@ -46,21 +45,11 @@ assert_success = true
 [steps.capture]
 gen1_id = "UniqueIdentifier"
 
-# ── 3. Second ReKey gen-0 again → FAILURE ────────────────────────────────
-#       gen-1 already exists; error must include "already exists".
+# ── 3. Second ReKey gen-0 again → SUCCESS (redirected to latest gen-1 → gen-2) ──
 
 [[steps]]
 operation = "ReKey"
 request = "step3_rekey_duplicate.json"
-assert_success = false
-assert_error_reason = "Object_Already_Exists"
-assert_error_contains = "already exists"
-
-# ── 4. ReKey gen-1 (the actual latest) → SUCCESS ─────────────────────────
-
-[[steps]]
-operation = "ReKey"
-request = "step4_rekey_gen1.json"
 assert_success = true
 
 # ── Cleanup ──────────────────────────────────────────────────────────────
