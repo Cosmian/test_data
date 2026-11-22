@@ -12,6 +12,7 @@ Tests: HSM keyset via CKA_LABEL, ReKey creates new HSM key, keyset decrypt chain
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
 backends = ["sqlite"]
+fips_excluded_hsm_models = ["softhsm2", "kryoptic"]
 
 # Pre-cleanup: destroy both possible keys from prior runs
 [[steps]]

@@ -15,6 +15,7 @@ base UID acts as a stable keyset handle that resolves to the current latest.
 server_type = "hsm"
 requires_env = ["HSM_SLOT_ID"]
 backends = ["sqlite"]
+fips_excluded_hsm_models = ["softhsm2", "kryoptic"]
 
 # ── Pre-cleanup ──────────────────────────────────────────────────────────
 
