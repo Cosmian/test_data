@@ -1,0 +1,17 @@
+name = "Negative (FIPS): Encrypt GCM With A Caller IV"
+description = "A FIPS build generates every AES-GCM IV inside the FIPS module (SP 800-38D 9.1, FIPS 140-3 IG C.H) and refuses an IV supplied by the caller"
+
+[[steps]]
+operation = "Create"
+request = "step1_create_key.json"
+assert_success = true
+
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Encrypt"
+request = "step2_encrypt.json"
+assert_success = false
+assert_error_reason = "Invalid_Field"
+assert_error_contains = "FIPS mode"

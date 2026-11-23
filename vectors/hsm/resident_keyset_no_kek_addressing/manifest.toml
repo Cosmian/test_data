@@ -20,6 +20,7 @@ to a SINGLE key without fallback, while bare keyset names activate chain-walk.
 server_type = "hsm"
 requires_env = ["HSM_SLOT_ID"]
 backends = ["sqlite"]
+fips_excluded_hsm_models = ["softhsm2", "kryoptic"]
 
 # ── Pre-cleanup ──────────────────────────────────────────────────────────
 

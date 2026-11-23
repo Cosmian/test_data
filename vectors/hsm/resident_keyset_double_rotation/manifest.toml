@@ -12,6 +12,7 @@ Proves HSM keyset chain traversal works beyond a single hop.
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
 backends = ["sqlite"]
+fips_excluded_hsm_models = ["softhsm2", "kryoptic"]
 
 # Pre-cleanup: destroy all three possible keys from prior runs
 [[steps]]

@@ -1,0 +1,30 @@
+name = "KAT: AES-192-CMAC MAC and MAC Verify (SP 800-38B Appendix D.2 Example 2)"
+description = "Known-Answer Test: AES-CMAC of a 16-byte message with the NIST SP 800-38B AES-192 key (Appendix D.2 Example 2); a flipped tag bit does not verify"
+
+[[steps]]
+operation = "Import"
+request = "step1_import_key.json"
+assert_success = true
+[steps.capture]
+key_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Mac"
+request = "step2_compute_mac.json"
+assert_success = true
+[steps.assert_fields]
+MACData = "9E99A7BF31E710900662F65E617C5184"
+
+[[steps]]
+operation = "MACVerify"
+request = "step3_verify_mac.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Valid"
+
+[[steps]]
+operation = "MACVerify"
+request = "step4_verify_tampered.json"
+assert_success = true
+[steps.assert_fields]
+ValidityIndicator = "Invalid"

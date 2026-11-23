@@ -11,6 +11,7 @@ Fully cleans up (DEK + both KEK generations) for idempotent reruns.
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
 backends = ["sqlite"]
+fips_excluded_hsm_models = ["softhsm2", "kryoptic"]
 
 # ── Pre-cleanup (allow_failure — keys may not exist on first run) ────────────
 
