@@ -376,7 +376,8 @@ else
 policy_id = "CUSTOM"
 
 [kmip.allowlists]
-algorithms = ["ECDH", "ECDSA", "EC"]
+# AES stays allowed so that the API-token key can be seeded; the policy under test is the curve.
+algorithms = ["ECDH", "ECDSA", "EC", "AES"]
 curves = ["P384"]
 CFGEOF
 
