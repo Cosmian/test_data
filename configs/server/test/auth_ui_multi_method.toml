@@ -50,7 +50,7 @@ ui_oidc_logout_url = "https://demo-kms.eu.auth0.com/logout"
 [ui_config]
 ui_index_html_folder = "ui/dist"
 # Must be identical across all KMS instances behind the same load balancer.
-ui_session_salt = "kms-test-local-salt-do-not-use-in-production"
+ui_session_salt = "ae2c870af7d641276bddc793cce198855d8e2799e4e4c6ed8d2661a9041248df"
 
 [logging]
 rust_log = "info,cosmian_kms=debug"
