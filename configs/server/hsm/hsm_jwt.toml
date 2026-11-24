@@ -29,7 +29,6 @@ jwt_auth_provider = [
 ]
 
 [google_cse_config]
-# Disabled: see auth/plain_jwt.toml (shared test databases already hold the CSE keypair).
-google_cse_enable = false
+google_cse_enable = true
 google_cse_disable_tokens_validation = false
 google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]
