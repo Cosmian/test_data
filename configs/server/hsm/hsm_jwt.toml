@@ -29,6 +29,8 @@ jwt_auth_provider = [
 ]
 
 [google_cse_config]
-google_cse_enable = true
+# Disabled: this server only bootstraps the KEK in a database that other fixtures (default user
+# tech@cosmian.com) reopen, and the CSE keypair is owned by `default_username`.
+google_cse_enable = false
 google_cse_disable_tokens_validation = false
 google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

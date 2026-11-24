@@ -1,9 +1,7 @@
 # Test KMS server — HTTPS with client CA, JWT, and Utimaco HSM + KEK.
 # Used by start_default_test_kms_server_with_utimaco_and_kek().
 
-# Same as hsm_jwt.toml: that server creates the KEK in the database this one reopens, and the
-# CSE keypair it creates there is owned by `default_username`.
-default_username = "kms-default-user"
+default_username = "tech@cosmian.com"
 kms_public_url = "https://localhost:10003/google_cse"
 hsm_model = "utimaco"
 hsm_admin = ["owner.client@acme.com"]
