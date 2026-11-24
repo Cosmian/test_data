@@ -2,7 +2,7 @@
 # Uses PEM cert + key (works in both FIPS and non-FIPS mode).
 # Bound to port 12003.
 
-default_username = "tech@cosmian.com"
+default_username = "kms-default-user"
 kms_public_url = "https://localhost:12003/google_cse"
 
 [http]

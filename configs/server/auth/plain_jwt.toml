@@ -1,7 +1,7 @@
 # Auth test server — plain HTTP with JWT authentication.
 # Bound to port 12002.
 
-default_username = "tech@cosmian.com"
+default_username = "kms-default-user"
 kms_public_url = "http://localhost:12002/google_cse"
 
 [http]

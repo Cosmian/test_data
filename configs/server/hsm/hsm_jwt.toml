@@ -1,7 +1,7 @@
 # Test KMS server — plain HTTP with Utimaco HSM and JWT authentication.
 # Used by create_kek_in_db() to bootstrap KEK creation.
 
-default_username = "tech@cosmian.com"
+default_username = "kms-default-user"
 kms_public_url = "http://localhost:10002/google_cse"
 hsm_model = "utimaco"
 hsm_admin = ["tech@cosmian.com"]

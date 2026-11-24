@@ -6,6 +6,7 @@ default_username = "tech@cosmian.com"
 kms_public_url = "https://localhost:12005/google_cse"
 
 [http]
+insecure_allow_unauthenticated = true
 port = 12005
 hostname = "0.0.0.0"
 

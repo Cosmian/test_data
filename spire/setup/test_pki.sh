@@ -28,6 +28,8 @@
 #   CKMS_CONF            — path to the ckms client config pointing at VAULT_ADDR
 #   KMS_BIN              — path to the KMS server binary (for M-03 second instance)
 #   KMS_CONFIG_FILE      — path to the running KMS TOML config (used as base for M-03)
+#   ADMIN_CKMS_CONF      — ckms config with the admin mTLS client cert (M-03 seeds the API-token
+#                          key of the ephemeral KMS with it); CKMS_CONF is the API-token config
 #
 # Exit code: 0 when all scenarios pass; non-zero on first failure (set -euo pipefail).
 
@@ -41,6 +43,7 @@ CKMS_BIN="${CKMS_BIN:-}"
 CKMS_CONF="${CKMS_CONF:-}"
 KMS_BIN="${KMS_BIN:-}"
 KMS_CONFIG_FILE="${KMS_CONFIG_FILE:-}"
+ADMIN_CKMS_CONF="${ADMIN_CKMS_CONF:-}"
 ADMIN_USER="${ADMIN_USER:-admin}"
 ADMIN_PASS="${ADMIN_PASS:-change_me}"
 AUTH_VERIFIER_URL="${AUTH_VERIFIER_URL:-https://localhost:8443}"
@@ -337,8 +340,8 @@ _pass "M-02 / PKI-11: TLS version enforcement verified (TLS ≤1.1 rejected, TLS
 # =============================================================================
 _section "M-03 / PKI-12 — Algorithm policy change (no workload redeploy)"
 
-if [[ -z "${KMS_BIN}" || -z "${KMS_CONFIG_FILE}" ]]; then
-  _info "M-03: KMS_BIN or KMS_CONFIG_FILE not set — skipping (requires full SPIRE task environment)"
+if [[ -z "${KMS_BIN}" || -z "${KMS_CONFIG_FILE}" || -z "${ADMIN_CKMS_CONF}" ]]; then
+  _info "M-03: KMS_BIN, KMS_CONFIG_FILE or ADMIN_CKMS_CONF not set — skipping (requires full SPIRE task environment)"
 else
   # ── Phase 1: Baseline — running KMS allows P-256 ──
   _info "M-03 Phase 1: Baseline — creating P-256 key on running KMS (permissive policy)..."
@@ -387,9 +390,20 @@ CFGEOF
     _fail "M-03" "Ephemeral KMS (port ${M03_PORT}) failed to start. See ${M03_LOG}"
   fi
 
+  # The ephemeral KMS has the same authentication as the running one (API token mapped to
+  # default_username, plus optional mTLS) but a fresh database: seed the API-token key with
+  # the token of CKMS_CONF through the admin mTLS identity, then reuse CKMS_CONF's token.
+  M03_TOKEN_ID="$(sed -n 's/^api_token_id[[:space:]]*=[[:space:]]*"\(.*\)"/\1/p' "${KMS_CONFIG_FILE}")"
+  M03_TOKEN="$(sed -n 's/^access_token[[:space:]]*=[[:space:]]*"\(.*\)"/\1/p' "${CKMS_CONF}")"
+  M03_ADMIN_CONF="${_TMP}/ckms-m03-admin.toml"
+  sed "s#^server_url[[:space:]]*=.*#server_url = \"https://localhost:${M03_PORT}\"#" \
+    "${ADMIN_CKMS_CONF}" >"${M03_ADMIN_CONF}"
+  "${CKMS_BIN}" --conf-path "${M03_ADMIN_CONF}" --accept-invalid-certs \
+    sym keys create --bytes-b64 "${M03_TOKEN}" "${M03_TOKEN_ID}" >/dev/null 2>&1 ||
+    _fail "M-03" "cannot create the API-token key '${M03_TOKEN_ID}' on the ephemeral KMS"
+  rm -f "${M03_ADMIN_CONF}"
+
   M03_CKMS_CONF="${_TMP}/ckms-m03.toml"
-  # Reuse the admin mTLS client certificate of CKMS_CONF: the ephemeral KMS has the same
-  # (Vault-token-only) authentication, so token-less requests are rejected with 401.
   sed "s#^server_url[[:space:]]*=.*#server_url = \"https://localhost:${M03_PORT}\"#" \
     "${CKMS_CONF}" >"${M03_CKMS_CONF}"
 

@@ -1,0 +1,23 @@
+# Auth Verifier for .mise/scripts/test/ui/test_ui_auth.sh (port 12026, replaced at runtime).
+# Paired KMS fixture: configs/server/auth/ui_auth.toml (port 12027).
+# Run from the authentication submodule; paths reference its bundled test certificates.
+# The harness uses the seeded admin only to create realm kms and user kms-user.
+host_name = "127.0.0.1"
+host_port = 12026
+
+[log]
+level = "warn"
+
+[tls_params]
+server_ca_chain = "server/src/tests/certificates/ec/auth.ca.pem"
+server_certificate = "server/src/tests/certificates/ec/auth.server.cert.pem"
+server_private_key = "server/src/tests/certificates/ec/auth.server.key.pem"
+
+[session_jwt_params]
+jwt_ec_private_key = "server/src/tests/certificates/ec/auth.server.key.pem"
+jwt_ec_public_key = "server/src/tests/certificates/ec/auth.server.cert.pem"
+
+[database_params]
+auto_init_schema = true
+backend = "sqlite"
+connection_url = "sqlite::memory:"

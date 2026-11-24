@@ -1,0 +1,30 @@
+# KMS for .mise/scripts/test/ui/test_ui_auth.sh (port 12027, replaced at runtime).
+# Paired Auth Verifier fixture: configs/auth_verifier/ui_auth.toml (port 12026).
+# The harness provisions realm kms and its non-admin user kms-user before starting KMS.
+default_username = "kms-default-user"
+vendor_identification = "test_vendor"
+kms_public_url = "http://localhost:12027"
+
+[http]
+port = 12027
+hostname = "localhost"
+
+[db]
+database_type = "sqlite"
+sqlite_path = "./sqlite-data-ui-auth-tests"
+clear_database = true
+
+[auth_verifier]
+auth_verifier_url = "https://localhost:12026"
+auth_verifier_realm = "kms"
+auth_verifier_accept_invalid_certs = true
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
+
+[logging]
+rust_log = "info,cosmian_kms=debug"
+quiet = false
+log_to_syslog = false
+environment = "development"
+ansi_colors = true

@@ -5,7 +5,7 @@
 # Prerequisites:
 #   1. Start the auth-verifier (from the authentication/ sibling repo):
 #        cargo run -p auth_verifier -- server/auth_verifier.dev.toml
-#      Admin UI at https://127.0.0.1:8443/admin-ui — create a test user in realm "_".
+#      Admin UI at https://127.0.0.1:8443/admin-ui — create realm "kms" and user "kms-user".
 #
 #   2. The TLS section below uses the repo's bundled test certificates.
 #      They work for connections to 127.0.0.1 and localhost in test environments.
@@ -39,7 +39,7 @@ jwt_auth_provider = [
 
 [auth_verifier]
 auth_verifier_url = "https://127.0.0.1:8443"
-auth_verifier_realm = "_"
+auth_verifier_realm = "kms"
 auth_verifier_accept_invalid_certs = true
 
 [ui_config.ui_oidc_auth]
