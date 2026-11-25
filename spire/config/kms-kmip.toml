@@ -14,7 +14,7 @@
 # Start via docker-compose.yml in the kmip-go repo:
 #   docker compose up -d kms-mtls
 
-default_username = "admin"
+default_username = "kms-default-user"
 
 [db]
 database_type  = "sqlite"

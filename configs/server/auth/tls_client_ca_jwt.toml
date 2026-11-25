@@ -2,7 +2,7 @@
 # Uses PEM cert + key (works in both FIPS and non-FIPS mode).
 # Bound to port 12003.
 
-default_username = "tech@cosmian.com"
+default_username = "kms-default-user"
 kms_public_url = "https://localhost:12003/google_cse"
 
 [http]
@@ -31,7 +31,8 @@ jwt_auth_provider = [
 ]
 
 [google_cse_config]
-google_cse_enable = true
+# Disabled: see plain_jwt.toml (shared test databases already hold the CSE keypair).
+google_cse_enable = false
 # Token validation is active because JWT auth is enabled.
 google_cse_disable_tokens_validation = false
 google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

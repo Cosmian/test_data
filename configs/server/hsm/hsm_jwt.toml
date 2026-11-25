@@ -1,7 +1,7 @@
 # Test KMS server — plain HTTP with Utimaco HSM and JWT authentication.
 # Used by create_kek_in_db() to bootstrap KEK creation.
 
-default_username = "tech@cosmian.com"
+default_username = "kms-default-user"
 kms_public_url = "http://localhost:10002/google_cse"
 hsm_model = "utimaco"
 hsm_admin = ["tech@cosmian.com"]
@@ -29,6 +29,8 @@ jwt_auth_provider = [
 ]
 
 [google_cse_config]
-google_cse_enable = true
+# Disabled: this server only bootstraps the KEK in a database that other fixtures (default user
+# tech@cosmian.com) reopen, and the CSE keypair is owned by `default_username`.
+google_cse_enable = false
 google_cse_disable_tokens_validation = false
 google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

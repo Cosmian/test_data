@@ -1,7 +1,7 @@
 # Auth test server — plain HTTP with JWT authentication.
 # Bound to port 12002.
 
-default_username = "tech@cosmian.com"
+default_username = "kms-default-user"
 kms_public_url = "http://localhost:12002/google_cse"
 
 [http]
@@ -25,7 +25,9 @@ jwt_auth_provider = [
 ]
 
 [google_cse_config]
-google_cse_enable = true
+# Disabled: CSE needs `default_username` to own the CSE keypair, and the shared test databases
+# already hold it under another `default_username`; the JWT identity (tech@cosmian.com) cannot be it.
+google_cse_enable = false
 # Token validation is active because JWT auth is enabled.
 google_cse_disable_tokens_validation = false
 google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]

@@ -3,7 +3,7 @@
 # Used by the `mise run test:spire` task when starting the KMS via
 # `cargo run`. Paths are relative to the kms_alt5 repository root.
 
-default_username = "admin"
+default_username = "kms-default-user"
 
 # ── Database ──────────────────────────────────────────────────────────────────
 [db]
@@ -21,6 +21,13 @@ clear_database = true
 [http]
 hostname = "0.0.0.0"
 port     = 9998
+# Bearer-token auth for the `ckms` provisioning steps: the symmetric key with this
+# uid (created by the harness with the admin mTLS cert, see
+# spire_write_api_token_conf in .mise/lib/spire_test.sh) holds the token bytes.
+# A valid token authenticates as `default_username`, the identity that must own the
+# PKI CA key (routes/spire/pki.rs). The key is looked up per request, so it need not
+# exist when the KMS starts.
+api_token_id = "spire-api-token"
 
 # ── TLS ───────────────────────────────────────────────────────────────────────
 # Server presents this cert to the SPIRE servers and to the ckms CLI.
@@ -28,8 +35,9 @@ port     = 9998
 [tls]
 tls_cert_file = "test_data/spire/certs/kms.crt"
 tls_key_file  = "test_data/spire/certs/kms.key"
-# Verify optional client certificates (mTLS) against the test CA. Token-less
-# ckms provisioning authenticates with admin.crt (CN = default_username).
+# Verify optional client certificates (mTLS) against the test CA. The harness uses
+# admin.crt (CN = admin, distinct from default_username) only to create the API-token
+# key; a certificate CN equal to default_username is refused (HTTP 401).
 clients_ca_cert_file = "test_data/spire/certs/ca.crt"
 
 # ── Vault-compatible API ──────────────────────────────────────────────────────
