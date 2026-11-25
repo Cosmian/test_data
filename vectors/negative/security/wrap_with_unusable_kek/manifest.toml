@@ -63,7 +63,7 @@ request = "step7_user_get_wrap_foreign_kek.json"
 identity = "user"
 assert_success = false
 assert_error_reason = "Permission_Denied"
-assert_error_contains = "does not have the permission to wrap with the key"
+assert_error_contains = "does not exist or is not accessible"
 
 [[steps]]
 operation = "GetAttributes"
