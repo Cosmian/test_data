@@ -4,7 +4,8 @@ HSM admin creates an AES-256 key in the HSM, grants only Get to
 <user.client@acme.com>. Unlike regular KMS keys, Get does NOT act as a
 wildcard for HSM keys — user can Get the key metadata but cannot Encrypt.
 Validates the stricter HSM permission model where each operation must be
-individually granted.
+individually granted. The key is created with Sensitive=false because HSM keys are
+sensitive (non-extractable) by default, and a sensitive key cannot be read with Get.
 """
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
