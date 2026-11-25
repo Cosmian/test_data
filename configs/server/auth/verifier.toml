@@ -5,6 +5,7 @@
 default_username = "tech@cosmian.com"
 
 [http]
+insecure_allow_unauthenticated = true
 port = 12006
 hostname = "0.0.0.0"
 

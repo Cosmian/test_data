@@ -3,4 +3,5 @@
 jwt_auth_provider = ["https://accounts.google.com,https://www.googleapis.com/oauth2/v3/certs,"]
 
 [http]
+insecure_allow_unauthenticated = true
 api_token_id = "test-symmetric-key-id"

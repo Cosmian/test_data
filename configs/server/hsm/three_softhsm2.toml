@@ -34,6 +34,7 @@ hsm_slot = [2]
 hsm_password = ["12345678"]
 
 [http]
+insecure_allow_unauthenticated = true
 hostname = "127.0.0.1"
 port = 19998
 

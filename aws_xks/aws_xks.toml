@@ -1,6 +1,8 @@
 # Test of the AWS XKS parameters: 
 # cargo run --bin cosmian_kms --features non-fips -- -c test_data/aws_xks/aws_xks.toml
 [http]
+# Binds 0.0.0.0 with SigV4 only (no KMIP authentication): development-only opt-in (issue #1486)
+insecure_allow_unauthenticated = true
 port = 9998
 hostname = "0.0.0.0"
 

@@ -3,6 +3,7 @@ vendor_identification = "test_vendor"
 kms_public_url = "http://localhost:9998"
 
 [http]
+insecure_allow_unauthenticated = true
 port = 9998
 hostname = "localhost"
 

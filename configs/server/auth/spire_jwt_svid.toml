@@ -16,6 +16,7 @@ default_username = "admin"
 kms_public_url = "https://localhost:9998"
 
 [http]
+insecure_allow_unauthenticated = true
 port = 9998
 hostname = "0.0.0.0"
 

@@ -4,6 +4,7 @@
 # disable_unwrapped_cache (false = JOSE CEK cache on, true = UnwrappedCache and CEK cache off).
 
 [http]
+insecure_allow_unauthenticated = true
 port = 12100
 hostname = "127.0.0.1"
 

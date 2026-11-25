@@ -22,6 +22,7 @@ sqlite_path    = "/tmp/kms-kmip-test"
 clear_database = true
 
 [http]
+insecure_allow_unauthenticated = true
 hostname = "0.0.0.0"
 port     = 9998
 

@@ -19,6 +19,7 @@ clear_database = true
 # Docker Desktop, whose host.docker.internal implementation proxies regardless
 # of bind address, which is why this only surfaces in CI).
 [http]
+insecure_allow_unauthenticated = true
 hostname = "0.0.0.0"
 port     = 9998
 # Bearer-token auth for the `ckms` provisioning steps: the symmetric key with this

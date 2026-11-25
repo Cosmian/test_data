@@ -10,6 +10,7 @@
 default_username = "tech@cosmian.com"
 
 [http]
+insecure_allow_unauthenticated = true
 port = 12007
 hostname = "127.0.0.1"
 cors_allowed_origins = ["http://localhost:12007", "http://localhost:5173"]

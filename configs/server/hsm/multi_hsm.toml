@@ -19,6 +19,7 @@ hsm_slot = [1667223158]
 hsm_password = ["12345678"]
 
 [http]
+insecure_allow_unauthenticated = true
 port = 29998
 hostname = "0.0.0.0"
 cors_allowed_origins = ["https://localhost:29998"]

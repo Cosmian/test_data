@@ -12,6 +12,7 @@
 kms_public_url = "https://localhost:8443"
 
 [http]
+insecure_allow_unauthenticated = true
 port = 9998
 hostname = "127.0.0.1"
 

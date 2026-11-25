@@ -1,3 +1,4 @@
 # API Token Authentication from authentication.md
 [http]
+insecure_allow_unauthenticated = true
 api_token_id = "test-symmetric-key-id"

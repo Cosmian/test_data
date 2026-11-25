@@ -48,6 +48,7 @@ kms_public_url = "https://localhost:9998"
 # TLS is required only for the auth_verifier endpoint (handled separately).
 # ---------------------------------------------------------------------------
 [http]
+insecure_allow_unauthenticated = true
 hostname = "0.0.0.0"
 port     = 9998
 
