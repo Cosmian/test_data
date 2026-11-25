@@ -69,3 +69,33 @@ assert_error_contains = "does not have the permission to wrap with the key"
 operation = "GetAttributes"
 request = "step8_owner_integrity.json"
 assert_success = true
+
+# A certificate carries no usage mask: its linked public key's mask (no WrapKey here) decides.
+[[steps]]
+operation = "CreateKeyPair"
+request = "step9_create_keypair_no_wrap.json"
+assert_success = true
+
+[steps.capture]
+nowrap_private_key_id = "PrivateKeyUniqueIdentifier"
+nowrap_public_key_id = "PublicKeyUniqueIdentifier"
+
+[[steps]]
+operation = "Activate"
+request = "step10_activate_private.json"
+assert_success = true
+
+[[steps]]
+operation = "Certify"
+request = "step11_certify_no_wrap.json"
+assert_success = true
+
+[steps.capture]
+nowrap_cert_id = "UniqueIdentifier"
+
+[[steps]]
+operation = "Get"
+request = "step12_get_wrap_cert_no_wrap.json"
+assert_success = false
+assert_error_reason = "Feature_Not_Supported"
+assert_error_contains = "is not meant to wrap keys"
