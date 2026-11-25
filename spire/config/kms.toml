@@ -64,6 +64,3 @@ vault_token_cache_ttl_secs = 30
 [logging]
 rust_log    = "info,cosmian_kms_server=debug"
 ansi_colors = false
-
-[ui_config]
-ui_index_html_folder = "ui/dist"
