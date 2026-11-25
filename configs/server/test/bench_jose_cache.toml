@@ -12,3 +12,6 @@ hostname = "127.0.0.1"
 database_type = "sqlite"
 sqlite_path = "/tmp/kms_bench_jose_cache"
 disable_unwrapped_cache = false
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

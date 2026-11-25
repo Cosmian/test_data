@@ -32,3 +32,6 @@ google_cse_enable = false
 # Token validation is active because JWT auth is enabled.
 google_cse_disable_tokens_validation = false
 google_cse_incoming_url_whitelist = ["https://cse.cosmian.com"]
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

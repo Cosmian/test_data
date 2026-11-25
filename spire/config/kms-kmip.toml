@@ -39,3 +39,6 @@ clients_ca_cert_file = "/etc/kms/certs/ca.crt"
 [logging]
 rust_log    = "warn,cosmian_kms_server=info"
 ansi_colors = false
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

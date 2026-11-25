@@ -19,3 +19,6 @@ sqlite_path = "/tmp/kms_bench_jose_cek_switch"
 
 [logging]
 rust_log = "info,cosmian_kms_server::routes::jose::cek_cache=debug"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

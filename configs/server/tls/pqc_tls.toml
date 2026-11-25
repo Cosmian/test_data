@@ -26,3 +26,6 @@ tls_key_file = "test_data/certificates/client_server/server/ml_dsa_44.key"
 
 [logging]
 rust_log = "off"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

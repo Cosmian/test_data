@@ -2,3 +2,6 @@
 [http]
 insecure_allow_unauthenticated = true
 api_token_id = "test-symmetric-key-id"
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

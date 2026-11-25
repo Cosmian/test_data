@@ -8,3 +8,6 @@ database_url = "mysql://mysql_server:3306/kms"
 
 [http]
 insecure_allow_unauthenticated = true
+
+[ui_config]
+ui_index_html_folder = "ui/dist"

@@ -26,3 +26,6 @@ clients_ca_cert_file = "test_data/certificates/client_server/ca/ca.crt"
 
 [roles]
 crypto_officer_users = ["tech@cosmian.com", "owner.client@acme.com"]
+
+[ui_config]
+ui_index_html_folder = "ui/dist"
