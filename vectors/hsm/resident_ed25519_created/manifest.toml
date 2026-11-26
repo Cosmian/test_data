@@ -1,10 +1,7 @@
-name = "HSM Resident: Ed25519 keypair creation (non-FIPS)"
+name = "HSM Resident: Ed25519 keypair creation"
 description = """
 Creates an Ed25519 keypair with an HSM-resident UID.
-The HSM backend supports Ed25519 keypair creation in non-FIPS builds only
-(Ed25519 is not a FIPS-approved algorithm here); this vector is skipped
-in FIPS test runs, where resident_ed25519_rejected applies instead.
-Tests: HSM accepts Ed25519 keypair creation (non-FIPS).
+Tests: HSM accepts Ed25519 keypair creation.
 """
 server_type = "hsm_kek"
 requires_env = ["HSM_SLOT_ID"]
