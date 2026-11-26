@@ -30,6 +30,11 @@
           "value": "2024-01-01T00:00:00Z"
         },
         {
+          "tag": "Sensitive",
+          "type": "Boolean",
+          "value": false
+        },
+        {
           "tag": "UniqueIdentifier",
           "type": "TextString",
           "value": "hsm::{{$HSM_SLOT_ID}}::vec_perm_get_nwc"
